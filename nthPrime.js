@@ -1,11 +1,14 @@
 // ===================== main =====================
 
+const primeArr = [2, 3, 5, 7, 11, 13, 17, 19]
+let tmp = 21
+
 function nthPrime(nth) {
-  const primeArr = [2, 3, 5, 7, 11, 13, 17, 19]
-  let tmp = 20
+  if (nth !== Math.round(nth) || nth < 1) return '請給我一個正整數'
+
+  // 不被小於根號次方的質數整除，亦為質數。
   const isPrime = (num) => {
-    if (num !== Math.round(num)) return false
-    if (num < 2) return false
+    if (num !== Math.round(num) || num < 2) return false
 
     for (let n = 0; n < primeArr.length; n++) {
       if (primeArr[n] > Math.sqrt(num)) return true
@@ -16,7 +19,7 @@ function nthPrime(nth) {
 
   while (nth > primeArr.length) {
     if (isPrime(tmp)) primeArr.push(tmp)
-    tmp++
+    tmp = tmp + 2
   }
 
   return primeArr[nth - 1]

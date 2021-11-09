@@ -1,9 +1,10 @@
 // ===================== main =====================
 
 function isPrime(num) {
-  if (num !== Math.round(num)) return false
-  if (num < 2) return false
+  // domain：大於 1 的正整數
+  if (num !== Math.round(num) || num < 2) return false
 
+  // 不被小於根號次方的整數整除。
   for (let n = 2; n <= Math.sqrt(num); n++) {
     if (num !== n) {
       if (num % n === 0) return false
