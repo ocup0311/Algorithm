@@ -1,3 +1,5 @@
+// ===================== main =====================
+
 const primeArr = [2, 3, 5, 7, 11, 13, 17, 19]
 let tmp = 21
 
@@ -42,7 +44,11 @@ function factorPrime(num) {
   return factorPrimeArr
 }
 
+// ===================== test =====================
+
 console.log(factorPrime(660 * 23 * 39 * 12345 * 96347))
+
+// ===================== sample =====================
 
 // console.log(factorPrime(660 * 23 * 39 * 12345 * 96347*179424673))
 
