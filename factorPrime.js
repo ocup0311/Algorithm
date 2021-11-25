@@ -1,7 +1,7 @@
 // ===================== main =====================
 
 const primeArr = [2, 3, 5, 7, 11, 13, 17, 19]
-let tmp = 21
+let temp = 21
 
 const nthPrime = (nth) => {
   const isPrime = (num) => {
@@ -15,8 +15,8 @@ const nthPrime = (nth) => {
   }
 
   while (nth > primeArr.length) {
-    if (isPrime(tmp)) primeArr.push(tmp)
-    tmp = tmp + 2
+    if (isPrime(temp)) primeArr.push(temp)
+    temp = temp + 2
   }
 
   return primeArr[nth - 1]
@@ -24,7 +24,7 @@ const nthPrime = (nth) => {
 
 function factorPrime(num) {
   const factorPrimeArr = []
-  let tmp2 = num
+  let temp2 = num
   let x = 1
 
   const diviseByPrime = (dividend, divisor) => {
@@ -32,10 +32,10 @@ function factorPrime(num) {
     return diviseByPrime(dividend / divisor, divisor)
   }
 
-  while (tmp2 > 1) {
-    let y = diviseByPrime(tmp2, nthPrime(x))
-    if (y !== tmp2) {
-      tmp2 = y
+  while (temp2 > 1) {
+    let y = diviseByPrime(temp2, nthPrime(x))
+    if (y !== temp2) {
+      temp2 = y
       factorPrimeArr.push(primeArr[x - 1])
     }
     x++

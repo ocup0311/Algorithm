@@ -1,7 +1,7 @@
 // ===================== main =====================
 
 const primeArr = [2, 3, 5, 7, 11, 13, 17, 19]
-let tmp = 21
+let temp = 21
 
 function nthPrime(nth) {
   if (nth !== Math.round(nth) || nth < 1) return '請給我一個正整數'
@@ -18,8 +18,8 @@ function nthPrime(nth) {
   }
 
   while (nth > primeArr.length) {
-    if (isPrime(tmp)) primeArr.push(tmp)
-    tmp = tmp + 2
+    if (isPrime(temp)) primeArr.push(temp)
+    temp = temp + 2
   }
 
   return primeArr[nth - 1]
