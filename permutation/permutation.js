@@ -6,6 +6,7 @@ const input3 = ['A', 'B', 'C', 'D', 'E']
 function toPrintPermutation(input) {
   const output = [input]
 
+  // function
   const permutation = (arr, head) => {
     while (head < arr.length - 1) {
       for (let ptr = head; ptr < arr.length; ptr++) {
@@ -23,6 +24,7 @@ function toPrintPermutation(input) {
     }
   }
 
+  // call
   permutation(input, 0)
 
   return output
