@@ -1,13 +1,27 @@
+// ===================== input =====================
+
+const builtInput = (num) => {
+  const target = []
+
+  for (let i = 1; i <= num; i++) {
+    target.unshift(i)
+  }
+
+  return target
+}
+
+const input = builtInput(5)
+
 // ===================== main =====================
 
 function honei(num, _first, _second, _third) {
-  let step = 0
-  const [first, second, third] = [_first, _second, _third]
+  const [first, second, third] = [[..._first], [..._second], [..._third]]
+  const output = [[_first, _second, _third]]
 
   const doHonei = (n, F, S, T) => {
     if (n === 1) {
       T.push(F.pop())
-      step++
+      output.push([[...first], [...second], [...third]])
     } else {
       doHonei(n - 1, F, T, S)
       doHonei(1, F, S, T)
@@ -17,14 +31,25 @@ function honei(num, _first, _second, _third) {
 
   doHonei(num, first, second, third)
 
-  return step
+  console.log('＝＝＝＝＝＝＝ 移動順序 ＝＝＝＝＝＝＝')
+  console.log(output)
+  console.log('＝＝＝＝＝＝＝ 最後狀態 ＝＝＝＝＝＝＝')
+  console.log(output[output.length - 1])
+  console.log('＝＝＝＝＝＝＝ 移動次數 ＝＝＝＝＝＝＝')
+  console.log(output.length - 1)
+
+  return
 }
 
 // ===================== test =====================
 
-console.log(honei(10, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], [], []))
+honei(input.length, input, [], [])
 
-console.log(2 ** 10 - 1)
+console.log(
+  '＝＝＝＝＝＝＝ 公式解次數 ＝＝＝＝＝＝＝',
+  '\n',
+  2 ** input.length - 1
+)
 
 // ===================== 發想 =====================
 
