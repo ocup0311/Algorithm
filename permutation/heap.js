@@ -1,15 +1,24 @@
-// by B. R. Heap
-// ===================== main =====================
+// by B. R. heapPermutation
+// ref: https://cuigeg.github.io/2017/05/05/heapPermutation-algorithms/
+// 全排列，每個 item 都視為不同的。
+
+// ===================== input =====================
 
 const input1 = ['A', 'B', 'C']
 const input2 = ['A', 'B', 'C', 'D']
-const input3 = ['A', 'B', 'C', 'D', 'E']
+const input3 = ['A', 'B', 'A', 'B']
+const input4 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
 
-function heap(input) {
+// ===================== main =====================
+
+function heapPermutation(input) {
   const output = []
+  let step = 0
 
   // function
   const swap = (n1, n2, arr) => {
+    step++
+
     const temp = arr[n1]
     arr[n1] = arr[n2]
     arr[n2] = temp
@@ -38,11 +47,20 @@ function heap(input) {
   // call
   generate(input.length, [...input])
 
-  return output
+  return { output, step }
 }
 
 // ===================== test =====================
 
-console.log(`======= ${input1} =======`, '\n', heap(input1))
-console.log(`======= ${input2} =======`, '\n', heap(input2))
-console.log(`======= ${input3} =======`, '\n', heap(input3))
+const test = (input) => {
+  const result = heapPermutation(input)
+
+  console.log(`======= ${input} =======`)
+  console.log(`SWAP ${result.step} times`)
+  console.log(result.output)
+}
+
+test(input1)
+test(input2)
+test(input3)
+test(input4)

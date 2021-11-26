@@ -1,3 +1,5 @@
+// ref: https://cuigeg.github.io/2017/05/05/heapPermutation-algorithms/
+// 全排列，每個 item 都視為不同的。
 // ===================== input =====================
 
 const input1 = ['A', 'B', 'C']
@@ -20,20 +22,20 @@ function permutation2(input) {
     arr[n2] = temp
   }
 
-  const generate = (arr, start, end) => {
-    if (start === end - 1) {
+  const generate = (arr, start) => {
+    if (start === arr.length - 1) {
       output.push(arr)
     } else {
-      for (let current = start; current < end; current++) {
+      for (let current = start; current < arr.length; current++) {
         swap(start, current, arr)
-        generate(arr, start + 1, arr.length)
+        generate(arr, start + 1)
         swap(start, current, arr)
       }
     }
   }
 
   // call
-  generate(input, 0, input.length)
+  generate(input, 0)
 
   return { output, step }
 }
