@@ -24,7 +24,7 @@ function permutation2(input) {
 
   const generate = (arr, start) => {
     if (start === arr.length - 1) {
-      output.push(arr)
+      output.push([...arr])
     } else {
       for (let current = start; current < arr.length; current++) {
         swap(start, current, arr)
