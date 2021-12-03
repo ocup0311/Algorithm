@@ -2,10 +2,51 @@
 // 全排列，每個 item 都視為不同的。
 // ===================== input =====================
 
-const input1 = ['A', 'B', 'C']
-const input2 = ['A', 'B', 'C', 'D']
-const input3 = ['A', 'B', 'A', 'B']
-const input4 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+const builtInput = (num) => {
+  const sample = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+  ]
+  const result = []
+
+  for (let i = 0; i < num; i++) {
+    const x = Math.ceil(i / 26)
+    const y = i % 26
+
+    result.push(`${sample[y]}${x}`)
+  }
+
+  return result
+}
+
+const input1 = builtInput(3)
+const input2 = builtInput(4)
+const input3 = [...builtInput(2), ...builtInput(2)]
+const input4 = builtInput(10)
 
 // ===================== main =====================
 
