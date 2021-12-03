@@ -8,10 +8,10 @@
 // ===================== main =====================
 
 function pascal(layer) {
+  if (layer < 1) return '請輸入正整數。'
+
   const output = []
   const factorial = [1]
-
-  if (layer < 1) return '請輸入正整數。'
 
   for (let j = 1; j <= layer; j++) {
     factorial[j] = factorial[j - 1] * j
