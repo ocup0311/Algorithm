@@ -34,25 +34,28 @@ function honei(num, _first, _second, _third) {
 
   doHonei(num, first, second, third)
 
-  console.log('＝＝＝＝＝＝＝ 移動順序 ＝＝＝＝＝＝＝')
-  console.log(output)
-  console.log('＝＝＝＝＝＝＝ 最後狀態 ＝＝＝＝＝＝＝')
-  console.log(output[output.length - 1])
-  console.log('＝＝＝＝＝＝＝ 移動次數 ＝＝＝＝＝＝＝')
-  console.log(output.length - 1)
-
-  return
+  return output
 }
 
 // ===================== test =====================
 
-honei(input.length, input, [], [])
+const test = (input) => {
+  const result = honei(input.length, input, [], [])
 
-console.log(
-  '＝＝＝＝＝＝＝ 公式解次數 ＝＝＝＝＝＝＝',
-  '\n',
-  2 ** input.length - 1
-)
+  console.log('＝＝＝＝＝＝＝ 移動順序 ＝＝＝＝＝＝＝')
+  console.log(result)
+  console.log('＝＝＝＝＝＝＝ 最後狀態 ＝＝＝＝＝＝＝')
+  console.log(result[result.length - 1])
+  console.log('＝＝＝＝＝＝＝ 移動次數 ＝＝＝＝＝＝＝')
+  console.log(result.length - 1)
+  console.log(
+    '＝＝＝＝＝＝＝ 公式解次數 ＝＝＝＝＝＝＝',
+    '\n',
+    2 ** input.length - 1
+  )
+}
+
+test(input)
 
 // ===================== 發想 =====================
 
