@@ -1,11 +1,15 @@
 // 凱薩密碼：將字母位移 n 個
 
 const _key = 3
+const A = 65
+const Z = 90
+const a = 97
+const z = 122
 
 // ===================== input =====================
 
-const input1 = 'HOW ARE YOU?'
-const input2 = "WHAT'S UP?"
+const input1 = 'How are you?'
+const input2 = "What's Up?"
 const input3 = 'I LOVE YOU.'
 
 // ===================== main =====================
@@ -40,24 +44,31 @@ function buildCaesarCipher(key) {
     'Z',
   ]
 
+  // function
+  const toIndex = (char) => char.charCodeAt(0)
+  const toChar = (index) => String.fromCharCode(index)
+
+  // return
   return (input) => {
-    const inputArr = input.split('')
-    const outputArr = []
+    let output = ''
 
-    for (let i = 0; i < inputArr.length; i++) {
-      const index = alphabetArr.indexOf(inputArr[i])
+    for (let i = 0; i < input.length; i++) {
+      const index = toIndex(input[i])
 
-      if (index === -1) {
-        outputArr.push(inputArr[i])
+      if (index >= A && index <= Z) {
+        const modifiedIndex = ((index - A + key) % 26) + A
+        output = output.concat(toChar(modifiedIndex))
         continue
       }
 
-      const modifiedIndex = (index + key) % 26
+      if (index >= a && index <= z) {
+        const modifiedIndex = ((index - a + key) % 26) + a
+        output = output.concat(toChar(modifiedIndex))
+        continue
+      }
 
-      outputArr.push(alphabetArr[modifiedIndex])
+      output = output.concat(input[i])
     }
-
-    const output = outputArr.reduce((total, value) => total.concat(value), '')
 
     return output
   }
@@ -77,9 +88,3 @@ const test = (input) => {
 test(input1)
 test(input2)
 test(input3)
-
-// text.charCodeAt(0)
-// 65
-// 90
-// 97
-// 122
