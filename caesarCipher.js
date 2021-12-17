@@ -1,10 +1,12 @@
 // 凱薩密碼：將字母位移 n 個
 
 const _key = 3
-const A = 65
-const Z = 90
-const a = 97
-const z = 122
+const char_A = 65
+const char_Z = 90
+const char_a = 97
+const char_z = 122
+const ENCODE = 'encode'
+const DECODE = 'decode'
 
 // ===================== input =====================
 
@@ -14,75 +16,48 @@ const input3 = 'I LOVE YOU.'
 
 // ===================== main =====================
 
-function buildCaesarCipher(key) {
-  const alphabetArr = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
+function buildCaesarCipher(encodeKey, action = ENCODE) {
+  const valuePool = [
+    [char_A, char_Z],
+    [char_a, char_z],
   ]
 
   // function
+  const mod = (dividend, divisor) =>
+    dividend >= 0
+      ? dividend % divisor
+      : (dividend % divisor) + Math.abs(divisor)
   const toIndex = (char) => char.charCodeAt(0)
-  const toChar = (index) => String.fromCharCode(index)
+  const toChar = (charIndex, key) =>
+    valuePool.reduce((t, v) => {
+      if (charIndex >= v[0] && charIndex <= v[1]) {
+        const modifiedIndex =
+          mod(charIndex - v[0] + key, v[1] - v[0] + 1) + v[0]
+        return String.fromCharCode(modifiedIndex)
+      }
+
+      return t
+    }, null)
+  const process = (input, key) =>
+    input.split('').reduce((t, v) => t + (toChar(toIndex(v), key) || v), '')
 
   // return
-  return (input) => {
-    let output = ''
-
-    for (let i = 0; i < input.length; i++) {
-      const index = toIndex(input[i])
-
-      if (index >= A && index <= Z) {
-        const modifiedIndex = ((index - A + key) % 26) + A
-        output = output.concat(toChar(modifiedIndex))
-        continue
-      }
-
-      if (index >= a && index <= z) {
-        const modifiedIndex = ((index - a + key) % 26) + a
-        output = output.concat(toChar(modifiedIndex))
-        continue
-      }
-
-      output = output.concat(input[i])
-    }
-
-    return output
-  }
+  return (input) =>
+    action === ENCODE ? process(input, encodeKey) : process(input, -encodeKey)
 }
 
 // ===================== test =====================
 
-const caesarCipher = buildCaesarCipher(_key)
+const caesarEncode = buildCaesarCipher(_key, ENCODE)
+const caesarDecode = buildCaesarCipher(_key, DECODE)
 
 const test = (input) => {
-  const result = caesarCipher(input)
+  const result1 = caesarEncode(input)
+  const result2 = caesarDecode(result1)
 
   console.log(`======= ${input} =======`)
-  console.log(result)
+  console.log(`Encode: ${result1}`)
+  console.log(`Decode: ${result2}`)
 }
 
 test(input1)
