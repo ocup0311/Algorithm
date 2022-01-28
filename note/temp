@@ -1,4 +1,12 @@
+; Big O Notation --------------------------------------------
 以「複雜度」取代「計時」的方式衡量演算法的原因：
     1. Same computer gets different runtime for the same task.
     2. Different computing power machine gives different run time for the same task.
+
+Big O: upper bound
+Big Omega: lower bound
+Big Theta: average bound
+
+; Linear Search (Sequential Search) --------------------------
+照線性順序，找到目標｜全找完
 
