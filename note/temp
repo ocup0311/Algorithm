@@ -32,7 +32,7 @@ Q:為何主要用 Big O？
     In the case n=0, the runtime is Θ(n^3).'
 
 # Linear Search (Sequential Search) --------------------------
-照線性順序，找到目標｜全找完
+照線性順序，找到目標｜全找完找不到
 
 O(n)
     worst case: O(n)
