@@ -1,0 +1,30 @@
+; note the specification for git
+
+; commint ---------------------------------
+ADD: 新增 file、function、等等
+  ex. '[ADD] file: caesar'
+
+COMMENT: 新增或調整註解
+  ex. '[COMMENT] factorPrime, GCD, honei, isPrime, LCM, nthPrime'
+
+UPDATE: 更新 file、function、等等
+  ex. '[UPDATE] file: caesarCipher'
+
+RENAME: 更改 file、variable、all 名稱
+  ex. '[RENAME] all: caesar -> caesarCipher'
+
+MOVE: 移動檔案位置
+  ex. '[MOVE] permutation'
+
+TYPO: 更正錯字
+  ex. '[TYPO] tmp->temp'
+
+FIX: 修改 bug
+  ex. '[FIX] permutation2'
+
+TEMP: 暫時性 commit，完成後再合併修成正式 commit
+  ex. '[TEMP] Need to code review from book "圖說演算法：使用JavaScript"'
+
+; branch ---------------------------------
+temp_: 暫時性 branch，完成後，merge 回 master
+  ex. temp_for_note
