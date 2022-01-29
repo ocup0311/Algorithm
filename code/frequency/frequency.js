@@ -80,6 +80,8 @@ const input3 = builtInput({ amount1: 7, amount2: 8 })
 // ===================== main =====================
 
 function frequency({ str1, str2 }) {
+  if (str1.length !== str2.length) return false
+
   const itemList = {}
 
   // function
