@@ -23,6 +23,7 @@ const builtInput_1to100 = (amount1, amount2) => {
     return output
   }
 
+  // call
   const arr1 = builtArr(amount1)
   const arr2 = builtArr(amount2)
 
@@ -46,6 +47,7 @@ function intersection({ arr1, arr2 }) {
     })
   }
 
+  // call
   addItemToList(arr1)
   addItemToList(arr2)
 
