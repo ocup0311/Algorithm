@@ -1,0 +1,14 @@
+; note the specification for js code
+
+; ============================ 命名 ============================
+
+; function ---------------------------------
+get- : 取得 常數、info、等等
+  ex. 'getRandomInt'
+
+built- : 產生 instance、function、等等
+  ex. 'builtInput'
+
+to- : 除上述外，其他 function
+  ex. 'toSortNumber'
+
