@@ -75,7 +75,7 @@ function permutation2(input) {
     }
   }
 
-  // call
+  // run
   generate(input, 0)
 
   return { output, step }

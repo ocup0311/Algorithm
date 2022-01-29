@@ -44,7 +44,7 @@ function heapPermutation(input) {
     }
   }
 
-  // call
+  // run
   generate(input.length, [...input])
 
   return { output, step }

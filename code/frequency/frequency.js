@@ -60,7 +60,7 @@ const builtInput = ({ amount1, amount2 }, guaranteed = false) => {
     return output
   }
 
-  // call
+  // run
   const str1 = builtStr(amount1)
   let str2 = ''
 
@@ -97,7 +97,7 @@ function frequency({ str1, str2 }) {
     }
   }
 
-  // call
+  // run
   addItemToList(str1)
   minusItemToList(str2)
 
