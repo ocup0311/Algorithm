@@ -31,6 +31,24 @@ Q:為何主要用 Big O？
     In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
     In the case n=0, the runtime is Θ(n^3).'
 
+
+# Big O for js -----------------------------------------------
+Object:
+    insertion O(1)
+    removal O(1)
+    searching O(n)
+    accessing O(1)
+
+Array:
+    insertion
+        push O(1)
+        shift O(n)
+    removal
+        pop O(1)
+        unshift O(n)
+    searching O(n)
+    accessing O(1)
+
 # Linear Search (Sequential Search) --------------------------
 照線性順序，找到目標｜全找完找不到
 
@@ -47,7 +65,4 @@ O(logn)
     best case: O(1)
     average: O(logn)
 
-
-
-
-
+# intersection ------------------------------------------------
