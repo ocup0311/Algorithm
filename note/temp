@@ -49,6 +49,8 @@ Array:
     searching O(n)
     accessing O(1)
 
+    sort: O(nlogn)
+
 # Linear Search (Sequential Search) --------------------------
 照線性順序，找到目標｜全找完找不到
 
