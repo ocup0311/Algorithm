@@ -4,26 +4,28 @@
 // 註：個別 array 中，每項不重複，才可用此法。否則需細修 itemList 的計數法。
 // ===================== input =====================
 
-const builtInput_1to100 = (amount1, amount2) => {
+const builtArr = (amount) => {
+  const output = []
+
   // function
-  const builtArr = (amount) => {
-    const output = []
-
-    for (let i = 0; i < amount; ) {
-      const randomNum = Math.ceil(Math.random() * 100)
-      const isDuplicate = output.some((v) => v === randomNum)
-
-      if (isDuplicate) continue
-
-      output.push(randomNum)
-
-      i++
-    }
-
-    return output
-  }
+  const getRandomN = (max) => Math.ceil(Math.random() * max)
 
   // run
+  for (let i = 0; i < amount; ) {
+    const randomNum = getRandomN(100)
+    const isDuplicate = output.some((v) => v === randomNum)
+
+    if (isDuplicate) continue
+
+    output.push(randomNum)
+
+    i++
+  }
+
+  return output
+}
+
+const builtInput_1to100 = (amount1, amount2) => {
   const arr1 = builtArr(amount1)
   const arr2 = builtArr(amount2)
 
