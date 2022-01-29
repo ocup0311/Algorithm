@@ -3,7 +3,7 @@
 // O(logn)
 // ===================== input =====================
 
-const builtInput = (amount, canFound = false) => {
+const builtInput = (amount, guaranteed = false) => {
   let target = -1
   const dataPool = []
 
@@ -14,7 +14,7 @@ const builtInput = (amount, canFound = false) => {
 
   dataPool.sort((a, b) => a - b)
 
-  if (canFound) {
+  if (guaranteed) {
     target = dataPool[Math.floor(Math.random() * amount)]
   } else {
     target = Math.ceil(Math.random() * 100)
