@@ -1,5 +1,6 @@
 // 需先排列數據。切一半找
 // input:{ dataPool:[5,9,15,78,99], target:78 } output: 3
+// O(logn)
 // ===================== input =====================
 
 const builtInput = (amount, canFound = false) => {

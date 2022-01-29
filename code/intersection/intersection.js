@@ -1,5 +1,7 @@
 // 比對兩個 array 相同之處
 // input:[5,3,9] & [7,9,3,2] output:[3,9]
+// O(n)
+// 註：個別 array 中，每項不重複，才可用此法。否則需細修 itemList 的計數法。
 // ===================== input =====================
 
 const builtInput_1to100 = (amount1, amount2) => {
