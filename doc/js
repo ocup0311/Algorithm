@@ -18,6 +18,9 @@ test: 測試
 
 ; function ---------------------------------
 get- : 取得 常數、info、等等
+  ex. 'getSomeInfo'
+
+make- : 產生 亂數、等等
   ex. 'makeRandomInt'
 
 built- : 產生 instance、function、等等
