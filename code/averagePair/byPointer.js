@@ -1,27 +1,28 @@
 // O(n)
 
 function byPointer({ dataPool, target }) {
-  let ptr1 = 0
-  let ptr2 = dataPool.length - 1
+  // pointer
+  let [left, right] = [0, dataPool.length - 1]
+
   const output = []
 
   // function
   const getAverage = (num1, num2) => (num1 + num2) / 2
 
   // run
-  while (ptr1 < ptr2) {
-    const average = getAverage(dataPool[ptr1], dataPool[ptr2])
+  while (left < right) {
+    const average = getAverage(dataPool[left], dataPool[right])
 
     if (average === target) {
-      output.push([dataPool[ptr1], dataPool[ptr2]])
-      ptr1++
-      ptr2--
+      output.push([dataPool[left], dataPool[right]])
+      left++
+      right--
     }
     if (average < target) {
-      ptr1++
+      left++
     }
     if (average > target) {
-      ptr2--
+      right--
     }
   }
 
