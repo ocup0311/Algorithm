@@ -8,7 +8,7 @@
 const builtInput = ({ amount1, amount2 }, guaranteed = false) => {
   // function
   const builtStr = (amount) => {
-    const sample = [
+    const A_Z = [
       'A',
       'B',
       'C',
@@ -42,7 +42,7 @@ const builtInput = ({ amount1, amount2 }, guaranteed = false) => {
     for (let i = 0; i < amount; i++) {
       const randomIndex = Math.floor(Math.random() * 26)
 
-      output = output + sample[randomIndex]
+      output = output + A_Z[randomIndex]
     }
 
     return output

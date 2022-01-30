@@ -3,7 +3,7 @@
 // ===================== input =====================
 
 const builtInput = (num) => {
-  const sample = [
+  const A_Z = [
     'A',
     'B',
     'C',
@@ -37,7 +37,7 @@ const builtInput = (num) => {
     const x = Math.ceil(i / 26)
     const y = i % 26
 
-    result.push(`${sample[y]}${x}`)
+    result.push(`${A_Z[y]}${x}`)
   }
 
   return result
