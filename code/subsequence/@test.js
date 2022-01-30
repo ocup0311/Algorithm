@@ -6,7 +6,10 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
   const makeRandomN = (max) => Math.round(Math.random() * max)
   const makeRandomIndex = (max) => Math.floor(Math.random() * max)
   const makeRandomLetter = () => {
-    const A_Z = [
+    const A_Z_SPACE = [
+      ' ',
+      ' ',
+      ' ',
       'A',
       'B',
       'C',
@@ -34,14 +37,16 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
       'Y',
       'Z',
     ]
-    return A_Z[makeRandomIndex(26)]
+    return A_Z_SPACE[makeRandomIndex(26)]
   }
   const makeRandomSequence = (amount) => {
     let output = ''
 
-    for (let i = 0; i < amount; i++) {
+    for (let i = 0; i < amount; ) {
       const newLetter = makeRandomLetter()
+      if (i === 0 && newLetter === ' ') continue
       output = output + newLetter
+      i++
     }
 
     return output
@@ -50,6 +55,7 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
     origin.split('').reduce((total, value, index, array) => {
       const restS = amount - total.length
       const restO = array.length - index
+      if (total.length === 0 && value === ' ') return total
       if (restS === 0) return total
       if (restS >= restO) return total + value
       if (makeRandomN(1)) return total + value
@@ -72,11 +78,11 @@ const runTest = (input, fn) => {
 
   if (result) {
     console.log(
-      `${input.subsequenceStr} is a subsequence string of ${input.originalStr}.`
+      `"${input.subsequenceStr}" is a subsequence string of "${input.originalStr}".`
     )
   } else {
     console.log(
-      `${input.subsequenceStr} is NOT a subsequence string of ${input.originalStr}.`
+      `"${input.subsequenceStr}" is NOT a subsequence string of "${input.originalStr}".`
     )
   }
 }
