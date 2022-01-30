@@ -1,4 +1,4 @@
-// O(n^2)
+// O(n)
 
 function byPointer({ dataPool, target }) {
   let ptr1 = 0
