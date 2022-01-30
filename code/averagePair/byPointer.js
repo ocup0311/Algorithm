@@ -7,11 +7,11 @@ function byPointer({ dataPool, target }) {
   const output = []
 
   // function
-  const getAverage = (num1, num2) => (num1 + num2) / 2
+  const makeAverage = (num1, num2) => (num1 + num2) / 2
 
   // run
   while (left < right) {
-    const average = getAverage(dataPool[left], dataPool[right])
+    const average = makeAverage(dataPool[left], dataPool[right])
 
     if (average === target) {
       output.push([dataPool[left], dataPool[right]])

@@ -2,8 +2,8 @@ const builtInput = (amount, guaranteed = false) => {
   let output = ''
 
   // function
-  const getRandomIndex = (max) => Math.floor(Math.random() * max)
-  const getRandomLetter = () => {
+  const makeRandomIndex = (max) => Math.floor(Math.random() * max)
+  const makeRandomLetter = () => {
     const A_Z = [
       'A',
       'B',
@@ -32,16 +32,15 @@ const builtInput = (amount, guaranteed = false) => {
       'Y',
       'Z',
     ]
-    return A_Z[getRandomIndex(26)]
+    return A_Z[makeRandomIndex(26)]
   }
 
   // run
-
   if (guaranteed) {
     let tempArr = []
 
     for (let i = 0; i < amount / 2; i++) {
-      const newLetter = getRandomLetter()
+      const newLetter = makeRandomLetter()
       tempArr[i] = newLetter
       tempArr[amount - i - 1] = newLetter
     }
@@ -49,7 +48,7 @@ const builtInput = (amount, guaranteed = false) => {
     output = tempArr.join('')
   } else {
     for (let i = 0; i < amount; i++) {
-      const newLetter = getRandomLetter()
+      const newLetter = makeRandomLetter()
       output = output + newLetter
     }
   }

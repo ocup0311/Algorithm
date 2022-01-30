@@ -8,11 +8,11 @@ const builtArr = (amount) => {
   const output = []
 
   // function
-  const getRandomN = (max) => Math.ceil(Math.random() * max)
+  const makeRandomN = (max) => Math.ceil(Math.random() * max)
 
   // run
   for (let i = 0; i < amount; ) {
-    const randomNum = getRandomN(100)
+    const randomNum = makeRandomN(100)
     const isDuplicate = output.some((v) => v === randomNum)
 
     if (isDuplicate) continue

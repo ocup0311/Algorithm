@@ -8,22 +8,22 @@ const builtInput = (amount, guaranteed = false) => {
   const dataPool = []
 
   // function
-  const getRandomN = (max) => Math.ceil(Math.random() * max)
-  const getRandomIndex = (size) => Math.floor(Math.random() * size)
+  const makeRandomN = (max) => Math.ceil(Math.random() * max)
+  const makeRandomIndex = (size) => Math.floor(Math.random() * size)
   const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
   // run
   for (let i = 0; i < amount; i++) {
-    const randomNum = getRandomN(100)
+    const randomNum = makeRandomN(100)
     dataPool.push(randomNum)
   }
 
   toSortNumber(dataPool)
 
   if (guaranteed) {
-    target = dataPool[getRandomIndex(amount)]
+    target = dataPool[makeRandomIndex(amount)]
   } else {
-    target = getRandomN(100)
+    target = makeRandomN(100)
   }
 
   return { dataPool, target }

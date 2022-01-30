@@ -4,13 +4,13 @@ const builtInput = (amount, guaranteed = false) => {
   let target = -1
 
   // function
-  const getRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
-  const getRandomIndex = (max) => Math.floor(Math.random() * max)
+  const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
+  const makeRandomIndex = (max) => Math.floor(Math.random() * max)
   const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
   // run
   for (let i = 0; i < amount; ) {
-    const randomNum = getRandomZ(_max)
+    const randomNum = makeRandomZ(_max)
     const isDuplicate = dataPool.some((v) => v === randomNum)
 
     if (isDuplicate) continue
@@ -23,12 +23,12 @@ const builtInput = (amount, guaranteed = false) => {
   toSortNumber(dataPool)
 
   if (guaranteed) {
-    let x = dataPool[getRandomIndex(amount)]
-    let y = dataPool[getRandomIndex(amount)]
-    while (x === y) y = dataPool[getRandomIndex(amount)]
+    let x = dataPool[makeRandomIndex(amount)]
+    let y = dataPool[makeRandomIndex(amount)]
+    while (x === y) y = dataPool[makeRandomIndex(amount)]
     target = (x - y) / 2
   } else {
-    target = getRandomZ(_max)
+    target = makeRandomZ(_max)
   }
 
   return { dataPool, target }
