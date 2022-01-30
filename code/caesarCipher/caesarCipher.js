@@ -51,7 +51,7 @@ function buildCaesarCipher(encodeKey, action = ENCODE) {
 const caesarEncode = buildCaesarCipher(_key, ENCODE)
 const caesarDecode = buildCaesarCipher(_key, DECODE)
 
-const test = (input) => {
+const runTest = (input) => {
   const result1 = caesarEncode(input)
   const result2 = caesarDecode(result1)
 
@@ -60,6 +60,6 @@ const test = (input) => {
   console.log(`Decode: ${result2}`)
 }
 
-test(input1)
-test(input2)
-test(input3)
+runTest(input1)
+runTest(input2)
+runTest(input3)

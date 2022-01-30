@@ -34,7 +34,7 @@ const builtInput = (amount, guaranteed = false) => {
   return { dataPool, target }
 }
 
-const test = (input, fn) => {
+const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`Data Pool: ${input.dataPool}`)
@@ -48,4 +48,4 @@ const test = (input, fn) => {
   console.log()
 }
 
-module.exports = { builtInput, test }
+module.exports = { builtInput, runTest }

@@ -39,7 +39,7 @@ function honei(num, _first, _second, _third) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = honei(input.length, input, [], [])
 
   console.log('＝＝＝＝＝＝＝ 移動順序 ＝＝＝＝＝＝＝')
@@ -55,7 +55,7 @@ const test = (input) => {
   )
 }
 
-test(input)
+runTest(input)
 
 // ===================== 發想 =====================
 

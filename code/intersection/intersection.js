@@ -62,7 +62,7 @@ function intersection({ arr1, arr2 }) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = intersection(input)
 
   console.log(`------- Compare two array -------`)
@@ -71,7 +71,7 @@ const test = (input) => {
   console.log(`result: ${result}`)
 }
 
-test({ arr1: [99, 7, 9, 3, 13], arr2: [3, 9, 7, 11] })
-test(input1)
-test(input2)
-test(input3)
+runTest({ arr1: [99, 7, 9, 3, 13], arr2: [3, 9, 7, 11] })
+runTest(input1)
+runTest(input2)
+runTest(input3)

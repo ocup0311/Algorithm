@@ -44,7 +44,7 @@ function linearSearch({ dataPool, target }) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = linearSearch(input)
 
   console.log(`Data Pool: ${input.dataPool}`)
@@ -56,6 +56,6 @@ const test = (input) => {
   }
 }
 
-test(input1)
-test(input2)
-test(input3)
+runTest(input1)
+runTest(input2)
+runTest(input3)

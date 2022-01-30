@@ -83,7 +83,7 @@ function permutation2(input) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = permutation2(input)
 
   console.log(`======= ${input} =======`)
@@ -91,7 +91,7 @@ const test = (input) => {
   console.log(result.output)
 }
 
-test(input1)
-test(input2)
-test(input3)
-test(input4)
+runTest(input1)
+runTest(input2)
+runTest(input3)
+runTest(input4)

@@ -110,7 +110,7 @@ function frequency({ str1, str2 }) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = frequency(input)
 
   console.log(`------- Compare two string -------`)
@@ -119,7 +119,7 @@ const test = (input) => {
   console.log(`Is the frequency same: ${result}`)
 }
 
-test({ str1: 'abbcd', str2: 'bcbda' })
-test(input1)
-test(input2)
-test(input3)
+runTest({ str1: 'abbcd', str2: 'bcbda' })
+runTest(input1)
+runTest(input2)
+runTest(input3)

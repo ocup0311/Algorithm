@@ -26,16 +26,16 @@ function pascal(layer) {
 
 // ===================== test =====================
 
-const test = (input) => {
+const runTest = (input) => {
   const result = pascal(input)
 
   console.log(`＝＝＝＝＝＝＝ 第${input}層 ＝＝＝＝＝＝＝`)
   console.log(result)
 }
 
-test(1)
-test(2)
-test(3)
-test(4)
-test(5)
-test(6)
+runTest(1)
+runTest(2)
+runTest(3)
+runTest(4)
+runTest(5)
+runTest(6)
