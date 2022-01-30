@@ -8,7 +8,7 @@ const builtInput = (amount, guaranteed = false) => {
   const dataPool = []
 
   // function
-  const makeRandomN = (max) => Math.ceil(Math.random() * max)
+  const makeRandomN = (max) => Math.round(Math.random() * max)
   const makeRandomIndex = (size) => Math.floor(Math.random() * size)
   const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 

@@ -8,7 +8,7 @@ const builtArr = (amount) => {
   const output = []
 
   // function
-  const makeRandomN = (max) => Math.ceil(Math.random() * max)
+  const makeRandomN = (max) => Math.round(Math.random() * max)
 
   // run
   for (let i = 0; i < amount; ) {
