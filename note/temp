@@ -74,3 +74,9 @@ counter O(n)
 # Same Frequency -----------------------------------------------
 
 # Average Pair -----------------------------------------------
+by loop O(n^2)
+by counter O(n)
+by pointer O(n) (need sorted)
+
+# Pointer -----------------------------------------------
+sorted array
