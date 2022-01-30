@@ -1,15 +1,16 @@
 const builtInput = (amount, guaranteed = false) => {
-  let average = -1
+  const _max = amount * 2
   const dataPool = []
+  let target = -1
 
   // function
   const getRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
-  const getRandomIndex = (size) => Math.floor(Math.random() * size)
+  const getRandomIndex = (max) => Math.floor(Math.random() * max)
   const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
   // run
   for (let i = 0; i < amount; ) {
-    const randomNum = getRandomZ(50)
+    const randomNum = getRandomZ(_max)
     const isDuplicate = dataPool.some((v) => v === randomNum)
 
     if (isDuplicate) continue
@@ -25,19 +26,19 @@ const builtInput = (amount, guaranteed = false) => {
     let x = dataPool[getRandomIndex(amount)]
     let y = dataPool[getRandomIndex(amount)]
     while (x === y) y = dataPool[getRandomIndex(amount)]
-    average = (x - y) / 2
+    target = (x - y) / 2
   } else {
-    average = getRandomZ(50)
+    target = getRandomZ(_max)
   }
 
-  return { dataPool, average }
+  return { dataPool, target }
 }
 
 const test = (input, fn) => {
   const result = fn(input)
 
   console.log(`Data Pool: ${input.dataPool}`)
-  console.log(`Average: ${input.average}`)
+  console.log(`Average: ${input.target}`)
 
   if (Array.isArray(result) && result.length > 0) {
     console.log(`Pair: [${result.join('] / [')}]`)
