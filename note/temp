@@ -1,4 +1,4 @@
-# Big O Notation --------------------------------------------
+# Big O Notation ============================================
 ; https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
 ; https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
 
@@ -15,7 +15,7 @@ Q:為何主要用 Big O？
     '比起其他兩個較易計算'
 
 網路解釋範例：
-    ; --------------------------------------------
+    ; ---------------------------------------------------------
     Contrive(n)
     1. if n is 0 then do something Θ(n^3)
     2. else if n is even then
@@ -26,13 +26,13 @@ Q:為何主要用 Big O？
     7.    flip a coin
     8.    if heads, do something Θ(n^4)
     9.    else if tails, do something Θ(n^5)
-    ; --------------------------------------------
+    ; ----------------------------------------------------------
     'In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
     In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
     In the case n=0, the runtime is Θ(n^3).'
 
 
-# Big O for js -----------------------------------------------
+# Big O for js =================================================
 Object:
     insertion O(1)
     removal O(1)
@@ -51,7 +51,7 @@ Array:
 
     sort: O(nlogn)
 
-# Linear Search (Sequential Search) --------------------------
+# Linear Search (Sequential Search) =============================
 照線性順序，找到目標｜全找完找不到
 
 O(n)
@@ -59,7 +59,7 @@ O(n)
     best case: O(1)
     average: O(n/2)
 
-# Binary Search ----------------------------------------------
+# Binary Search ==================================================
 需要 sorted data set
 
 O(logn)
@@ -67,16 +67,25 @@ O(logn)
     best case: O(1)
     average: O(logn)
 
-# intersection ------------------------------------------------
-nested loop O(n^2)
-counter O(n)
+# Counter ========================================================
 
-# Same Frequency -----------------------------------------------
+# Pointer ========================================================
 
-# Average Pair -----------------------------------------------
-by loop O(n^2)
-by counter O(n)
-by pointer O(n) (need sorted)
+# code practice ===================================================
+intersection
+    by loop O(n^2)
+    by counter O(n)
 
-# Pointer -----------------------------------------------
-sorted array
+Same Frequency
+    by loop O(n)
+
+Average Pair
+    by loop O(n^2)
+    by counter O(n)
+    by pointer O(n) (need sorted)
+
+Palindrome
+    by pointer O(n)
+
+Subsequence promblem
+    by pointer O(n)
