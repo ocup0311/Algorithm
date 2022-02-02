@@ -69,23 +69,43 @@ O(logn)
 
 # Counter ========================================================
 
+    # code practice:
+    Same Frequency
+        by loop O(n)
+
+    intersection
+        by loop O(n^2)
+        by counter O(n)
+
+    Average Pair
+        by loop O(n^2)
+        by counter O(n)
+        by pointer O(n) (need sorted)
+
+
 # Pointer ========================================================
 
-# code practice ===================================================
-intersection
-    by loop O(n^2)
-    by counter O(n)
+    # code practice:
+    Palindrome
+        by pointer O(n)
 
-Same Frequency
-    by loop O(n)
+    Subsequence promblem
+        by pointer O(n)
 
-Average Pair
-    by loop O(n^2)
-    by counter O(n)
-    by pointer O(n) (need sorted)
 
-Palindrome
-    by pointer O(n)
+# Sliding Window =================================================
+input:
+    array: [a, b, c, d, e, f, g] (也可是動態 array)
+    size: 3
 
-Subsequence promblem
-    by pointer O(n)
+ouput:
+    [a, b, c]
+       [b, c, d]
+          [c, d, e]
+             [d, e, f]
+                [e, f, g]
+
+
+    # code practice:
+    Max and Min Sum
+        
