@@ -1,7 +1,4 @@
 const builtInput = ({ amountS, amountO }, guaranteed = false) => {
-  let subsequenceStr = ''
-  let originalStr = ''
-
   // function
   const makeRandomN = (max) => Math.round(Math.random() * max)
   const makeRandomIndex = (max) => Math.floor(Math.random() * max)
@@ -55,6 +52,7 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
     origin.split('').reduce((total, value, index, array) => {
       const restS = amount - total.length
       const restO = array.length - index
+
       if (total.length === 0 && value === ' ') return total
       if (restS === 0) return total
       if (restS >= restO) return total + value
@@ -64,11 +62,10 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
     }, '')
 
   // run
-  originalStr = makeRandomSequence(amountO)
-  subsequenceStr = guaranteed
+  const originalStr = makeRandomSequence(amountO)
+  const subsequenceStr = guaranteed
     ? makeSubsequence(amountS, originalStr)
     : makeRandomSequence(amountS)
-  console.log({ subsequenceStr, originalStr })
 
   return { subsequenceStr, originalStr }
 }
