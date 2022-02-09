@@ -10,6 +10,9 @@ COMMENT: 新增或調整註解
 UPDATE: 更新 file、function、等等
   ex. '[UPDATE] file: caesarCipher'
 
+DELETE: 刪除 file、function、等等
+  ex. '[DELETE] .DS_Store'
+
 RENAME: 更改 file、variable、all 名稱
   ex. '[RENAME] all: caesar -> caesarCipher'
 
