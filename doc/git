@@ -25,6 +25,9 @@ TYPO: 更正錯字
 FIX: 修改 bug
   ex. '[FIX] permutation2'
 
+MODULE: add、delete、update、等等 module
+  ex. '[MODULE] add: link-module-alias'
+
 TEMP: 暫時性 commit，完成後再合併修成正式 commit
   ex. '[TEMP] Need to code review from book "圖說演算法：使用JavaScript"'
 
