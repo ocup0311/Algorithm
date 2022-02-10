@@ -7,7 +7,7 @@ function slidingWindow({ dataPool, size = 3 }, callBack) {
   if (size > dataPool.length) return
 
   // run
-  for (let i = 0; i <= dataPool.length - size; i++) {
+  for (let i = 0; i < dataPool.length - size; i++) {
     const lastItem = dataPool[i]
     const nextItem = dataPool[i + size]
 

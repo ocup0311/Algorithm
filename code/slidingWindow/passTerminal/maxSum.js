@@ -5,8 +5,8 @@ function maxSum({ dataPool, size = 3 }) {
   if (size > dataPool.length) return null
 
   // var
-  let value_max = -Infinity
-  let value_temp = U.makeSumofArr(dataPool.slice(0, size))
+  let value_max = U.makeSumofArr(dataPool.slice(0, size))
+  let value_temp = value_max
 
   // function
   const slidingWindow = require('./slidingWindow')
