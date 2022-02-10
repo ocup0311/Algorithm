@@ -6,8 +6,9 @@ function slidingWindow({ dataPool, size = 3 }, fn) {
 
   // run
   for (let i = 0; i <= dataPool.length - size; i++) {
-    const set = dataPool.slice(i, i + size)
-    fn(set)
+    const pre = dataPool[i]
+    const pro = dataPool[i + size]
+    fn(pre, pro)
   }
 
   return
