@@ -1,21 +1,26 @@
+const U = require('../../@util')
+
 function minSum({ dataPool, size = 3 }) {
   // exception
   if (size > dataPool.length) return null
 
   // var
-  let min = Infinity
+  let value_min = Infinity
 
   // function
   const slidingWindow = require('./slidingWindow')
-  const fn = (x) => {
-    const y = x.reduce((t, v) => t + v)
-    if (min > y) min = y
+  const callBack = (windowSet) => {
+    const value_temp = U.makeSumofArr(windowSet)
+
+    if (value_min > value_temp) value_min = value_temp
+
     return
   }
 
-  slidingWindow({ dataPool, size }, fn)
+  // run
+  slidingWindow({ dataPool, size }, callBack)
 
-  return min
+  return value_min
 }
 
 module.exports = minSum

@@ -1,24 +1,27 @@
+const U = require('../../@util')
+
 function maxSum({ dataPool, size = 3 }) {
   // exception
   if (size > dataPool.length) return null
 
   // var
-  let max = dataPool.slice(0, size).reduce((t, v) => t + v)
-  let x = max
+  let value_max = -Infinity
+  let value_temp = U.makeSumofArr(dataPool.slice(0, size))
 
   // function
   const slidingWindow = require('./slidingWindow')
-  const fn = (pre, pro) => {
-    x = x - pre + pro
+  const callBack = (lastItem, nextItem) => {
+    value_temp = value_temp - lastItem + nextItem
 
-    if (max < x) max = x
+    if (value_max < value_temp) value_max = value_temp
+
     return
   }
 
   // run
-  slidingWindow({ dataPool, size }, fn)
+  slidingWindow({ dataPool, size }, callBack)
 
-  return max
+  return value_max
 }
 
 module.exports = maxSum
