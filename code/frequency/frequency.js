@@ -3,56 +3,21 @@
 // input:'abbcd' & 'abbcc' output: false
 // input:'abbcd' & 'abbcdd' output: false
 // O(n)
+
+const C = require('../@config')
+const U = require('../@util')
+
 // ===================== input =====================
 
 const builtInput = ({ amount1, amount2 }, guaranteed = false) => {
   // function
-  const builtStr = (amount) => {
-    const A_Z = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-    ]
-
-    let output = ''
-
-    for (let i = 0; i < amount; i++) {
-      const randomIndex = Math.floor(Math.random() * 26)
-
-      output = output + A_Z[randomIndex]
-    }
-
-    return output
-  }
+  const makeRandomStr = (amount) => U.makeRandomStr(C.A_Z, amount)
 
   const messupStr = (str) => {
     let output = ''
 
     while (str.length > 0) {
-      const randomIndex = Math.floor(Math.random() * str.length)
+      const randomIndex = U.makeRandomIndex(str.length)
       output = output + str[randomIndex]
       str = str.slice(0, randomIndex) + str.slice(randomIndex + 1, str.length)
     }
@@ -61,14 +26,8 @@ const builtInput = ({ amount1, amount2 }, guaranteed = false) => {
   }
 
   // run
-  const str1 = builtStr(amount1)
-  let str2 = ''
-
-  if (guaranteed) {
-    str2 = messupStr(str1)
-  } else {
-    str2 = builtStr(amount2)
-  }
+  const str1 = makeRandomStr(amount1)
+  const str2 = guaranteed ? messupStr(str1) : makeRandomStr(amount2)
 
   return { str1, str2 }
 }

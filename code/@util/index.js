@@ -14,6 +14,16 @@ const makeRandomLetter = (letterPool) => {
   return letterPool[makeRandomIndex(letterPool.length)]
 }
 
+const makeRandomStr = (letterPool, amount) => {
+  let output = ''
+
+  for (let i = 0; i < amount; i++) {
+    output = output + makeRandomLetter(letterPool)
+  }
+
+  return output
+}
+
 module.exports = {
   makeSumofArr,
   toSortNumber,
@@ -21,4 +31,5 @@ module.exports = {
   makeRandomZ,
   makeRandomIndex,
   makeRandomLetter,
+  makeRandomStr,
 }
