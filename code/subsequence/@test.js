@@ -1,41 +1,10 @@
+const C = require('../@config')
+const U = require('../@util')
+
 const builtInput = ({ amountS, amountO }, guaranteed = false) => {
   // function
-  const makeRandomN = (max) => Math.round(Math.random() * max)
-  const makeRandomIndex = (max) => Math.floor(Math.random() * max)
-  const makeRandomLetter = () => {
-    const A_Z_SPACE = [
-      ' ',
-      ' ',
-      ' ',
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-    ]
-    return A_Z_SPACE[makeRandomIndex(26)]
-  }
+  const makeRandomLetter = () =>
+    U.makeRandomLetter(C.a_z.concat([' ', ' ', ' ']))
   const makeRandomSequence = (amount) => {
     let output = ''
 
@@ -56,7 +25,7 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
       if (total.length === 0 && value === ' ') return total
       if (restS === 0) return total
       if (restS >= restO) return total + value
-      if (makeRandomN(1)) return total + value
+      if (U.makeRandomN(1)) return total + value
 
       return total
     }, '')

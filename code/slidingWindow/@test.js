@@ -1,15 +1,13 @@
+const U = require('../@util')
+
 const builtInput = (amount, size = 3) => {
+  // var
   const _max = amount * 2
   const dataPool = []
 
-  // function
-  const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
-
   // run
   for (let i = 0; i < amount; ) {
-    const randomNum = makeRandomZ(_max)
-
-    dataPool.push(randomNum)
+    dataPool.push(U.makeRandomZ(_max))
 
     i++
   }

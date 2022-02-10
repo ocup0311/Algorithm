@@ -1,29 +1,28 @@
 // 需先排列數據。切一半找
 // input:{ dataPool:[5,9,15,78,99], target:78 } output: 3
 // O(logn)
+
+const U = require('../@util')
+
 // ===================== input =====================
 
 const builtInput = (amount, guaranteed = false) => {
+  // var
   let target = -1
   const dataPool = []
 
-  // function
-  const makeRandomN = (max) => Math.round(Math.random() * max)
-  const makeRandomIndex = (size) => Math.floor(Math.random() * size)
-  const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
-
   // run
   for (let i = 0; i < amount; i++) {
-    const randomNum = makeRandomN(100)
+    const randomNum = U.makeRandomN(100)
     dataPool.push(randomNum)
   }
 
-  toSortNumber(dataPool)
+  U.toSortNumber(dataPool)
 
   if (guaranteed) {
-    target = dataPool[makeRandomIndex(amount)]
+    target = dataPool[U.makeRandomIndex(amount)]
   } else {
-    target = makeRandomN(100)
+    target = U.makeRandomN(100)
   }
 
   return { dataPool, target }

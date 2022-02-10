@@ -1,26 +1,26 @@
 // 照線性順序，找到目標｜全找完找不到
 // input:{ dataPool:[87,5,13,9,15,78,99], target:78 } output: 5
 // O(n)
+
+const U = require('../@util')
+
 // ===================== input =====================
 
 const builtInput = (amount, guaranteed = false) => {
+  // var
   let target = -1
   const dataPool = []
 
-  // function
-  const makeRandomN = (max) => Math.round(Math.random() * max)
-  const makeRandomIndex = (size) => Math.floor(Math.random() * size)
-
   // run
   for (let i = 0; i < amount; i++) {
-    const randomNum = makeRandomN(100)
+    const randomNum = U.makeRandomN(100)
     dataPool.push(randomNum)
   }
 
   if (guaranteed) {
-    target = dataPool[makeRandomIndex(amount)]
+    target = dataPool[U.makeRandomIndex(amount)]
   } else {
-    target = makeRandomN(100)
+    target = U.makeRandomN(100)
   }
 
   return { dataPool, target }

@@ -1,16 +1,14 @@
+const U = require('../@util')
+
 const builtInput = (amount, guaranteed = false) => {
+  // var
   const _max = amount * 2
   const dataPool = []
   let target = -1
 
-  // function
-  const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
-  const makeRandomIndex = (max) => Math.floor(Math.random() * max)
-  const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
-
   // run
   for (let i = 0; i < amount; ) {
-    const randomNum = makeRandomZ(_max)
+    const randomNum = U.makeRandomZ(_max)
     const isDuplicate = dataPool.some((v) => v === randomNum)
 
     if (isDuplicate) continue
@@ -20,15 +18,17 @@ const builtInput = (amount, guaranteed = false) => {
     i++
   }
 
-  toSortNumber(dataPool)
+  U.toSortNumber(dataPool)
 
   if (guaranteed) {
-    let x = dataPool[makeRandomIndex(amount)]
-    let y = dataPool[makeRandomIndex(amount)]
-    while (x === y) y = dataPool[makeRandomIndex(amount)]
+    let x = dataPool[U.makeRandomIndex(amount)]
+    let y = dataPool[U.makeRandomIndex(amount)]
+
+    while (x === y) y = dataPool[U.makeRandomIndex(amount)]
+
     target = (x - y) / 2
   } else {
-    target = makeRandomZ(_max)
+    target = U.makeRandomZ(_max)
   }
 
   return { dataPool, target }

@@ -1,39 +1,12 @@
+const C = require('../@config')
+const U = require('../@util')
+
 const builtInput = (amount, guaranteed = false) => {
+  // var
   let output = ''
 
   // function
-  const makeRandomIndex = (max) => Math.floor(Math.random() * max)
-  const makeRandomLetter = () => {
-    const A_Z = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-    ]
-    return A_Z[makeRandomIndex(26)]
-  }
+  const makeRandomLetter = () => U.makeRandomLetter(C.A_Z)
 
   // run
   if (guaranteed) {
