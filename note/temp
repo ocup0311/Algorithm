@@ -1,4 +1,115 @@
+# Big O Notation ============================================
+// https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
+// https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
+
 以「複雜度」取代「計時」的方式衡量演算法的原因：
     1. Same computer gets different runtime for the same task.
     2. Different computing power machine gives different run time for the same task.
 
+Big O: 'upper bound'
+Big Omega (Ω): 'lower bound'
+Big Theta (Θ): 'average bound (asymptotically tight bound?)'
+
+Q:為何主要用 Big O？
+    '一般比較在意 the worst-case 的 upper bound'
+    '比起其他兩個較易計算'
+
+網路解釋範例：
+    // ---------------------------------------------------------
+    Contrive(n)
+    1. if n is 0 then do something Θ(n^3)
+    2. else if n is even then
+    3.    flip a coin
+    4.    if heads, do something Θ(n)
+    5.    else if tails, do something Θ(n^2)
+    6. else if n is odd then
+    7.    flip a coin
+    8.    if heads, do something Θ(n^4)
+    9.    else if tails, do something Θ(n^5)
+    // ----------------------------------------------------------
+    'In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
+    In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
+    In the case n=0, the runtime is Θ(n^3).'
+
+
+# Big O for js =================================================
+// https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
+// https://stackoverflow.com/questions/22614237/javascript-runtime-complexity-of-array-functions
+
+Object:
+    insertion O(1)
+    removal O(1)
+    searching O(n)
+    accessing O(1)
+
+Array:
+    insertion
+        push O(1)
+        shift O(n)
+    removal
+        pop O(1)
+        unshift O(n)
+    searching O(n)
+    accessing O(1)
+
+    sort: O(nlogn)
+
+# Linear Search (Sequential Search) =============================
+照線性順序，找到目標｜全找完找不到
+
+O(n)
+    worst case: O(n)
+    best case: O(1)
+    average: O(n/2)
+
+# Binary Search ==================================================
+需要 sorted data set
+
+O(logn)
+    worst case: O(logn)
+    best case: O(1)
+    average: O(logn)
+
+# Counter ========================================================
+
+    # code practice:
+    Same Frequency
+        by loop O(n)
+
+    intersection
+        by loop O(n^2)
+        by counter O(n)
+
+    Average Pair
+        by loop O(n^2)
+        by counter O(n)
+        by pointer O(n) (need sorted)
+
+
+# Pointer ========================================================
+
+    # code practice:
+    Palindrome
+        by pointer O(n)
+
+    Subsequence promblem
+        by pointer O(n)
+
+
+# Sliding Window =================================================
+input:
+    array: [a, b, c, d, e, f, g] (也可是動態 array)
+    size: 3
+
+ouput:
+    [a, b, c]
+       [b, c, d]
+          [c, d, e]
+             [d, e, f]
+                [e, f, g]
+
+
+    # code practice:
+    Max and Min Sum
+        by pass whole set O(n * size)
+        by pass terminal O(n)
