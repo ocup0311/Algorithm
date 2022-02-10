@@ -4,8 +4,8 @@
 // input:'abbcd' & 'abbcdd' output: false
 // O(n)
 
-const C = require('../@config')
-const U = require('../@util')
+const C = require('@config')
+const U = require('@util')
 
 // ===================== input =====================
 

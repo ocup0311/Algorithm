@@ -1,5 +1,5 @@
-const C = require('../@config')
-const U = require('../@util')
+const C = require('@config')
+const U = require('@util')
 
 const builtInput = ({ amountS, amountO }, guaranteed = false) => {
   // function

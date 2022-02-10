@@ -3,7 +3,7 @@
 // O(n)
 // 註：個別 array 中，每項不重複，才可用此法。否則需細修 itemList 的計數法。
 
-const U = require('../@util')
+const U = require('@util')
 
 // ===================== input =====================
 

@@ -2,7 +2,7 @@
 // input:{ dataPool:[87,5,13,9,15,78,99], target:78 } output: 5
 // O(n)
 
-const U = require('../@util')
+const U = require('@util')
 
 // ===================== input =====================
 

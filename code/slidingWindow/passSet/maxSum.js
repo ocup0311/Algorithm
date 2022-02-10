@@ -1,4 +1,4 @@
-const U = require('../../@util')
+const U = require('@util')
 
 function maxSum({ dataPool, size = 3 }) {
   // exception

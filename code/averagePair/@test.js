@@ -1,4 +1,4 @@
-const U = require('../@util')
+const U = require('@util')
 
 const builtInput = (amount, guaranteed = false) => {
   // var

@@ -1,0 +1,20 @@
+{
+  "name": "algorithm",
+  "version": "0.0.0",
+  "engines": {
+    "node": "14.14.0"
+  },
+  "scripts": {
+    "postinstall": "link-module-alias",
+    "preinstall": "command -v link-module-alias && link-module-alias clean || true"
+  },
+  "_moduleAliases": {
+    "~root": ".",
+    "@util": "code/@util",
+    "@config": "code/@config"
+  },
+  "author": "OcupHuang",
+  "devDependencies": {
+    "link-module-alias": "^1.2.0"
+  }
+}
