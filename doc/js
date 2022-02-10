@@ -9,6 +9,7 @@ Q: 有理數（分數）
 R: 實數（根號）
 C: 複數（i）
 arr: array
+str: string
 temp: temporary value
 ptr: pointer
 
