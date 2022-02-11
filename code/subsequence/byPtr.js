@@ -1,6 +1,6 @@
 // O(n)
 
-function byPointer({ subsequenceStr, originalStr }) {
+function byPtr({ subsequenceStr, originalStr }) {
   // exception
   if (subsequenceStr.length > originalStr.length) return false
 
@@ -22,4 +22,4 @@ function byPointer({ subsequenceStr, originalStr }) {
   return true
 }
 
-module.exports = byPointer
+module.exports = byPtr

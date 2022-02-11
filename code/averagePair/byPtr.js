@@ -1,6 +1,6 @@
 // O(n)
 
-function byPointer({ dataPool, target }) {
+function byPtr({ dataPool, target }) {
   // pointer
   let [left, right] = [0, dataPool.length - 1]
 
@@ -29,4 +29,4 @@ function byPointer({ dataPool, target }) {
   return output
 }
 
-module.exports = byPointer
+module.exports = byPtr

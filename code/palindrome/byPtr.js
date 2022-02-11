@@ -1,6 +1,6 @@
 // O(n)
 
-function byPointer(input) {
+function byPtr(input) {
   // pointer
   let [left, right] = [0, input.length - 1]
   const str = input.toUpperCase()
@@ -17,4 +17,4 @@ function byPointer(input) {
   return true
 }
 
-module.exports = byPointer
+module.exports = byPtr
