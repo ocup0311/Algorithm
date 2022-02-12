@@ -24,6 +24,15 @@ const makeRandomStr = (letterPool, amount) => {
   return output
 }
 
+// counter
+const toUpCounter = (counter, item) => {
+  counter[item] = counter[item] === undefined ? 1 : counter[item] + 1
+}
+
+const toDownCounter = (counter, item) => {
+  counter[item] = counter[item] === undefined ? -1 : counter[item] - 1
+}
+
 module.exports = {
   makeSumofArr,
   toSortNumber,
@@ -32,4 +41,6 @@ module.exports = {
   makeRandomIndex,
   makeRandomLetter,
   makeRandomStr,
+  toUpCounter,
+  toDownCounter,
 }

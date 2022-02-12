@@ -46,13 +46,13 @@ function frequency({ str1, str2 }) {
   // function
   const addItemToList = (str) => {
     for (let i = 0; i < str.length; i++) {
-      itemList[str[i]] = itemList[str[i]] + 1 || 1
+      U.toUpCounter(itemList, str[i])
     }
   }
 
   const minusItemToList = (str) => {
     for (let i = 0; i < str.length; i++) {
-      itemList[str[i]] = itemList[str[i]] ? itemList[str[i]] - 1 : -1
+      U.toDownCounter(itemList, str[i])
     }
   }
 
