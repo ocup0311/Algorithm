@@ -9,7 +9,8 @@ const builtInput = (amount) => {
   const target = Math.round(U.makeRandomN((amount / 3) ** 2) * 3.5)
 
   for (let i = 0; i < amount; ) {
-    dataPool.push(U.makeRandomZ(_max))
+    // dataPool.push(U.makeRandomZ(_max))
+    dataPool.push(U.makeRandomN(_max))
 
     i++
   }
@@ -20,8 +21,8 @@ const builtInput = (amount) => {
 const runTest = (input, fn) => {
   const result = fn(input)
 
-  console.log(`Data Pool: ${input.dataPool}, target: ${input.target}`)
-  console.log(`${fn.name}: ${result.minLength}, sum: ${result.sum}`)
+  // console.log(`Data Pool: ${input.dataPool}, target: ${input.target}`)
+  console.log(`${fn.name}: ${result}`)
 
   console.log()
 }
