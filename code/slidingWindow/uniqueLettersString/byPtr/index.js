@@ -13,20 +13,22 @@ function uniqueLettersString(input) {
 
   // run
   while (ptr < input.length) {
-    if (ptr === 0 || Object.keys(counter).every((k) => counter[k] < 2)) {
-      const letter = input[ptr]
-      counter[letter] = counter[letter] + 1 || 1
+    const newLetter = input[ptr]
+    const newLetter_low = newLetter.toLowerCase()
+    const isExist = counter[newLetter_low] > 0
 
-      tempStr = tempStr + letter
+    if (isExist) {
+      const removeLetter_low = tempStr[0].toLowerCase()
+
+      U.toDownCounter(counter, removeLetter_low)
+      tempStr = tempStr.slice(1)
+    } else {
+      ptr++
+
+      U.toUpCounter(counter, newLetter_low)
+      tempStr = tempStr + newLetter
 
       if (subStr.length < tempStr.length) subStr = tempStr
-
-      ptr++
-    } else {
-      const letter = tempStr[0]
-      counter[letter] = counter[letter] - 1
-
-      tempStr = tempStr.slice(1)
     }
   }
 
