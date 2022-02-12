@@ -42,6 +42,7 @@ Q:為何主要用 Big O？
 # Big O for js =================================================
 ; https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
 ; https://stackoverflow.com/questions/22614237/javascript-runtime-complexity-of-array-functions
+; https://stackoverflow.com/questions/47733645/what-is-the-algorithmic-complexity-of-string-slicing-practical-real-world
 
 Object:
     insertion O(1)
@@ -60,6 +61,11 @@ Array:
     accessing O(1)
 
     sort: O(nlogn)
+    slice: O(n)
+
+String:
+    slice: O(1)
+
 
 # Linear Search (Sequential Search) =============================
 照線性順序，找到目標｜全找完找不到

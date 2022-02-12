@@ -1,12 +1,11 @@
 // O(n)
-// (X) 用 string + 1個 pointer，移除前面時需要於 loop 中 slice，為 O(n)，會多花時間。
-// (O) string slice 為 O(1)，所以可以直接用 slice。
+// 用 string + 3個 pointer，可不用於 loop 中 slice。
 
 const U = require('@util')
 
 function uniqueLettersString(input) {
   // pointer
-  let ptr = 0
+  let [start, start_T, end_T] = [0, 0, 0]
 
   // var
   let tempStr = ''
@@ -14,27 +13,30 @@ function uniqueLettersString(input) {
   const counter = {}
 
   // run
-  while (ptr < input.length) {
-    const newLetter = input[ptr]
+  while (end_T < input.length) {
+    const newLetter = input[end_T]
     const newLetter_low = newLetter.toLowerCase()
     const isExist = counter[newLetter_low] > 0
 
     if (isExist) {
-      const removeLetter_low = tempStr[0].toLowerCase()
+      const removeLetter_low = tempStr[start_T].toLowerCase()
 
       U.toDownCounter(counter, removeLetter_low)
-      tempStr = tempStr.slice(1) // O(1)
+      start_T++
     } else {
-      ptr++
+      end_T++
 
       U.toUpCounter(counter, newLetter_low)
       tempStr = tempStr + newLetter
 
-      if (subStr.length < tempStr.length) subStr = tempStr
+      if (subStr.length - start < end_T - start_T) {
+        subStr = tempStr
+        start = start_T
+      }
     }
   }
 
-  return subStr
+  return subStr.slice(start)
 }
 
 module.exports = { uniqueLettersString }
