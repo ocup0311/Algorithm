@@ -1,21 +1,28 @@
+# 筆記方向 ===================================================
+1. 查演算法的各種使用時機
+2. 附圖解
+3. pseudo code
+4. 簡單文字描述
+5. Big O
+
 # Big O Notation ============================================
-// https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
-// https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
+; https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
+; https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
 
 以「複雜度」取代「計時」的方式衡量演算法的原因：
     1. Same computer gets different runtime for the same task.
     2. Different computing power machine gives different run time for the same task.
 
-Big O: 'upper bound'
-Big Omega (Ω): 'lower bound'
-Big Theta (Θ): 'average bound (asymptotically tight bound?)'
+Big O: "upper bound"
+Big Omega (Ω): "lower bound"
+Big Theta (Θ): "average bound (asymptotically tight bound?)"
 
 Q:為何主要用 Big O？
-    '一般比較在意 the worst-case 的 upper bound'
-    '比起其他兩個較易計算'
+    "一般比較在意 the worst-case 的 upper bound"
+    "比起其他兩個較易計算"
 
 網路解釋範例：
-    // ---------------------------------------------------------
+    ; ---------------------------------------------------------
     Contrive(n)
     1. if n is 0 then do something Θ(n^3)
     2. else if n is even then
@@ -26,15 +33,15 @@ Q:為何主要用 Big O？
     7.    flip a coin
     8.    if heads, do something Θ(n^4)
     9.    else if tails, do something Θ(n^5)
-    // ----------------------------------------------------------
-    'In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
+    ; ----------------------------------------------------------
+    "In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
     In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
-    In the case n=0, the runtime is Θ(n^3).'
+    In the case n=0, the runtime is Θ(n^3)."
 
 
 # Big O for js =================================================
-// https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
-// https://stackoverflow.com/questions/22614237/javascript-runtime-complexity-of-array-functions
+; https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
+; https://stackoverflow.com/questions/22614237/javascript-runtime-complexity-of-array-functions
 
 Object:
     insertion O(1)
@@ -74,13 +81,16 @@ O(logn)
 
     # code practice:
     Same Frequency
+    "Write a function that takes two strings and check if they have the same letters.Order doesn't matter."
         by loop O(n)
 
     intersection
+    "Write a function that takes two arrays as parameters, and then return an array that is the intersection of these two arrays."
         by loop O(n^2)
         by counter O(n)
 
     Average Pair
+    "Write a function that given a sorted array of integers and a number. Find if there's any pair in the array that has average of the given number. Find all of them. There might be multiple pairs fit the condition."
         by loop O(n^2)
         by counter O(n)
         by pointer O(n) (need sorted)
@@ -90,13 +100,16 @@ O(logn)
 
     # code practice:
     Palindrome
+    "Write a function that checks if the input string is a palindrome. Palindrome is a word that can be read forwards and backwards."
         by pointer O(n)
 
     Subsequence promblem
+    "A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. Write a function that checks if one string is a subsequence of the other string."
         by pointer O(n)
 
 
 # Sliding Window =================================================
+"Generally speaking, a sliding window is a sub-list that runs over an underlying collection."
 input:
     array: [a, b, c, d, e, f, g] (也可是動態 array)
     size: 3
@@ -111,5 +124,14 @@ ouput:
 
     # code practice:
     Max and Min Sum
+    "Write two functions that calculate the max and min sum of n consecutive numbers in an array."
         by pass whole set O(n * size)
         by pass terminal O(n)
+
+    minSubLength
+    "Write a function called minSubLength which accepts two parameters, an array of positive integers and a positive integer. This function should return the minimal length of a continuous subarray - the sum of elements inside this subarray has to be greater than or equal to the positive integer parameter. If subarray not found, then return 0."
+        by use maxSum O(n ^ 2)
+        by pointer O(n) (每項必須為自然數)
+
+    unique letters string
+    "Write a function called uniqueLettersString, which accepts a string and returns the length of the longest substring with all distinct characters."
