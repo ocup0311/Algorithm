@@ -4,6 +4,7 @@ function byPtr({ dataPool, target }) {
   // pointer
   let [left, right] = [0, dataPool.length - 1]
 
+  // var
   const output = []
 
   // function

@@ -3,6 +3,8 @@
 function byPtr(input) {
   // pointer
   let [left, right] = [0, input.length - 1]
+
+  // var
   const str = input.toUpperCase()
 
   // run
