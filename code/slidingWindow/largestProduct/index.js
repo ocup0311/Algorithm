@@ -7,7 +7,7 @@ const { builtInput, runTest } = require('./@test.js')
 const passTerminal = require('./passTerminal')
 const passSet = require('./passSet')
 
-const input0 = builtInput(200, 30)
+const input0 = builtInput(2000, 300)
 const input1 = { dataPool: [5, 7, 0, 5, 3, 7, 8, 5, 9], size: 2 }
 const input2 = builtInput(2)
 const input3 = builtInput(2, 1)
