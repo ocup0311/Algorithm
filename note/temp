@@ -148,3 +148,26 @@ ouput:
 
     largest product（乘積）
     "The four adjacent digits in the 1000-digit number that have the greatest product are 9x9x8x9=5832. Find the n adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?"
+
+# Recursion ======================================================
+"A function that calls itself."
+"Recursion is using a data structure called 'stack'. When we are calling a function inside another function, we are on the call stack."
+"Recursion is also a mathematical relation in sequences."
+
+    # pseudo code:
+        recursion(n):
+            if n equal 1:
+                return A1
+            else:
+                return recursion(n-1)
+
+    # code practice:
+        recursionSequence
+            O(n)
+
+
+
+
+
+
+
