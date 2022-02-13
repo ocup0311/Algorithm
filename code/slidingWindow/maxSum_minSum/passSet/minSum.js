@@ -8,7 +8,7 @@ function minSum({ dataPool, size = 3 }) {
   let value_min = Infinity
 
   // function
-  const slidingWindow = require('./slidingWindow')
+  const { slidingWindow } = require('../../slidingWindow/passSet')
   const callBack = (windowSet) => {
     const value_temp = U.makeSumofArr(windowSet)
 

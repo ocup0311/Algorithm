@@ -4,7 +4,7 @@
 
 function slidingWindow({ dataPool, size = 3 }, callBack) {
   // exception
-  if (size > dataPool.length) return
+  if (size > dataPool.length) return null
 
   // run
   for (let i = 0; i <= dataPool.length - size; i++) {
@@ -15,4 +15,4 @@ function slidingWindow({ dataPool, size = 3 }, callBack) {
   return
 }
 
-module.exports = slidingWindow
+module.exports = { slidingWindow }

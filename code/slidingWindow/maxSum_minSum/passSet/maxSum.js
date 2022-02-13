@@ -8,7 +8,7 @@ function maxSum({ dataPool, size = 3 }) {
   let value_max = -Infinity
 
   // function
-  const slidingWindow = require('./slidingWindow')
+  const { slidingWindow } = require('../../slidingWindow/passSet')
   const callBack = (windowSet) => {
     const value_temp = U.makeSumofArr(windowSet)
     if (value_max < value_temp) value_max = value_temp

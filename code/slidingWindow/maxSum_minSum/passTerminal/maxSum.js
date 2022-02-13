@@ -9,7 +9,7 @@ function maxSum({ dataPool, size = 3 }) {
   let value_temp = value_max
 
   // function
-  const slidingWindow = require('./slidingWindow')
+  const { slidingWindow } = require('../../slidingWindow/passTerminal')
   const callBack = (lastItem, nextItem) => {
     value_temp = value_temp - lastItem + nextItem
 
