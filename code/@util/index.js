@@ -1,6 +1,20 @@
 // arr
 const makeSumofArr = (arr) => arr.reduce((t, v) => t + v, 0)
 
+const makeProductofArr = (arr) => arr.reduce((t, v) => t * v, 1)
+
+const makeProductofArr_fromNextTo0 = (arr) => {
+  let skip = 0
+  const product = arr.reduce((t, v, i) => {
+    if (v === 0) {
+      skip = skip + i + 1
+      return 1
+    }
+    return t * v
+  }, 1)
+  return { product, skip }
+}
+
 const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
 // random
@@ -35,6 +49,8 @@ const toDownCounter = (counter, item) => {
 
 module.exports = {
   makeSumofArr,
+  makeProductofArr,
+  makeProductofArr_fromNextTo0,
   toSortNumber,
   makeRandomN,
   makeRandomZ,
