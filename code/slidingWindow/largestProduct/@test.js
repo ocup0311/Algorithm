@@ -15,10 +15,10 @@ const builtInput = (amount, size = 3) => {
   return { dataPool, size }
 }
 
-const runTest = (input, fn) => {
+const runTest = (input, fn, showData = true) => {
   const result = fn(input)
 
-  console.log(`Data Pool: ${input.dataPool}, size: ${input.size}`)
+  if (showData) console.log(`Data Pool: ${input.dataPool}, size: ${input.size}`)
   console.log(`${fn.name}: ${result}`)
 
   console.log()

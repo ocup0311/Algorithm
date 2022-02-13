@@ -1,4 +1,5 @@
 // O(n)
+
 const U = require('@util')
 
 function largestProduct({ dataPool, size = 3 }) {
@@ -6,10 +7,10 @@ function largestProduct({ dataPool, size = 3 }) {
   if (size > dataPool.length) return null
 
   // var
-  let { product: value_max, skip } = U.makeProductofArr_fromNextTo0(
+  let { product: value_temp, skip } = U.makeProductofArr_fromNextTo0(
     dataPool.slice(0, size)
   )
-  let value_temp = value_max
+  let value_max = skip ? -Infinity : value_temp
 
   // function
   const { slidingWindow } = require('../../slidingWindow/passTerminal')
@@ -20,15 +21,14 @@ function largestProduct({ dataPool, size = 3 }) {
       value_temp = 1
       return
     }
-
-    // run
     if (skip > 0) {
       skip--
       value_temp = value_temp * nextItem
-    } else {
-      value_temp = (value_temp / lastItem) * nextItem
+      return
     }
 
+    // run
+    value_temp = (value_temp / lastItem) * nextItem
     if (value_max < value_temp) value_max = value_temp
 
     return
@@ -37,7 +37,7 @@ function largestProduct({ dataPool, size = 3 }) {
   // run
   slidingWindow({ dataPool, size }, callBack)
 
-  return value_max
+  return value_max === -Infinity ? 0 : value_max
 }
 
 module.exports = { largestProduct }
