@@ -161,9 +161,20 @@ ouput:
             else:
                 return recursion(n-1)
 
+    # Big O: call x times rs() inside itslef
+    ; https://stackoverflow.com/questions/13467674/determining-complexity-for-recursive-functions-big-o-notation
+        rs: recursive(n-1) x: 1 --> O(n)
+        rs: recursive(n-5) x: 1 --> O(n/5)
+        rs: recursive(n/5) x: 1 --> O(log(n)) --base 5
+        rs: recursive(n-1) x: 2 --> O(2^n) (exponential)
+
     # code practice:
-        recursionSequence
+        Recursion Sequence
             O(n)
+
+        Fibonacci Sequence
+        "Write a function that takes an integer N as an input and returns the Nth number in Fibonacci Sequence."
+            O(2^n)
 
 
 
