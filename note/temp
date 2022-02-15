@@ -177,6 +177,10 @@ ouput:
             withoutStore O(2^n)
             withStore O(n)
 
+        Array of Arrays
+        "Write a function that collects all value in an array of arrays and return an array of values collected."
+            
+
 
 
 

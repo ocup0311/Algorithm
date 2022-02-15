@@ -1,4 +1,3 @@
-const C = require('@config')
 const U = require('@util')
 
 const builtInput = () => U.makeRandomN(1000)
