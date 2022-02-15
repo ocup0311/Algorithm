@@ -179,7 +179,7 @@ ouput:
 
         Array of Arrays
         "Write a function that collects all value in an array of arrays and return an array of values collected."
-            
+            O(n)
 
 
 

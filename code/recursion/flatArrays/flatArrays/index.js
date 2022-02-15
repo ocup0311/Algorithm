@@ -1,20 +1,20 @@
-// O()
+// O(n+m)
+// item * n, array * m
 
-function flatArrays(input) {
+function flatArrays(originalArr) {
   // var
-  const output = []
+  const flattedArr = []
 
   // function
-  const toFlatArr = (arr2) =>
-    arr2.forEach((item) => {
-      if (!Array.isArray(item)) output.push(item)
-      else toFlatArr(item)
-    })
+  const getItems = (input) => {
+    if (Array.isArray(input)) input.forEach(getItems)
+    else flattedArr.push(input)
+  }
 
   // run
-  toFlatArr(input)
+  getItems(originalArr)
 
-  return output
+  return flattedArr
 }
 
 module.exports = { flatArrays }
