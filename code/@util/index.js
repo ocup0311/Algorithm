@@ -18,11 +18,12 @@ const makeProductofArr_fromNextTo0 = (arr) => {
 const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
 // random
+// Math.random() --> 包含 0，不包含1)
 const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
 
 const makeRandomN = (max) => Math.round(Math.random() * max)
 
-const makeRandomIndex = (max) => Math.floor(Math.random() * max)
+const makeRandomIndex = (length) => Math.floor(Math.random() * length)
 
 const makeRandomLetter = (letterPool) => {
   return letterPool[makeRandomIndex(letterPool.length)]
@@ -38,6 +39,20 @@ const makeRandomStr = (letterPool, amount) => {
   return output
 }
 
+const makeRandomBoolean = (probability) => {
+  const P =
+    probability === undefined
+      ? 0.5
+      : typeof probability === 'string'
+      ? parseInt(probability) / 100
+      : probability
+
+  // exception
+  if (P >= 1) return true
+
+  return makeRandomIndex(0.5 / (1 - P)) === 0 ? false : true
+}
+
 // counter
 const toUpCounter = (counter, item) => {
   counter[item] = counter[item] === undefined ? 1 : counter[item] + 1
@@ -46,6 +61,9 @@ const toUpCounter = (counter, item) => {
 const toDownCounter = (counter, item) => {
   counter[item] = counter[item] === undefined ? -1 : counter[item] - 1
 }
+
+// log
+const openLog = (v) => console.log(JSON.stringify(v, null, ' '))
 
 module.exports = {
   makeSumofArr,
@@ -57,6 +75,8 @@ module.exports = {
   makeRandomIndex,
   makeRandomLetter,
   makeRandomStr,
+  makeRandomBoolean,
   toUpCounter,
   toDownCounter,
+  openLog,
 }

@@ -25,7 +25,7 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
       if (total.length === 0 && value === ' ') return total
       if (restS === 0) return total
       if (restS >= restO) return total + value
-      if (U.makeRandomN(1)) return total + value
+      if (U.makeRandomBoolean()) return total + value
 
       return total
     }, '')
