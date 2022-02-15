@@ -174,7 +174,8 @@ ouput:
 
         Fibonacci Sequence
         "Write a function that takes an integer N as an input and returns the Nth number in Fibonacci Sequence."
-            O(2^n)
+            withoutStore O(2^n)
+            withStore O(n)
 
 
 
