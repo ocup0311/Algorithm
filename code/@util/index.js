@@ -50,7 +50,7 @@ const makeRandomBoolean = (probability) => {
   // exception
   if (P >= 1) return true
 
-  return makeRandomIndex(0.5 / (1 - P)) === 0 ? false : true
+  return makeRandomN(0.5 / (1 - P)) === 0 ? false : true
 }
 
 // counter
