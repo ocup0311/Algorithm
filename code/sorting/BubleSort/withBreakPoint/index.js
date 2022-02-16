@@ -4,7 +4,7 @@
 
 const U = require('@util')
 
-function BubleSort(originalArr) {
+function BubleSortWBP(originalArr) {
   // var
   const sortedArr = [...originalArr]
   let step = 0
@@ -28,4 +28,4 @@ function BubleSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = BubleSort
+module.exports = BubleSortWBP

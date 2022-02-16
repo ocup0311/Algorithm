@@ -11,26 +11,30 @@ const builtInput = (amount) => {
   return output
 }
 
-const runTest = (input, fn) => {
+const runTest = (input, fn, isLog = true) => {
   const result = fn(input)
 
-  console.log(
-    `------------- ${JSON.stringify(result.step)} steps -------------`
-  )
-  console.log(`input: ${JSON.stringify(input)}`)
-  console.log(`output: ${JSON.stringify(result.sortedArr)}`)
+  if (isLog) {
+    console.log(
+      `------------- ${JSON.stringify(result.step)} steps -------------`
+    )
+    console.log(`input: ${JSON.stringify(input)}`)
+    console.log(`output: ${JSON.stringify(result.sortedArr)}`)
+  }
 
-  return result.step
+  return result
 }
 
-const runTestSet = (fn, ...inputs) => {
-  console.log('====== InsertionSort ======')
+const runTestSet = ({ fn, inputSet }, isLog) => {
+  if (isLog) console.log(`====== ${fn.name} ======`)
   const ts = performance.now()
-  const steps = inputs.map((i) => runTest(i, fn))
+  const result = inputSet.map((i) => runTest(i, fn, isLog))
   const te = performance.now()
 
-  const times = `${Math.round((te - ts) * 1000) / 1000} ms`
-  return { steps, times }
+  const steps = result.map((v) => v.step)
+  const time = `${Math.round((te - ts) * 1000) / 1000} ms`
+  const arr = result[0].sortedArr
+  return { steps, time, arr }
 }
 
 module.exports = { builtInput, runTest, runTestSet }
