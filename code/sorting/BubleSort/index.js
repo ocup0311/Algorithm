@@ -1,4 +1,4 @@
 module.exports = {
   byBase: require('./byBase'),
-  withBreakPoint: require('./withBreakPoint'),
+  withBreak: require('./withBreak'),
 }

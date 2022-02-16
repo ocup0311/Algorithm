@@ -16,7 +16,7 @@ const inputSet = [input0, input1, input2, input3]
 // warm up :)
 ;(() => {
   for (let i = 0; i < 9; i++) {
-    runTestSet({ fn: BubleSort.withBreakPoint, inputSet }, false)
+    runTestSet({ fn: BubleSort.withBreak, inputSet }, false)
     runTestSet({ fn: BubleSort.byBase, inputSet }, false)
     runTestSet({ fn: InsertionSort, inputSet }, false)
     runTestSet({ fn: InsertionSort, inputSet }, false)
@@ -25,7 +25,7 @@ const inputSet = [input0, input1, input2, input3]
 
 console.log('\n---------- RUN ----------')
 const result2 = runTestSet({ fn: InsertionSort, inputSet })
-const result1 = runTestSet({ fn: BubleSort.withBreakPoint, inputSet })
+const result1 = runTestSet({ fn: BubleSort.withBreak, inputSet })
 const result0 = runTestSet({ fn: BubleSort.byBase, inputSet })
 
 console.log('\n-------------------- COMPARE --------------------')
