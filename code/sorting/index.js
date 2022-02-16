@@ -6,6 +6,7 @@ const U = require('@util')
 const { builtInput, runTestSet } = require('./@test.js')
 const bubleSort = require('./bubleSort')
 const insertionSort = require('./insertionSort')
+const selectionSort = require('./selectionSort')
 
 const input0 = [3, 7, 4, 1, 9, 2]
 const input1 = builtInput(2000)
@@ -20,10 +21,12 @@ const inputSet = [input0, input1, input2, input3]
     runTestSet({ fn: bubleSort.byBase, inputSet }, false)
     runTestSet({ fn: insertionSort.withKey, inputSet }, false)
     runTestSet({ fn: insertionSort.byBase, inputSet }, false)
+    runTestSet({ fn: selectionSort.byBase, inputSet }, false)
   }
 })()
 
 console.log('\n---------- RUN ----------')
+const result4 = runTestSet({ fn: selectionSort.byBase, inputSet })
 const result3 = runTestSet({ fn: insertionSort.withKey, inputSet })
 const result2 = runTestSet({ fn: insertionSort.byBase, inputSet })
 const result1 = runTestSet({ fn: bubleSort.withBreak, inputSet })
@@ -38,8 +41,16 @@ console.log(`\nO(n^2)   InsertionSort   ${result2.time}`)
 console.log('steps: ', result2.steps)
 console.log(`\nO(n^2)   InsertionSortWK   ${result3.time}`)
 console.log('steps: ', result3.steps)
+console.log(`\nO(n^2)   SelectionSort   ${result4.time}`)
+console.log('steps: ', result4.steps)
 
 console.log(`\n---------- CHECK BY [${input0}] ----------`)
 console.log(
-  U.toCheckSameArr(result0.arr, result1.arr, result2.arr, result3.arr)
+  U.toCheckSameArr(
+    result0.arr,
+    result1.arr,
+    result2.arr,
+    result3.arr,
+    result4.arr
+  )
 )

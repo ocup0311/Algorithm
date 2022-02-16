@@ -182,6 +182,7 @@ ouput:
             O(n)
 
 # Sorting ======================================================
+    ; not so efficient ---------------------------------------------
     Buble Sort O(n^2)
     "Bubble sort compares adjacent elements and swaps them if they are in the wrong order."
     "目前幾乎沒地方在使用。"
@@ -202,7 +203,12 @@ ouput:
 
 
     Selection Sort
-
+    "The principle of selection sort is - select the smallest value in unsorted array, and then swap it with the left most value in this unsorted array."
+    "找到最小值, 移去最左邊"
+        worst case performance: O(n^2)
+        best case performance: O(n^2)
+        average performance: O(n^2)    
+    ; not so efficient ---------------------------------------------
 
 
 
