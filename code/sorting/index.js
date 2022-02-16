@@ -4,8 +4,8 @@
 
 const U = require('@util')
 const { builtInput, runTestSet } = require('./@test.js')
-const bubleSort = require('./bubleSort_tmp')
-const insertionSort = require('./insertionSort_tmp')
+const bubleSort = require('./bubleSort')
+const insertionSort = require('./insertionSort')
 
 const input0 = [3, 7, 4, 1, 9, 2]
 const input1 = builtInput(2000)
