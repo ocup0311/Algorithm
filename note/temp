@@ -75,17 +75,17 @@ String:
 照線性順序，找到目標｜全找完找不到
 
 O(n)
-    worst case: O(n)
-    best case: O(1)
-    average: O(n/2)
+    worst case performance: O(n)
+    best case performance: O(1)
+    average performance: O(n/2)
 
 # Binary Search ==================================================
 需要 sorted data set
 
 O(logn)
-    worst case: O(logn)
-    best case: O(1)
-    average: O(logn)
+    worst case performance: O(logn)
+    best case performance: O(1)
+    average performance: O(logn)
 
 # Counter ========================================================
 
@@ -180,6 +180,21 @@ ouput:
         Array of Arrays
         "Write a function that collects all value in an array of arrays and return an array of values collected."
             O(n)
+
+# Sorting ======================================================
+    Buble Sort O(n^2)
+    "Bubble sort compares adjacent elements and swaps them if they are in the wrong order."
+    "目前幾乎沒地方在使用。"
+    "[3,7,4,1,9,2] --> [3,7,4,1,2,9] --> [3,7,1,4,2,9] --> [3,1,7,4,2,9] --> [1,3,7,4,2,9] --> [1,3,7,2,4,9] --> [1,3,2,7,4,9] --> [1,2,3,7,4,9] --> [1,2,3,4,7,9]"
+        worst case performance: O(n^2)
+        best case performance: O(n^2) -- with break point --> O(n)
+        average performance: O(n^2)
+
+    Insertion Sort 
+
+
+    Selection Sort
+
 
 
 

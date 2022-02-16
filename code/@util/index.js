@@ -17,6 +17,10 @@ const makeProductofArr_fromNextTo0 = (arr) => {
 
 const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
+const toSwapArr = (arr, index1, index2) => {
+  ;[arr[index1], arr[index2]] = [arr[index2], arr[index1]]
+}
+
 // random
 // Math.random() --> 包含 0，不包含1)
 const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
@@ -70,6 +74,7 @@ module.exports = {
   makeProductofArr,
   makeProductofArr_fromNextTo0,
   toSortNumber,
+  toSwapArr,
   makeRandomN,
   makeRandomZ,
   makeRandomIndex,
