@@ -4,8 +4,8 @@
 
 const U = require('@util')
 const { builtInput, runTestSet } = require('./@test.js')
-const BubleSort = require('./BubleSort')
-const InsertionSort = require('./InsertionSort')
+const bubleSort = require('./bubleSort_tmp')
+const insertionSort = require('./insertionSort_tmp')
 
 const input0 = [3, 7, 4, 1, 9, 2]
 const input1 = builtInput(2000)
@@ -16,18 +16,18 @@ const inputSet = [input0, input1, input2, input3]
 // warm up :)
 ;(() => {
   for (let i = 0; i < 9; i++) {
-    runTestSet({ fn: BubleSort.withBreak, inputSet }, false)
-    runTestSet({ fn: BubleSort.byBase, inputSet }, false)
-    runTestSet({ fn: InsertionSort.withKey, inputSet }, false)
-    runTestSet({ fn: InsertionSort.byBase, inputSet }, false)
+    runTestSet({ fn: bubleSort.withBreak, inputSet }, false)
+    runTestSet({ fn: bubleSort.byBase, inputSet }, false)
+    runTestSet({ fn: insertionSort.withKey, inputSet }, false)
+    runTestSet({ fn: insertionSort.byBase, inputSet }, false)
   }
 })()
 
 console.log('\n---------- RUN ----------')
-const result3 = runTestSet({ fn: InsertionSort.withKey, inputSet })
-const result2 = runTestSet({ fn: InsertionSort.byBase, inputSet })
-const result1 = runTestSet({ fn: BubleSort.withBreak, inputSet })
-const result0 = runTestSet({ fn: BubleSort.byBase, inputSet })
+const result3 = runTestSet({ fn: insertionSort.withKey, inputSet })
+const result2 = runTestSet({ fn: insertionSort.byBase, inputSet })
+const result1 = runTestSet({ fn: bubleSort.withBreak, inputSet })
+const result0 = runTestSet({ fn: bubleSort.byBase, inputSet })
 
 console.log('\n-------------------- COMPARE --------------------')
 console.log(`\nO(n^2)   BubleSort   ${result0.time}`)
