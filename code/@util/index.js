@@ -21,6 +21,16 @@ const toSwapArr = (arr, index1, index2) => {
   ;[arr[index1], arr[index2]] = [arr[index2], arr[index1]]
 }
 
+const toCheckSameArr = (...arrs) => {
+  const [arr1, ...otherArrs] = arrs
+
+  for (let j = 0; j < otherArrs.length; j++) {
+    if (!otherArrs[j].every((v, i) => v === arr1[i])) return false
+  }
+
+  return true
+}
+
 // random
 // Math.random() --> 包含 0，不包含1)
 const makeRandomZ = (max) => Math.ceil((Math.random() - 0.5) * (max * 2))
@@ -75,6 +85,7 @@ module.exports = {
   makeProductofArr_fromNextTo0,
   toSortNumber,
   toSwapArr,
+  toCheckSameArr,
   makeRandomN,
   makeRandomZ,
   makeRandomIndex,
