@@ -9,7 +9,7 @@
 ; https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
 ; https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
 
-以「複雜度」取代「計時」的方式衡量演算法的原因：
+以「複雜度」取代「計時」的方式衡量演算法的原因: 
     1. Same computer gets different runtime for the same task.
     2. Different computing power machine gives different run time for the same task.
 
@@ -21,7 +21,7 @@ Q:為何主要用 Big O？
     "一般比較在意 the worst-case 的 upper bound"
     "比起其他兩個較易計算"
 
-網路解釋範例：
+網路解釋範例: 
     ; ---------------------------------------------------------
     Contrive(n)
     1. if n is 0 then do something Θ(n^3)
@@ -72,7 +72,7 @@ String:
 
 
 # Linear Search (Sequential Search) =============================
-照線性順序，找到目標｜全找完找不到
+照線性順序, 找到目標｜全找完找不到
 
 O(n)
     worst case performance: O(n)
@@ -216,12 +216,26 @@ ouput:
     Merge Sort
     "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
     "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
+    "空間複雜度較高 <-- 需一直建立 array"
     "[3,7,4,1,9,2] --> [3],[7],[4],[1],[9],[2] --> [3,7],[1,4],[2,9] --> [1,3,4,7],[2,9] --> [1,2,3,4,7,9]"
 
-        切片 --> O(n)
-        每層合併為 O(n) 共 logn(base2) 層 --> O(nlogn)        +
-        ------------------------------------------------------
-        O(n) + O(nlogn) --> O(nlogn)
+        切片 --> O(nlogn)
+        每層合併為 O(n) 共 logn(base2) 層 --> O(nlogn)        
+
+        ; ---------------------------------------------
+        ; 原本想說直接一次切完, 再 merge: 
+        ; 切片為 O(n),  合併為 O(nlogn)
+        ; => O(n) + O(nlogn) =>  O(nlogn)
+        ; 
+        ; 實際寫之後, 覺得這樣不太可行 & 差別不大, 直接跟著 recursion 即可, 變成: 
+        ; 切片為 O(nlogn),  合併為 O(nlogn)
+        ; => O(nlogn) + O(nlogn) =>  O(nlogn)
+        ; 最後還是 O(nlogn)
+        ; ---------------------------------------------
+        
+        worst case performance: O(nlogn)
+        best case performance: O(nlogn)
+        average performance: O(nlogn)
 
     Heap Sort
 
@@ -231,8 +245,13 @@ ouput:
     ; 目前最快排列 O(nlogn) ---------------------------------------------
 
 
+# tree ======================================================
+"tree is acyclic graph"
+
+    名詞: node, edge(箭頭), root, subtree, children, parent node, 
 
 
-# 重看過往：
+
+# 重看過往 ======================================================
 ＊ 整理多層 object --> 淮: 用 BFS
 ＊ old case study: idsToChildren
