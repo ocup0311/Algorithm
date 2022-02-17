@@ -5,7 +5,7 @@ const builtInput = (amount) => {
   let output = []
 
   for (let i = 0; i < amount; i++) {
-    output.push(U.makeRandomN(999))
+    output.push(U.makeRandomZ(999))
   }
 
   return output

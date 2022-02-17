@@ -182,8 +182,10 @@ ouput:
             O(n)
 
 # Sorting ======================================================
-    ; not so efficient ---------------------------------------------
-    Buble Sort O(n^2)
+  Bubble, Insertion, Selection, Merge, Heap, Quick
+
+    ; not so efficient O(n^2)---------------------------------------------
+    Bubble Sort O(n^2)
     "Bubble sort compares adjacent elements and swaps them if they are in the wrong order."
     "目前幾乎沒地方在使用。"
     "兩兩互比, 小的左移"
@@ -194,13 +196,12 @@ ouput:
 
     Insertion Sort 
     "Keeping inserting a new value into a sorted array. Insert it to the correct spot sot the sorted array remains sorted."
-    "效率比 Buble Sort 略好"
+    "效率比 Bubble Sort 略好"
     "照順序一個個, 往左比過去, 一個數一次比到位"
     "[3,7,4,1,9,2] --> [3,7,4,1,9,2] --> [3,4,7,1,9,2] --> [3,4,1,7,9,2] --> [3,1,4,7,9,2] --> [1,3,4,7,9,2] --> [1,3,4,7,9,2] --> [1,3,4,7,2,9] --> [1,3,4,2,7,9] --> [1,3,2,4,7,9] --> [1,2,3,4,7,9]"
         worst case performance: O(n^2)
         best case performance: O(n)
         average performance: O(n^2)    
-
 
     Selection Sort
     "The principle of selection sort is - select the smallest value in unsorted array, and then swap it with the left most value in this unsorted array."
@@ -208,10 +209,26 @@ ouput:
         worst case performance: O(n^2)
         best case performance: O(n^2)
         average performance: O(n^2)    
-    ; not so efficient ---------------------------------------------
 
+    ; not so efficient O(n^2)---------------------------------------------
 
+    ; 目前最快排列 O(nlogn) ---------------------------------------------
+    Merge Sort
+    "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
+    "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
+    "[3,7,4,1,9,2] --> [3],[7],[4],[1],[9],[2] --> [3,7],[1,4],[2,9] --> [1,3,4,7],[2,9] --> [1,2,3,4,7,9]"
 
+        切片 --> O(n)
+        每層合併為 O(n) 共 logn(base2) 層 --> O(nlogn)        +
+        ------------------------------------------------------
+        O(n) + O(nlogn) --> O(nlogn)
+
+    Heap Sort
+
+    
+    Quick Sort
+    
+    ; 目前最快排列 O(nlogn) ---------------------------------------------
 
 
 
