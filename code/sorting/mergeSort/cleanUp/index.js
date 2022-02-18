@@ -3,7 +3,7 @@
 const U = require('@util')
 
 // main
-function mergeSort(originalArr) {
+function mergeSortC(originalArr) {
   // var
   let step = 0
 
@@ -50,4 +50,4 @@ function mergeSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = mergeSort
+module.exports = mergeSortC

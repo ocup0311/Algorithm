@@ -8,27 +8,30 @@ const bubbleSort = require('./bubbleSort')
 const insertionSort = require('./insertionSort')
 const selectionSort = require('./selectionSort')
 const mergeSort = require('./mergeSort')
+const heapSort = require('./heapSort')
 
-const input0 = [3, 7, 4, 1, 9, 2, 6, 99, 5, -8, -99]
+const input0 = [3, 7, 4, 1, 9, 2, 6, 93, 5, -8, -99]
 const input1 = builtInput(2000)
 const input2 = builtInput(20000)
 const input3 = builtInput(0)
-const inputSet = [input0, input1, input2, input3]
+const inputSet = [
+  input0,
+  // input1, input2, input3
+]
 
 // warm up :)
-;(() => {
-  for (let i = 0; i < 9; i++) {
-    runTestSet({ fn: mergeSort.byBase, inputSet }, false)
-    runTestSet({ fn: mergeSort.cleanUp, inputSet }, false)
-    runTestSet({ fn: selectionSort.byBase, inputSet }, false)
-    runTestSet({ fn: insertionSort.byBase, inputSet }, false)
-    runTestSet({ fn: insertionSort.withKey, inputSet }, false)
-    runTestSet({ fn: bubbleSort.byBase, inputSet }, false)
-    runTestSet({ fn: bubbleSort.withBreak, inputSet }, false)
-  }
-})()
+for (let i = 0; i < 9; i++) {
+  runTestSet({ fn: mergeSort.byBase, inputSet }, false)
+  runTestSet({ fn: mergeSort.cleanUp, inputSet }, false)
+  runTestSet({ fn: selectionSort.byBase, inputSet }, false)
+  runTestSet({ fn: insertionSort.byBase, inputSet }, false)
+  runTestSet({ fn: insertionSort.withKey, inputSet }, false)
+  runTestSet({ fn: bubbleSort.byBase, inputSet }, false)
+  runTestSet({ fn: bubbleSort.withBreak, inputSet }, false)
+}
 
 console.log('\n---------- RUN ----------')
+const result7 = runTestSet({ fn: heapSort.minHeap, inputSet })
 const result6 = runTestSet({ fn: mergeSort.cleanUp, inputSet })
 const result5 = runTestSet({ fn: mergeSort.byBase, inputSet })
 const result4 = runTestSet({ fn: selectionSort.byBase, inputSet })
@@ -52,6 +55,8 @@ console.log(`\nO(nlongn)   MergeSort   ${result5.time}`)
 console.log('steps: ', result5.steps)
 console.log(`\nO(nlongn)   MergeSortC   ${result6.time}`)
 console.log('steps: ', result6.steps)
+console.log(`\nO(nlongn)   HeapSort   ${result7.time}`)
+console.log('steps: ', result7.steps)
 
 console.log(`\n---------- CHECK BY [${input0}] ----------`)
 console.log(
@@ -62,6 +67,7 @@ console.log(
     result3.arr,
     result4.arr,
     result5.arr,
-    result6.arr
+    result6.arr,
+    result7.arr
   )
 )
