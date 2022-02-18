@@ -97,16 +97,16 @@ String:
 # Counter ========================================================
 
     # code practice:
-    Same Frequency
+    ＊Same Frequency
     "Write a function that takes two strings and check if they have the same letters.Order doesn't matter."
         by loop O(n)
 
-    intersection
+    ＊intersection
     "Write a function that takes two arrays as parameters, and then return an array that is the intersection of these two arrays."
         by loop O(n^2)
         by counter O(n)
 
-    Average Pair
+    ＊Average Pair
     "Write a function that given a sorted array of integers and a number. Find if there's any pair in the array that has average of the given number. Find all of them. There might be multiple pairs fit the condition."
         by loop O(n^2)
         by counter O(n)
@@ -117,11 +117,11 @@ String:
 # Pointer ========================================================
 
     # code practice:
-    Palindrome
+    ＊Palindrome
     "Write a function that checks if the input string is a palindrome. Palindrome is a word that can be read forwards and backwards."
         by pointer O(n)
 
-    Subsequence promblem
+    ＊Subsequence promblem
     "A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. Write a function that checks if one string is a subsequence of the other string."
         by pointer O(n)
 
@@ -142,20 +142,20 @@ output:
 
 
     # code practice:
-    Max and Min Sum
+    ＊Max and Min Sum
     "Write two functions that calculate the max and min sum of n consecutive numbers in an array."
         by pass whole set O(n * size)
         by pass terminal O(n)
 
-    minSubLength
+    ＊minSubLength
     "Write a function called minSubLength which accepts two parameters, an array of positive integers and a positive integer. This function should return the minimal length of a continuous subarray - the sum of elements inside this subarray has to be greater than or equal to the positive integer parameter. If subarray not found, then return 0."
         by use maxSum O(n ^ 2)
         by pointer O(n) (每項必須為自然數)
 
-    unique letters string
+    ＊unique letters string
     "Write a function called uniqueLettersString, which accepts a string and returns the length of the longest substring with all distinct characters."
 
-    largest product（乘積）
+    ＊largest product（乘積）
     "The four adjacent digits in the 1000-digit number that have the greatest product are 9x9x8x9=5832. Find the n adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?"
 
 
@@ -180,15 +180,15 @@ output:
         rs: recursive(n-1) x: 2 --> O(2^n) (exponential)
 
     # code practice:
-        Recursion Sequence
+        ＊Recursion Sequence
             O(n)
 
-        Fibonacci Sequence
+        ＊Fibonacci Sequence
         "Write a function that takes an integer N as an input and returns the Nth number in Fibonacci Sequence."
             withoutStore O(2^n)
             withStore O(n)
 
-        Array of Arrays
+        ＊Array of Arrays
         "Write a function that collects all value in an array of arrays and return an array of values collected."
             O(n)
 
@@ -198,7 +198,7 @@ output:
   Bubble, Insertion, Selection, Merge, Heap, Quick
 
     ; not so efficient O(n^2)---------------------------------------------
-    Bubble Sort O(n^2)
+    ＊Bubble Sort O(n^2)
     "Bubble sort compares adjacent elements and swaps them if they are in the wrong order."
     "目前幾乎沒地方在使用。"
     "兩兩互比, 小的左移"
@@ -207,7 +207,7 @@ output:
         best case performance: O(n^2) -- with break point --> O(n)
         average performance: O(n^2)
 
-    Insertion Sort 
+    ＊Insertion Sort 
     "Keeping inserting a new value into a sorted array. Insert it to the correct spot sot the sorted array remains sorted."
     "效率比 Bubble Sort 略好"
     "照順序一個個, 往左比過去, 一個數一次比到位"
@@ -216,7 +216,7 @@ output:
         best case performance: O(n)
         average performance: O(n^2)    
 
-    Selection Sort
+    ＊Selection Sort
     "The principle of selection sort is - select the smallest value in unsorted array, and then swap it with the left most value in this unsorted array."
     "找到最小值, 移去最左邊"
         worst case performance: O(n^2)
@@ -226,16 +226,19 @@ output:
     ; not so efficient O(n^2)---------------------------------------------
 
     ; 目前最快排列 O(nlogn) ---------------------------------------------
-    Merge Sort
+    ＊Merge Sort
     "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
     "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
     "空間複雜度較高 <-- 需一直建立 array"
     "[3,7,4,1,9,2] --> [3],[7],[4],[1],[9],[2] --> [3,7],[1,4],[2,9] --> [1,3,4,7],[2,9] --> [1,2,3,4,7,9]"
 
+        # Big O
         切片 --> O(nlogn)
-        每層合併為 O(n) 共 logn(base2) 層 --> O(nlogn)        
+        每層合併為 O(n) 共 logn(base2) 層 --> O(nlogn)      +
+        ---------------------------------------------------
+        O(nlogn) + O(nlogn) ==> O(nlogn)       
 
-        ; ---------------------------------------------
+        ; --------------------------------------------
         ; 原本想說直接一次切完, 再 merge: 
         ; 切片為 O(n),  合併為 O(nlogn)
         ; => O(n) + O(nlogn) =>  O(nlogn)
@@ -250,21 +253,29 @@ output:
         best case performance: O(nlogn)
         average performance: O(nlogn)
 
-    Heap Sort
+    ＊Heap Sort
     "array --> Complete Binary Tree --> Max Heap Tree --> array"
         
+        # 步驟
         ; ---------------------------------------------
-        1. 從最底層開始把大的往上換
-        2. 當上層有換過時, 需再次檢查他的下層, 直到底層
-        3. root 與 last 互換, HeapSize - 1
-        4. 重複 2 & 3 直到 HeapSize 歸零
+        ; 1. 從最底層開始把大的往上換
+        ; 2. 當上層有換過時, 需再次檢查他的下層, 直到底層
+        ; 3. root 與 last 互換, HeapSize - 1
+        ; 4. 重複 2 & 3 直到 HeapSize 歸零
         ; ---------------------------------------------
-    
+
+
+        # Big O
+        建樹 --> O(n)
+        排列 --> O(nlogn)   +
+        ----------------------------
+        O(n) + O(nlogn) ==> O(nlogn)
+
         worst case performance: O(nlogn)
         best case performance: O(nlogn)
         average performance: O(nlogn)
 
-    Quick Sort
+    ＊Quick Sort
     
     ; 目前最快排列 O(nlogn) ---------------------------------------------
 
