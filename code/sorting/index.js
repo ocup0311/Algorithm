@@ -11,11 +11,15 @@ const mergeSort = require('./mergeSort')
 const heapSort = require('./heapSort')
 const quickSort = require('./quickSort')
 
+const sorted = true
+
 const input0 = [3, 7, 4, 1, 9, 2, 6, 93, 5, -8, -99]
 const input1 = builtInput(2000)
 const input2 = builtInput(20000)
 const input3 = builtInput(0)
-const inputSet = [input0, input1, input2, input3]
+const input4 = builtInput(5000)
+
+const inputSet = [input0, input1, input2, input3, input4]
 
 // warm up :)
 for (let i = 0; i < 9; i++) {
@@ -65,7 +69,7 @@ console.log('steps: ', result8.steps)
 console.log(`\nO(nlongn)   QuickSort   ${result9.time}`)
 console.log('steps: ', result9.steps)
 
-console.log(`\n---------- CHECK BY [${input0}] ----------`)
+console.log(`\n---------- CHECK BY [${inputSet[0]}] ----------`)
 console.log(
   U.toCheckSameArr(
     result0.arr,

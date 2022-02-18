@@ -18,7 +18,9 @@ const makeProductofArr_fromNextTo0 = (arr) => {
 const toSortNumber = (numArr) => numArr.sort((a, b) => a - b)
 
 const toSwapArr = (arr, index1, index2) => {
-  // 原本方法建立 array 會更花時間 commit 24b41ca
+  // 原本方法建立 array 會更花時間與空間 commit 24b41ca
+  // ;[arr[index1], arr[index2]] = [arr[index2], arr[index1]]
+
   let temp = arr[index1]
   arr[index1] = arr[index2]
   arr[index2] = temp

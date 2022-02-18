@@ -1,11 +1,15 @@
 const { performance } = require('perf_hooks')
 const U = require('@util')
 
-const builtInput = (amount) => {
+const builtInput = (amount, sorted = false) => {
   let output = []
 
   for (let i = 0; i < amount; i++) {
-    output.push(U.makeRandomZ(999))
+    if (sorted) {
+      output.push(i)
+    } else {
+      output.push(U.makeRandomZ(999))
+    }
   }
 
   return output

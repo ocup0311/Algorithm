@@ -285,11 +285,21 @@ output:
         
         # 步驟
         ; ---------------------------------------------
-        ; 1. 不斷對個 part 做 Partition
+        ; 1. 不斷對每個 part 做 Partition
         ; ---------------------------------------------
 
-        O(nlogn)
+        worst case performance: O(n^2)
+        best case performance: O(nlogn)
+        average performance: O(nlogn)
 
+        與 Merge Sort, Heap Sort 比較:
+            優勢:
+                因為過程中省去建立許多 array, 空間複雜度相對小很多？
+                省去建立 array 所花費時間, 在一般的情況下, 時間也能較快？
+            劣勢:
+                worst case performance: O(n^2)
+                worst case 時可能會 stack overflow
+        
 
 
     ; 目前最快排列 O(nlogn) ---------------------------------------------
