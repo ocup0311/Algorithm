@@ -277,6 +277,21 @@ output:
 
     ＊Quick Sort
     
+        Partition
+        "The idea of partition algorithm is to divide the array into 2 parts. Either part is a sorted array, but the element in the middle is sorted(we found its correct final spot)"
+        "把 last 當作 pivot --> 比 pivot 小的右移到小區, 如右示意 (小區-大區-pivot) --> 最後把大區第一個跟 pivot 交換 (小區-pivot-大區)"
+        "[3,7,2,1,9,4] --> [3,7,2,1,9,4] --> [3,2,7,1,9,4] --> [3,2,1,7,9,4] --> [3,2,1,7,9,4] --> [3,2,1,4,9,7]"
+            ==> [3,2,1,4,9,7] ==> 如上跑一輪後只有 4 的位置排好
+        
+        # 步驟
+        ; ---------------------------------------------
+        ; 1. 不斷對個 part 做 Partition
+        ; ---------------------------------------------
+
+        O(nlogn)
+
+
+
     ; 目前最快排列 O(nlogn) ---------------------------------------------
 
 

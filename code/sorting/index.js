@@ -9,6 +9,7 @@ const insertionSort = require('./insertionSort')
 const selectionSort = require('./selectionSort')
 const mergeSort = require('./mergeSort')
 const heapSort = require('./heapSort')
+const quickSort = require('./quickSort')
 
 const input0 = [3, 7, 4, 1, 9, 2, 6, 93, 5, -8, -99]
 const input1 = builtInput(2000)
@@ -18,6 +19,7 @@ const inputSet = [input0, input1, input2, input3]
 
 // warm up :)
 for (let i = 0; i < 9; i++) {
+  runTestSet({ fn: quickSort.byBase, inputSet }, false)
   runTestSet({ fn: heapSort.bySameArr, inputSet }, false)
   runTestSet({ fn: heapSort.byNewArr, inputSet }, false)
   runTestSet({ fn: mergeSort.byBase, inputSet }, false)
@@ -30,6 +32,7 @@ for (let i = 0; i < 9; i++) {
 }
 
 console.log('\n---------- RUN ----------')
+const result9 = runTestSet({ fn: quickSort.byBase, inputSet })
 const result8 = runTestSet({ fn: heapSort.bySameArr, inputSet })
 const result7 = runTestSet({ fn: heapSort.byNewArr, inputSet })
 const result6 = runTestSet({ fn: mergeSort.cleanUp, inputSet })
@@ -59,6 +62,8 @@ console.log(`\nO(nlongn)   HeapSortN   ${result7.time}`)
 console.log('steps: ', result7.steps)
 console.log(`\nO(nlongn)   HeapSortS   ${result8.time}`)
 console.log('steps: ', result8.steps)
+console.log(`\nO(nlongn)   QuickSort   ${result9.time}`)
+console.log('steps: ', result9.steps)
 
 console.log(`\n---------- CHECK BY [${input0}] ----------`)
 console.log(
@@ -71,6 +76,7 @@ console.log(
     result5.arr,
     result6.arr,
     result7.arr,
-    result8.arr
+    result8.arr,
+    result9.arr
   )
 )
