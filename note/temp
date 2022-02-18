@@ -251,17 +251,17 @@ output:
         average performance: O(nlogn)
 
     Heap Sort
-    "array --> Complete Binary Tree --> Max Heap --> array"
+    "array --> Complete Binary Tree --> Max Heap Tree --> array"
         
         ; ---------------------------------------------
         1. 從最底層開始把大的往上換
         2. 當上層有換過時, 需再次檢查他的下層, 直到底層
-        3. root 排進 output, last 移到 root
-        4. 重複 2 & 3 直到全部排進 output
+        3. root 與 last 互換, HeapSize - 1
+        4. 重複 2 & 3 直到 HeapSize 歸零
         ; ---------------------------------------------
     
         worst case performance: O(nlogn)
-        best case performance: 
+        best case performance: O(nlogn)
         average performance: O(nlogn)
 
     Quick Sort

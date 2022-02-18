@@ -1,4 +1,4 @@
 module.exports = {
-  maxHeap: require('./maxHeap'),
-  minHeap: require('./minHeap'),
+  byNewArr: require('./byNewArr'),
+  bySameArr: require('./bySameArr'),
 }
