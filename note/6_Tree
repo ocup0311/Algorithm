@@ -1,0 +1,17 @@
+# 筆記方向 ===================================================================================
+1. 查演算法的各種使用時機
+2. 附圖解
+3. pseudo code
+4. 簡單文字描述
+5. Big O
+
+
+# tree =====================================================================================
+"tree is acyclic graph"
+
+    名詞: node, edge(箭頭), root, subtree, children, parent node, leaf
+
+    Binary Tree: "所有 node 最多兩個 children"
+    Complete Binary Tree: "只有最右邊最底部為空"
+    Full Binary Tree(FBT): "所有的葉子有一樣的 depth"
+    Max Heap: "Complete + 所有 subtree, root 必為最大值 -(左右沒差)"

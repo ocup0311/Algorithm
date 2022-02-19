@@ -22,7 +22,7 @@
         best case performance: O(1)
         average performance: O(logn)
 
-"Lower bounds of searching is Ω(logn)"
+"Lower bounds of comparison searching is Ω(logn)"
     Comparison Model --> Decision Tree
 
 

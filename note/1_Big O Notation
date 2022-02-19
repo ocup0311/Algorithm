@@ -34,9 +34,9 @@ Q:為何主要用 Big O？
     8.    if heads, do something Θ(n^4)
     9.    else if tails, do something Θ(n^5)
     ; ----------------------------------------------------------
-    "In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
-    In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
-    In the case n=0, the runtime is Θ(n^3)."
+    "In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything."
+    "In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything."
+    "In the case n=0, the runtime is Θ(n^3)."
 
 
 
@@ -71,3 +71,5 @@ Array:
 String:
     slice: O(1)
 
+
+; ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
