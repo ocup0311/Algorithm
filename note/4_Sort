@@ -130,6 +130,7 @@
 
 
         # Big O
+        ; 參考圖 image/4_Sort/heapSort/makeMaxHeapTree.jpg
         建樹 --> O(n)
         排列 --> O(nlogn)   +
         ----------------------------

@@ -9,22 +9,42 @@
 # Master Theorem ===========================================================================
 "大師定理: 一開始覺得是無敵的定理, 但後來不是無敵"
 "將遞迴關係式換成 Big O 的方法"
+"T(n)  -->  O()"
 
-    ; ex. ---------------------------------------------------
+    ; ↓ ↓ ↓ ex. 遞迴關係式 -----------------------------------------
     Merge Sort
         遞迴關係式: T(n) = 2 T(n/2) + n
         Big O: O(nlogn)
 
-          o    o    o    o    sort   <--  T(1) = 0
-            \/        \/      merge  <--  n/2
-            oo        oo      sort   <--  T(n/2)
-               \    /         merge  <--  n
-                oooo          sort   <--  T(n) = 2 T(n/2) + n
+          [o]    [o]    [o]    [o]    sort   <--  T(1) = 0
+            \    /         \   /      merge  <--  n/2
+             [oo]           [oo]      sort   <--  T(n/2)
+                 \         /          merge  <--  n
+                   [oooo]             sort   <--  T(n) = 2 T(n/2) + n
 
             T(4) = 2 T(2) + 4
                 = 2 (2 T(1) + 2) +4
                 = 8
 
             O(4log4) = 8
-    ; ex. ---------------------------------------------------
+
+    ; ↑ ↑ ↑ ex. 遞迴關係式 -----------------------------------------
+            ＊ 註: subproblem: "圖中每個分裂的子 array"
+
+
+    
+    T(n) = a*T(n/b) + c*n^k
+    a: "subproblems 數量" , n/b: "每個 subproblem 大小" , f(n): "cost of combining subproblems"
+
+    ; 參考圖 image/5_Theorem/Master Theorem/Master Theorem.jpg
+    ; ↓ ↓ ↓ Master Theorem ---------------------------------------------
+    ; T(n) = a*T(n/b) + c*n^k
+    ; T(1) = c
+    ; a, b, c, k 為常數
+    ; -----------------
+    ; T(n) ∈ Θ(n^k)         <-- if a < b^k
+    ; T(n) ∈ Θ(n^k * logn)  <-- if a = b^k
+    ; T(n) ∈ Θ(n^logb(a))   <-- if a > b^k
+    ; ↑ ↑ ↑ Master Theorem ---------------------------------------------
+
 

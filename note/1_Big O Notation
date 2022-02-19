@@ -13,6 +13,7 @@
     1. Same computer gets different runtime for the same task.
     2. Different computing power machine gives different run time for the same task.
 
+; 參考圖 image/1_big O Notation/Asymptotic Notation.png
 Big O: "upper bound"
 Big Omega (Ω): "lower bound"
 Big Theta (Θ): "average bound (asymptotically tight bound?)"
