@@ -4,6 +4,7 @@
 3. pseudo code
 4. 簡單文字描述
 5. Big O
+6. （Ｑ？） still need to find the anwer
 
 # Sorting ==================================================================================
 ; https://blog.kennycoder.io/2020/04/16/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98-Sort-%E6%8E%92%E5%BA%8F-%E4%BB%8B%E7%B4%B9/
@@ -14,10 +15,10 @@
         可以, 不需 --> External
         不可, 需要 --> Internal
 
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
         ; Internal --> Bubble, Insertion, Quick, Heap, Radix, Selection, ...
         ; External --> Merge (利用 Selection Tree 結構輔助), M-way Search Tree, B Tree, ...
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
 
     2. Stable vs Unstable
         重複的相同 value, 是否排序前後, 順序不變?
@@ -30,25 +31,35 @@
         ; Unstable --> [2, 3*, 3, 5, 7, 9]
         ; ex. -----------------------------
 
+        ; e.g. -----------------------------
+        ; Stable --> Merge
+        ; Unstable --> Quick, Heap
+        ; e.g. -----------------------------
+
     3. 初等排序 vs 高等排序
         排序效率
         O(n^2) --> 初等
         O(nlogn) --> 高等
 
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
         ; 初等 --> Bubble, Insertion, Selection
         ; 高等 --> Merge, Quick, Heap
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
 
     4. Comparison vs Linear-Time
-        是否需有其他條件限制? 因而突破時間複雜度的 Lower_bound    <--- ？
-        不需 --> Comparison
-        需要 --> Linear-Time
+        是否需有其他條件限制? 因而突破時間複雜度的 Lower_bound    <--- （Ｑ？）
+        不需 --> Comparison     Lower_bound O(nlogn)
+        需要 --> Linear-Time    O(n)  <-- 每一種都是（Ｑ？）
 
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
         ; Comparison --> Bubble, Insertion, Selection, Merge, Quick, Heap
         ; Linear-Time --> Counting, Radix
-        ; ex. -----------------------------
+        ; e.g. -----------------------------
+
+
+
+
+# Comparison Sorting =======================================================================
 
     ; ↓ ↓ ↓ not so efficient O(n^2)---------------------------------------------
     ＊Bubble Sort O(n^2)
@@ -78,7 +89,7 @@
 
     ; ↑ ↑ ↑ not so efficient O(n^2)---------------------------------------------
 
-    ; ↓ ↓ ↓ Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------------
+    ; ↓ ↓ ↓ Comparison Model 中, 目前最快排列 O(nlogn) ----------------------------------------
     ＊Merge Sort
     "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
     "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
@@ -147,17 +158,17 @@
 
         與 Merge Sort, Heap Sort 比較:
             優勢:
-                因為過程中省去建立許多 array, 空間複雜度相對小很多？
-                省去建立 array 所花費時間, 在一般的情況下, 時間也能較快？
+                因為過程中省去建立許多 array, 空間複雜度相對小很多（Ｑ？）
+                省去建立 array 所花費時間, 在一般的情況下, 時間也能較快（Ｑ？）
             劣勢:
                 worst case performance: O(n^2)
                 worst case 時可能會 stack overflow
         
 
 
-    ; ↑ ↑ ↑ Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------------
+    ; ↑ ↑ ↑ Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------
 
-"Lower bounds of comparison sorting is Ω(nlogn)"
+    ; Lower bounds of comparison sorting is Ω(nlogn) ---------------------------------------
         sorting 得到的結果畫成 Decision Tree, 
         最後所有可能的 leaf 長相如下範例,
         如同將所有 item 做排列(permutation),
@@ -169,13 +180,19 @@
          6      5      4      3      2      1       <-- 排列可能數量
          n  +  n-1   +   ...     ...     +  1       <-- n!
    
+
+
+
 # Linear Time Sorting ======================================================================
+
 ; https://stackoverflow.com/questions/749585/sorting-in-linear-time
 ; http://ind.ntou.edu.tw/~litsnow/al98/pdf/Algorithm-Ch8-Sorting-in-Linear-Time.pdf
 ; https://www.csie.ntu.edu.tw/~hsinmu/courses/_media/dsa_17spring/sorting_linear.pdf
+O(n)
 
 "Pigeonhole sort, Counting sort, Radix sort, Bucket sort"
 "通常以空間換取時間"
+"講者: 因為 linear time sorting 還是研究中的領域, 研究者使用 Big Theta 來分析, 所以解釋時才一直用 Big Theta。 <-- （Ｑ？）"
 
     This is a time space trade off.
     ; ---------------------------------------------------
@@ -183,24 +200,94 @@
     ; Radix sort (for example) runs in O(n) time AND O(log(radix)) memory.
     ; ---------------------------------------------------
 
-    ＊Counting Sort
+    ＊Counting Sort  -->  O(n+K)
         限制:
-            1. 已知所有 input 種類 (ex. 3 ~ 8)
-            2. 種類數 K, 必須 K = O(n)
+            1. 需為整數
+            2. 已知 input 項目, 所有的種類範圍 (ex. 3 ~ 8)
+            3. 種類數 K, 必須 K = O(n)
         步驟:
+          Stable
             1. 建立已排序種類別 array            --->   O(K)
             2. 將欲排列的 array 數一遍           --->   O(n) 
-            3. 將每個種類按順序輸出上述數出的數量   --->   O(K+n)
-            註: 此為 Unstable 也有 Stable 的 Counting Sort
-
+            3. counter 從 1st 往後累加          --->   O(K)    <-- (CMF)Cumulative Mass Function
+            4. input 從 last 往前放入 sorted    --->   O(n)
+                (參考 counter 放入對應 index)
+            5. 對應 counter -1                 --->   O(1)
+            6. 重複 4 & 5 直到全部排入           --->   O(n)
             ; ex. --------------------------------------------- 
-            ; inputs = [3,4,5,6,7,8]
-            ; target = [8,6,5,7,4,6,3,5,5,7,8]
+            ; range = [0, 1, 2, 3, 4, 5]
+            ; input = [5, 3, 2, 4, 1, 3, 0, 2, 2, 4, 5]
+                       1  2  3  4  5  6  7  8  9 10 11
+            ; 
+            ;  --> counter = [1, 1, 3, 2, 2, 2]     (1個0,1個1...)
+                              0  1  2  3  4  5
+            ; 
+            ;  --> counter = [1, 2, 5, 7, 9, 11]    (≤ 5 有 11 個...)
+                              0  1  2  3  4  5
+            ; 
+            ;  --> input =  [5, 3, 2, 4, 1, 3, 0, 2, 2, 4, -]
+                             1  2  3  4  5  6  7  8  9 10 11
+            ;      sorted = [-, -, -, -, -, -, -, -, -, -, 5]
+                             1  2  3  4  5  6  7  8  9 10 11
+            ;      counter = [1, 2, 5, 7, 9, 10]    
+                              0  1  2  3  4  5
+            ; 
+            ;  --> input =  [5, 3, 2, 4, 1, 3, 0, 2, 2, -, -]
+                             1  2  3  4  5  6  7  8  9 10 11
+            ;      sorted = [-, -, -, -, -, -, -, -, 4, -, 5]
+                             1  2  3  4  5  6  7  8  9 10 11
+            ;      counter = [1, 2, 5, 7, 8, 10]    (≤ 4 剩 8 個...)
+                              0  1  2  3  4  5
+            ; 
+            ;                     ...  ... ...
+            ; 
+            ;  --> sorted = [0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5]
+            ; ex. --------------------------------------------- 
+
+          Unstable
+            1. 建立已排序種類別 array            --->   O(K)
+            2. 將欲排列的 array 數一遍           --->   O(n) 
+            3. 將每個種類按順序輸出上述數出的數量   --->   O(n+K)
+            ; ex. --------------------------------------------- 
+            ; range = [3,4,5,6,7,8]
+            ; input = [8,6,5,7,4,6,3,5,5,7,8]
             ;  --> count = [1,1,3,2,2,2]     (1個3,1個4...)
             ;  --> sorted = [3,4,5,5,5,6,6,7,7,8,8]
             ; ex. --------------------------------------------- 
 
-    ＊Radix Sort
+    ＊Radix Sort  -->  O(n * c)
+        
+        d: "digits(位數)" , n: "資料量" , b: "base of log" , S: "最大數" 
+        ; proof ---------------------------------------------
+        
+        ; 使用 Counting Sort O(n+K), 則時間複雜度為:
+        ; Θ(d(n+K))
+        
+        ; 選擇 base b, 所有的位數在 0 ~ b-1 帶入
+        ; --->  O(d(n+b))
+
+        ; d = logb(S) 帶入
+        ; --->  O(logb(S) * (n+b))
+        
+        ; b 越小 d 越大, 需取得平衡
+        ; if b = Θ(n) 時, logb(S) * (n+b) 會有最小值
+        ; --->  O(n * logn(S))
+
+        ; if S ≤ n^c
+        ; --->  O(n*c)
+        ; proof ---------------------------------------------
+
+        限制:
+            1. 需為整數
+            2. 使用 stable sort 來進行 (使用 Counting Sort)
+            3. base 的選擇
+            4. ∃ S ≤ n^c --> c ≤ 1 (不確定, 如何訂立此部分限制 （Ｑ？）)
+        步驟:
+            1. 選擇 base b, 使 b & d 達到平衡 (經驗上選擇 b = Θ(n))
+            2. 需將所有 input 換算成 b 進位 （Ｑ？）
+            3. 依序參照 1st, 2nd, ..., bth 位數, 對 input 做 stable sort
+
+
 
 
 

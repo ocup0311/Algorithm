@@ -17,7 +17,7 @@ Big O: "upper bound"
 Big Omega (Ω): "lower bound"
 Big Theta (Θ): "average bound (asymptotically tight bound?)"
 
-Q:為何主要用 Big O？
+Q:為何主要用 Big O ?
     "一般比較在意 the worst-case 的 upper bound"
     "比起其他兩個較易計算"
 
