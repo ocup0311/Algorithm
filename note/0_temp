@@ -1,4 +1,4 @@
-# 筆記方向 ===================================================
+# 筆記方向 ===================================================================================
 1. 查演算法的各種使用時機
 2. 附圖解
 3. pseudo code
@@ -7,7 +7,7 @@
 
 
 
-# Big O Notation ============================================
+# Big O Notation ===========================================================================
 ; https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
 ; https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
 
@@ -42,7 +42,7 @@ Q:為何主要用 Big O？
 
 
 
-# Big O for js =================================================
+# Big O for js =============================================================================
 ; array:
 ; https://adrianmejia.com/data-structures-time-complexity-for-beginners-arrays-hashmaps-linked-lists-stacks-queues-tutorial/
 ; https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
@@ -75,7 +75,7 @@ String:
 
 
 
-# Search ==========================================================
+# Search ===================================================================================
     # Linear Search (Sequential Search) ---------------------------
     照線性順序, 找到目標｜全找完找不到
 
@@ -94,7 +94,7 @@ String:
 
 
 
-# Counter ========================================================
+# Counter ==================================================================================
 
     # code practice:
     ＊Same Frequency
@@ -114,7 +114,7 @@ String:
 
 
 
-# Pointer ========================================================
+# Pointer ==================================================================================
 
     # code practice:
     ＊Palindrome
@@ -127,7 +127,7 @@ String:
 
 
 
-# Sliding Window =================================================
+# Sliding Window ===========================================================================
 "Generally speaking, a sliding window is a sub-list that runs over an underlying collection."
 input:
     array: [a, b, c, d, e, f, g] (也可是動態 array)
@@ -160,7 +160,7 @@ output:
 
 
 
-# Recursion ======================================================
+# Recursion ================================================================================
 "A function that calls itself."
 "Recursion is using a data structure called 'stack'. When we are calling a function inside another function, we are on the call stack."
 "Recursion is also a mathematical relation in sequences."
@@ -194,7 +194,7 @@ output:
 
 
 
-# Sorting ======================================================
+# Sorting ==================================================================================
   Bubble, Insertion, Selection, Merge, Heap, Quick
 
     ; not so efficient O(n^2)---------------------------------------------
@@ -225,7 +225,7 @@ output:
 
     ; not so efficient O(n^2)---------------------------------------------
 
-    ; 目前最快排列 O(nlogn) ---------------------------------------------
+    ; Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------------
     ＊Merge Sort
     "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
     "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
@@ -272,7 +272,7 @@ output:
         O(n) + O(nlogn) ==> O(nlogn)
 
         worst case performance: O(nlogn)
-        best case performance: O(nlogn)
+        best case performance: O(nlogn) [or O(n)  <--  [1,1,1,1,1]]
         average performance: O(nlogn)
 
     ＊Quick Sort
@@ -302,11 +302,31 @@ output:
         
 
 
-    ; 目前最快排列 O(nlogn) ---------------------------------------------
+    ; Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------------
+
+
+# Lower bounds of searching and sorting ====================================================
+    Comparison Model --> Decision Tree
+        searching is Ω(logn)
+
+        sorting is Ω(nlogn)
+            sorting 得到的結果畫成 Decision Tree, 
+            最後所有可能的 leaf 長相如下範例,
+            如同將所有 item 做排列(permutation),
+            --> 總共有 n! 個 leaf 
+            --> log(n!)
+            --> Ω(nlogn), O(nlongn)
+
+            A[0] ≤ A[5] ≤ A[4] ≤ A[2] ≤ A[1] ≤ A[3]  
+             6      5      4      3      2      1       <-- 可能數
+             n  +  n-1   +   ...     ...     +  1       <-- n!
 
 
 
-# tree ======================================================
+; ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
+
+
+# tree =====================================================================================
 "tree is acyclic graph"
 
     名詞: node, edge(箭頭), root, subtree, children, parent node, leaf
@@ -317,8 +337,13 @@ output:
     Max Heap: "Complete + 所有 subtree, root 必為最大值 -(左右沒差)"
 
 
+# Master Theorem ===========================================================================
+"大師定理: 一開始覺得是無敵的定理, 但後來沒有"
 
-# 重看過往 ======================================================
+
+
+
+# 重看過往 ===================================================================================
 ＊ 整理多層 object --> 淮: 用 BFS
 ＊ old case study: idsToChildren
 

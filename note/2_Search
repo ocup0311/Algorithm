@@ -1,0 +1,28 @@
+# 筆記方向 ===================================================================================
+1. 查演算法的各種使用時機
+2. 附圖解
+3. pseudo code
+4. 簡單文字描述
+5. Big O
+
+# Search ===================================================================================
+    # Linear Search (Sequential Search) ---------------------------
+    "照線性順序, 找到目標 | 全找完找不到"
+
+    O(n)
+        worst case performance: O(n)
+        best case performance: O(1)
+        average performance: O(n/2)
+
+    # Binary Search -----------------------------------------------
+    "需要 sorted data set"
+
+    O(logn)
+        worst case performance: O(logn)
+        best case performance: O(1)
+        average performance: O(logn)
+
+"Lower bounds of searching is Ω(logn)"
+    Comparison Model --> Decision Tree
+
+

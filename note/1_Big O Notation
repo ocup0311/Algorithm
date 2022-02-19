@@ -1,0 +1,73 @@
+# 筆記方向 ===================================================================================
+1. 查演算法的各種使用時機
+2. 附圖解
+3. pseudo code
+4. 簡單文字描述
+5. Big O
+
+# Big O Notation ===========================================================================
+; https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation
+; https://cs.stackexchange.com/questions/23068/how-do-o-and-%CE%A9-relate-to-worst-and-best-case
+
+以「複雜度」取代「計時」的方式衡量演算法的原因: 
+    1. Same computer gets different runtime for the same task.
+    2. Different computing power machine gives different run time for the same task.
+
+Big O: "upper bound"
+Big Omega (Ω): "lower bound"
+Big Theta (Θ): "average bound (asymptotically tight bound?)"
+
+Q:為何主要用 Big O？
+    "一般比較在意 the worst-case 的 upper bound"
+    "比起其他兩個較易計算"
+
+網路解釋範例: 
+    ; ---------------------------------------------------------
+    Contrive(n)
+    1. if n is 0 then do something Θ(n^3)
+    2. else if n is even then
+    3.    flip a coin
+    4.    if heads, do something Θ(n)
+    5.    else if tails, do something Θ(n^2)
+    6. else if n is odd then
+    7.    flip a coin
+    8.    if heads, do something Θ(n^4)
+    9.    else if tails, do something Θ(n^5)
+    ; ----------------------------------------------------------
+    "In the best case (where n is even), the runtime is Ω(n) and O(n^2), but not Θ of anything.
+    In the worst case (where n is odd), the runtime is Ω(n^4) and O(n^5), but not Θ of anything.
+    In the case n=0, the runtime is Θ(n^3)."
+
+
+
+# Big O for js =============================================================================
+; array:
+; https://adrianmejia.com/data-structures-time-complexity-for-beginners-arrays-hashmaps-linked-lists-stacks-queues-tutorial/
+; https://dev.to/lukocastillo/time-complexity-big-0-for-javascript-array-methods-and-examples-mlg
+; https://stackoverflow.com/questions/22614237/javascript-runtime-complexity-of-array-functions
+; string:
+; https://stackoverflow.com/questions/47733645/what-is-the-algorithmic-complexity-of-string-slicing-practical-real-world
+; https://mrale.ph/blog/2016/11/23/making-less-dart-faster.html
+
+Object:
+    insertion O(1)
+    removal O(1)
+    searching O(n)
+    accessing O(1)
+
+Array:
+    insertion
+        push O(1)
+        shift O(n)
+    removal
+        pop O(1)
+        unshift O(n)
+    searching O(n)
+    accessing O(1)
+
+    sort: O(nlogn)
+    slice: O(n)
+
+String:
+    slice: O(1)
+
