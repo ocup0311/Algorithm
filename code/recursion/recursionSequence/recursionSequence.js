@@ -8,4 +8,4 @@ function recursionSequence(nth) {
   return recursionSequence(nth - 1) + 15
 }
 
-module.exports = recursionSequence
+export default recursionSequence

@@ -1,6 +1,6 @@
 // O(n^2)
 
-const U = require('@util')
+import U from '$util'
 
 function InsertionSort(originalArr) {
   // var
@@ -9,20 +9,17 @@ function InsertionSort(originalArr) {
 
   // run
   for (let i = 1; i < sortedArr.length; i++) {
-    const key = sortedArr[i]
     let j = i
 
-    while (j > 0 && sortedArr[j - 1] > key) {
-      sortedArr[j] = sortedArr[j - 1]
+    while (j > 0 && sortedArr[j - 1] > sortedArr[j]) {
+      U.toSwapArr(sortedArr, j - 1, j)
 
       step++
       j--
     }
-
-    sortedArr[j] = key
   }
 
   return { sortedArr, step }
 }
 
-module.exports = InsertionSort
+export default InsertionSort

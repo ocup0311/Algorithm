@@ -1,6 +1,6 @@
 // O(nlogn)
 
-const U = require('@util')
+import U from '$util'
 
 // main
 function heapSortN(originalArr) {
@@ -23,7 +23,7 @@ function heapSortN(originalArr) {
     }
   }
   const makeMinHeapTree = (arr) => {
-    ptr = Math.floor(arr.length / 2) - 1
+    let ptr = Math.floor(arr.length / 2) - 1
 
     while (ptr >= 0) {
       minHeapify(ptr)
@@ -46,4 +46,4 @@ function heapSortN(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = heapSortN
+export default heapSortN

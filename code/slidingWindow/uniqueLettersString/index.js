@@ -2,10 +2,10 @@
 // input: 'WriteafunctioncalleduniqueLettersString'
 // output: 'Writeafunct'
 
-const { performance } = require('perf_hooks')
-const { builtInput, runTest } = require('./@test.js')
-const byPtr = require('./byPtr')
-const byPtr3 = require('./byPtr3')
+import { performance } from 'perf_hooks'
+import { builtInput, runTest } from './@test.js'
+import * as byPtr from './byPtr/index.js'
+import * as byPtr3 from './byPtr3/index.js'
 
 const input0 = builtInput(2000)
 const input1 = 'WriteafunctioncalleduniqueLettersString'

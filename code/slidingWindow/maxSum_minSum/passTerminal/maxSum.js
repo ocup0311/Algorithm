@@ -1,4 +1,5 @@
-const U = require('@util')
+import U from '$util'
+import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
 function maxSum({ dataPool, size = 3 }) {
   // exception
@@ -9,7 +10,6 @@ function maxSum({ dataPool, size = 3 }) {
   let value_temp = value_max
 
   // function
-  const { slidingWindow } = require('../../slidingWindow/passTerminal')
   const callBack = (lastItem, nextItem) => {
     value_temp = value_temp - lastItem + nextItem
 
@@ -24,4 +24,4 @@ function maxSum({ dataPool, size = 3 }) {
   return value_max
 }
 
-module.exports = maxSum
+export default maxSum

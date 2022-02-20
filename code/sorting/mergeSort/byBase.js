@@ -1,6 +1,6 @@
 // O(nlogn)
 
-const U = require('@util')
+import U from '$util'
 
 // main
 function mergeSort(originalArr) {
@@ -57,4 +57,4 @@ function mergeSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = mergeSort
+export default mergeSort

@@ -1,5 +1,5 @@
-const C = require('@config')
-const U = require('@util')
+import C from '$config'
+import U from '$util'
 
 const builtInput = (amount, guaranteed = false) => {
   // var
@@ -39,4 +39,4 @@ const runTest = (input, fn) => {
   }
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

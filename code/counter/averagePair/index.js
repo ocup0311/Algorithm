@@ -2,11 +2,11 @@
 // input:{ dataPool:[-11, 0, 1, 2, 3, 9, 14, 17, 21], target:1.5 }
 // output: [[-11, 14], [0, 3], [1, 2]]
 
-const { performance } = require('perf_hooks')
-const { builtInput, runTest } = require('./@test.js')
-const byLoop = require('./byLoop')
-const byCounter = require('./byCounter')
-const byPtr = require('./byPtr')
+import { performance } from 'perf_hooks'
+import { builtInput, runTest } from './@test.js'
+import byLoop from './byLoop.js'
+import byCounter from './byCounter.js'
+import byPtr from './byPtr.js'
 
 const input0 = { dataPool: [-11, 0, 1, 2, 3, 9, 14, 17, 21], target: 1.5 }
 const input1 = builtInput(15)

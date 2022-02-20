@@ -1,6 +1,7 @@
 // O(n * size)
 
-const U = require('@util')
+import U from '$util'
+import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
 function largestProduct({ dataPool, size = 3 }) {
   // exception
@@ -10,7 +11,6 @@ function largestProduct({ dataPool, size = 3 }) {
   let value_max = -Infinity
 
   // function
-  const { slidingWindow } = require('../../slidingWindow/passSet')
   const callBack = (windowSet) => {
     const value_temp = U.makeProductofArr(windowSet)
 
@@ -24,4 +24,4 @@ function largestProduct({ dataPool, size = 3 }) {
   return value_max
 }
 
-module.exports = { largestProduct }
+export { largestProduct }

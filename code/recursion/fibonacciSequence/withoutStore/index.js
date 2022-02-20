@@ -9,4 +9,4 @@ function fib(nth) {
   return fib(nth - 1) + fib(nth - 2)
 }
 
-module.exports = { fib }
+export { fib }

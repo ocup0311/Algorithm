@@ -12,4 +12,4 @@ function byLoop({ dataPool, target }) {
   return output
 }
 
-module.exports = byLoop
+export default byLoop

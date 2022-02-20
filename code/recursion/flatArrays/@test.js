@@ -1,4 +1,4 @@
-const U = require('@util')
+import U from '$util'
 
 const builtInput = (amount) => {
   let output = []
@@ -24,4 +24,4 @@ const runTest = (input, fn) => {
   console.log(`output: ${JSON.stringify(result)}`)
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

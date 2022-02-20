@@ -22,4 +22,4 @@ function byPtr({ subsequenceStr, originalStr }) {
   return true
 }
 
-module.exports = byPtr
+export default byPtr

@@ -19,4 +19,4 @@ function byPtr(input) {
   return true
 }
 
-module.exports = byPtr
+export default byPtr

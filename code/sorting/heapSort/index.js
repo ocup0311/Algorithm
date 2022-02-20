@@ -1,4 +1,2 @@
-module.exports = {
-  byNewArr: require('./byNewArr'),
-  bySameArr: require('./bySameArr'),
-}
+export { default as byNewArr } from './byNewArr.js'
+export { default as bySameArr } from './bySameArr.js'

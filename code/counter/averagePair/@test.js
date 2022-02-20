@@ -1,4 +1,4 @@
-const U = require('@util')
+import U from '$util'
 
 const builtInput = (amount, guaranteed = false) => {
   // var
@@ -48,4 +48,4 @@ const runTest = (input, fn) => {
   console.log()
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

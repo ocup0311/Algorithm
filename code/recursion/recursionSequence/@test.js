@@ -1,4 +1,4 @@
-const U = require('@util')
+import U from '$util'
 
 const builtInput = () => U.makeRandomN(9999)
 
@@ -8,4 +8,4 @@ const runTest = (input, fn) => {
   console.log(`The ${input} item is ${result}.`)
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

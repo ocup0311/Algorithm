@@ -4,8 +4,8 @@
 // input:'abbcd' & 'abbcdd' output: false
 // O(n)
 
-const C = require('@config')
-const U = require('@util')
+import C from '$config'
+import U from '$util'
 
 // ===================== input =====================
 

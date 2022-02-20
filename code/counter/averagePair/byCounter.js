@@ -15,4 +15,4 @@ function byCounter({ dataPool, target }) {
   return output
 }
 
-module.exports = byCounter
+export default byCounter

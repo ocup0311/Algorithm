@@ -1,6 +1,6 @@
 // O(nlogn)
 
-const U = require('@util')
+import U from '$util'
 
 // main
 function quickSort(originalArr) {
@@ -39,4 +39,4 @@ function quickSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = quickSort
+export default quickSort

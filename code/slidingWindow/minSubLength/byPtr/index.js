@@ -1,7 +1,7 @@
 // 每個項目必須是自然數。
 // O(n)
 
-const U = require('@util')
+import U from '$util'
 
 function minSubLength({ dataPool, target = 30 }) {
   // pointer
@@ -31,4 +31,4 @@ function minSubLength({ dataPool, target = 30 }) {
   return minLength === Infinity ? null : minLength
 }
 
-module.exports = { minSubLength }
+export { minSubLength }

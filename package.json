@@ -1,8 +1,9 @@
 {
   "name": "algorithm",
   "version": "0.0.0",
+  "type": "module",
   "engines": {
-    "node": "14.14.0"
+    "node": "16.0.0"
   },
   "scripts": {
     "postinstall": "link-module-alias",
@@ -10,8 +11,8 @@
   },
   "_moduleAliases": {
     "~root": ".",
-    "@util": "code/@util",
-    "@config": "code/@config"
+    "$util": "code/@util",
+    "$config": "code/@config"
   },
   "author": "OcupHuang",
   "devDependencies": {

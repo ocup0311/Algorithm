@@ -2,14 +2,14 @@
 // input: [3,7,4,1,9,2]
 // output: [1,2,3,4,7,9]
 
-const U = require('@util')
-const { builtInput, runTestSet } = require('./@test.js')
-const bubbleSort = require('./bubbleSort')
-const insertionSort = require('./insertionSort')
-const selectionSort = require('./selectionSort')
-const mergeSort = require('./mergeSort')
-const heapSort = require('./heapSort')
-const quickSort = require('./quickSort')
+import U from '$util'
+import { builtInput, runTestSet } from './@test.js'
+import * as bubbleSort from './bubbleSort/index.js'
+import * as insertionSort from './insertionSort/index.js'
+import * as selectionSort from './selectionSort/index.js'
+import * as mergeSort from './mergeSort/index.js'
+import * as heapSort from './heapSort/index.js'
+import * as quickSort from './quickSort/index.js'
 
 const sorted = true
 
@@ -17,7 +17,7 @@ const input0 = [3, 7, 4, 1, 9, 2, 6, 93, 5, -8, -99]
 const input1 = builtInput(2000)
 const input2 = builtInput(20000)
 const input3 = builtInput(0)
-const input4 = builtInput(5000)
+const input4 = builtInput(5000, sorted)
 
 const inputSet = [input0, input1, input2, input3, input4]
 

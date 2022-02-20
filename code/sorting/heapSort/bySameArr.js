@@ -1,6 +1,6 @@
 // O(nlogn)
 
-const U = require('@util')
+import U from '$util'
 
 // main
 function heapSortS(originalArr) {
@@ -51,4 +51,4 @@ function heapSortS(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = heapSortS
+export default heapSortS

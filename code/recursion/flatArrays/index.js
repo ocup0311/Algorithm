@@ -2,9 +2,9 @@
 // input: [0, [[[1, [2], 3]], [4, 5, 6]], [[[[7, [8, 9]]]], 10]]
 // output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-const { performance } = require('perf_hooks')
-const { builtInput, runTest } = require('./@test.js')
-const { flatArrays } = require('./flatArrays')
+import { performance } from 'perf_hooks'
+import { builtInput, runTest } from './@test.js'
+import flatArrays from './flatArrays/index.js'
 
 const input_prRUN = builtInput(10000)
 const input0 = [0, [[[1, [2], 3]], [4, 5, 6]], [[[[7, [8, 9]]]], 10]]

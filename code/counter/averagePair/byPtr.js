@@ -30,4 +30,4 @@ function byPtr({ dataPool, target }) {
   return output
 }
 
-module.exports = byPtr
+export default byPtr

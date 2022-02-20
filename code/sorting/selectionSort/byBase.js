@@ -1,6 +1,6 @@
 // O(n^2)
 
-const U = require('@util')
+import U from '$util'
 
 function selectionSort(originalArr) {
   // var
@@ -23,4 +23,4 @@ function selectionSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = selectionSort
+export default selectionSort

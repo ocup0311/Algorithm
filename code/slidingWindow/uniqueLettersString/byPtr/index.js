@@ -2,7 +2,7 @@
 // (X) 用 string + 1個 pointer，移除前面時需要於 loop 中 slice，為 O(n)，會多花時間。
 // (O) string slice 為 O(1)，所以可以直接用 slice。
 
-const U = require('@util')
+import U from '$util'
 
 function uniqueLettersString(input) {
   // pointer
@@ -37,4 +37,4 @@ function uniqueLettersString(input) {
   return subStr
 }
 
-module.exports = { uniqueLettersString }
+export { uniqueLettersString }

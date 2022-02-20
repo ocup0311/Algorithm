@@ -2,8 +2,8 @@
 // input: 13
 // output: 181
 
-const { builtInput, runTest } = require('./@test.js')
-const recursionSequence = require('./recursionSequence')
+import { builtInput, runTest } from './@test.js'
+import recursionSequence from './recursionSequence.js'
 
 const input0 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const input1 = 100

@@ -2,10 +2,10 @@
 // input: { dataPool: [5, 7, 21, 5, 3, 7, 18, 5, 10], size: 2 }
 // output: maxSum: 28, minSum: 8
 
-const { performance } = require('perf_hooks')
-const { builtInput, runTest } = require('./@test.js')
-const passSet = require('./passSet')
-const passTerminal = require('./passTerminal')
+import { performance } from 'perf_hooks'
+import { builtInput, runTest } from './@test.js'
+import * as passTerminal from './passTerminal/index.js'
+import * as passSet from './passSet/index.js'
 
 const input0 = builtInput(2000, 500)
 const input1 = { dataPool: [5, 7, 21, 5, 3, 7, 18, 5, 10], size: 2 }

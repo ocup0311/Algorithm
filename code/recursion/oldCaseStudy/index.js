@@ -1,8 +1,8 @@
 //
 
-const { builtInput, runTest } = require('./@test.js')
-const fromFriend = require('./fromFriend')
-const fromMe202103 = require('./fromMe202103')
+import { builtInput, runTest } from './@test.js'
+import fromFriend from './fromFriend/index.js'
+import fromMe202103 from './fromMe202103/index.js'
 
 const input = builtInput()
 

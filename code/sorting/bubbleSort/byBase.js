@@ -1,6 +1,6 @@
 // O(n^2)
 
-const U = require('@util')
+import U from '$util'
 
 function BubbleSort(originalArr) {
   // var
@@ -19,4 +19,4 @@ function BubbleSort(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = BubbleSort
+export default BubbleSort

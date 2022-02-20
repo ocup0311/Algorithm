@@ -56,7 +56,4 @@ const a_z = [
   'z',
 ]
 
-module.exports = {
-  A_Z,
-  a_z,
-}
+export default { A_Z, a_z }

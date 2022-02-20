@@ -1,4 +1,5 @@
-const U = require('@util')
+import U from '$util'
+import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
 function minSum({ dataPool, size = 3 }) {
   // exception
@@ -8,7 +9,6 @@ function minSum({ dataPool, size = 3 }) {
   let value_min = Infinity
 
   // function
-  const { slidingWindow } = require('../../slidingWindow/passSet')
   const callBack = (windowSet) => {
     const value_temp = U.makeSumofArr(windowSet)
 
@@ -23,4 +23,4 @@ function minSum({ dataPool, size = 3 }) {
   return value_min
 }
 
-module.exports = minSum
+export default minSum

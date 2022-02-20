@@ -2,9 +2,9 @@
 // input: 13
 // output: 233
 
-const { builtInput, runTest } = require('./@test.js')
-const withStore = require('./withStore')
-const withoutStore = require('./withoutStore')
+import { builtInput, runTest } from './@test.js'
+import * as withStore from './withStore/index.js'
+import * as withoutStore from './withoutStore/index.js'
 
 const input0 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const input1 = 39

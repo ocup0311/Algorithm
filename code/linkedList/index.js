@@ -1,4 +1,4 @@
-const LinkedList = require('./LinkedList')
+import LinkedList from './LinkedList.js'
 
 const testList1 = new LinkedList()
 testList1.push(1)

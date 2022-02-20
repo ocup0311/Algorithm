@@ -1,3 +1,1 @@
-module.exports = {
-  byBase: require('./byBase'),
-}
+export { default as byBase } from './byBase.js'

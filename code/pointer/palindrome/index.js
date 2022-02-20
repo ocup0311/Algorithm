@@ -2,8 +2,8 @@
 // input:'abba', 'abbc', 'tacocat'
 // output: true, false, true
 
-const { builtInput, runTest } = require('./@test.js')
-const byPtr = require('./byPtr')
+import { builtInput, runTest } from './@test.js'
+import byPtr from './byPtr.js'
 
 const input0 = 'evacanistabbatsinacave'
 const input1 = builtInput(9, true)

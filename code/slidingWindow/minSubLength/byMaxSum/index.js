@@ -1,6 +1,7 @@
 // O(n^2)
 
-const U = require('@util')
+import U from '$util'
+import maxSum from '../../maxSum_minSum/passTerminal/maxSum.js'
 
 function minSubLength({ dataPool, target = 30 }) {
   // var
@@ -8,7 +9,6 @@ function minSubLength({ dataPool, target = 30 }) {
   let sum = -Infinity
 
   // function
-  const maxSum = require('../../maxSum_minSum/passTerminal/maxSum')
 
   // run
   while (sum < target) {
@@ -23,4 +23,4 @@ function minSubLength({ dataPool, target = 30 }) {
   return minLength
 }
 
-module.exports = { minSubLength }
+export { minSubLength }

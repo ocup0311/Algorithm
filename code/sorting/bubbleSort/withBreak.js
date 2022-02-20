@@ -2,7 +2,7 @@
 // best case performance: O(n^2) -> O(n)
 // O(n^2)
 
-const U = require('@util')
+import U from '$util'
 
 function BubbleSortWBP(originalArr) {
   // var
@@ -28,4 +28,4 @@ function BubbleSortWBP(originalArr) {
   return { sortedArr, step }
 }
 
-module.exports = BubbleSortWBP
+export default BubbleSortWBP

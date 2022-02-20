@@ -1,5 +1,5 @@
-const C = require('@config')
-const U = require('@util')
+import C from '$config'
+import U from '$util'
 
 const builtInput = () => U.makeRandomN(1000)
 
@@ -9,4 +9,4 @@ const runTest = (input, fn) => {
   console.log(`The ${input} item is ${result}.`)
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

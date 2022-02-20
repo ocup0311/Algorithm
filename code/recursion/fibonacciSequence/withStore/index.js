@@ -13,4 +13,4 @@ function fib(nth) {
   return value
 }
 
-module.exports = { fib }
+export { fib }

@@ -84,7 +84,7 @@ const toDownCounter = (counter, item) => {
 // log
 const openLog = (v) => console.log(JSON.stringify(v, null, ' '))
 
-module.exports = {
+export default {
   makeSumofArr,
   makeProductofArr,
   makeProductofArr_fromNextTo0,

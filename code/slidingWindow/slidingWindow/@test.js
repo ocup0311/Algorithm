@@ -1,4 +1,4 @@
-const U = require('@util')
+import U from '$util'
 
 const builtInput = (amount, size = 3) => {
   // var
@@ -25,4 +25,4 @@ const runTest = (input, fn) => {
   fn(input, callBack)
 }
 
-module.exports = { builtInput, runTest }
+export { builtInput, runTest }

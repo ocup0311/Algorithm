@@ -1,5 +1,5 @@
-const { performance } = require('perf_hooks')
-const U = require('@util')
+import { performance } from 'perf_hooks'
+import U from '$util'
 
 const builtInput = (amount, sorted = false) => {
   let output = []
@@ -41,4 +41,4 @@ const runTestSet = ({ fn, inputSet }, isLog) => {
   return { steps, time, arr }
 }
 
-module.exports = { builtInput, runTest, runTestSet }
+export { builtInput, runTest, runTestSet }

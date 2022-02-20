@@ -2,10 +2,10 @@
 // input: { dataPool: [9, 8, 1, 4, 9, 5, 1, 2], target: 11 }
 // output: 2
 
-const { performance } = require('perf_hooks')
-const { builtInput, runTest } = require('./@test.js')
-const byMaxSum = require('./byMaxSum')
-const byPtr = require('./byPtr')
+import { performance } from 'perf_hooks'
+import { builtInput, runTest } from './@test.js'
+import * as byMaxSum from './byMaxSum/index.js'
+import * as byPtr from './byPtr/index.js'
 
 const input0 = builtInput(200)
 const input1 = { dataPool: [9, 8, 1, 4, 9, 5, 1, 2], target: 11 }

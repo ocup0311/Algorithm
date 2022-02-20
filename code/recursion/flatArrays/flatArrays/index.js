@@ -17,4 +17,4 @@ function flatArrays(originalArr) {
   return flattedArr
 }
 
-module.exports = { flatArrays }
+export default flatArrays

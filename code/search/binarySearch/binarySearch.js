@@ -2,7 +2,7 @@
 // input:{ dataPool:[5,9,15,78,99], target:78 } output: 3
 // O(logn)
 
-const U = require('@util')
+import U from '$util'
 
 // ===================== input =====================
 

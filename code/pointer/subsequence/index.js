@@ -2,8 +2,8 @@
 // input: ['abc', 'abcd'] / ['abc', 'acb'] / ['abc', 'abdc'] / ['abc', 'abc dads']
 // output: true, false, true, true
 
-const { builtInput, runTest } = require('./@test.js')
-const byPtr = require('./byPtr')
+import { builtInput, runTest } from './@test.js'
+import byPtr from './byPtr.js'
 
 const input0 = { subsequenceStr: 'abc', originalStr: 'abcd' }
 const input1 = { subsequenceStr: 'abc', originalStr: 'acb' }

@@ -17,4 +17,4 @@ function slidingWindow({ dataPool, size = 3 }, callBack) {
   return
 }
 
-module.exports = { slidingWindow }
+export { slidingWindow }
