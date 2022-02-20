@@ -28,6 +28,9 @@ FIX: 修改 bug
 MODULE: add、delete、update、等等 module
   ex. '[MODULE] add: link-module-alias'
 
+UPGRADE: 升級版本、大改語法
+  ex. '[UPGRADE] CommonJS --> ESM'
+
 TEMP: 暫時性 commit，完成後再合併修成正式 commit
   ex. '[TEMP] Need to code review from book "圖說演算法：使用JavaScript"'
 

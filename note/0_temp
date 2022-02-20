@@ -17,12 +17,12 @@
     Array
       ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
       "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)（Ｑ？）"
-
+      "JSArray有兩種模式, 一種是快速的, 一種是慢速的, 快速的用的是索引直接定位, 慢速的使用用哈希查找"
 
     Linked List
     "In computer science, a linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next."
-    
-    push, pop, shift, unshift, inserAt, removeAt, get, printAll, 
+    ; https://www.linkedin.com/pulse/all-you-need-know-linked-lists-fahad-yameen/
+    ; push, pop, shift, unshift, inserAt, removeAt, get, printAll, 
 
 
     List( vs Array):
