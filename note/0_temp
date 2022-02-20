@@ -13,3 +13,32 @@
 ＊ old case study: idsToChildren
 ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
 
+# Data Structure ===========================================================================
+    Array
+      ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
+      "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)（Ｑ？）"
+
+
+    Linked List
+    "In computer science, a linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next."
+    
+    push, pop, shift, unshift, inserAt, removeAt, get, printAll, 
+
+
+    List( vs Array):
+    優點:
+      1. 整群不用在一起 --> 不用固定長度, 不怕找不到大塊空間, 不用先預留空間不浪費
+      2. 方便增減                  <-- 不用管 index, length
+    缺點:
+      1. 單項佔較多空間             <-- 多存了 pointer
+      2. 都要從頭開始造訪
+      3. 不連續記憶體(noncontiguous) --> 大增時間
+      4. reverse traversing 需要再多一個 pointer 空間
+
+
+
+  Stack
+  Queue 
+  Hashtable
+
+
