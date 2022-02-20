@@ -7,8 +7,10 @@
 6. 找機會轉成 Markdown
 
 # Master Theorem ===========================================================================
+; http://courses.csail.mit.edu/6.046/spring04/handouts/akrabazzi.pdf  <--  論文
+; https://www.gushiciku.cn/pl/gbAq/zh-tw  <--  vs Akra-Bazzi Theorem
 "大師定理: 一開始覺得是無敵的定理, 但後來不是無敵"
-"將遞迴關係式換成 Big O 的方法"
+"將遞迴關係式換成 Big O 的方法"  <--  "只用在 Divide-and-Conquer recursion （Ｑ？）"
 "T(n)  -->  O()"
 
     ; ↓ ↓ ↓ ex. 遞迴關係式 -----------------------------------------

@@ -258,7 +258,7 @@ O(n)
 
     ＊Radix Sort  -->  O(n * c)
         
-        d: "digits(位數)" , n: "資料量" , b: "base of log" , S: "最大數" 
+        d: "digits(位數)" , n: "資料量" , b: "base of log" , S: "最大數" , logb(S): "logS of base b"
         ; proof ---------------------------------------------
         
         ; 使用 Counting Sort O(n+K), 則時間複雜度為:
