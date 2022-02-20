@@ -62,6 +62,7 @@
 # Comparison Sorting =======================================================================
 
     ; ↓ ↓ ↓ not so efficient O(n^2)---------------------------------------------
+    ; Bubble, Insertion, Selection, Shell, Shaker
     ＊Bubble Sort O(n^2)
     "Bubble sort compares adjacent elements and swaps them if they are in the wrong order."
     "目前幾乎沒地方在使用。"
@@ -90,6 +91,7 @@
     ; ↑ ↑ ↑ not so efficient O(n^2)---------------------------------------------
 
     ; ↓ ↓ ↓ Comparison Model 中, 目前最快排列 O(nlogn) ----------------------------------------
+    ; Merge, Quick, Heap
     ＊Merge Sort
     "Take advantage of the fact that combining two sorted arrays has O(n) time complexity, using the pointer skill."
     "divide and conquer (分而治之)" --> 通常會跟 recursion 併用
@@ -141,6 +143,8 @@
         average performance: O(nlogn)
 
     ＊Quick Sort
+    ; https://kopu.chat/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-quick-sort/
+    ; ↑ ↑ ↑ 再研究解決 worst case 的方法。
     
         Partition
         "The idea of partition algorithm is to divide the array into 2 parts. Either part is a sorted array, but the element in the middle is sorted(we found its correct final spot)"
@@ -275,7 +279,7 @@ O(n)
         ; --->  O(n * logn(S))
 
         ; if S ≤ n^c
-        ; --->  O(n*c)
+        ; --->  O(n * c)
         ; proof ---------------------------------------------
 
         限制:
@@ -288,7 +292,20 @@ O(n)
             2. 需將所有 input 換算成 b 進位 （Ｑ？）
             3. 依序參照 1st, 2nd, ..., bth 位數, 對 input 做 stable sort
 
+# 整理表格 ===================================================================================
 
+        Algorithm       Best       Worst       Avg           空間        stable       
+        -------------------------------------------------------------------------
+        Bubble          O(n)       O(n^2)     O(n^2)         O(1)        stable
+        Insertion       O(n)       O(n^2)     O(n^2)         O(1)        stable
+        Selection      O(n^2)      O(n^2)     O(n^2)         O(1)       Unstable
+        Merge         O(nlogn)    O(nlogn)   O(nlogn)        O(n)        stable
+        Heap          O(nlogn)    O(nlogn)   O(nlogn)     O(n)+O(1)     Unstable
+        Quick         O(nlogn)     O(n^2)    O(nlogn)    O(logn)~O(n)   Unstable
+        Counting       O(n+K)      O(n+K)     O(n+K)        O(n+K)       stable
+        Radix
 
-
-
+; ＊stable 的再回去檢查 code 是否有保持 stable。  
+; 再研究 Quick, Counting 空間。  
+; Radix。   
+; 再研究 Quick 解決 worst case 法。
