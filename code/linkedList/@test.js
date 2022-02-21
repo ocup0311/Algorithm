@@ -1,6 +1,33 @@
+import U from '$util'
+
+const builtArr = (amount, sorted = false) => {
+  let output = []
+
+  for (let i = 0; i < amount; i++) {
+    if (sorted) {
+      output.push(i)
+    } else {
+      output.push(U.makeRandomN(10))
+    }
+  }
+
+  return output
+}
+
+const toTestBigData = (list) => {
+  const bigNum = 10000
+  const bigArr = builtArr(bigNum, true)
+  list.pushArr(bigArr)
+  for (let i = 0; i < bigNum; i++) {
+    list.push(i)
+  }
+}
+
 const runTest = (List) => {
   const list0 = new List()
   const list1 = new List()
+
+  toTestBigData(list0)
 
   console.log('------ pushArr([99, 98]) ------')
   const x0 = list0.pushArr([99, 98])

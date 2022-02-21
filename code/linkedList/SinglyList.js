@@ -1,9 +1,4 @@
-class Node {
-  constructor(value) {
-    this.value = value
-    this.next = null
-  }
-}
+import Node from './Node.js'
 
 class SinglyList {
   constructor() {
@@ -205,10 +200,3 @@ class SinglyList {
 }
 
 export default SinglyList
-
-// TODO
-// const exception = ({ info, err }) => {
-//   if (info) console.log(info)
-//   if (err) console.error(err)
-//   return
-// }

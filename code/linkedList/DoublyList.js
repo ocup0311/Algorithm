@@ -1,10 +1,4 @@
-class Node {
-  constructor(value) {
-    this.value = value
-    this.prev = null
-    this.next = null
-  }
-}
+import Node from './Node.js'
 
 class DoublyList {
   constructor() {
