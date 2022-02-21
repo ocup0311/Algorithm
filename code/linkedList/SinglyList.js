@@ -1,10 +1,3 @@
-// TODO
-// const exception = ({ info, err }) => {
-//   if (info) console.log(info)
-//   if (err) console.error(err)
-//   return
-// }
-
 class Node {
   constructor(value) {
     this.value = value
@@ -12,12 +5,13 @@ class Node {
   }
 }
 
-class LinkedList {
+class SinglyList {
   constructor() {
     this.head = null
     this.length = 0
   }
 
+  // O(n)
   findNode(index) {
     let currentNode = this.head
 
@@ -28,10 +22,12 @@ class LinkedList {
     return currentNode
   }
 
+  // O(n)
   findLastNode() {
     return this.findNode(this.length - 1)
   }
 
+  // O(n)
   traverse(indexOfEnd, callBack) {
     if (!this.head) {
       console.log('This is an empty list.')
@@ -45,10 +41,12 @@ class LinkedList {
     }
   }
 
+  // O(n)
   traverseAll(callBack) {
     this.traverse(this.length - 1, callBack)
   }
 
+  // O(n)
   inserAt(index, value) {
     // exception
     if (index > this.length) {
@@ -75,6 +73,7 @@ class LinkedList {
     return this.length
   }
 
+  // O(n)
   removeAt(index) {
     // exception
     if (!this.head) {
@@ -104,14 +103,17 @@ class LinkedList {
     return removedNode.value
   }
 
+  // O(n)
   push(value) {
     return this.inserAt(this.length, value)
   }
 
+  // O(n)
   pop() {
     return this.removeAt(this.length - 1)
   }
 
+  // O(1)
   shift(value) {
     const newNode = new Node(value)
 
@@ -123,6 +125,7 @@ class LinkedList {
     return this.length
   }
 
+  // O(1)
   unshift() {
     // exception
     if (!this.head) {
@@ -140,10 +143,52 @@ class LinkedList {
     return unshiftNode.value
   }
 
+  // O(n)
+  pushList(list) {
+    if (!this.head) {
+      this.head = list.head
+    } else {
+      const lastNode = this.findLastNode()
+      lastNode.next = list.head
+    }
+
+    this.length = this.length + list.length
+
+    return this.length
+  }
+
+  // O(n)
+  pushArr(arr) {
+    // var
+    let startIndex = 0
+    let lastNode = this.findLastNode()
+
+    // exception
+    if (!lastNode) {
+      const newNode = new Node(arr[0])
+      this.head = newNode
+      lastNode = newNode
+      startIndex++
+    }
+
+    // run
+    for (let i = startIndex; i < arr.length; i++) {
+      const newNode = new Node(arr[i])
+      lastNode.next = newNode
+      lastNode = newNode
+    }
+
+    this.length = this.length + arr.length
+
+    return this.length
+  }
+
+  // O(n)
   getValue(index) {
     return this.findNode(index).value
   }
 
+  // O(n)
   getList() {
     const list = []
 
@@ -154,16 +199,18 @@ class LinkedList {
     return list
   }
 
-  getListArr() {
-    const listArr = []
+  // O(n)
+  getArr() {
+    const arr = []
 
-    const callBack = (currentNode) => listArr.push(currentNode.value)
+    const callBack = (currentNode) => arr.push(currentNode.value)
 
     this.traverseAll(callBack)
 
-    return listArr
+    return arr
   }
 
+  // O(n)
   printAll() {
     const callBack = (currentNode) => console.log(currentNode.value)
 
@@ -171,4 +218,11 @@ class LinkedList {
   }
 }
 
-export default LinkedList
+export default SinglyList
+
+// TODO
+// const exception = ({ info, err }) => {
+//   if (info) console.log(info)
+//   if (err) console.error(err)
+//   return
+// }
