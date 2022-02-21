@@ -35,6 +35,11 @@
       3. 不連續記憶體(noncontiguous) --> 大增時間
       4. reverse traversing 需要再多一個 pointer 空間
 
+    Singly Linked List --> Doubly Linked List
+      1. O(n)  -->  O(n/2)
+      2. 可 reverse traversing
+
+    Circular Linked List
 
 
   Stack

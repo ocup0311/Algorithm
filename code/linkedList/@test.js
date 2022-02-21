@@ -72,6 +72,8 @@ const runTest = (List) => {
   console.log(
     `size: 0 -> ${x0} -> ${a} -> ${b} -> ${c} -> ${d} -> ${e} -> ${f} -> ${g} -> ${h} -> ${i} -> ${j} -> ${k} -> ${l} -> ${m}`
   )
+
+  return list0.getArr()
 }
 
 export { runTest }
