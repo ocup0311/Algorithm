@@ -59,6 +59,9 @@ class SinglyList {
 
     if (!this.head) {
       this.head = newNode
+    } else if (index === 0) {
+      newNode.next = this.head
+      this.head = newNode
     } else if (index === this.length) {
       const lastNode = this.findLastNode()
       lastNode.next = newNode
@@ -91,13 +94,16 @@ class SinglyList {
       const last2Node = this.findNode(this.length - 2)
       removedNode = last2Node.next
       last2Node.next = null
+    } else if (index === 0) {
+      removedNode = this.head
+      this.head = this.head.next
     } else {
       const preNode = this.findNode(index - 1)
       removedNode = preNode.next
       preNode.next = removedNode.next
-      removedNode.next = null
     }
 
+    removedNode.next = null
     this.length--
 
     return removedNode.value
@@ -115,32 +121,12 @@ class SinglyList {
 
   // O(1)
   shift(value) {
-    const newNode = new Node(value)
-
-    if (this.head) newNode.next = this.head
-
-    this.head = newNode
-    this.length++
-
-    return this.length
+    return this.inserAt(0, value)
   }
 
   // O(1)
   unshift() {
-    // exception
-    if (!this.head) {
-      console.log("Can't unshift an empty list.")
-      return
-    }
-
-    // run
-    const unshiftNode = this.head
-    this.head = unshiftNode.next
-    unshiftNode.next = null
-
-    this.length--
-
-    return unshiftNode.value
+    return this.removeAt(0)
   }
 
   // O(n)
