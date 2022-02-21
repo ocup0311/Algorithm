@@ -14,6 +14,8 @@
 ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
 
 # Data Structure ===========================================================================
+; abstract, 
+
     Array
       ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
       "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)（Ｑ？）"
@@ -43,7 +45,18 @@
 
 
   Stack
+    "Last in first out (LIFO)"
+    push、pop
   Queue 
+    "First in first out (FIFO)"
+    enqueue、dequeue
+  Deque
+    "Double-ended queue"
+    "Stack + Queue"
+    push、inject、pop、eject
+    push_front、push_back、pop_front、pop_back
+
+
   Hashtable
 
 
