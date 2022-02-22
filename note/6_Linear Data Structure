@@ -1,0 +1,102 @@
+# Data Structure =============================================================================
+; "Abstract Data Type" "dynamic data structure: linked list"
+
+Linear Data Structure
+    Array, Linked List, Stack, Queue,
+
+Non-Linear Data Structure
+    Graph, Tree,
+
+# Linear Data Structure ======================================================================
+; https://zh-tw.coderbridge.com/series/4166931ce56145259387d5834e172195/posts/5348492a10d54fccb23d38a8697b0f6d
+
+    ＊ Array
+        ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
+        "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)"  <--  "2019 chrome src: 擴容: 1.5x +16  降容: x/2"
+        "JSArray有兩種模式, 一種是快速的, 一種是慢速的, 快速的用的是索引直接定位, 慢速的使用用哈希查找"
+
+
+    ＊ Linked List
+    "In computer science, a linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next."
+    "Dynamic Data Structure"
+    ; https://www.linkedin.com/pulse/all-you-need-know-linked-lists-fahad-yameen/
+
+        1. 未知長度
+        2. 不連續記憶體空間
+        3. by references
+
+    # Linked List   vs   Array ------------------------------
+    1. 差異
+            feature              Linked List             Array
+        ---------------------------------------------------------------
+           資料的長度              無固定長度              需給定長度
+           記憶體空間              不連續空間              連續的空間 (contiguous)
+           連結的方式             references              index
+ 
+    2. Big O
+            action              Linked List             Array
+        ---------------------------------------------------------------
+         走訪 (Accessing)          O(n)                   O(1)
+
+        Insert/Remove from 
+          首項增減 (beginnig)       O(1)                   O(n)
+          中間增減 (middle)         O(n)                   O(n)
+          末項增減 (end)            O(n)                   O(1)
+
+    3. 使用時機
+            feature              Linked List             Array
+        ---------------------------------------------------------------
+            資料長度                 未知                   已知
+            隨機造訪                 不需                   需要
+            快速迭代 (iterate)       不需                   需要
+            大量增減                 需要                   不需
+        (ex.real-time computing)
+
+    4. 優缺點
+        優點 (Pros): 
+            1. 不浪費空間     <-- 不用預留空間 <- 不用連續區塊 <- 動態長度
+            2. 不怕沒有整大塊空間     <-- 不用連續區塊
+            3. 方便增減     <-- 不用改 index & 不用改長度 拷貝 換空間
+            4. 方便實作 stack, queue 等
+
+        缺點 (Cons):
+            1. 單項佔較多空間     <-- 存多於資料,如 next prev 等 ref
+            2. 都要從頭開始造訪     <-- 沒有 index
+            3. 大增造訪時間     <-- 大增記憶體操作時間 <- 不連續
+            4. reverse traversing 麻煩     <-- 可用 Doubly 多耗空間解決
+
+
+    # Advanced from Singly Linked List ---------------------------
+    ＊ Doubly Linked List
+        1. Accessing: O(n)  -->  O(n/2)
+        2. Reverse traversing: NO --> YES
+
+    ＊ Circular Linked List
+
+
+# Abstract (ADT) --------------------------------------------------
+"https://www.csie.ntu.edu.tw/~b01902011/material.php?type=cpp&&id=3"
+
+    ＊ Stack
+        "Last in first out (LIFO)"
+        push   pop
+    
+    ＊ Queue 
+        "First in first out (FIFO)"
+        enqueue   dequeue
+    
+    ＊ Deque
+        "Double-ended queue"
+        "Stack + Queue"
+        push        inject        pop       eject
+     (push_back   push_front   pop_back   pop_front)
+
+    ＊ Hashtable
+    "Save both time and memory."
+
+
+
+# linked list 問題集 ==========================================================================
+1. 另有HEAD指向list本體 vs 直接是list本體
+2. 另紀錄一些屬性如length vs 不紀錄
+3. 更多抽象及method引用其他method vs 全部hardcode
