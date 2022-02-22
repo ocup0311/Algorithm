@@ -14,93 +14,108 @@ const builtArr = (amount, sorted = false) => {
   return output
 }
 
-const toTestBigData = (list) => {
-  const bigNum = 10000
-  const bigArr = builtArr(bigNum, true)
-  list.pushArr(bigArr)
-  for (let i = 0; i < bigNum; i++) {
-    list.push(i)
+const toTestBigData = ({ fn, props }) => {
+  const bigData = 5000
+  const bigArr = builtArr(bigData, true)
+  props.sample.pushArr(bigArr)
+
+  for (let i = 0; i < bigData; i++) {
+    fn(props, false)
   }
 }
 
-const runTest = (List) => {
-  const list0 = new List()
-  const list1 = new List()
+const toTestOnce = ({ Factory, sample = [] }, isLog = true) => {
+  // function
+  const print = (info) => {
+    if (isLog) console.log(info)
+    return
+  }
 
-  toTestBigData(list0)
+  // run
+  const list1 = new Factory()
 
-  console.log('------ pushArr([99, 98]) ------')
-  const x0 = list0.pushArr([99, 98])
-  console.log(list0.getArr())
-  console.log('------ push(1) ------')
-  const a = list0.push(1)
-  console.log(list0.getArr())
-  console.log('------ push(2) ------')
-  const b = list0.push(2)
-  console.log(list0.getArr())
-  console.log('------ push(3) ------')
-  const c = list0.push(3)
-  console.log(list0.getArr())
+  print('------ pushArr([99, 98]) ------')
+  const x0 = sample.pushArr([99, 98])
+  print(sample.getArr())
+  print('------ push(1) ------')
+  const a = sample.push(1)
+  print(sample.getArr())
+  print('------ push(2) ------')
+  const b = sample.push(2)
+  print(sample.getArr())
+  print('------ push(3) ------')
+  const c = sample.push(3)
+  print(sample.getArr())
 
-  console.log('------ pop() ------')
-  const popValue = list0.pop()
-  const d = list0.length
-  console.log(list0.getArr())
-  console.log('popValue:', popValue)
-  console.log('------ push(4) ------')
-  const e = list0.push(4)
-  console.log(list0.getArr())
+  print('------ pop() ------')
+  const popValue = sample.pop()
+  const d = sample.length
+  print(sample.getArr())
+  print('popValue:', popValue)
+  print('------ push(4) ------')
+  const e = sample.push(4)
+  print(sample.getArr())
 
-  console.log('------ printAll() ------')
-  list0.printAll()
-  console.log('------ getValue(1) ------')
-  const value1 = list0.getValue(1)
-  console.log('value1:', value1)
+  print('------ printAll() ------')
+  if (isLog) sample.printAll()
+  print('------ getValue(1) ------')
+  const value1 = sample.getValue(1)
+  print('value1:', value1)
 
-  console.log('------ unshift() ------')
-  const unshiftValue = list0.unshift()
-  const f = list0.length
-  console.log('unshiftValue:', unshiftValue)
-  console.log(list0.getArr())
-  console.log('------ shift(9) ------')
-  const g = list0.shift(9)
-  console.log(list0.getArr())
+  print('------ unshift() ------')
+  const unshiftValue = sample.unshift()
+  const f = sample.length
+  print('unshiftValue:', unshiftValue)
+  print(sample.getArr())
+  print('------ shift(9) ------')
+  const g = sample.shift(9)
+  print(sample.getArr())
 
-  console.log('------ inserAt(2,18) ------')
-  const h = list0.inserAt(2, 18)
-  console.log(list0.getArr())
-  console.log('------ inserAt(12,18) ------')
-  const i = list0.inserAt(12, 18)
-  console.log(list0.getArr())
-  console.log('------ removeAt(1) ------')
-  const removedValue1 = list0.removeAt(1)
-  console.log('removedValue:', removedValue1)
-  const j = list0.length
-  console.log('------ removeAt(13) ------')
-  const removedValue2 = list0.removeAt(13)
-  const k = list0.length
-  console.log('removedValue:', removedValue2)
-  console.log(list0.getArr())
+  print('------ inserAt(2,18) ------')
+  const h = sample.inserAt(2, 18)
+  print(sample.getArr())
+  print('------ inserAt(12,18) ------')
+  const i = sample.inserAt(12, 18)
+  print(sample.getArr())
+  print('------ removeAt(1) ------')
+  const removedValue1 = sample.removeAt(1)
+  print('removedValue:', removedValue1)
+  const j = sample.length
+  print('------ removeAt(13) ------')
+  const removedValue2 = sample.removeAt(13)
+  const k = sample.length
+  print('removedValue:', removedValue2)
+  print(sample.getArr())
 
-  console.log('------ pushArr([97, 96]) ------')
-  const l = list0.pushArr([97, 96])
-  console.log(list0.getArr())
+  print('------ pushArr([97, 96]) ------')
+  const l = sample.pushArr([97, 96])
+  print(sample.getArr())
 
-  console.log('------ pushArr([100, 101]) ------')
+  print('------ pushArr([100, 101]) ------')
   list1.pushArr([100, 101])
-  console.log(list1.getArr())
-  console.log('------ pushList(list1) ------')
-  const m = list0.pushList(list1)
-  console.log(list0.getArr())
+  print(list1.getArr())
+  print('------ pushList(list1) ------')
+  const m = sample.pushList(list1)
+  print(sample.getArr())
 
-  console.log('------ getList() ------')
-  console.log(list0.getList())
+  print('------ getList() ------')
+  print(sample.getList())
 
-  console.log(
+  print(
     `size: 0 -> ${x0} -> ${a} -> ${b} -> ${c} -> ${d} -> ${e} -> ${f} -> ${g} -> ${h} -> ${i} -> ${j} -> ${k} -> ${l} -> ${m}`
   )
 
-  return list0.getArr()
+  return sample.getArr()
+}
+
+const runTest = ({ Factory }, bigData = false) => {
+  const sample = new Factory()
+
+  const oneData = toTestOnce({ Factory, sample })
+
+  if (bigData) toTestBigData({ fn: toTestOnce, props: { Factory, sample } })
+
+  return oneData
 }
 
 export { runTest }

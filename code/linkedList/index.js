@@ -6,18 +6,18 @@ import { runTest } from './@test.js'
 
 // warm up :)
 for (let i = 0; i < 9; i++) {
-  runTest(DoublyList)
-  runTest(SinglyList)
+  runTest({ Factory: DoublyList })
+  runTest({ Factory: SinglyList })
 }
 
 console.log('\n===================== SinglyList =====================')
 const t0s = performance.now()
-const singleResult = runTest(SinglyList)
+const singleResult = runTest({ Factory: SinglyList }, true)
 const t0e = performance.now()
 
 console.log('\n===================== DoublyList =====================')
 const t1s = performance.now()
-const doubleResult = runTest(DoublyList)
+const doubleResult = runTest({ Factory: DoublyList }, true)
 const t1e = performance.now()
 
 console.log(`SinglyList: ${Math.round((t0e - t0s) * 1000) / 1000} ms`)
