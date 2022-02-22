@@ -8,55 +8,82 @@
 7. （Ｑ？） still need to find the anwer
 
 
-# 重看過往 ===================================================================================
+# 重看過往 ====================================================================================
 ＊ 整理多層 object --> 淮: 用 BFS
 ＊ old case study: idsToChildren
 ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
 
-# Data Structure ===========================================================================
-; abstract, 
+# Data Structure =============================================================================
+"Abstract Data Type" "dynamic data structure: linked list"
 
+Linear Data Structure
+    Array, Linked List, Stack, Queue, 
+Non-Linear Data Structure
+    Graph, Tree
+
+# Linear Data Structure ======================================================================
     Array
-      ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
-      "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)（Ｑ？）"
-      "JSArray有兩種模式, 一種是快速的, 一種是慢速的, 快速的用的是索引直接定位, 慢速的使用用哈希查找"
+        ; js array 稍後看: https://zhuanlan.zhihu.com/p/26388217
+        "js array 長度超過時, 會自動「加倍」預留空間。 (ex. []1 --> [x,x]2 --> [x,x,x]4 --> [x,x,x,x,x]8)"  <--  "2019 chrome src: 擴容: 1.5x +16  降容: x/2"
+        "JSArray有兩種模式, 一種是快速的, 一種是慢速的, 快速的用的是索引直接定位, 慢速的使用用哈希查找"
 
     Linked List
     "In computer science, a linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next."
-    ; https://www.linkedin.com/pulse/all-you-need-know-linked-lists-fahad-yameen/
-    ; push, pop, shift, unshift, inserAt, removeAt, get, printAll, 
+    ; https://www.linkedin.com/pulse/all-you-need-know-linked-lists-fahad-yameen/ <-- 整理
+
+        未知長度
+        不連續空間
+        list- references  vs  array- index
+
+    差異
+    Big O
+    優缺點
+    使用時機
+
 
 
     List( vs Array):
     優點:
-      1. 整群不用在一起 --> 不用固定長度, 不怕找不到大塊空間, 不用先預留空間不浪費
-      2. 方便增減                  <-- 不用管 index, length
+        1. 整群不用在一起 --> 不用固定長度, 不怕找不到大塊空間, 不用先預留空間不浪費
+        2. 方便增減                  <-- 不用管 index, length
     缺點:
-      1. 單項佔較多空間             <-- 多存了 pointer
-      2. 都要從頭開始造訪
-      3. 不連續記憶體(noncontiguous) --> 大增時間
-      4. reverse traversing 需要再多一個 pointer 空間
+        1. 單項佔較多空間             <-- 多存了 pointer
+        2. 都要從頭開始造訪
+        3. 不連續記憶體(noncontiguous) --> 大增時間
+        4. reverse traversing 需要再多一個 pointer 空間
 
     Singly Linked List --> Doubly Linked List
-      1. O(n)  -->  O(n/2)
-      2. 可 reverse traversing
+        1. O(n)  -->  O(n/2)
+        2. 可 reverse traversing
 
     Circular Linked List
 
 
-  Stack
-    "Last in first out (LIFO)"
-    push、pop
-  Queue 
-    "First in first out (FIFO)"
-    enqueue、dequeue
-  Deque
-    "Double-ended queue"
-    "Stack + Queue"
-    push、inject、pop、eject
-    push_front、push_back、pop_front、pop_back
+    # linked list 問題集 -----------------------------------------
+    1. 另有HEAD指向list本體 vs 直接是list本體
+    2. 另紀錄一些屬性如length vs 不紀錄
+    3. 更多抽象及method引用其他method vs 全部hardcode
 
 
-  Hashtable
+    # Abstract (ADT) ===================================================
+    "https://www.csie.ntu.edu.tw/~b01902011/material.php?type=cpp&&id=3"
+
+    Stack
+        "Last in first out (LIFO)"
+        push   pop
+    
+    Queue 
+        "First in first out (FIFO)"
+        enqueue   dequeue
+    
+    Deque
+        "Double-ended queue"
+        "Stack + Queue"
+        push        inject        pop       eject
+        push_back   push_front   pop_back   pop_front
+
+    Hashtable
+    "Save both time and memory."
+
 
 

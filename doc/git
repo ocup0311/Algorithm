@@ -25,6 +25,9 @@ TYPO: 更正錯字
 FIX: 修改 bug
   ex. '[FIX] permutation2'
 
+CLEAN: 整理 folder、code、note、等等
+  ex. '[CLEAN] folder: note'
+
 MODULE: add、delete、update、等等 module
   ex. '[MODULE] add: link-module-alias'
 
