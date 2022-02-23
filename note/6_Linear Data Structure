@@ -92,11 +92,51 @@ Non-Linear Data Structure
      (push_back   push_front   pop_back   pop_front)
 
     ＊ Hashtable
+    ; https://web.archive.org/web/20171226092838/http://blog.kdchang.cc:80/2016/09/23/javascript-data-structure-algorithm-dictionary-hash-table/
     "Save both time and memory."
 
+        O(1)
+
+        collision (碰撞)
+        ; https://medium.com/@fchern/設計高效能的hash-table-二-9b5dc744219f
+            "When two or more objects happen to be hashed into the same index in hashtable."
+            "Python Dicts resolve collisions using open addressing with probing, while Java HashMaps resolve collisions with chaining."
+            "因為 locality of reference, 所以通常 probing 會快於 chaining"
+
+            # chaining
+            separate chaining   --> 速度慢
+
+            # Probing
+            Linear Probing      --> 處理衝突時, 同樣 hash 的資料會擠在一起
+            Quadratic Probing   --> 較分散、速度也不太慢  -->  目前最流行
+            Rotate Probing      --> 隨機性高、速度較慢
+
+            # 延伸
+            Robin Hood Hashing  --> 解決貧富不均問題 (先到先佔位的問題)
+            Fast mod and scale  --> 取補數再壓縮
+
+        
+        # code practice:
+        "key: your data,  m: table size, []: 高斯記號"
+        Division Method
+            Index = key % m
+        
+        Multiplication Method
+            " A ∈ Q' (無理數)"
+            十進位 Index = [ m * ( key * A % 1 ) ]
+            "r bits m, w bits key, w bits A"
+            二進位 Index = [ key * A % 2^w ] >> ( w - r ) 
+
+            ; 6_Linear Data Structure/hash/Multiplication Method.jpg
+
+
+        ; [x] --> 高斯記號: 取最大且小於 x 的整數。 ex. [3.587] = 3, [5] = 5, [-2] = -2, [-2.76] = -3
 
 
 # linked list 問題集 ==========================================================================
 1. 另有HEAD指向list本體 vs 直接是list本體
 2. 另紀錄一些屬性如length vs 不紀錄
 3. 更多抽象及method引用其他method vs 全部hardcode
+
+
+
