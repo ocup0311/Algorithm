@@ -196,12 +196,12 @@ class DoublyList {
   }
 
   // O(1)
-  shift(value) {
+  unshift(value) {
     return this.inserAt(0, value)
   }
 
   // O(1)
-  unshift() {
+  shift() {
     return this.removeAt(0)
   }
 

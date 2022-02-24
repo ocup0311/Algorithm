@@ -62,13 +62,13 @@ const toTestOnce = ({ Factory, sample = [] }, isLog = true) => {
   const value1 = sample.getValue(1)
   print('value1:', value1)
 
-  print('------ unshift() ------')
-  const unshiftValue = sample.unshift()
+  print('------ shift() ------')
+  const shiftValue = sample.shift()
   const f = sample.length
-  print('unshiftValue:', unshiftValue)
+  print('shiftValue:', shiftValue)
   print(sample.getArr())
-  print('------ shift(9) ------')
-  const g = sample.shift(9)
+  print('------ unshift(9) ------')
+  const g = sample.unshift(9)
   print(sample.getArr())
 
   print('------ inserAt(2,18) ------')
