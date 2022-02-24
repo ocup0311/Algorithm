@@ -95,9 +95,19 @@ Non-Linear Data Structure
     ; https://web.archive.org/web/20171226092838/http://blog.kdchang.cc:80/2016/09/23/javascript-data-structure-algorithm-dictionary-hash-table/
     "Save both time and memory."
 
-        O(1)
+        # Big O
+            結論: O(1 + load_factor)
+            "hashtable size 需跟著預期資料量提升"
+            
+            假設:
+                1. hash function 為 O(1)    <-- 1 是指做一次 hash, hash 越複雜, 則一次越久。
+                2. simple uniform hashing   <-- hash 結果互不關聯
 
-        collision (碰撞)
+            則:
+                1. load factor: α = n/m        <-- n: 資料量, m: hashtable size
+                2. If m = Θ(n), then α = O(1)
+
+        # collision (碰撞)
         ; https://medium.com/@fchern/設計高效能的hash-table-二-9b5dc744219f
             "When two or more objects happen to be hashed into the same index in hashtable."
             "Python Dicts resolve collisions using open addressing with probing, while Java HashMaps resolve collisions with chaining."
@@ -117,20 +127,20 @@ Non-Linear Data Structure
 
         
         # code practice:
-        "key: your data,  m: table size, []: 高斯記號"
-        Division Method
-            Index = key % m
-        
-        Multiplication Method
-            " A ∈ Q' (無理數)"
-            十進位 Index = [ m * ( key * A % 1 ) ]
-            "r bits m, w bits key, w bits A"
-            二進位 Index = [ key * A % 2^w ] >> ( w - r ) 
+            "key: your data,  m: table size, []: 高斯記號"
+            Division Method
+                Index = key % m
+            
+            Multiplication Method
+                " A ∈ Q' (無理數)"
+                十進位 Index = [ m * ( key * A % 1 ) ]
+                "r bits m, w bits key, w bits A"
+                二進位 Index = [ key * A % 2^w ] >> ( w - r ) 
 
-            ; 6_Linear Data Structure/hash/Multiplication Method.jpg
+                ; 6_Linear Data Structure/hash/Multiplication Method.jpg
 
 
-        ; [x] --> 高斯記號: 取最大且小於 x 的整數。 ex. [3.587] = 3, [5] = 5, [-2] = -2, [-2.76] = -3
+            ; [x] --> 高斯記號: 取最大且小於 x 的整數。 ex. [3.587] = 3, [5] = 5, [-2] = -2, [-2.76] = -3
 
 
 # linked list 問題集 ==========================================================================
