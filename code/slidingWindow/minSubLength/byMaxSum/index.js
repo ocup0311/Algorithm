@@ -1,6 +1,6 @@
 // O(n^2)
 
-import U from '$util'
+import * as U from '$util'
 import maxSum from '../../maxSum_minSum/passTerminal/maxSum.js'
 
 function minSubLength({ dataPool, target = 30 }) {

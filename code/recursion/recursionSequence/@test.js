@@ -1,4 +1,4 @@
-import U from '$util'
+import * as U from '$util'
 
 const builtInput = () => U.makeRandomN(9999)
 

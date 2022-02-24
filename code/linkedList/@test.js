@@ -1,4 +1,4 @@
-import U from '$util'
+import * as U from '$util'
 
 const builtArr = (amount, sorted = false) => {
   let output = []
@@ -26,8 +26,8 @@ const toTestBigData = ({ fn, props }) => {
 
 const toTestOnce = ({ Factory, sample = [] }, isLog = true) => {
   // function
-  const print = (info) => {
-    if (isLog) console.log(info)
+  const print = (...info) => {
+    if (isLog) console.log(...info)
     return
   }
 

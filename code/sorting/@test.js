@@ -1,5 +1,5 @@
 import { performance } from 'perf_hooks'
-import U from '$util'
+import * as U from '$util'
 
 const builtInput = (amount, sorted = false) => {
   let output = []

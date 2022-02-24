@@ -1,4 +1,4 @@
-import U from '$util'
+import * as U from '$util'
 import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
 function minSum({ dataPool, size = 3 }) {

@@ -1,7 +1,7 @@
 // O(n)
 // 用 string + 3個 pointer，可不用於 loop 中 slice。
 
-import U from '$util'
+import * as U from '$util'
 
 function uniqueLettersString(input) {
   // pointer

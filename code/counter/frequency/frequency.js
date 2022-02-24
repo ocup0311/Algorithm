@@ -5,7 +5,7 @@
 // O(n)
 
 import C from '$config'
-import U from '$util'
+import * as U from '$util'
 
 // ===================== input =====================
 

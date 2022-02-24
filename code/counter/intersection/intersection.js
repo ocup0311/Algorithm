@@ -3,7 +3,7 @@
 // O(n)
 // 註：個別 array 中，每項不重複，才可用此法。否則需細修 itemList 的計數法。
 
-import U from '$util'
+import * as U from '$util'
 
 // ===================== input =====================
 

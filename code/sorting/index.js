@@ -2,7 +2,7 @@
 // input: [3,7,4,1,9,2]
 // output: [1,2,3,4,7,9]
 
-import U from '$util'
+import * as U from '$util'
 import { builtInput, runTestSet } from './@test.js'
 import * as bubbleSort from './bubbleSort/index.js'
 import * as insertionSort from './insertionSort/index.js'

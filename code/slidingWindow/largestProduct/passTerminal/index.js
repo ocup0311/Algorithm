@@ -1,6 +1,6 @@
 // O(n)
 
-import U from '$util'
+import * as U from '$util'
 import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
 function largestProduct({ dataPool, size = 3 }) {

@@ -1,6 +1,6 @@
 // O(n^2)
 
-import U from '$util'
+import * as U from '$util'
 
 function selectionSort(originalArr) {
   // var

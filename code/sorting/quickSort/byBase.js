@@ -1,6 +1,6 @@
 // O(nlogn)
 
-import U from '$util'
+import * as U from '$util'
 
 // main
 function quickSort(originalArr) {

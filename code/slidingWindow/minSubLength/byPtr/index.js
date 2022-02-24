@@ -1,7 +1,7 @@
 // 每個項目必須是自然數。
 // O(n)
 
-import U from '$util'
+import * as U from '$util'
 
 function minSubLength({ dataPool, target = 30 }) {
   // pointer

@@ -2,7 +2,7 @@
 // best case performance: O(n^2) -> O(n)
 // O(n^2)
 
-import U from '$util'
+import * as U from '$util'
 
 function BubbleSortWBP(originalArr) {
   // var

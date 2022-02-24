@@ -1,4 +1,4 @@
-import U from '$util'
+import * as U from '$util'
 import SinglyList from './SinglyList.js'
 import DoublyList from './DoublyList.js'
 import { performance } from 'perf_hooks'
