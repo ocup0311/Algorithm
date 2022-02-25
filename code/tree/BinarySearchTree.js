@@ -1,4 +1,6 @@
+import * as U from '$util'
 import Node from './Node.js'
+import traverseMethod from './traverseMethod.js'
 
 // function
 const makeReturn = (Node) => Node.item
@@ -30,6 +32,12 @@ class BinarySearchTree {
     else previousNode.right = newNode
 
     return console.log(`${key} Node inserted.`)
+  }
+
+  printAll(method = 'bft') {
+    const callBack = (currentNode) => console.log(currentNode.item)
+
+    U.getObjValue(traverseMethod, method)(this.root, callBack)
   }
 }
 

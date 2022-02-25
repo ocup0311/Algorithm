@@ -9,3 +9,12 @@ bst.insert({ key: 18, value: 123 })
 bst.insert({ key: 9, value: 123 })
 
 console.log(bst)
+
+console.log('------ bft ------')
+bst.printAll('bft')
+console.log('------ preOrder ------')
+bst.printAll('preOrder')
+console.log('------ inOrder ------')
+bst.printAll('inOrder')
+console.log('------ postOrder ------')
+bst.printAll('postOrder')
