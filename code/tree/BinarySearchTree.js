@@ -1,13 +1,13 @@
+// 抽象化 findNodeByCondition，是好不好？ (commit 942258b)
 import * as U from '$util'
 import Node from './Node.js'
 import traverseMethod from './traverseMethod.js'
 
 // function
-const makeReturn = ({ node, message = 'not a node' }) => {
-  return node ? node.item : console.log(message) ?? null
-}
+const makeReturn = ({ node, message = 'not a node' }) =>
+  node?.item || (console.log(message) ?? null)
 
-const getKey = (node) => node.key
+const getKey = (node) => node?.key
 
 // main
 class BinarySearchTree {
@@ -15,35 +15,20 @@ class BinarySearchTree {
     this.root = null
   }
 
-  findNodeByCondition({ key, condition }) {
+  insert(item) {
+    const newNode = new Node(item)
+    const key = getKey(newNode)
     let currentNode = this.root
     let resultNode = null
     let resultKey = null
 
-    while (!condition({ currentNode, resultKey })) {
-      if (currentNode === null) {
-        resultNode = null
-        break
-      }
-
-      resultKey = getKey(currentNode)
+    while (currentNode !== null) {
       resultNode = currentNode
+      resultKey = getKey(currentNode)
 
       if (key < resultKey) currentNode = currentNode.left
       else currentNode = currentNode.right
     }
-
-    return { resultNode, resultKey }
-  }
-
-  insert(item) {
-    const newNode = new Node(item)
-    const key = getKey(newNode)
-
-    const { resultNode, resultKey } = this.findNodeByCondition({
-      key,
-      condition: ({ currentNode }) => currentNode === null,
-    })
 
     if (this.root === null) this.root = newNode
     else if (key < resultKey) resultNode.left = newNode
@@ -53,13 +38,18 @@ class BinarySearchTree {
   }
 
   search(key) {
-    const { resultNode } = this.findNodeByCondition({
-      key,
-      condition: ({ resultKey }) => resultKey === key,
-    })
+    let currentNode = this.root
+    let currentKey = getKey(currentNode)
+
+    while (currentNode !== null && key !== currentKey) {
+      if (key < currentKey) currentNode = currentNode.left
+      else currentNode = currentNode.right
+
+      currentKey = getKey(currentNode)
+    }
 
     return makeReturn({
-      node: resultNode,
+      node: currentNode,
       message: `There's no #${key} node in the tree.`,
     })
   }

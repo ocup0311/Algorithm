@@ -21,6 +21,7 @@ const makeItem = (item) => {
 // main
 class Node {
   constructor(item) {
+    // store one more key is better or not?
     this.key = makeKey(item)
     this.item = makeItem(item)
     this.left = null
