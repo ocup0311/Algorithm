@@ -3,7 +3,9 @@ import Node from './Node.js'
 import traverseMethod from './traverseMethod.js'
 
 // function
-const makeReturn = (Node) => Node.item
+const makeReturn = (Node, message = 'not a node') => {
+  return Node ? Node.item : console.log(message) ?? null
+}
 const getKey = (Node) => Node.key
 
 // main
@@ -31,7 +33,28 @@ class BinarySearchTree {
     else if (key < currentKey) previousNode.left = newNode
     else previousNode.right = newNode
 
-    return console.log(`${key} Node inserted.`)
+    return console.log(`#${key} Node inserted.`)
+  }
+
+  search(key) {
+    let currentNode = this.root
+    let previousNode = null
+    let currentKey = null
+
+    while (key !== currentKey) {
+      if (currentNode === null) {
+        previousNode = null
+        break
+      }
+
+      previousNode = currentNode
+      currentKey = getKey(currentNode)
+
+      if (key < currentKey) currentNode = currentNode.left
+      else currentNode = currentNode.right
+    }
+
+    return makeReturn(previousNode, `There's no #${key} node in the tree.`)
   }
 
   printAll(method = 'bft') {

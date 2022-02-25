@@ -1,5 +1,7 @@
 import Queue from '../linkedList/Queue.js'
 
+// 雖然會每次都重跑一次，但我認為每次都該拿到當下的結果，所以不紀錄 Traversal 的結果。也可做成 optional。
+
 // Breadth First Tree Traversal
 const bft = (node, callBack) => {
   // var
