@@ -15,6 +15,28 @@ class BinarySearchTree {
     this.root = null
   }
 
+  traverseAll(method = 'bft', callBack) {
+    U.getObjValue(traverseMethod, method)(this.root, callBack)
+  }
+
+  findNodeFrom(node, key) {
+    let currentNode = node
+    let currentKey = getKey(currentNode)
+
+    while (currentNode !== null && key !== currentKey) {
+      if (key < currentKey) currentNode = currentNode.left
+      else currentNode = currentNode.right
+
+      currentKey = getKey(currentNode)
+    }
+
+    return currentNode
+  }
+
+  findNode(key) {
+    return this.findNodeFrom(this.root, key)
+  }
+
   insert(item) {
     const newNode = new Node(item)
     const key = getKey(newNode)
@@ -34,30 +56,48 @@ class BinarySearchTree {
     else if (key < resultKey) resultNode.left = newNode
     else resultNode.right = newNode
 
-    return console.log(`#${key} Node inserted.`)
+    console.log(`#${key} Node inserted.`)
+    return newNode
+  }
+
+  searchFrom(node, key) {
+    return makeReturn({
+      node: this.findNodeFrom(node, key),
+      message: `There's no #${key} node in the tree from "${getKey(node)}".`,
+    })
   }
 
   search(key) {
-    let currentNode = this.root
-    let currentKey = getKey(currentNode)
-
-    while (currentNode !== null && key !== currentKey) {
-      if (key < currentKey) currentNode = currentNode.left
-      else currentNode = currentNode.right
-
-      currentKey = getKey(currentNode)
-    }
-
     return makeReturn({
-      node: currentNode,
+      node: this.findNode(key),
       message: `There's no #${key} node in the tree.`,
     })
   }
 
-  printAll(method = 'bft') {
+  getListArrBy(method) {
+    const list = []
+
+    const callBack = (currentNode) => list.push(currentNode)
+
+    this.traverseAll(method, callBack)
+
+    return list
+  }
+
+  getItemArrBy(method) {
+    const arr = []
+
+    const callBack = (currentNode) => arr.push(currentNode.item)
+
+    this.traverseAll(method, callBack)
+
+    return arr
+  }
+
+  printAllBy(method) {
     const callBack = (currentNode) => console.log(currentNode.item)
 
-    U.getObjValue(traverseMethod, method)(this.root, callBack)
+    this.traverseAll(method, callBack)
   }
 }
 
