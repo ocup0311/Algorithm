@@ -13,41 +13,24 @@ class BinarySearchTree {
   insert(item) {
     const newNode = new Node(item)
     const key = getKey(newNode)
-    if (this.root === null) this.root = newNode
-    else {
-      let currentNode = this.root
-      let previousNode = null
-      let x = 0
+    let currentNode = this.root
+    let previousNode = null
+    let currentKey = null
 
-      while (currentNode !== null) {
-        previousNode = currentNode
-        const currentKey = getKey(currentNode)
+    while (currentNode !== null) {
+      previousNode = currentNode
+      currentKey = getKey(currentNode)
 
-        if (key < currentKey) {
-          currentNode = currentNode.left
-          x = 0
-        } else {
-          currentNode = currentNode.right
-          x = 1
-        }
-      }
-
-      if (x) previousNode.right = newNode
-      else previousNode.left = newNode
+      if (key < currentKey) currentNode = currentNode.left
+      else currentNode = currentNode.right
     }
+
+    if (this.root === null) this.root = newNode
+    else if (key < currentKey) previousNode.left = newNode
+    else previousNode.right = newNode
 
     return console.log(`${key} Node inserted.`)
   }
 }
 
 export default BinarySearchTree
-
-const bst = new BinarySearchTree()
-console.log(bst)
-bst.insert({ key: 8, value: 123 })
-bst.insert({ key: 765, value: 456 })
-bst.insert({ key: 5, value: 65 })
-bst.insert({ key: 18, value: 123 })
-bst.insert({ key: 9, value: 123 })
-
-console.log(bst)
