@@ -1,6 +1,7 @@
 # Sorting ==================================================================================
 ; https://blog.kennycoder.io/2020/04/16/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98-Sort-%E6%8E%92%E5%BA%8F-%E4%BB%8B%E7%B4%B9/
 ; http://notepad.yehyeh.net/Content/Algorithm/Sort/Sort.php
+; "V8 js.sort: Timsort = Insertion +  Merge"    <-- https://v8.dev/blog/array-sort
 
     1. Internal vs External
         是否資料量小, 可一次全部載入記憶體中做排序? 無需借助外部儲存體, 再分段讀入做排序?
@@ -285,6 +286,7 @@ O(n)
             3. 依序參照 1st, 2nd, ..., bth 位數, 對 input 做 stable sort
 
 # 整理表格 ===================================================================================
+; https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_sorts  <-- see more
 
         Algorithm       Best       Worst       Avg           空間        stable       
         -------------------------------------------------------------------------

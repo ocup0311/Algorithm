@@ -15,6 +15,13 @@
 
 
 
+# Graph ======================================================================================
+
+    Abstract
+    有限的 vertices
+    方向性有無
+    vertices (nodes, points)
+    edges (links, lines)
 
 
 

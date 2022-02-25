@@ -7,3 +7,24 @@
     Complete Binary Tree: "只有最右邊最底部為空"
     Full Binary Tree(FBT): "所有的葉子有一樣的 depth"
     Max Heap: "Complete + 所有 subtree, root 必為最大值 -(左右沒差)"
+
+
+    no loop graph
+    one and only one root
+    DOM, File System in OS, AI
+
+    PreOrder 
+    InOrder 
+    PostOrder
+
+    Breadth First Tree Traversal 
+    Depth First Tree Traversal 
+    
+    Binary Search Tree (BST)
+        最多兩個 children
+        left < root < right
+
+        # e.g. 需求: 未知數量隨意新增資料後查詢
+        ; array       --> 不斷擴容, O(n)
+        ; linked list --> O(n)
+        ; hashtable   --> O(1), 但未知數量無法確保達到 O(1)
