@@ -17,49 +17,49 @@ class BinarySearchTree {
 
   findNodeByCondition({ key, condition }) {
     let currentNode = this.root
-    let previousNode = null
-    let currentKey = null
+    let resultNode = null
+    let resultKey = null
 
-    while (!condition({ currentNode, currentKey })) {
+    while (!condition({ currentNode, resultKey })) {
       if (currentNode === null) {
-        previousNode = null
+        resultNode = null
         break
       }
 
-      currentKey = getKey(currentNode)
-      previousNode = currentNode
+      resultKey = getKey(currentNode)
+      resultNode = currentNode
 
-      if (key < currentKey) currentNode = currentNode.left
+      if (key < resultKey) currentNode = currentNode.left
       else currentNode = currentNode.right
     }
 
-    return { previousNode, currentKey }
+    return { resultNode, resultKey }
   }
 
   insert(item) {
     const newNode = new Node(item)
     const key = getKey(newNode)
 
-    const { previousNode, currentKey } = this.findNodeByCondition({
+    const { resultNode, resultKey } = this.findNodeByCondition({
       key,
       condition: ({ currentNode }) => currentNode === null,
     })
 
     if (this.root === null) this.root = newNode
-    else if (key < currentKey) previousNode.left = newNode
-    else previousNode.right = newNode
+    else if (key < resultKey) resultNode.left = newNode
+    else resultNode.right = newNode
 
     return console.log(`#${key} Node inserted.`)
   }
 
   search(key) {
-    const { previousNode } = this.findNodeByCondition({
+    const { resultNode } = this.findNodeByCondition({
       key,
-      condition: ({ currentKey }) => currentKey === key,
+      condition: ({ resultKey }) => resultKey === key,
     })
 
     return makeReturn({
-      node: previousNode,
+      node: resultNode,
       message: `There's no #${key} node in the tree.`,
     })
   }
