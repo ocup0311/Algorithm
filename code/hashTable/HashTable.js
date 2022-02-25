@@ -5,7 +5,7 @@ class HashTable {
   constructor({ size, hash = 'division' }) {
     this.size = size
     this.table = new Array(size)
-    this.hash = U.toCheckItem(hashMethod, hash)
+    this.hash = U.getObjValue(hashMethod, hash)
 
     for (let i = 0; i < this.table.length; i++) {
       this.table[i] = []
