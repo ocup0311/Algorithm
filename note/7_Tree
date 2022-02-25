@@ -1,30 +1,74 @@
 # tree =====================================================================================
 "tree is acyclic graph"
 
-    名詞: node, edge(箭頭), root, subtree, children, parent node, leaf
-
-    Binary Tree: "所有 node 最多兩個 children"
-    Complete Binary Tree: "只有最右邊最底部為空"
-    Full Binary Tree(FBT): "所有的葉子有一樣的 depth"
-    Max Heap: "Complete + 所有 subtree, root 必為最大值 -(左右沒差)"
-
-
+    # 定義:
     no loop graph
     one and only one root
-    DOM, File System in OS, AI
 
-    PreOrder 
-    InOrder 
-    PostOrder
+    # 應用例子:
+    DOM, File System in OS, AI ...
 
-    Breadth First Tree Traversal 
-    Depth First Tree Traversal 
+    # 名詞:   
+
+    node: "節點"
+
+    edge: "相連的線"
+
+    root: "最上一個 node"
+
+    parent: "向上相連的 node"
+
+    children: "向下相連的 node"
+
+    leaf: "沒有 child 的 node"
+
+    layer: "root = 1"
+
+    subtree: "每個 node 與他的所有 children 形成一個 tree, 都是他的 root 的 subtree"
+
+    Binary Tree: "所有 node 最多兩個 children"
     
-    Binary Search Tree (BST)
+    Complete Binary Tree: "只有最右邊最底部為空"
+    
+    Full Binary Tree(FBT): "所有的葉子有一樣的 depth"
+    
+    Max Heap Tree: "Complete + 所有 subtree, root 必為最大值 -(左右沒差)"
+
+# Binary Search Tree (BST) ===================================================================
+
+範例:
+              A                 <-- layer = 1 -->                56
+          /        \                                         /        \            
+      B               C         <-- layer = 2 -->         32             78
+    /   \           /   \                               /   \           /   \       
+  D       E       F       G     <-- layer = 3 -->     3      52       67     87
+ / \     / \     / \     / \                         / \     / \     / \     / \
+H   I   J   K   L   M   N   O   <-- layer = 4 -->   1  5    47 55   53 72   79  99
+
+    # 定義:
         最多兩個 children
         left < root < right
 
-        # e.g. 需求: 未知數量隨意新增資料後查詢
-        ; array       --> 不斷擴容, O(n)
-        ; linked list --> O(n)
-        ; hashtable   --> O(1), 但未知數量無法確保達到 O(1)
+    # e.g. 需求: 未知數量隨意新增資料後查詢
+        array       --> 不斷擴容, O(n)
+        linked list --> O(n)
+        hashtable   --> O(1), 但未知數量無法確保達到 O(1)
+
+    # Traversal
+        Breadth First Tree Traversal (BFT) (廣度優先)
+            從最上面開始一層一層往下, 由左往右
+            ; [56,32,78,3,52,67,87,1,5,47,55,53,72,79,99]
+
+        Depth First Tree Traversal   (DFT) (深度優先)
+            分三種, 由左往右。 名稱對應 root 位置。
+            PreOrder "root -> left -> right"
+            ; [56,32,3,1,5,52,47,55,78,67,53,72,87,79,99]
+            InOrder "left -> root -> right"
+            ; [1,3,5,32,47,52,55,56,53,67,72,78,79,87,99]
+            PostOrder "left -> right -> root"
+            ; [1,5,3,47,55,52,32,53,72,67,79,99,87,78,56]
+
+    # Big O
+        worst case performance: O(n)    <-- unbalanced
+        best case performance: O(1)
+        average performance: O(logn)    <-- balanced
