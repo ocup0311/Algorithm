@@ -3,10 +3,11 @@ import Node from './Node.js'
 import traverseMethod from './traverseMethod.js'
 
 // function
-const makeReturn = (Node, message = 'not a node') => {
-  return Node ? Node.item : console.log(message) ?? null
+const makeReturn = ({ node, message = 'not a node' }) => {
+  return node ? node.item : console.log(message) ?? null
 }
-const getKey = (Node) => Node.key
+
+const getKey = (node) => node.key
 
 // main
 class BinarySearchTree {
@@ -14,20 +15,35 @@ class BinarySearchTree {
     this.root = null
   }
 
-  insert(item) {
-    const newNode = new Node(item)
-    const key = getKey(newNode)
+  findNodeByCondition({ key, condition }) {
     let currentNode = this.root
     let previousNode = null
     let currentKey = null
 
-    while (currentNode !== null) {
-      previousNode = currentNode
+    while (!condition({ currentNode, currentKey })) {
+      if (currentNode === null) {
+        previousNode = null
+        break
+      }
+
       currentKey = getKey(currentNode)
+      previousNode = currentNode
 
       if (key < currentKey) currentNode = currentNode.left
       else currentNode = currentNode.right
     }
+
+    return { previousNode, currentKey }
+  }
+
+  insert(item) {
+    const newNode = new Node(item)
+    const key = getKey(newNode)
+
+    const { previousNode, currentKey } = this.findNodeByCondition({
+      key,
+      condition: ({ currentNode }) => currentNode === null,
+    })
 
     if (this.root === null) this.root = newNode
     else if (key < currentKey) previousNode.left = newNode
@@ -37,24 +53,15 @@ class BinarySearchTree {
   }
 
   search(key) {
-    let currentNode = this.root
-    let previousNode = null
-    let currentKey = null
+    const { previousNode } = this.findNodeByCondition({
+      key,
+      condition: ({ currentKey }) => currentKey === key,
+    })
 
-    while (key !== currentKey) {
-      if (currentNode === null) {
-        previousNode = null
-        break
-      }
-
-      previousNode = currentNode
-      currentKey = getKey(currentNode)
-
-      if (key < currentKey) currentNode = currentNode.left
-      else currentNode = currentNode.right
-    }
-
-    return makeReturn(previousNode, `There's no #${key} node in the tree.`)
+    return makeReturn({
+      node: previousNode,
+      message: `There's no #${key} node in the tree.`,
+    })
   }
 
   printAll(method = 'bft') {
