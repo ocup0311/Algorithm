@@ -3,7 +3,7 @@
 
 const store = { 0: 0, 1: 1 }
 
-function fib(nth) {
+export function fib(nth) {
   if (nth < 0) return null
   if (store[nth] !== undefined) return store[nth]
 
@@ -12,5 +12,3 @@ function fib(nth) {
 
   return value
 }
-
-export { fib }

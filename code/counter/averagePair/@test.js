@@ -1,6 +1,6 @@
 import * as U from '$util'
 
-const builtInput = (amount, guaranteed = false) => {
+export const builtInput = (amount, guaranteed = false) => {
   // var
   const _max = amount * 2
   const dataPool = []
@@ -34,7 +34,7 @@ const builtInput = (amount, guaranteed = false) => {
   return { dataPool, target }
 }
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`Data Pool: ${input.dataPool}`)
@@ -47,5 +47,3 @@ const runTest = (input, fn) => {
   }
   console.log()
 }
-
-export { builtInput, runTest }

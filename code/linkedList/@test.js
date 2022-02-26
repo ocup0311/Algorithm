@@ -108,7 +108,7 @@ const toTestOnce = ({ Factory, sample = [] }, isLog = true) => {
   return sample.getArr()
 }
 
-const runTest = ({ Factory }, bigData = false) => {
+export const runTest = ({ Factory }, bigData = false) => {
   const sample = new Factory()
 
   const oneData = toTestOnce({ Factory, sample })
@@ -117,5 +117,3 @@ const runTest = ({ Factory }, bigData = false) => {
 
   return oneData
 }
-
-export { runTest }

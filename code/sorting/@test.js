@@ -1,7 +1,7 @@
 import { performance } from 'perf_hooks'
 import * as U from '$util'
 
-const builtInput = (amount, sorted = false) => {
+export const builtInput = (amount, sorted = false) => {
   let output = []
 
   for (let i = 0; i < amount; i++) {
@@ -15,7 +15,7 @@ const builtInput = (amount, sorted = false) => {
   return output
 }
 
-const runTest = (input, fn, isLog = true) => {
+export const runTest = (input, fn, isLog = true) => {
   const result = fn(input)
 
   if (isLog) {
@@ -29,7 +29,7 @@ const runTest = (input, fn, isLog = true) => {
   return result
 }
 
-const runTestSet = ({ fn, inputSet }, isLog) => {
+export const runTestSet = ({ fn, inputSet }, isLog) => {
   if (isLog) console.log(`====== ${fn.name} ======`)
   const ts = performance.now()
   const result = inputSet.map((i) => runTest(i, fn, isLog))
@@ -40,5 +40,3 @@ const runTestSet = ({ fn, inputSet }, isLog) => {
   const arr = result[0].sortedArr
   return { steps, time, arr }
 }
-
-export { builtInput, runTest, runTestSet }

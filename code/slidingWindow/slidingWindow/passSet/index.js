@@ -2,7 +2,7 @@
 //（以回傳 whole window 方式）
 // O(n * size)
 
-function slidingWindow({ dataPool, size = 3 }, callBack) {
+export function slidingWindow({ dataPool, size = 3 }, callBack) {
   // exception
   if (size > dataPool.length) return null
 
@@ -14,5 +14,3 @@ function slidingWindow({ dataPool, size = 3 }, callBack) {
 
   return
 }
-
-export { slidingWindow }

@@ -1,12 +1,10 @@
 import C from '$config'
 import * as U from '$util'
 
-const builtInput = () => U.makeRandomN(1000)
+export const builtInput = () => U.makeRandomN(1000)
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`The ${input} item is ${result}.`)
 }
-
-export { builtInput, runTest }

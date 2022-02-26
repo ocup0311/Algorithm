@@ -1,6 +1,6 @@
 import * as U from '$util'
 
-const builtInput = (amount) => {
+export const builtInput = (amount) => {
   let output = []
 
   for (let i = 0; i < amount; ) {
@@ -17,11 +17,9 @@ const builtInput = (amount) => {
   return output
 }
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`input: ${JSON.stringify(input)}`)
   console.log(`output: ${JSON.stringify(result)}`)
 }
-
-export { builtInput, runTest }

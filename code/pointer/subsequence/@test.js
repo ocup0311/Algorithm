@@ -1,7 +1,7 @@
 import C from '$config'
 import * as U from '$util'
 
-const builtInput = ({ amountS, amountO }, guaranteed = false) => {
+export const builtInput = ({ amountS, amountO }, guaranteed = false) => {
   // function
   const makeRandomLetter = () =>
     U.makeRandomLetter(C.a_z.concat([' ', ' ', ' ']))
@@ -39,7 +39,7 @@ const builtInput = ({ amountS, amountO }, guaranteed = false) => {
   return { subsequenceStr, originalStr }
 }
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   if (result) {
@@ -52,5 +52,3 @@ const runTest = (input, fn) => {
     )
   }
 }
-
-export { builtInput, runTest }

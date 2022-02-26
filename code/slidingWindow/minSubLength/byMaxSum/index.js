@@ -1,9 +1,8 @@
 // O(n^2)
 
-import * as U from '$util'
 import maxSum from '../../maxSum_minSum/passTerminal/maxSum.js'
 
-function minSubLength({ dataPool, target = 30 }) {
+export function minSubLength({ dataPool, target = 30 }) {
   // var
   let minLength = 0
   let sum = -Infinity
@@ -22,5 +21,3 @@ function minSubLength({ dataPool, target = 30 }) {
 
   return minLength
 }
-
-export { minSubLength }

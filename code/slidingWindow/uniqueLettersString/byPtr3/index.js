@@ -3,7 +3,7 @@
 
 import * as U from '$util'
 
-function uniqueLettersString(input) {
+export function uniqueLettersString(input) {
   // pointer
   let [start, start_T, end_T] = [0, 0, 0]
 
@@ -38,5 +38,3 @@ function uniqueLettersString(input) {
 
   return subStr.slice(start)
 }
-
-export { uniqueLettersString }

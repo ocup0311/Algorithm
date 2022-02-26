@@ -4,7 +4,7 @@
 
 import * as U from '$util'
 
-function uniqueLettersString(input) {
+export function uniqueLettersString(input) {
   // pointer
   let ptr = 0
 
@@ -36,5 +36,3 @@ function uniqueLettersString(input) {
 
   return subStr
 }
-
-export { uniqueLettersString }

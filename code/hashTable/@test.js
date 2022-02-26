@@ -1,6 +1,6 @@
 import * as U from '$util'
 
-const runTest = ({ Factory, hash }, isLog = true) => {
+export const runTest = ({ Factory, hash }, isLog = true) => {
   // function
   const print = (...info) => {
     if (isLog) console.log(...info)
@@ -44,5 +44,3 @@ const runTest = ({ Factory, hash }, isLog = true) => {
   }
   sample.printAll()
 }
-
-export { runTest }

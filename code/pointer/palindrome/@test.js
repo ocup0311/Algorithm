@@ -1,7 +1,7 @@
 import C from '$config'
 import * as U from '$util'
 
-const builtInput = (amount, guaranteed = false) => {
+export const builtInput = (amount, guaranteed = false) => {
   // var
   let output = ''
 
@@ -29,7 +29,7 @@ const builtInput = (amount, guaranteed = false) => {
   return output
 }
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   if (result) {
@@ -38,5 +38,3 @@ const runTest = (input, fn) => {
     console.log(`${input} is NOT a palindrome.`)
   }
 }
-
-export { builtInput, runTest }

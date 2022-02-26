@@ -1,9 +1,7 @@
 // 每個項目必須是自然數。
 // O(n)
 
-import * as U from '$util'
-
-function minSubLength({ dataPool, target = 30 }) {
+export function minSubLength({ dataPool, target = 30 }) {
   // pointer
   let [start, end] = [0, 1]
 
@@ -30,5 +28,3 @@ function minSubLength({ dataPool, target = 30 }) {
 
   return minLength === Infinity ? null : minLength
 }
-
-export { minSubLength }

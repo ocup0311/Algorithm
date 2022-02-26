@@ -1,7 +1,7 @@
 import C from '$config'
 import * as U from '$util'
 
-const builtInput = (amount) => {
+export const builtInput = (amount) => {
   // var
   let output = ''
 
@@ -17,7 +17,7 @@ const builtInput = (amount) => {
   return output
 }
 
-const runTest = (input, fn) => {
+export const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`String: ${input}`)
@@ -25,5 +25,3 @@ const runTest = (input, fn) => {
 
   console.log()
 }
-
-export { builtInput, runTest }
