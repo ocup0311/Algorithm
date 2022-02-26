@@ -1,6 +1,6 @@
 // use Max Heap
 import * as U from '$util'
-import { Node_arr, makeReturn, getKey } from './Node.js'
+import { Node_arr, buildReturn, getKey } from './Node.js'
 
 class Node extends Node_arr {
   constructor(item) {
@@ -9,10 +9,10 @@ class Node extends Node_arr {
 }
 
 // function
-const maxHeapify = (arr, ptr) => {
+const maxHeapDown = (arr, index_parent) => {
   // var
-  let index_largest = ptr
-  const index_child1 = (ptr + 1) * 2
+  let index_largest = index_parent
+  const index_child1 = (index_parent + 1) * 2
   const index_child2 = index_child1 - 1
 
   // function
@@ -23,12 +23,19 @@ const maxHeapify = (arr, ptr) => {
   if (isBigger(index_child1)) index_largest = index_child1
   if (isBigger(index_child2)) index_largest = index_child2
 
-  if (index_largest !== ptr) {
-    U.toSwapArr(arr, ptr, index_largest)
-    maxHeapify(index_largest)
+  if (index_largest !== index_parent) {
+    U.toSwapArr(arr, index_parent, index_largest)
+    maxHeapDown(arr, index_largest)
     return true
   }
   return false
+}
+
+const maxHeapUp = (arr, index_child) => {
+  const index_parent = Math.ceil(index_child / 2) - 1
+  const isSwap = maxHeapDown(arr, index_parent)
+
+  if (isSwap) maxHeapUp(arr, index_parent)
 }
 
 // main
@@ -37,36 +44,39 @@ class PriorityQueue {
     this.queue = []
   }
 
+  isEmpty() {
+    return this.queue.length === 0
+  }
+
   enqueue(item) {
     const newNode = new Node(item)
     const key = getKey(newNode)
 
+    // run
     this.queue.push(newNode)
-
-    // function
-    const run = (ptr) => {
-      const i = Math.ceil(ptr / 2) - 1
-      const x = maxHeapify(this.queue, i)
-
-      if (x) run(i)
-    }
-
-    run(this.queue.length - 1)
+    maxHeapUp(this.queue, this.queue.length - 1)
 
     console.log(`#${key} Node enqueued.`)
-    return newNode
+    return this.queue.length
   }
 
   dequeue() {
+    // exception
+    if (this.isEmpty()) return buildReturn({ message: 'This is empty.' })
+
     const deNode = this.queue[0]
     const deKey = getKey(deNode)
     const lastNode = this.queue.pop()
 
-    this.queue[0] = lastNode
-    maxHeapify(this.queue, 0)
+    if (!this.isEmpty()) {
+      this.queue[0] = lastNode
+      maxHeapDown(this.queue, 0)
+    }
 
-    console.log(`#${deKey} Node dequeued.`)
-    return deNode
+    return buildReturn({
+      node: deNode,
+      message: `#${deKey} Node dequeued.`,
+    })
   }
 }
 

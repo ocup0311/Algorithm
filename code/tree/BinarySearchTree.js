@@ -1,5 +1,5 @@
 // 抽象化 findNodeByCondition，是好不好？ (commit 942258b)
-import { Node_list as Node, makeReturn, getKey } from './Node.js'
+import { Node_list as Node, buildReturn, getKey } from './Node.js'
 import BinaryTree from './BinaryTree.js'
 
 // main
@@ -46,14 +46,14 @@ class BinarySearchTree extends BinaryTree {
   }
 
   searchFrom(node, key) {
-    return makeReturn({
+    return buildReturn({
       node: this.findNodeFrom(node, key),
       message: `There's no #${key} node in the tree from "${getKey(node)}".`,
     })
   }
 
   search(key) {
-    return makeReturn({
+    return buildReturn({
       node: this.findNode(key),
       message: `There's no #${key} node in the tree.`,
     })

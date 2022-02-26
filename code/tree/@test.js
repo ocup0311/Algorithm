@@ -80,5 +80,13 @@ export const runTestPQ = () => {
   console.log(pq.dequeue())
   console.log('------ dequeue ------')
   console.log(pq.dequeue())
+  console.log('------ dequeue ------')
+  console.log(pq.dequeue())
+  console.log('------ dequeue ------')
+  console.log(pq.dequeue())
+  console.log('------ dequeue ------')
+  console.log(pq.dequeue())
+  console.log('------ dequeue ------')
+  console.log(pq.dequeue())
   console.log(pq)
 }

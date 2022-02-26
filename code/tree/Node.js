@@ -37,8 +37,16 @@ export class Node_arr {
 }
 
 // util
-export const makeReturn = ({ node, message = 'not a node' }) => {
-  return node?.item || (console.log(message) ?? null)
+export const buildReturn = ({ node, message = 'not a node' }) => {
+  const fn = (result) => {
+    result || console.log(message)
+    return result ?? null
+  }
+
+  return fn(node?.item)
+
+  // if (type === 'node') return fn(node)
+  // if (type === 'item') return fn(node?.item)
 }
 
 export const getKey = (node) => node?.key
