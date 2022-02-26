@@ -9,11 +9,18 @@ class Node extends Node_arr {
 }
 
 // function
+const getParent = (index_child) => Math.ceil(index_child / 2) - 1
+
+const getChildren = (index_parent) => [
+  index_parent * 2 + 1,
+  index_parent * 2 + 2,
+]
+
 const maxHeapDown = (arr, index_parent) => {
   // var
+  const [index_child1, index_child2] = getChildren(index_parent)
   let index_largest = index_parent
-  const index_child1 = (index_parent + 1) * 2
-  const index_child2 = index_child1 - 1
+  let isSwap = false
 
   // function
   const isBigger = (index) =>
@@ -26,16 +33,20 @@ const maxHeapDown = (arr, index_parent) => {
   if (index_largest !== index_parent) {
     U.toSwapArr(arr, index_parent, index_largest)
     maxHeapDown(arr, index_largest)
-    return true
+
+    isSwap = true
   }
-  return false
+
+  return isSwap
 }
 
 const maxHeapUp = (arr, index_child) => {
-  const index_parent = Math.ceil(index_child / 2) - 1
+  const index_parent = getParent(index_child)
   const isSwap = maxHeapDown(arr, index_parent)
 
   if (isSwap) maxHeapUp(arr, index_parent)
+
+  return
 }
 
 // main
