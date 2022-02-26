@@ -24,7 +24,7 @@
 
     layer: "root = 1"
 
-    subtree: "每個 node 與他的所有 children 形成一個 tree, 都是他的 root 的 subtree"
+    subtree: "每個 node 與他的所有 children 形成一個 tree, 都是他所屬那棵樹的 subtree"
 
     Binary Tree: "所有 node 最多兩個 children"
     
@@ -56,6 +56,7 @@ H   I   J   K   L   M   N   O   <-- layer = 4 -->   1  5    47 55   53 72   79  
 
     # Traversal
         Breadth First Tree Traversal (BFT) (廣度優先)
+        "Level Order Tree Traversal"
             從最上面開始一層一層往下, 由左往右
             ; [56,32,78,3,52,67,87,1,5,47,55,53,72,79,99]
 
