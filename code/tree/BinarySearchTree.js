@@ -1,24 +1,9 @@
 // 抽象化 findNodeByCondition，是好不好？ (commit 942258b)
-import * as U from '$util'
-import Node from './Node.js'
-import traverseMethod from './traverseMethod.js'
-
-// function
-const makeReturn = ({ node, message = 'not a node' }) =>
-  node?.item || (console.log(message) ?? null)
-
-const getKey = (node) => node?.key
+import { Node_list as Node, makeReturn, getKey } from './Node.js'
+import BinaryTree from './BinaryTree.js'
 
 // main
-class BinarySearchTree {
-  constructor() {
-    this.root = null
-  }
-
-  traverseAll(method = 'bft', callBack) {
-    U.getObjValue(traverseMethod, method)(this.root, callBack)
-  }
-
+class BinarySearchTree extends BinaryTree {
   findNodeFrom(node, key) {
     let currentNode = node
     let currentKey = getKey(currentNode)
@@ -72,32 +57,6 @@ class BinarySearchTree {
       node: this.findNode(key),
       message: `There's no #${key} node in the tree.`,
     })
-  }
-
-  getListArrBy(method) {
-    const list = []
-
-    const callBack = (currentNode) => list.push(currentNode)
-
-    this.traverseAll(method, callBack)
-
-    return list
-  }
-
-  getItemArrBy(method) {
-    const arr = []
-
-    const callBack = (currentNode) => arr.push(currentNode.item)
-
-    this.traverseAll(method, callBack)
-
-    return arr
-  }
-
-  printAllBy(method) {
-    const callBack = (currentNode) => console.log(currentNode.item)
-
-    this.traverseAll(method, callBack)
   }
 }
 
