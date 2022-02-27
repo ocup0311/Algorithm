@@ -9,3 +9,8 @@ export const getObjValue = (object, property) => {
     `Please use any in [ ${Object.keys(object)} ] instead of "${property}"`
   )
 }
+
+export const toCheckEnum = (type, enumerate) => {
+  if (enumerate.some((v) => v === type)) return
+  throw new OwnError(`Please give a argument in ${enumerate}.`)
+}

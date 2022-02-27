@@ -2,9 +2,10 @@
 import * as U from '$util'
 import { Node_arr, buildReturn, getKey } from './Node.js'
 
+// class
 class Node extends Node_arr {
-  constructor(item) {
-    super(item, 'priority')
+  constructor(item, priority) {
+    super(item, priority)
   }
 }
 
@@ -16,23 +17,27 @@ const getChildren = (index_parent) => [
   index_parent * 2 + 2,
 ]
 
-const maxHeapDown = (arr, index_parent) => {
+const heapDown = (arr, index_parent, type) => {
   // var
   const [index_child1, index_child2] = getChildren(index_parent)
   let index_largest = index_parent
   let isSwap = false
 
   // function
-  const isBigger = (index) =>
-    index < arr.length && getKey(arr[index]) > getKey(arr[index_largest])
+  const compare = (index) => {
+    const isBigger = getKey(arr[index]) > getKey(arr[index_largest])
+    const isSmaller = getKey(arr[index]) < getKey(arr[index_largest])
+
+    return index < arr.length && (type === 'max' ? isBigger : isSmaller)
+  }
 
   // run
-  if (isBigger(index_child1)) index_largest = index_child1
-  if (isBigger(index_child2)) index_largest = index_child2
+  if (compare(index_child1)) index_largest = index_child1
+  if (compare(index_child2)) index_largest = index_child2
 
   if (index_largest !== index_parent) {
     U.toSwapArr(arr, index_parent, index_largest)
-    maxHeapDown(arr, index_largest)
+    heapDown(arr, index_largest, type)
 
     isSwap = true
   }
@@ -40,32 +45,36 @@ const maxHeapDown = (arr, index_parent) => {
   return isSwap
 }
 
-const maxHeapUp = (arr, index_child) => {
+const heapUp = (arr, index_child, type) => {
   const index_parent = getParent(index_child)
-  const isSwap = maxHeapDown(arr, index_parent)
+  const isSwap = heapDown(arr, index_parent, type)
 
-  if (isSwap) maxHeapUp(arr, index_parent)
+  if (isSwap) heapUp(arr, index_parent)
 
   return
 }
 
 // main
 class PriorityQueue {
-  constructor() {
+  constructor(type = 'max') {
+    const enumerate = ['max', 'min']
+    U.toCheckEnum(type, enumerate)
+
     this.queue = []
+    this.type = type
   }
 
   isEmpty() {
     return this.queue.length === 0
   }
 
-  enqueue(item) {
-    const newNode = new Node(item)
+  enqueue(item, priority = 'priority') {
+    const newNode = new Node(item, priority)
     const key = getKey(newNode)
 
     // run
     this.queue.push(newNode)
-    maxHeapUp(this.queue, this.queue.length - 1)
+    heapUp(this.queue, this.queue.length - 1, this.type)
 
     console.log(`#${key} Node enqueued.`)
     return this.queue.length
@@ -81,7 +90,7 @@ class PriorityQueue {
 
     if (!this.isEmpty()) {
       this.queue[0] = lastNode
-      maxHeapDown(this.queue, 0)
+      heapDown(this.queue, 0, this.type)
     }
 
     return buildReturn({
