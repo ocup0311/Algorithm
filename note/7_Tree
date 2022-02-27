@@ -114,3 +114,19 @@ H   I   J   K   L   M   N   O   <-- layer = 4 -->   1  5    47 55   53 72   79  
             1. 讀取編碼, 按照 Huffman codes 轉回原本的編碼 (8 bits)
             2. 再將 8 bits 轉為人類讀取的檔案
 
+    # Minimal Spanning Tree (MST) ------------------------------------
+    "加權最小的 Spanning Tree"
+    
+        # Spanning Tree
+        · 將 graph 移除部分 edge 但不移除任何 node, 直到成為一個 tree
+        · graph 中, 以最少 edge 連通所有 node, 所形成的 tree
+    
+        # Prim's Algorithm
+        1. 從任意一個 node 開始
+        2. 紀錄所有走過的 node & edge
+        3. 從所有 visited node 尋找最小加權的 edge
+        4. 檢查是否會有重複的 visited node (cycle)。 否, 則選擇該 edge
+        5. 重複 step 3, 4 直到走過所有 node
+
+        # Kruskal's Algorithms
+        1. 
