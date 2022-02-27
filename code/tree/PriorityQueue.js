@@ -58,7 +58,7 @@ const heapUp = (arr, index_child, type) => {
 class PriorityQueue {
   constructor(type = 'max') {
     const enumerate = ['max', 'min']
-    U.toCheckEnum(type, enumerate)
+    U.checkEnum(type, enumerate)
 
     this.queue = []
     this.type = type

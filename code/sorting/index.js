@@ -71,7 +71,7 @@ console.log('steps: ', result9.steps)
 
 console.log(`\n---------- CHECK BY [${inputSet[0]}] ----------`)
 console.log(
-  U.toCheckSameArr(
+  U.checkSameArr(
     result0.arr,
     result1.arr,
     result2.arr,

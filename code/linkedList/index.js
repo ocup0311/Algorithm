@@ -15,7 +15,7 @@ console.log('\n===================== DoublyList =====================')
 const doubleResult = runTestList({ Factory: DoublyList })
 
 console.log(`\n---------- CHECK ----------`)
-console.log(U.toCheckSameArr(singleResult, doubleResult))
+console.log(U.checkSameArr(singleResult, doubleResult))
 
 console.log('\n===================== runTestStack =====================')
 runTestStack()

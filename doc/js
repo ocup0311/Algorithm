@@ -32,6 +32,9 @@ make- : 產生 亂數、等等
 built- : 產生 instance、function、等等
   ex. 'builtInput'
 
+check- : 確認 result、argument、等等, 是否符合規範
+  ex. 'checkSameArr'
+
 to- : 除上述外，其他 function
   ex. 'toSortNumber'
 

@@ -10,7 +10,7 @@ export const getObjValue = (object, property) => {
   )
 }
 
-export const toCheckEnum = (type, enumerate) => {
+export const checkEnum = (type, enumerate) => {
   if (enumerate.some((v) => v === type)) return
   throw new OwnError(`Please give a argument in ${enumerate}.`)
 }

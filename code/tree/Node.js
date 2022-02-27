@@ -1,19 +1,19 @@
 import * as U from '$util'
 
 // function
-const toCheckItem = (item, keyName) => {
+const checkItem = (item, keyName) => {
   if (typeof item !== 'object' || !item[keyName])
     throw new U.OwnError(`Please give an object with ${keyName} for new Node.`)
 }
 
 const makeKey = (item, keyName) => {
-  toCheckItem(item, keyName)
+  checkItem(item, keyName)
 
   return item[keyName]
 }
 
 const makeItem = (item, keyName) => {
-  toCheckItem(item, keyName)
+  checkItem(item, keyName)
 
   return { ...item }
 }

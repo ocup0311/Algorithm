@@ -25,12 +25,23 @@ export const toSwapArr = (arr, index1, index2) => {
   arr[index2] = temp
 }
 
-export const toCheckSameArr = (...arrs) => {
+export const checkSameArr = (...arrs) => {
   const [arr1, ...otherArrs] = arrs
+  if (!otherArrs.every((arr) => arr.length === arr1.length)) return false
 
-  for (let j = 0; j < otherArrs.length; j++) {
-    if (!otherArrs[j].every((v, i) => v === arr1[i])) return false
-  }
+  if (!otherArrs.every((arr) => arr.every((v, i) => v === arr1[i])))
+    return false
+
+  return true
+}
+
+export const checkSameArrItem = (...arrs) => {
+  const [arr1, ...otherArrs] = arrs
+  if (!otherArrs.every((arr) => arr.length === arr1.length)) return false
+
+  const bucket = {}
+  arr1.forEach((v) => (bucket[v] = true))
+  if (!otherArrs.every((arr) => arr.every((v) => bucket[v]))) return false
 
   return true
 }
