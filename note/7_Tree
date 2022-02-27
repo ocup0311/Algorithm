@@ -73,3 +73,44 @@ H   I   J   K   L   M   N   O   <-- layer = 4 -->   1  5    47 55   53 72   79  
         worst case performance: O(n)    <-- unbalanced
         best case performance: O(1)
         average performance: O(logn)    <-- balanced
+
+# 衍生 ========================================================================================
+    # Priority Queue (PQ) -------------------------------
+        實作方法: linked list, Queue, array, Max Heap...
+
+            Max Heap
+                enqueue O(logn)
+                dequeue O(logn)
+            linked list, array
+                enqueue O(n)
+                dequeue O(1) or O(n)
+
+
+    # Huffman Coding ------------------------------------
+    ; https://huffman.ooz.ie/
+    ; Encoding Theory: Lossy  Compression & Lossless  Compression (無失真)
+    "Huffman -- Lossless  Compression"
+    "出現越多次的字, 用越少的 bit 來儲存"
+    "不同檔案的 Huffman Tree 不同, 所以還需要存 tree"
+
+        # Huffman Tree 
+            1. 一開始將每個 node 當成只有 root 的 tree
+            2. 將 root 最小的兩個 tree 合併, 其兩個 root 相加, 新的數當作合併後新的 root
+            3. 其較小的為 left child, 較大的為 right child
+            4. 重複 step 2,3 將所有 tree 合併
+
+        # Huffman code 
+            1. 為 Huffman Tree 所有 edges 編號, left:0 right:1
+            2. 從 root 開始走到每個 leaf, 每個 edge 組合形成的編碼為該 leaf 的 Huffman code
+        
+        # Compress 
+            1. 讀取資料, 計算每個單位(字)出現的頻率
+            2. 按照頻率排序
+            3. 以 頻率 建立 Huffman Tree    <-- 可用 Priority Queue
+            4. 產生 Huffman codes
+            5. 讀取資料, 將其按照 Huffman codes 編碼 (也需紀錄 Huffman codes 對照表)
+
+        # Decompress 
+            1. 讀取編碼, 按照 Huffman codes 轉回原本的編碼 (8 bits)
+            2. 再將 8 bits 轉為人類讀取的檔案
+

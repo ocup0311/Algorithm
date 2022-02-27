@@ -24,13 +24,3 @@
     edges (links, lines)
 
 
-# ===
-    Priority Queue (PQ)
-        實作方法: linked list, Queue, array, Max Heap...
-
-            Max Heap
-                enqueue O(logn)
-                dequeue O(logn)
-            linked list, array
-                enqueue O(n)
-                dequeue O(1) or O(n)
