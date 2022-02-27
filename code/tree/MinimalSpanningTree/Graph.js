@@ -17,6 +17,36 @@ const toCheckRawGraph = (rawNode, rawEdge) => {
     )
 }
 
+const buildNode = (rawNode) => {
+  const graph = {}
+
+  rawNode.forEach((v) => {
+    graph[v.key] = new Node(v)
+  })
+
+  return graph
+}
+const buildEdge = (graph, edgeData) => {
+  const fn = ({ key1, key2, weight }) => {
+    const node1 = graph[key1]
+    const node2 = graph[key2]
+
+    const edge1 = new Edge(node1, node2, weight)
+    node1.addEdge(edge1)
+    node2.addEdge(edge1)
+  }
+
+  edgeData.forEach((v) => fn(v))
+}
+const buildGraph = (rawNode, rawEdge) => {
+  toCheckRawGraph(rawNode, rawEdge)
+  const graph = buildNode(rawNode)
+  buildEdge(graph, rawEdge)
+
+  return Object.values(graph)
+}
+
+// class
 class Node extends Node_arr {
   constructor(item) {
     super(item)
@@ -40,41 +70,12 @@ class Edge {
 // rawEdge: [{ key1: 1, key2: 2, weight: 10 }]
 class Graph {
   constructor({ name, rawNode, rawEdge }) {
-    // exception
-    toCheckRawGraph(rawNode, rawEdge)
-
-    // var
-    const graph = {}
-
-    // function
-    const buildNode = () => {
-      rawNode.forEach((v) => {
-        graph[v.key] = new Node(v)
-      })
-    }
-    const buildEdge = (graph, edgeData) => {
-      const fn = ({ key1, key2, weight }) => {
-        const node1 = graph[key1]
-        const node2 = graph[key2]
-
-        const edge1 = new Edge(node1, node2, weight)
-        node1.addEdge(edge1)
-        node2.addEdge(edge1)
-      }
-
-      edgeData.forEach((v) => fn(v))
-    }
-
-    // run
-    buildNode()
-    buildEdge(graph, rawEdge)
-
+    this.graph = buildGraph(rawNode, rawEdge)
     this.name = name
-    this.graph = Object.values(graph)
     this.mst = null
   }
 
-  PrimMST(force_run = false) {
+  PrimMST(startIndex = 0, force_run = false) {
     // exception
     if (!force_run && this.mst) return this.mst
 
@@ -118,12 +119,12 @@ class Graph {
       return minEdge
     }
 
-    const buildMST = (node) => {
-      if (!node) return
+    const buildMST = (startNode) => {
+      if (!startNode) return
 
-      visitedNode[getKey(node)] = node
+      visitedNode[getKey(startNode)] = startNode
       visitedNode._length = 1
-      node.edges.forEach((edge) => edgeBucket.enqueue(edge, 'weight'))
+      startNode.edges.forEach((edge) => edgeBucket.enqueue(edge, 'weight'))
 
       while (visitedNode._length < this.graph.length) {
         const minEdge = findMinWeight()
@@ -133,7 +134,7 @@ class Graph {
     }
 
     // run
-    buildMST(this.graph[0])
+    buildMST(this.graph[startIndex])
 
     this.mst = mst
     return mst

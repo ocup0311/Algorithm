@@ -22,4 +22,4 @@ const rawEdge = [
 
 const myGraph = new Graph({ name: 'myGraph', rawNode, rawEdge })
 console.log(myGraph.graph)
-console.log(myGraph.PrimMST())
+console.log(myGraph.PrimMST(0))
