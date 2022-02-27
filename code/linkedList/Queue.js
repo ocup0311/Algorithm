@@ -106,19 +106,3 @@ class Queue {
 }
 
 export default Queue
-
-const queue = new Queue()
-console.log('------ enqueue(1) ------')
-queue.enqueue(1)
-console.log(queue.getArr())
-console.log('------ enqueue(2) ------')
-queue.enqueue(2)
-console.log(queue.getArr())
-console.log('------ dequeue() ------')
-queue.dequeue()
-console.log(queue.getArr())
-console.log('------ enqueue(3) ------')
-queue.enqueue(3)
-console.log(queue.getArr())
-console.log('------ printAll() ------')
-queue.printAll()

@@ -139,28 +139,3 @@ class Deque {
 }
 
 export default Deque
-
-const deque = new Deque()
-console.log('------ push(1) ------')
-deque.push(1)
-console.log(deque.getArr())
-console.log('------ push(2) ------')
-deque.push(2)
-console.log(deque.getArr())
-console.log('------ pop() ------')
-deque.pop()
-console.log(deque.getArr())
-console.log('------ inject(3) ------')
-deque.inject(3)
-console.log(deque.getArr())
-console.log('------ inject(4) ------')
-deque.inject(4)
-console.log(deque.getArr())
-console.log('------ eject() ------')
-deque.eject()
-console.log(deque.getArr())
-console.log('------ push(5) ------')
-deque.push(5)
-console.log(deque.getArr())
-console.log('------ printAll() ------')
-deque.printAll()

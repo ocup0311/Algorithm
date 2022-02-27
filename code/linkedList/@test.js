@@ -1,4 +1,7 @@
 import * as U from '$util'
+import Stack from './Stack.js'
+import Queue from './Queue.js'
+import Deque from './Deque.js'
 
 const builtArr = (amount, sorted = false) => {
   let output = []
@@ -108,7 +111,7 @@ const toTestOnce = ({ Factory, sample = [] }, isLog = true) => {
   return sample.getArr()
 }
 
-export const runTest = ({ Factory }, bigData = false) => {
+export const runTestList = ({ Factory }, bigData = false) => {
   const sample = new Factory()
 
   const oneData = toTestOnce({ Factory, sample })
@@ -116,4 +119,67 @@ export const runTest = ({ Factory }, bigData = false) => {
   if (bigData) toTestBigData({ fn: toTestOnce, props: { Factory, sample } })
 
   return oneData
+}
+
+export const runTestStack = () => {
+  const stack = new Stack()
+  console.log('------ push(1) ------')
+  stack.push(1)
+  console.log(stack.getArr())
+  console.log('------ push(2) ------')
+  stack.push(2)
+  console.log(stack.getArr())
+  console.log('------ pop() ------')
+  stack.pop()
+  console.log(stack.getArr())
+  console.log('------ push(3) ------')
+  stack.push(3)
+  console.log(stack.getArr())
+  console.log('------ printAll() ------')
+  stack.printAll()
+}
+
+export const runTestQueue = () => {
+  const queue = new Queue()
+  console.log('------ enqueue(1) ------')
+  queue.enqueue(1)
+  console.log(queue.getArr())
+  console.log('------ enqueue(2) ------')
+  queue.enqueue(2)
+  console.log(queue.getArr())
+  console.log('------ dequeue() ------')
+  queue.dequeue()
+  console.log(queue.getArr())
+  console.log('------ enqueue(3) ------')
+  queue.enqueue(3)
+  console.log(queue.getArr())
+  console.log('------ printAll() ------')
+  queue.printAll()
+}
+
+export const runTestDeque = () => {
+  const deque = new Deque()
+  console.log('------ push(1) ------')
+  deque.push(1)
+  console.log(deque.getArr())
+  console.log('------ push(2) ------')
+  deque.push(2)
+  console.log(deque.getArr())
+  console.log('------ pop() ------')
+  deque.pop()
+  console.log(deque.getArr())
+  console.log('------ inject(3) ------')
+  deque.inject(3)
+  console.log(deque.getArr())
+  console.log('------ inject(4) ------')
+  deque.inject(4)
+  console.log(deque.getArr())
+  console.log('------ eject() ------')
+  deque.eject()
+  console.log(deque.getArr())
+  console.log('------ push(5) ------')
+  deque.push(5)
+  console.log(deque.getArr())
+  console.log('------ printAll() ------')
+  deque.printAll()
 }

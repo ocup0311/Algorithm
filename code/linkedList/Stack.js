@@ -106,19 +106,3 @@ class Stack {
 }
 
 export default Stack
-
-const stack = new Stack()
-console.log('------ push(1) ------')
-stack.push(1)
-console.log(stack.getArr())
-console.log('------ push(2) ------')
-stack.push(2)
-console.log(stack.getArr())
-console.log('------ pop() ------')
-stack.pop()
-console.log(stack.getArr())
-console.log('------ push(3) ------')
-stack.push(3)
-console.log(stack.getArr())
-console.log('------ printAll() ------')
-stack.printAll()

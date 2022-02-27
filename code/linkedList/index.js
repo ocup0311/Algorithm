@@ -1,30 +1,28 @@
 import * as U from '$util'
 import SinglyList from './SinglyList.js'
 import DoublyList from './DoublyList.js'
-import { performance } from 'perf_hooks'
-import { runTest } from './@test.js'
-
-// warm up :)
-for (let i = 0; i < 9; i++) {
-  runTest({ Factory: DoublyList })
-  runTest({ Factory: SinglyList })
-}
+import {
+  runTestList,
+  runTestStack,
+  runTestQueue,
+  runTestDeque,
+} from './@test.js'
 
 console.log('\n===================== SinglyList =====================')
-const t0s = performance.now()
-const singleResult = runTest({ Factory: SinglyList }, true)
-const t0e = performance.now()
+const singleResult = runTestList({ Factory: SinglyList })
 
 console.log('\n===================== DoublyList =====================')
-const t1s = performance.now()
-const doubleResult = runTest({ Factory: DoublyList }, true)
-const t1e = performance.now()
-
-console.log(`SinglyList: ${Math.round((t0e - t0s) * 1000) / 1000} ms`)
-console.log(`DoublyList: ${Math.round((t1e - t1s) * 1000) / 1000} ms`)
+const doubleResult = runTestList({ Factory: DoublyList })
 
 console.log(`\n---------- CHECK ----------`)
 console.log(U.toCheckSameArr(singleResult, doubleResult))
+
+console.log('\n===================== runTestStack =====================')
+runTestStack()
+console.log('\n===================== runTestQueue =====================')
+runTestQueue()
+console.log('\n===================== runTestDeque =====================')
+runTestDeque()
 
 // TODO1
 // const exception = ({ info, err }) => {
