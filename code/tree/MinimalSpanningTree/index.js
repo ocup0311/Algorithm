@@ -1,3 +1,4 @@
+import * as U from '$util'
 import Graph from './Graph.js'
 
 const rawNode = [
@@ -19,7 +20,21 @@ const rawEdge = [
   { key1: 4, key2: 6, weight: 3 },
   { key1: 5, key2: 6, weight: 1 },
 ]
-
 const myGraph = new Graph({ name: 'myGraph', rawNode, rawEdge })
-console.log(myGraph.graph)
-console.log(myGraph.PrimMST(0))
+console.log('------ rawGraph ------\n')
+console.log(myGraph.nodes)
+
+console.log(`------ PrimMST(0) ------`)
+console.log(myGraph.PrimMST(0, true))
+console.log(`------ PrimMST(8) ------`)
+console.log(myGraph.PrimMST(8, true))
+
+console.log(`------ KruskalMST ------`)
+const mstKruskal = myGraph.KruskalMST(true)
+console.log(mstKruskal)
+
+console.log(`------ check result by PrimMST with different startNode  ------`)
+const checkArr = myGraph.nodes
+  .map((v, i) => myGraph.PrimMST(i, true))
+  .concat([mstKruskal])
+console.log(U.checkSameArrItem(checkArr))

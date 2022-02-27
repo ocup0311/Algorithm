@@ -68,7 +68,7 @@ class PriorityQueue {
     return this.queue.length === 0
   }
 
-  enqueue(item, priority = 'priority') {
+  enqueue(item, priority = 'priority', isLog = true) {
     const newNode = new Node(item, priority)
     const key = getKey(newNode)
 
@@ -76,7 +76,7 @@ class PriorityQueue {
     this.queue.push(newNode)
     heapUp(this.queue, this.queue.length - 1, this.type)
 
-    console.log(`#${key} Node enqueued.`)
+    if (isLog) console.log(`#${key} Node enqueued.`)
     return this.queue.length
   }
 

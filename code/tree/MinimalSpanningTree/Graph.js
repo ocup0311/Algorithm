@@ -3,7 +3,7 @@ import { Node_arr, getKey } from '../Node.js'
 import PriorityQueue from '../PriorityQueue.js'
 
 // function
-const toCheckRawGraph = (rawNode, rawEdge) => {
+const checkRawGraph = (rawNode, rawEdge) => {
   const isNotEmptyArr = Array.isArray(rawEdge) && rawEdge.length !== 0
   const isValidEdge =
     isNotEmptyArr &&
@@ -18,32 +18,34 @@ const toCheckRawGraph = (rawNode, rawEdge) => {
 }
 
 const buildNode = (rawNode) => {
-  const graph = {}
+  const nodes = {}
 
   rawNode.forEach((v) => {
-    graph[v.key] = new Node(v)
+    nodes[v.key] = new Node(v)
   })
 
-  return graph
+  return nodes
 }
-const buildEdge = (graph, edgeData) => {
+const buildEdge = (nodes, edgeData) => {
   const fn = ({ key1, key2, weight }) => {
-    const node1 = graph[key1]
-    const node2 = graph[key2]
+    const node1 = nodes[key1]
+    const node2 = nodes[key2]
 
-    const edge1 = new Edge(node1, node2, weight)
-    node1.addEdge(edge1)
-    node2.addEdge(edge1)
+    const edge = new Edge(node1, node2, weight)
+    node1.addEdge(edge)
+    node2.addEdge(edge)
+
+    return edge
   }
 
-  edgeData.forEach((v) => fn(v))
+  return edgeData.map((v) => fn(v))
 }
 const buildGraph = (rawNode, rawEdge) => {
-  toCheckRawGraph(rawNode, rawEdge)
-  const graph = buildNode(rawNode)
-  buildEdge(graph, rawEdge)
+  checkRawGraph(rawNode, rawEdge)
+  const nodes = buildNode(rawNode)
+  const edges = buildEdge(nodes, rawEdge)
 
-  return Object.values(graph)
+  return [Object.values(nodes), edges]
 }
 
 // class
@@ -70,7 +72,10 @@ class Edge {
 // rawEdge: [{ key1: 1, key2: 2, weight: 10 }]
 class Graph {
   constructor({ name, rawNode, rawEdge }) {
-    this.graph = buildGraph(rawNode, rawEdge)
+    const [nodes, edges] = buildGraph(rawNode, rawEdge)
+
+    this.nodes = nodes
+    this.edges = edges
     this.name = name
     this.mst = null
   }
@@ -94,7 +99,7 @@ class Graph {
         visitedNode[key1] = edge.node1
         visitedNode._length++
         edge.node1.edges.forEach((v) => {
-          if (edge !== v) edgeBucket.enqueue(v, 'weight')
+          if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
         })
       }
 
@@ -103,7 +108,7 @@ class Graph {
         visitedNode[key2] = edge.node2
         visitedNode._length++
         edge.node2.edges.forEach((v) => {
-          if (edge !== v) edgeBucket.enqueue(v, 'weight')
+          if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
         })
       }
 
@@ -113,7 +118,6 @@ class Graph {
     const findMinWeight = () => {
       const minEdge = edgeBucket.dequeue()
 
-      // console.log(minEdge)
       if (checkCycled(minEdge)) return findMinWeight()
 
       return minEdge
@@ -124,9 +128,11 @@ class Graph {
 
       visitedNode[getKey(startNode)] = startNode
       visitedNode._length = 1
-      startNode.edges.forEach((edge) => edgeBucket.enqueue(edge, 'weight'))
+      startNode.edges.forEach((edge) =>
+        edgeBucket.enqueue(edge, 'weight', false)
+      )
 
-      while (visitedNode._length < this.graph.length) {
+      while (visitedNode._length < this.nodes.length) {
         const minEdge = findMinWeight()
 
         mst.push(minEdge)
@@ -134,7 +140,60 @@ class Graph {
     }
 
     // run
-    buildMST(this.graph[startIndex])
+    buildMST(this.nodes[startIndex])
+
+    this.mst = mst
+    return mst
+  }
+
+  KruskalMST(force_run = false) {
+    // exception
+    if (!force_run && this.mst) return this.mst
+
+    // var
+    const mst = []
+    const visitedNode = {}
+    const edgeBucket = new PriorityQueue('min')
+    this.edges.forEach((v) => edgeBucket.enqueue(v, 'weight', false))
+
+    // function
+    const checkCycled = (edge) => {
+      const [key1, key2] = [getKey(edge.node1), getKey(edge.node2)]
+      let cycled = true
+
+      if (!visitedNode[key1]) {
+        cycled = false
+        visitedNode[key1] = edge.node1
+      }
+
+      if (!visitedNode[key2]) {
+        cycled = false
+        visitedNode[key2] = edge.node2
+      }
+
+      return cycled
+    }
+
+    const findMinWeight = () => {
+      if (edgeBucket.queue.length === 0) return null
+
+      const minEdge = edgeBucket.dequeue()
+
+      if (checkCycled(minEdge)) return findMinWeight()
+
+      return minEdge
+    }
+
+    const buildMST = () => {
+      while (edgeBucket.queue.length > 0) {
+        const minEdge = findMinWeight()
+
+        minEdge && mst.push(minEdge)
+      }
+    }
+
+    // run
+    buildMST()
 
     this.mst = mst
     return mst
