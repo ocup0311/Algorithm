@@ -91,26 +91,20 @@ class Graph {
 
     // function
     const checkCycled = (edge) => {
-      const [key1, key2] = [getKey(edge.node1), getKey(edge.node2)]
       let cycled = true
 
-      if (!visitedNode[key1]) {
-        cycled = false
-        visitedNode[key1] = edge.node1
-        visitedNode._length++
-        edge.node1.edges.forEach((v) => {
-          if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
-        })
-      }
+      ;[edge.node1, edge.node2].forEach((node) => {
+        const key = getKey(node)
 
-      if (!visitedNode[key2]) {
-        cycled = false
-        visitedNode[key2] = edge.node2
-        visitedNode._length++
-        edge.node2.edges.forEach((v) => {
-          if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
-        })
-      }
+        if (!visitedNode[key]) {
+          cycled = false
+          visitedNode[key] = node
+          visitedNode._length++
+          node.edges.forEach((v) => {
+            if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
+          })
+        }
+      })
 
       return cycled
     }
@@ -158,18 +152,16 @@ class Graph {
 
     // function
     const checkCycled = (edge) => {
-      const [key1, key2] = [getKey(edge.node1), getKey(edge.node2)]
       let cycled = true
 
-      if (!visitedNode[key1]) {
-        cycled = false
-        visitedNode[key1] = edge.node1
-      }
+      ;[edge.node1, edge.node2].forEach((node) => {
+        const key = getKey(node)
 
-      if (!visitedNode[key2]) {
-        cycled = false
-        visitedNode[key2] = edge.node2
-      }
+        if (!visitedNode[key]) {
+          cycled = false
+          visitedNode[key] = node
+        }
+      })
 
       return cycled
     }

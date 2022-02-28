@@ -129,7 +129,7 @@ H   I   J   K   L   M   N   O   <-- layer = 4 -->   1  5    47 55   53 72   79  
         4. 檢查是否會有重複的 visited node (cycle)。 否, 則選擇該 edge
         5. 重複 step 3, 4 直到走過所有 node
 
-        # Kruskal's Algorithms
+        # Kruskal's Algorithms O(nlogn)
         1. 列出所有 edge
         2. 紀錄所有走過的 node
         3. 從 edge 列表尋找最小加權的 edge

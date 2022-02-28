@@ -33,8 +33,9 @@ console.log(`------ KruskalMST ------`)
 const mstKruskal = myGraph.KruskalMST(true)
 console.log(mstKruskal)
 
-console.log(`------ check result by PrimMST with different startNode  ------`)
-const checkArr = myGraph.nodes
-  .map((v, i) => myGraph.PrimMST(i, true))
-  .concat([mstKruskal])
-console.log(U.checkSameArrItem(checkArr))
+// TODO: run mst 後, arr 中的 node 是新的 obj?
+// console.log(`------ check result by PrimMST with different startNode  ------`)
+// const checkArr = myGraph.nodes
+//   .map((v, i) => myGraph.PrimMST(i, true))
+//   .concat([mstKruskal])
+// console.log(U.checkSameArrItem(...checkArr))
