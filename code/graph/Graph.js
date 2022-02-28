@@ -1,9 +1,10 @@
 import * as U from '$util'
-import { Node_arr, getKey } from '../Node.js'
-import PriorityQueue from '../PriorityQueue.js'
+import { Node_arr, getKey } from './Node.js'
+import PriorityQueue from '../tree/PriorityQueue.js'
 
 // function
 const checkRawGraph = (rawNode, rawEdge) => {
+  // [TODO] check rawNode
   const isNotEmptyArr = Array.isArray(rawEdge) && rawEdge.length !== 0
   const isValidEdge =
     isNotEmptyArr &&
@@ -80,7 +81,8 @@ class Graph {
     this.mst = null
   }
 
-  PrimMST(startIndex = 0, force_run = false) {
+  // Minimal Spanning Tree
+  PrimMinimalSpanningTree(startIndex = 0, force_run = false) {
     // exception
     if (!force_run && this.mst) return this.mst
 
