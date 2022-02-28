@@ -10,7 +10,7 @@ function minSum({ dataPool, size = 3 }) {
   let value_temp = value_min
 
   // function
-  const callBack = (lastItem, nextItem) => {
+  const cb = (lastItem, nextItem) => {
     value_temp = value_temp - lastItem + nextItem
 
     if (value_min > value_temp) value_min = value_temp
@@ -19,7 +19,7 @@ function minSum({ dataPool, size = 3 }) {
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_min
 }

@@ -9,14 +9,14 @@ function maxSum({ dataPool, size = 3 }) {
   let value_max = -Infinity
 
   // function
-  const callBack = (windowSet) => {
+  const cb = (windowSet) => {
     const value_temp = U.makeSumofArr(windowSet)
     if (value_max < value_temp) value_max = value_temp
     return
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_max
 }

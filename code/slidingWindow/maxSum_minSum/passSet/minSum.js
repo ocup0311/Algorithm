@@ -9,7 +9,7 @@ function minSum({ dataPool, size = 3 }) {
   let value_min = Infinity
 
   // function
-  const callBack = (windowSet) => {
+  const cb = (windowSet) => {
     const value_temp = U.makeSumofArr(windowSet)
 
     if (value_min > value_temp) value_min = value_temp
@@ -18,7 +18,7 @@ function minSum({ dataPool, size = 3 }) {
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_min
 }

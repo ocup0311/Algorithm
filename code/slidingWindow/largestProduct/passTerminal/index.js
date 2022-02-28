@@ -14,7 +14,7 @@ export function largestProduct({ dataPool, size = 3 }) {
   let value_max = skip ? -Infinity : value_temp
 
   // function
-  const callBack = (lastItem, nextItem) => {
+  const cb = (lastItem, nextItem) => {
     // exception
     if (nextItem === 0) {
       skip = size
@@ -35,7 +35,7 @@ export function largestProduct({ dataPool, size = 3 }) {
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_max === -Infinity ? 0 : value_max
 }

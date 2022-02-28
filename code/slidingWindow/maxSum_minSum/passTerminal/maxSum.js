@@ -10,7 +10,7 @@ function maxSum({ dataPool, size = 3 }) {
   let value_temp = value_max
 
   // function
-  const callBack = (lastItem, nextItem) => {
+  const cb = (lastItem, nextItem) => {
     value_temp = value_temp - lastItem + nextItem
 
     if (value_max < value_temp) value_max = value_temp
@@ -19,7 +19,7 @@ function maxSum({ dataPool, size = 3 }) {
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_max
 }

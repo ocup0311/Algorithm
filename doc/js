@@ -5,13 +5,16 @@
 ; 縮寫 ---------------------------------
 N: 自然數、正整數
 Z: 整數
-Q: 有理數（分數）
-R: 實數（根號）
-C: 複數（i）
+Q: 有理數 (分數)
+R: 實數 (根號)
+C: 複數 (i)
+
 arr: array
 str: string
 temp: temporary value
 ptr: pointer
+fn: function
+cb: callback
 
 ; comment tag ---------------------------------
 main: 主程式
@@ -39,7 +42,7 @@ to- : 除上述外，其他 function
   ex. 'toSortNumber'
 
 
-; ============================ 涵式 ============================
+; ============================ 函式 ============================
 which one is better if the fn2 & fn3 are only use by fn1?
 A:
 function fn1() {

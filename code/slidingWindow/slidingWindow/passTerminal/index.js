@@ -1,8 +1,8 @@
-// 執行一遍 slidingWindow 後，對每個 window 做一次 callBack
+// 執行一遍 slidingWindow 後，對每個 window 做一次 cb
 //（以回傳 lastItem, nextItem 方式）
 // O(n)
 
-export function slidingWindow({ dataPool, size = 3 }, callBack) {
+export function slidingWindow({ dataPool, size = 3 }, cb) {
   // exception
   if (size > dataPool.length) return null
 
@@ -11,7 +11,7 @@ export function slidingWindow({ dataPool, size = 3 }, callBack) {
     const lastItem = dataPool[i]
     const nextItem = dataPool[i + size]
 
-    callBack(lastItem, nextItem)
+    cb(lastItem, nextItem)
   }
 
   return

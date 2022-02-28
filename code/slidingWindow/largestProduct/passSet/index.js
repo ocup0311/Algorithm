@@ -11,7 +11,7 @@ export function largestProduct({ dataPool, size = 3 }) {
   let value_max = -Infinity
 
   // function
-  const callBack = (windowSet) => {
+  const cb = (windowSet) => {
     const value_temp = U.makeProductofArr(windowSet)
 
     if (value_max < value_temp) value_max = value_temp
@@ -19,7 +19,7 @@ export function largestProduct({ dataPool, size = 3 }) {
   }
 
   // run
-  slidingWindow({ dataPool, size }, callBack)
+  slidingWindow({ dataPool, size }, cb)
 
   return value_max
 }

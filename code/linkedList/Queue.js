@@ -23,7 +23,7 @@ class Queue {
       },
 
       // O(n)
-      traverse: (indexOfEnd, callBack) => {
+      traverse: (indexOfEnd, cb) => {
         if (!this.head) {
           console.log('This is an empty list.')
           return
@@ -31,14 +31,14 @@ class Queue {
 
         let currentNode = this.head
         for (let i = 0; i <= indexOfEnd; i++) {
-          callBack(currentNode)
+          cb(currentNode)
           currentNode = currentNode.next
         }
       },
 
       // O(n)
-      traverseAll: (callBack) => {
-        this._.traverse(this.length - 1, callBack)
+      traverseAll: (cb) => {
+        this._.traverse(this.length - 1, cb)
       },
     }
   }
@@ -79,9 +79,9 @@ class Queue {
   getList() {
     const list = []
 
-    const callBack = (currentNode) => list.push(currentNode)
+    const cb = (currentNode) => list.push(currentNode)
 
-    this._.traverseAll(callBack)
+    this._.traverseAll(cb)
 
     return list
   }
@@ -90,18 +90,18 @@ class Queue {
   getArr() {
     const arr = []
 
-    const callBack = (currentNode) => arr.push(currentNode.value)
+    const cb = (currentNode) => arr.push(currentNode.value)
 
-    this._.traverseAll(callBack)
+    this._.traverseAll(cb)
 
     return arr
   }
 
   // O(n)
   printAll() {
-    const callBack = (currentNode) => console.log(currentNode.value)
+    const cb = (currentNode) => console.log(currentNode.value)
 
-    this._.traverseAll(callBack)
+    this._.traverseAll(cb)
   }
 }
 

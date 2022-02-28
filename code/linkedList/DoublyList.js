@@ -37,7 +37,7 @@ class DoublyList {
   }
 
   // O(n/2)
-  traverseFromHead(indexOfEnd, callBack) {
+  traverseFromHead(indexOfEnd, cb) {
     if (!this.head) {
       console.log('This is an empty list.')
       return
@@ -45,13 +45,13 @@ class DoublyList {
 
     let currentNode = this.head
     for (let i = 0; i <= indexOfEnd; i++) {
-      callBack(currentNode)
+      cb(currentNode)
       currentNode = currentNode.next
     }
   }
 
   // O(n/2)
-  traverseFromTail(indexOfEnd, callBack) {
+  traverseFromTail(indexOfEnd, cb) {
     if (!this.tail) {
       console.log('This is an empty list.')
       return
@@ -59,14 +59,14 @@ class DoublyList {
 
     let currentNode = this.tail
     for (let i = this.length - 1; i >= indexOfEnd; i++) {
-      callBack(currentNode)
+      cb(currentNode)
       currentNode = currentNode.prev
     }
   }
 
   // O(n)
-  traverseAll(callBack) {
-    this.traverseFromHead(this.length - 1, callBack)
+  traverseAll(cb) {
+    this.traverseFromHead(this.length - 1, cb)
   }
 
   // O(n/2)
@@ -255,9 +255,9 @@ class DoublyList {
   getList() {
     const list = []
 
-    const callBack = (currentNode) => list.push(currentNode)
+    const cb = (currentNode) => list.push(currentNode)
 
-    this.traverseAll(callBack)
+    this.traverseAll(cb)
 
     return list
   }
@@ -266,18 +266,18 @@ class DoublyList {
   getArr() {
     const arr = []
 
-    const callBack = (currentNode) => arr.push(currentNode.value)
+    const cb = (currentNode) => arr.push(currentNode.value)
 
-    this.traverseAll(callBack)
+    this.traverseAll(cb)
 
     return arr
   }
 
   // O(n)
   printAll() {
-    const callBack = (currentNode) => console.log(currentNode.value)
+    const cb = (currentNode) => console.log(currentNode.value)
 
-    this.traverseAll(callBack)
+    this.traverseAll(cb)
   }
 }
 

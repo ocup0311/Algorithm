@@ -8,16 +8,16 @@ class BinaryTree {
     this.root = null
   }
 
-  traverseAll(method = 'bft', callBack) {
-    U.getObjValue(traverseMethod, method)(this.root, callBack)
+  traverseAll(method = 'bft', cb) {
+    U.getObjValue(traverseMethod, method)(this.root, cb)
   }
 
   getListArrBy(method) {
     const list = []
 
-    const callBack = (currentNode) => list.push(currentNode)
+    const cb = (currentNode) => list.push(currentNode)
 
-    this.traverseAll(method, callBack)
+    this.traverseAll(method, cb)
 
     return list
   }
@@ -25,17 +25,17 @@ class BinaryTree {
   getItemArrBy(method) {
     const arr = []
 
-    const callBack = (currentNode) => arr.push(currentNode.item)
+    const cb = (currentNode) => arr.push(currentNode.item)
 
-    this.traverseAll(method, callBack)
+    this.traverseAll(method, cb)
 
     return arr
   }
 
   printAllBy(method) {
-    const callBack = (currentNode) => console.log(currentNode.item)
+    const cb = (currentNode) => console.log(currentNode.item)
 
-    this.traverseAll(method, callBack)
+    this.traverseAll(method, cb)
   }
 }
 

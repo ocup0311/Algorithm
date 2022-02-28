@@ -17,10 +17,10 @@ export const builtInput = (amount, size = 3) => {
 
 export const runTest = (input, fn) => {
   // function
-  const callBack = (...arg) => console.log(`${arg}\n`)
+  const cb = (...arg) => console.log(`${arg}\n`)
 
   // run
   console.log('=================================================')
   console.log(`Data Pool: ${input.dataPool}, size: ${input.size}`)
-  fn(input, callBack)
+  fn(input, cb)
 }
