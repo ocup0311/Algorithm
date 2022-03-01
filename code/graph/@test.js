@@ -51,8 +51,20 @@ export const runTestTraversal = () => {
 
   const traverseBy = (node, method) => {
     console.log(`------ ${method}(${node?.item.value}) ------`)
-    const result = myGraph[method](node)
-    console.log(makeLog(result))
+    const result1 = myGraph[method](node, 'normal')
+    const result2 = myGraph[method](node, 'alpha_order')
+    const result3 = myGraph[method](node, 'key_small')
+    const result4 = myGraph[method](node, 'alpha_reverse')
+    const result5 = myGraph[method](node, 'key_big')
+    const result6 = myGraph[method](node, 'weight_small')
+    const result7 = myGraph[method](node, 'weight_big')
+
+    console.log('normal', 'alpha_order', 'key_small')
+    console.log(makeLog(result1), makeLog(result2), makeLog(result3))
+    console.log('alpha_reverse', 'key_big')
+    console.log(makeLog(result4), makeLog(result5))
+    console.log('weight_small', 'weight_big')
+    console.log(makeLog(result6), makeLog(result7))
   }
 
   // run

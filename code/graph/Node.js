@@ -45,3 +45,5 @@ export const buildReturn = ({ node, message = 'not a node' }) => {
 }
 
 export const getKey = (node) => node?.key
+export const getItem = (node) => node?.item
+export const getValue = (node) => node?.item?.value

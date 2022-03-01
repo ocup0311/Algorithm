@@ -1,7 +1,8 @@
 import * as U from '$util'
-import { Node, getKey } from './Node.js'
+import { Node } from './Node.js'
 import { Edge } from './Edge.js'
 import PriorityQueue from '../tree/PriorityQueue.js'
+import traverseRule from './traverseRule.js'
 
 // function
 const checkRawGraph = (rawNode, rawEdge) => {
@@ -169,8 +170,8 @@ class Graph {
     return mst
   }
 
-  // traversal: 未加入順序規則, 只參照加入 node 時, 提供 rawData 的順序
-  DFT(startNode) {
+  // traversal
+  DFT(startNode, rule = 'normal') {
     if (!startNode) {
       console.log('Please give a start node inside the graph')
       return null
@@ -179,16 +180,16 @@ class Graph {
     // var
     const result = []
     const visitedNode = new Map()
+    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
 
     // function
     const fn = (node) => {
       visitedNode.set(node, true)
       result.push(node)
 
-      node.edges.forEach((e) => {
-        ;[e.node1, e.node2].forEach((n) => {
-          if (!visitedNode.get(n)) fn(n)
-        })
+      const nodes = makeNodes(node)
+      nodes.forEach((n) => {
+        if (!visitedNode.get(n)) fn(n)
       })
     }
 
@@ -198,7 +199,7 @@ class Graph {
     return result
   }
 
-  BFT(startNode) {
+  BFT(startNode, rule = 'normal') {
     if (!startNode) {
       console.log('Please give a start node inside the graph')
       return null
@@ -208,18 +209,19 @@ class Graph {
     const result = []
     const visitedNode = new Map()
     let ptr = 0
+    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
 
     visitedNode.set(startNode, true)
     result.push(startNode)
 
     while (result[ptr]) {
-      result[ptr].edges.forEach((e) => {
-        ;[e.node1, e.node2].forEach((n) => {
-          if (!visitedNode.get(n)) {
-            visitedNode.set(n, true)
-            result.push(n)
-          }
-        })
+      const nodes = makeNodes(result[ptr])
+
+      nodes.forEach((n) => {
+        if (!visitedNode.get(n)) {
+          visitedNode.set(n, true)
+          result.push(n)
+        }
       })
 
       ptr++
