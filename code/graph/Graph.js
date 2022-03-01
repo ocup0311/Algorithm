@@ -169,8 +169,13 @@ class Graph {
     return mst
   }
 
-  // traversal
+  // traversal: 未加入順序規則, 只參照加入 node 時, 提供 rawData 的順序
   DFT(startNode) {
+    if (!startNode) {
+      console.log('Please give a start node inside the graph')
+      return null
+    }
+
     // var
     const result = []
     const visitedNode = new Map()
@@ -189,6 +194,36 @@ class Graph {
 
     // run
     fn(startNode)
+
+    return result
+  }
+
+  BFT(startNode) {
+    if (!startNode) {
+      console.log('Please give a start node inside the graph')
+      return null
+    }
+
+    // var
+    const result = []
+    const visitedNode = new Map()
+    let ptr = 0
+
+    visitedNode.set(startNode, true)
+    result.push(startNode)
+
+    while (result[ptr]) {
+      result[ptr].edges.forEach((e) => {
+        ;[e.node1, e.node2].forEach((n) => {
+          if (!visitedNode.get(n)) {
+            visitedNode.set(n, true)
+            result.push(n)
+          }
+        })
+      })
+
+      ptr++
+    }
 
     return result
   }
