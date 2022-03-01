@@ -19,20 +19,15 @@ const makeItem = (item, keyName) => {
 }
 
 // main
-export class Node_list {
+export class Node {
   constructor(item, keyName = 'key') {
-    // store one more key is better or not?
     this.key = makeKey(item, keyName)
     this.item = makeItem(item, keyName)
-    this.left = null
-    this.right = null
+    this.edges = []
   }
-}
 
-export class Node_arr {
-  constructor(item, keyName = 'key') {
-    this.key = makeKey(item, keyName)
-    this.item = makeItem(item, keyName)
+  addEdge(edge) {
+    this.edges.push(edge)
   }
 }
 

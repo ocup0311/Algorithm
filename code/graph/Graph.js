@@ -1,5 +1,6 @@
 import * as U from '$util'
-import { Node_arr, getKey } from './Node.js'
+import { Node, getKey } from './Node.js'
+import { Edge } from './Edge.js'
 import PriorityQueue from '../tree/PriorityQueue.js'
 
 // function
@@ -49,26 +50,7 @@ const buildGraph = (rawNode, rawEdge) => {
   return [Object.values(nodes), edges]
 }
 
-// class
-class Node extends Node_arr {
-  constructor(item) {
-    super(item)
-    this.edges = []
-  }
-
-  addEdge(edge) {
-    this.edges.push(edge)
-  }
-}
-
-class Edge {
-  constructor(node1, node2, weight = 0) {
-    this.node1 = node1
-    this.node2 = node2
-    this.weight = weight
-  }
-}
-
+// main
 // rawNode: [{ key: 1, value: 'A' }]
 // rawEdge: [{ key1: 1, key2: 2, weight: 10 }]
 class Graph {
@@ -153,8 +135,6 @@ class Graph {
       let cycled = true
 
       ;[edge.node1, edge.node2].forEach((node) => {
-        const key = getKey(node)
-
         if (!visitedNode.get(node)) {
           cycled = false
           visitedNode.set(node, true)

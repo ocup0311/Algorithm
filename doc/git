@@ -19,6 +19,9 @@ RENAME: 更改 file、variable、all 名稱
 MOVE: 移動檔案位置
   ex. '[MOVE] permutation'
 
+DIVIDE: 拆分檔案
+  ex. '[DIVIDE] Node & Edge from Graph'
+
 TYPO: 更正錯字
   ex. '[TYPO] tmp->temp'
 
