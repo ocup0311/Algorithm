@@ -168,6 +168,30 @@ class Graph {
     this.mst = mst
     return mst
   }
+
+  // traversal
+  DFT(startNode) {
+    // var
+    const result = []
+    const visitedNode = new Map()
+
+    // function
+    const fn = (node) => {
+      visitedNode.set(node, true)
+      result.push(node)
+
+      node.edges.forEach((e) => {
+        ;[e.node1, e.node2].forEach((n) => {
+          if (!visitedNode.get(n)) fn(n)
+        })
+      })
+    }
+
+    // run
+    fn(startNode)
+
+    return result
+  }
 }
 
 export default Graph

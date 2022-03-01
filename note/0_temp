@@ -24,3 +24,21 @@
     edges (links, lines)
 
 
+    Breadth First Tree Traversal (BFT) (廣度優先)
+
+    Depth First Tree Traversal   (DFT) (深度優先)
+        
+
+
+    # ex. ------------------------------------------------------------------
+    Graph: [(A,E) (A,F) (B,D) (C,D) (D,E) (D,I) (E,F) (E,I) (F,I) 
+    (G,H) (G,I) (H,I) (H,L) (I,J) (I,K) (I,M) (J, M) (K,L) (K,M)]
+    從 A 開始, 以字母順序當標準。
+    
+    BFT: A -> E -> F -> D -> I -> B -> C -> G -> H -> J -> K -> M -> L
+    DFT: A -> E -> D -> B -> C -> I -> F -> G -> H -> L -> K -> M -> J
+    # ex. ------------------------------------------------------------------
+
+
+; Floyd-Warchall 
+; Dijkstra's 

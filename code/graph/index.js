@@ -1,4 +1,5 @@
-import { runTestMST } from './@test.js'
+import { runTestMST, runTestTraversal } from './@test.js'
 
 // run
 runTestMST()
+runTestTraversal()
