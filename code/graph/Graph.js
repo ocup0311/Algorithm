@@ -62,7 +62,7 @@ class Node extends Node_arr {
 }
 
 class Edge {
-  constructor(node1, node2, weight) {
+  constructor(node1, node2, weight = 0) {
     this.node1 = node1
     this.node2 = node2
     this.weight = weight
@@ -82,26 +82,23 @@ class Graph {
   }
 
   // Minimal Spanning Tree
-  PrimMinimalSpanningTree(startIndex = 0, force_run = false) {
+  PrimMST(startIndex = 0, force_run = false) {
     // exception
     if (!force_run && this.mst) return this.mst
 
     // var
     const mst = []
     const edgeBucket = new PriorityQueue('min')
-    const visitedNode = {}
+    const visitedNode = new Map()
 
     // function
     const checkCycled = (edge) => {
       let cycled = true
 
       ;[edge.node1, edge.node2].forEach((node) => {
-        const key = getKey(node)
-
-        if (!visitedNode[key]) {
+        if (!visitedNode.get(node)) {
           cycled = false
-          visitedNode[key] = node
-          visitedNode._length++
+          visitedNode.set(node, true)
           node.edges.forEach((v) => {
             if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
           })
@@ -122,13 +119,12 @@ class Graph {
     const buildMST = (startNode) => {
       if (!startNode) return
 
-      visitedNode[getKey(startNode)] = startNode
-      visitedNode._length = 1
+      visitedNode.set(startNode, true)
       startNode.edges.forEach((edge) =>
         edgeBucket.enqueue(edge, 'weight', false)
       )
 
-      while (visitedNode._length < this.nodes.length) {
+      while (visitedNode.size < this.nodes.length) {
         const minEdge = findMinWeight()
 
         mst.push(minEdge)
@@ -148,7 +144,7 @@ class Graph {
 
     // var
     const mst = []
-    const visitedNode = {}
+    const visitedNode = new Map()
     const edgeBucket = new PriorityQueue('min')
     this.edges.forEach((v) => edgeBucket.enqueue(v, 'weight', false))
 
@@ -159,9 +155,9 @@ class Graph {
       ;[edge.node1, edge.node2].forEach((node) => {
         const key = getKey(node)
 
-        if (!visitedNode[key]) {
+        if (!visitedNode.get(node)) {
           cycled = false
-          visitedNode[key] = node
+          visitedNode.set(node, true)
         }
       })
 
