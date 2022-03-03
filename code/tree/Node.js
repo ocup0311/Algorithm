@@ -2,7 +2,7 @@ import * as U from '$util'
 
 // function
 const checkItem = (item, keyName) => {
-  if (typeof item !== 'object' || !item[keyName])
+  if (typeof item !== 'object' || item[keyName] === undefined)
     throw new U.OwnError(`Please give an object with ${keyName} for new Node.`)
 }
 
