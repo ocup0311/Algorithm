@@ -1,5 +1,7 @@
 import Graph from './Graph.js'
+import Digraph from './Digraph.js'
 
+// undirected
 const rawNode = [
   { key: 1, value: 'A' },
   { key: 2, value: 'B' },
@@ -80,4 +82,34 @@ export const runTestTraversal = () => {
   console.log('------ BFT(myGraph.nodes[myGraph.nodes.length]) ------')
   const bft6 = myGraph.BFT(myGraph.nodes[myGraph.nodes.length])
   console.log(makeLog(bft6))
+}
+
+// directed
+const rawDiNode = [
+  { key: 1, value: 'A' },
+  { key: 2, value: 'B' },
+  { key: 3, value: 'C' },
+  { key: 4, value: 'D' },
+]
+const rawDiEdge = [
+  { key1: 1, key2: 2, weight: 3 },
+  { key1: 1, key2: 4, weight: 4 },
+  { key1: 2, key2: 3, weight: 5 },
+  { key1: 3, key2: 4, weight: 1 },
+  { key1: 4, key2: 2, weight: 2 },
+  { key1: 4, key2: 3, weight: 1 },
+]
+const myDigraph = new Digraph({
+  name: 'myDigraph',
+  rawNode: rawDiNode,
+  rawEdge: rawDiEdge,
+})
+
+export const runTestDijkstra = () => {
+  console.log('------ myDigraph ------\n')
+  console.log(myDigraph.nodes)
+
+  console.log('------ myShortedPath ------\n')
+  const myShortedPath = myDigraph.Dijkstra(myDigraph.nodes[0])
+  console.log(myShortedPath)
 }
