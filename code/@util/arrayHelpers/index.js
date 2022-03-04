@@ -37,15 +37,17 @@ export const checkSameArr = (...arrs) => {
 
 export const checkSameArrItem = (...arrs) => {
   const [arr1, ...otherArrs] = arrs
-  if (!otherArrs.every((arr) => arr.length === arr1.length)) return false
 
-  const bucket = new Map()
+  const checkSameSize = (arr) => arr.length === arr1.length
+  const isAllSameSize = otherArrs.every(checkSameSize)
+  if (!isAllSameSize) return false
 
-  arr1.forEach((v) => {
-    bucket.set(v, true)
-  })
+  const bucket = new Map(arr1.map((v) => [v, true]))
 
-  if (!otherArrs.every((arr) => arr.every((v) => bucket.get(v)))) return false
+  const checkItem = (v) => bucket.get(v)
+  const checkAllItem = (arr) => arr.every(checkItem)
+  const isAllSameItem = otherArrs.every(checkAllItem)
+  if (!isAllSameItem) return false
 
   return true
 }
