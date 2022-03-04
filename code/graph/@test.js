@@ -90,15 +90,63 @@ const rawDiNode = [
   { key: 2, value: 'B' },
   { key: 3, value: 'C' },
   { key: 4, value: 'D' },
+  { key: 5, value: 'E' },
+  { key: 6, value: 'F' },
+  { key: 7, value: 'G' },
+  { key: 8, value: 'H' },
+  { key: 9, value: 'I' },
+  { key: 10, value: 'J' },
+  { key: 11, value: 'K' },
 ]
-const rawDiEdge = [
-  { key1: 1, key2: 2, weight: 3 },
-  { key1: 1, key2: 4, weight: 4 },
-  { key1: 2, key2: 3, weight: 5 },
-  { key1: 3, key2: 4, weight: 1 },
-  { key1: 4, key2: 2, weight: 2 },
-  { key1: 4, key2: 3, weight: 1 },
+
+const ssss = [
+  [1, 2, 2],
+  [1, 7, 3],
+
+  [2, 1, 2],
+  [2, 3, 3],
+  [2, 4, 2],
+
+  [3, 2, 3],
+  [3, 4, 5],
+
+  [4, 2, 2],
+  [4, 3, 5],
+  [4, 5, 4],
+
+  [5, 4, 4],
+  [5, 6, 8],
+
+  [6, 5, 8],
+  [6, 7, 1],
+
+  [7, 1, 3],
+  [7, 6, 1],
+  [7, 8, 4],
+  [7, 9, 3],
+  [7, 10, 5],
+
+  [8, 7, 4],
+  [8, 9, 2],
+
+  [9, 7, 3],
+  [9, 11, 2],
+
+  [10, 7, 5],
+
+  [11, 9, 2],
 ]
+
+const rawDiEdge = ssss.map((v) => ({ key1: v[0], key2: v[1], weight: v[2] }))
+
+//  [
+//   { key1: 1, key2: 2, weight: 3 },
+//   { key1: 1, key2: 4, weight: 4 },
+//   { key1: 2, key2: 3, weight: 5 },
+//   { key1: 3, key2: 4, weight: 1 },
+//   { key1: 4, key2: 2, weight: 2 },
+//   { key1: 4, key2: 3, weight: 1 },
+// ]
 const myDigraph = new Digraph({
   name: 'myDigraph',
   rawNode: rawDiNode,
@@ -110,6 +158,15 @@ export const runTestDijkstra = () => {
   console.log(myDigraph.nodes)
 
   console.log('------ myShortedPath ------\n')
-  const myShortedPath = myDigraph.Dijkstra(myDigraph.nodes[0])
+  const myShortedPath = myDigraph.Dijkstra(myDigraph.nodes[6])
+
+  const myShortedPathArr = []
+  myShortedPath.forEach((v) =>
+    myShortedPathArr.push(
+      `\n${v.start.item.value} --> ${v.to.item.value}  steps: ${v.steps}  from: ${v.previous.item.value}`
+    )
+  )
+
   console.log(myShortedPath)
+  console.log(...myShortedPathArr)
 }

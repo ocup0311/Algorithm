@@ -180,12 +180,17 @@ class Graph {
     // var
     const result = []
     const visitedNode = new Map()
-    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
 
     // function
-    const fn = (node) => {
+    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
+
+    const pushResult = (node) => {
       visitedNode.set(node, true)
       result.push(node)
+    }
+
+    const fn = (node) => {
+      pushResult(node)
 
       const nodes = makeNodes(node)
       nodes.forEach((n) => {
@@ -209,19 +214,22 @@ class Graph {
     const result = []
     const visitedNode = new Map()
     let ptr = 0
-    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
 
-    visitedNode.set(startNode, true)
-    result.push(startNode)
+    // function
+    const makeNodes = (edge) => U.getObjValue(traverseRule, rule)(edge)
+    const pushResult = (node) => {
+      visitedNode.set(node, true)
+      result.push(node)
+    }
+
+    // run
+    pushResult(startNode)
 
     while (result[ptr]) {
       const nodes = makeNodes(result[ptr])
 
       nodes.forEach((n) => {
-        if (!visitedNode.get(n)) {
-          visitedNode.set(n, true)
-          result.push(n)
-        }
+        if (!visitedNode.get(n)) pushResult(n)
       })
 
       ptr++

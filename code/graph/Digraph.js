@@ -80,7 +80,6 @@ class Digraph {
     // function
     const toEnqueue = (path) => unVisitedNode.enqueue(path, 'steps', false)
     const toDequeue = () => unVisitedNode.dequeue()
-
     const fn = (path) => {
       path.to.edges.forEach((edge) => {
         const newSteps = edge.weight + path.steps
@@ -116,8 +115,6 @@ class Digraph {
       fn(currentPath)
     }
 
-    // const ss = []
-    // shortedPaths.forEach((v) => ss.push(v))
     return shortedPaths
   }
 }
