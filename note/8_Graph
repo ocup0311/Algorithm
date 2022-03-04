@@ -40,4 +40,18 @@
             用以找出從一個起始點到其他所有點的最短路徑 (可獲得路線圖)
             O(ElogV)  --> let E = O(VN), then O(VNlogV)
 
-    
+
+        # Floyd-Warshall  vs  Dijkstra’s -----------------------------------------------
+        ; https://www.geeksforgeeks.org/comparison-dijkstras-floyd-warshall-algorithms/
+            
+            # Floyd-Warshall
+                1. all-pairs                (所有點 --> 所有點)
+                2. Time: O(V^3)
+                3. work in negative edge    (but no negative cycle <-- 自己到自己小於零)
+                4. can be implemented in a distributed system <-- Graph of Graphs （Ｑ？）
+
+            # Dijkstra’s
+                1. single-source            (單點 --> 所有點)
+                2. Time: O(ElogV)     --> all-pairs: O(VELogV)  ( worst: O(V^3LogV))
+                3. Not work in negative edge
+        # Floyd-Warshall  vs  Dijkstra’s -----------------------------------------------
