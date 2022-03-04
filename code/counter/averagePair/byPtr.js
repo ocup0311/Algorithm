@@ -1,6 +1,6 @@
 // O(n)
 
-function byPtr({ dataPool, target }) {
+const byPtr = ({ dataPool, target }) => {
   // pointer
   let [left, right] = [0, dataPool.length - 1]
 

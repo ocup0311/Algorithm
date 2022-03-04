@@ -4,7 +4,7 @@
 
 import * as U from '$util'
 
-export function uniqueLettersString(input) {
+export const uniqueLettersString = (input) => {
   // pointer
   let ptr = 0
 

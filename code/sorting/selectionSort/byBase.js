@@ -2,7 +2,7 @@
 
 import * as U from '$util'
 
-function selectionSort(originalArr) {
+const selectionSort = (originalArr) => {
   // var
   const sortedArr = [...originalArr]
   let step = 0

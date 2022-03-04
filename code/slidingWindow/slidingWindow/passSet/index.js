@@ -2,7 +2,7 @@
 //（以回傳 whole window 方式）
 // O(n * size)
 
-export function slidingWindow({ dataPool, size = 3 }, cb) {
+export const slidingWindow = ({ dataPool, size = 3 }, cb) => {
   // exception
   if (size > dataPool.length) return null
 

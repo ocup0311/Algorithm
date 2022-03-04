@@ -1,7 +1,7 @@
 import * as U from '$util'
 import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
-function minSum({ dataPool, size = 3 }) {
+const minSum = ({ dataPool, size = 3 }) => {
   // exception
   if (size > dataPool.length) return null
 

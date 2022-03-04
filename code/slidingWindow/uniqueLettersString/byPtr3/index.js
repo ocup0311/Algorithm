@@ -3,7 +3,7 @@
 
 import * as U from '$util'
 
-export function uniqueLettersString(input) {
+export const uniqueLettersString = (input) => {
   // pointer
   let [start, start_T, end_T] = [0, 0, 0]
 

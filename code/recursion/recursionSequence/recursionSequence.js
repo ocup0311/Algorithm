@@ -1,6 +1,6 @@
 // O(n)
 
-function recursionSequence(nth) {
+const recursionSequence = (nth) => {
   console.log(`run recursionSequence${nth}`)
   if (nth < 1) return null
   if (nth === 1) return 1

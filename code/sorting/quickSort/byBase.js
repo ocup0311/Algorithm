@@ -3,7 +3,7 @@
 import * as U from '$util'
 
 // main
-function quickSort(originalArr) {
+const quickSort = (originalArr) => {
   // var
   let step = 0
   const sortedArr = [...originalArr]

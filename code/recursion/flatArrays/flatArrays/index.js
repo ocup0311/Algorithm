@@ -1,7 +1,7 @@
 // O(n+m)
 // item * n, array * m
 
-function flatArrays(originalArr) {
+const flatArrays = (originalArr) => {
   // var
   const flattedArr = []
 

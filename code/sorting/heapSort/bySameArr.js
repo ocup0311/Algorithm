@@ -3,7 +3,7 @@
 import * as U from '$util'
 
 // main
-function heapSortS(originalArr) {
+const heapSortS = (originalArr) => {
   // var
   const sortedArr = [...originalArr]
   let heapSize = sortedArr.length

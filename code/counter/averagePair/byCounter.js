@@ -1,6 +1,6 @@
 // O(n)
 
-function byCounter({ dataPool, target }) {
+const byCounter = ({ dataPool, target }) => {
   const counter = {}
   const output = []
 

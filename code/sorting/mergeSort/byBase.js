@@ -1,9 +1,7 @@
 // O(nlogn)
 
-import * as U from '$util'
-
 // main
-function mergeSort(originalArr) {
+const mergeSort = (originalArr) => {
   // var
   let step = 0
 

@@ -1,7 +1,7 @@
 // O(2^n) (exponential)
 // too small to get stack overflow
 
-export function fib(nth) {
+export const fib = (nth) => {
   if (nth < 0) return null
   if (nth === 0) return 0
   if (nth === 1) return 1

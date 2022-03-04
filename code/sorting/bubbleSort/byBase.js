@@ -2,7 +2,7 @@
 
 import * as U from '$util'
 
-function BubbleSort(originalArr) {
+const BubbleSort = (originalArr) => {
   // var
   const sortedArr = [...originalArr]
   let step = 0

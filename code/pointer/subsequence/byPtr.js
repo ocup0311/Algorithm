@@ -1,6 +1,6 @@
 // O(n)
 
-function byPtr({ subsequenceStr, originalStr }) {
+const byPtr = ({ subsequenceStr, originalStr }) => {
   // exception
   if (subsequenceStr.length > originalStr.length) return false
 

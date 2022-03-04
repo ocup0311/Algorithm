@@ -3,7 +3,7 @@
 import * as U from '$util'
 
 // main
-function heapSortN(originalArr) {
+const heapSortN = (originalArr) => {
   // var
   const tempArr = [...originalArr]
   const sortedArr = []

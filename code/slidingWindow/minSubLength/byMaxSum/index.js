@@ -2,7 +2,7 @@
 
 import maxSum from '../../maxSum_minSum/passTerminal/maxSum.js'
 
-export function minSubLength({ dataPool, target = 30 }) {
+export const minSubLength = ({ dataPool, target = 30 }) => {
   // var
   let minLength = 0
   let sum = -Infinity

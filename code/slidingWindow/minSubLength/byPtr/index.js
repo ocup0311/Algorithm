@@ -1,7 +1,7 @@
 // 每個項目必須是自然數。
 // O(n)
 
-export function minSubLength({ dataPool, target = 30 }) {
+export const minSubLength = ({ dataPool, target = 30 }) => {
   // pointer
   let [start, end] = [0, 1]
 

@@ -1,8 +1,6 @@
 // O(n^2)
 
-import * as U from '$util'
-
-function InsertionSort(originalArr) {
+const InsertionSort = (originalArr) => {
   // var
   const sortedArr = [...originalArr]
   let step = 0

@@ -3,7 +3,7 @@
 import * as U from '$util'
 import { slidingWindow } from '../../slidingWindow/passSet/index.js'
 
-export function largestProduct({ dataPool, size = 3 }) {
+export const largestProduct = ({ dataPool, size = 3 }) => {
   // exception
   if (size > dataPool.length) return null
 

@@ -4,7 +4,7 @@
 
 import * as U from '$util'
 
-function BubbleSortWBP(originalArr) {
+const BubbleSortWBP = (originalArr) => {
   // var
   const sortedArr = [...originalArr]
   let step = 0

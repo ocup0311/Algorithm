@@ -1,6 +1,6 @@
 // O(n)
 
-function byPtr(input) {
+const byPtr = (input) => {
   // pointer
   let [left, right] = [0, input.length - 1]
 
