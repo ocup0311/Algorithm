@@ -13,7 +13,10 @@ const byPtr = ({ subsequenceStr, originalStr }) => {
   // run
   while (ptrS < regexStrS.length) {
     if (ptrO >= regexStrO.length) return false
-    if (regexStrS[ptrS] !== regexStrO[ptrO]) ptrO++
+    if (regexStrS[ptrS] !== regexStrO[ptrO]) {
+      ptrO++
+      continue
+    }
 
     ptrS++
     ptrO++
