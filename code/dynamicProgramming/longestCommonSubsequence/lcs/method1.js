@@ -1,3 +1,6 @@
+// very slow
+// O(m * n!)?
+
 import subsequence from '../../../pointer/subsequence/byPtr.js'
 
 const lcs = (str1, str2) => {

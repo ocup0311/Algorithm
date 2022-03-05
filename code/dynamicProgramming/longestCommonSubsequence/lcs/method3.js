@@ -1,3 +1,6 @@
+// by Dynamic Programming
+// O(n * m)
+
 const lcs = (_str1, _str2) => {
   const [str1, str2] = [' ' + _str1, ' ' + _str2]
   const [rowSize, columnSize] = [str1.length, str2.length]
@@ -11,7 +14,7 @@ const lcs = (_str1, _str2) => {
 
     table[0] = new Array(columnSize).fill(initialItem)
 
-    for (let i = 1; i < columnSize; i++) {
+    for (let i = 1; i < rowSize; i++) {
       const newArr = new Array(columnSize)
       newArr[0] = initialItem
       table[i] = newArr

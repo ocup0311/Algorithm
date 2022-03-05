@@ -1,3 +1,6 @@
+// return without the result. only length
+// O(2^n)
+
 const lcs = (str1, str2) => {
   // var
   let step = 0
