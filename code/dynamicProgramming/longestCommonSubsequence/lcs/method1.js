@@ -1,8 +1,8 @@
-import subsequence from '../pointer/subsequence/byPtr.js'
+import subsequence from '../../../pointer/subsequence/byPtr.js'
 
-const LCS = (str1, str2) => {
+const lcs = (str1, str2) => {
   // var
-  let output = ''
+  let result = ''
   let step1 = 0
   let step2 = 0
 
@@ -11,10 +11,10 @@ const LCS = (str1, str2) => {
 
   const fn = (str) => {
     step1++
-    if (output.length >= str.length) return
+    if (result.length >= str.length) return
     if (isSub(str)) {
       step2++
-      output = str
+      result = str
       return
     }
 
@@ -25,9 +25,8 @@ const LCS = (str1, str2) => {
 
   // run
   fn(str1)
-  console.log(step1, step2)
-  return output
+
+  return { result, length: result.length, step1, step2 }
 }
 
-const xx = LCS('addfgf', 'adefrtyf')
-console.log(xx)
+export default lcs
