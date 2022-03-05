@@ -98,6 +98,13 @@ class PriorityQueue {
       message: `#${deKey} Node dequeued.`,
     })
   }
+
+  changePriority(index) {
+    heapDown(this.queue, index, this.type)
+    heapUp(this.queue, index, this.type)
+
+    return this.queue.length
+  }
 }
 
 export default PriorityQueue
