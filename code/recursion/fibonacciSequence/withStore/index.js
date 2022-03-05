@@ -1,5 +1,6 @@
 // O(n)
 // keep value in store to decrease duplicate stack
+// 加入 store 即為用到 Dynamic Programming 概念
 
 const store = { 0: 0, 1: 1 }
 
