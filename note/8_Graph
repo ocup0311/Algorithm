@@ -40,6 +40,8 @@
             用以找出從一個起始點到其他所有點的最短路徑 (可獲得路線圖)
             O(ElogV)  --> let E = O(VN), then O(VNlogV)
 
+        Multistage Graph
+
 
         # Floyd-Warshall  vs  Dijkstra’s -----------------------------------------------
         ; https://www.geeksforgeeks.org/comparison-dijkstras-floyd-warshall-algorithms/

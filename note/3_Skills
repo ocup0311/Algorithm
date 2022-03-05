@@ -1,16 +1,16 @@
-# Counter ==================================================================================
+# Counter ===================================================================================================
 
     # code practice:
-    ＊Same Frequency
+    ＊ Same Frequency
     "Write a function that takes two strings and check if they have the same letters.Order doesn't matter."
         by loop O(n)
 
-    ＊intersection
+    ＊ intersection
     "Write a function that takes two arrays as parameters, and then return an array that is the intersection of these two arrays."
         by loop O(n^2)
         by counter O(n)
 
-    ＊Average Pair
+    ＊ Average Pair
     "Write a function that given a sorted array of integers and a number. Find if there's any pair in the array that has average of the given number. Find all of them. There might be multiple pairs fit the condition."
         by loop O(n^2)
         by counter O(n)
@@ -18,20 +18,20 @@
 
 
 
-# Pointer ==================================================================================
+# Pointer ===================================================================================================
 
     # code practice:
-    ＊Palindrome
+    ＊ Palindrome
     "Write a function that checks if the input string is a palindrome. Palindrome is a word that can be read forwards and backwards."
         by pointer O(n)
 
-    ＊Subsequence promblem
+    ＊ Subsequence promblem
     "A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. Write a function that checks if one string is a subsequence of the other string."
         by pointer O(n)
 
 
 
-# Sliding Window ===========================================================================
+# Sliding Window ============================================================================================
 "Generally speaking, a sliding window is a sub-list that runs over an underlying collection."
 input:
     array: [a, b, c, d, e, f, g] (也可是動態 array)
@@ -46,25 +46,25 @@ output:
 
 
     # code practice:
-    ＊Max and Min Sum
+    ＊ Max and Min Sum
     "Write two functions that calculate the max and min sum of n consecutive numbers in an array."
         by pass whole set O(n * size)
         by pass terminal O(n)
 
-    ＊minSubLength
+    ＊ minSubLength
     "Write a function called minSubLength which accepts two parameters, an array of positive integers and a positive integer. This function should return the minimal length of a continuous subarray - the sum of elements inside this subarray has to be greater than or equal to the positive integer parameter. If subarray not found, then return 0."
         by use maxSum O(n ^ 2)
         by pointer O(n) (每項必須為自然數)
 
-    ＊unique letters string
+    ＊ unique letters string
     "Write a function called uniqueLettersString, which accepts a string and returns the length of the longest substring with all distinct characters."
 
-    ＊largest product（乘積）
+    ＊ largest product（乘積）
     "The four adjacent digits in the 1000-digit number that have the greatest product are 9x9x8x9=5832. Find the n adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?"
 
 
 
-# Recursion ================================================================================
+# Recursion =================================================================================================
 "A function that calls itself."
 "Recursion is using a data structure called 'stack'. When we are calling a function inside another function, we are on the call stack."
 "Recursion is also a mathematical relation in sequences."
@@ -84,15 +84,68 @@ output:
         rs: recursive(n-1) x: 2 --> O(2^n) (exponential)
 
     # code practice:
-        ＊Recursion Sequence
+        ＊ Recursion Sequence
             O(n)
 
-        ＊Fibonacci Sequence
+        ＊ Fibonacci Sequence
         "Write a function that takes an integer N as an input and returns the Nth number in Fibonacci Sequence."
             withoutStore O(2^n)
             withStore O(n)
 
-        ＊Array of Arrays
+        ＊ Array of Arrays
         "Write a function that collects all value in an array of arrays and return an array of values collected."
             O(n)
+
+
+# Greedy Methods ============================================================================================
+"Each step of a 'greedy' algorithm only considers what seems best at the moment, rather than looking at the data as a whole."
+"They still arrive at globally-optimal solutions."
+"只考慮當下最佳選擇 --> 整體最佳選擇"   <-- "哪些條件下可用 （Ｑ？）"
+
+    # code practice:
+        ＊ Huffman Coding
+
+        ＊ Minimal Spanning Tree
+
+        ＊ Dijkstra’s
+            ; https://stackoverflow.com/questions/14038011/dijkstras-algorithm-a-greedy-or-dynamic-programming-algorithm
+        
+        ＊ Fractional Knapsack Problem (背包問題)    <-- 可以是分數
+
+
+# Dynamic Programming =======================================================================================
+
+    # 特性:
+        - 全方面的策略
+        - 分解成許多子問題，全部解決後才得到答案
+        - 避免重複的動作
+        - 不斷改變、紀錄某些細節
+
+    # 使用時機:
+        -  有許多重複問題時
+
+    # code practice:
+        ＊ Longest Common Subsequence (LCS) 
+        "ex. 比較兩條 ssDNA 的相似度"
+
+            # 名詞: 
+            於兩個 string 中，    ; "ABCDEFG"  &  "ABDEFG"
+                連續出現的字母: common substring    (collection of contiguous letters )
+                    ; "AB", "DE", "DEFG"...
+                順序出現的字母: common subsequence  (collection of letters )
+                    ; "AB", "BD", "ABDEFG"...
+
+
+
+
+        ＊ 0/1 Knapsack Problem    <-- 全有全無
+
+        ＊ Multistage Graph (shorted path)
+        ; https://www.geeksforgeeks.org/multistage-graph-shortest-path/
+            stage 0: 起點
+            stage 1: 與起點相隔一個 edge
+
+
+
+
 

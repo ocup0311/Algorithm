@@ -14,37 +14,3 @@
 ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
 
 
-
-
-Greedy Methods
-"Each step of a 'greedy' algorithm only considers what seems best at the moment, rather than looking at the data as a whole."
-"They still arrive at globally-optimal solutions."
-"只考慮當下最佳選擇 --> 整體最佳選擇"   <-- "哪些條件下可用 （Ｑ？）"
-
-    Huffman Coding
-    Minimal Spanning Tree
-    Dijkstra’s
-    ; https://stackoverflow.com/questions/14038011/dijkstras-algorithm-a-greedy-or-dynamic-programming-algorithm
-    Fractional Knapsack Problem (背包問題)    <-- 可以是分數
-
-
-Dynamic Programming
-    Longest Common Subsequence (LCS) 
-    "ex. 比較兩條 ssDNA 的相似度"
-
-        # 名詞: 
-        於兩個 string 中，    ; "ABCDEFG"  &  "ABDEFG"
-            連續出現的字母: common substring    (collection of contiguous letters )
-              ; "AB", "DE", "DEFG"...
-            順序出現的字母: common subsequence  (collection of letters )
-              ; "AB", "BD", "ABDEFG"...
-
-
-
-
-    011 Knapsack Problem    <-- 全有全無
-
-
-
-
-
