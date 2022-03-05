@@ -3,17 +3,15 @@ import subsequence from '../../../pointer/subsequence/byPtr.js'
 const lcs = (str1, str2) => {
   // var
   let result = ''
-  let step1 = 0
-  let step2 = 0
+  let step = 0
 
   // function
   const isSub = (str) => subsequence({ subsequenceStr: str, originalStr: str2 })
-
   const fn = (str) => {
-    step1++
+    step++
+
     if (result.length >= str.length) return
     if (isSub(str)) {
-      step2++
       result = str
       return
     }
@@ -26,7 +24,7 @@ const lcs = (str1, str2) => {
   // run
   fn(str1)
 
-  return { result, length: result.length, step1, step2 }
+  return { result, length: result.length, step }
 }
 
 export default lcs
