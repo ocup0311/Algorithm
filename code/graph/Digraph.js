@@ -73,7 +73,7 @@ class Digraph {
     this.path = null
   }
 
-  Dijkstra(startNode) {
+  Dijkstra(startNode, type = 'enqueue') {
     const shortedPaths = new Map()
     const unVisitedNode = new PriorityQueue('min')
 
@@ -86,6 +86,22 @@ class Digraph {
       shortedPaths.set(startNode, path)
       toEnqueue(path)
     }
+    const toDealNewPath = (type, node, path) => {
+      switch (type) {
+        case 'enqueue':
+          toEnqueue(path)
+          break
+
+        case 'change':
+          const index = unVisitedNode.queue.findIndex((v) => v.to === node)
+          if (index > 0) unVisitedNode.changePriority(index)
+          else toEnqueue(path)
+          break
+
+        default:
+          toEnqueue(path)
+      }
+    }
     const addNewPath = (path) => {
       path.to.edges.forEach((edge) => {
         const newSteps = edge.weight + path.steps
@@ -95,7 +111,8 @@ class Digraph {
           const newPath = new Path(startNode, edge.node2, edge.node1)
           newPath.steps = newSteps
           shortedPaths.set(edge.node2, newPath)
-          toEnqueue(newPath)
+          // toEnqueue(newPath)
+          toDealNewPath(type, edge.node2, newPath)
         }
       })
     }

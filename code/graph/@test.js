@@ -139,33 +139,37 @@ const ssss = [
 
 const rawDiEdge = ssss.map((v) => ({ key1: v[0], key2: v[1], weight: v[2] }))
 
-//  [
-//   { key1: 1, key2: 2, weight: 3 },
-//   { key1: 1, key2: 4, weight: 4 },
-//   { key1: 2, key2: 3, weight: 5 },
-//   { key1: 3, key2: 4, weight: 1 },
-//   { key1: 4, key2: 2, weight: 2 },
-//   { key1: 4, key2: 3, weight: 1 },
-// ]
 const myDigraph = new Digraph({
   name: 'myDigraph',
   rawNode: rawDiNode,
   rawEdge: rawDiEdge,
 })
 
-export const runTestDijkstra = () => {
-  console.log('------ myDigraph ------\n')
-  console.log(myDigraph.nodes)
-
-  console.log('------ myShortedPath ------\n')
-  const myShortedPath = myDigraph.Dijkstra(myDigraph.nodes[6])
-
+// function
+const makeResult = (shortedPath) => {
   const myShortedPathArr = []
-  myShortedPath.forEach((v) =>
+
+  shortedPath.forEach((v) =>
     myShortedPathArr.push(
       `\n${v.start.item.value} --> ${v.to.item.value}  steps: ${v.steps}  from: ${v.previous.item.value}`
     )
   )
 
-  console.log(...myShortedPathArr)
+  console.log('\n', ...myShortedPathArr)
+  return myShortedPathArr
+}
+
+export const runTestDijkstra = () => {
+  console.log('------ myDigraph ------\n')
+  console.log(myDigraph.nodes)
+
+  console.log('------ myShortedPath by enqueue ------\n')
+  const myShortedPath1 = myDigraph.Dijkstra(myDigraph.nodes[6], 'enqueue')
+
+  makeResult(myShortedPath1)
+
+  console.log('------ myShortedPath by change ------\n')
+  const myShortedPath2 = myDigraph.Dijkstra(myDigraph.nodes[6], 'change')
+
+  makeResult(myShortedPath2)
 }
