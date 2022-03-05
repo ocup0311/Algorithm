@@ -167,6 +167,5 @@ export const runTestDijkstra = () => {
     )
   )
 
-  console.log(myShortedPath)
   console.log(...myShortedPathArr)
 }

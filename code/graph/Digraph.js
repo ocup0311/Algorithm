@@ -80,39 +80,32 @@ class Digraph {
     // function
     const toEnqueue = (path) => unVisitedNode.enqueue(path, 'steps', false)
     const toDequeue = () => unVisitedNode.dequeue()
-    const fn = (path) => {
+    const inialize = () => {
+      const path = new Path(startNode, startNode, startNode)
+      path.steps = 0
+      shortedPaths.set(startNode, path)
+      toEnqueue(path)
+    }
+    const addNewPath = (path) => {
       path.to.edges.forEach((edge) => {
         const newSteps = edge.weight + path.steps
+        const oldSteps = shortedPaths.get(edge.node2)?.steps ?? Infinity
 
-        const currentSteps = shortedPaths.get(edge.node2)?.steps ?? Infinity
-        if (newSteps < currentSteps) {
+        if (newSteps < oldSteps) {
           const newPath = new Path(startNode, edge.node2, edge.node1)
           newPath.steps = newSteps
-          toEnqueue(newPath)
           shortedPaths.set(edge.node2, newPath)
+          toEnqueue(newPath)
         }
       })
-
-      if (path.start === path.to) {
-        path.previous = startNode
-        path.steps = 0
-      }
     }
 
     // run
-    this.nodes.forEach((node) => {
-      const path = new Path(startNode, node, null)
-      if (node === startNode) {
-        path.steps = 0
-        path.previous = startNode
-        shortedPaths.set(startNode, path)
-      }
-      toEnqueue(path)
-    })
+    inialize()
 
     while (!unVisitedNode.isEmpty()) {
       const currentPath = toDequeue()
-      fn(currentPath)
+      addNewPath(currentPath)
     }
 
     return shortedPaths
