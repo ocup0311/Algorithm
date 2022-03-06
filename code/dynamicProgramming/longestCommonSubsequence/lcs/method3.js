@@ -3,7 +3,7 @@
 
 const lcs = (_str1, _str2) => {
   const [str1, str2] = [' ' + _str1, ' ' + _str2]
-  const [rowSize, columnSize] = [str1.length, str2.length]
+  const [rowSize, colSize] = [str1.length, str2.length]
   const table = new Array(rowSize)
   let [ptrR, ptrC] = [1, 1]
   let step = 0
@@ -12,10 +12,10 @@ const lcs = (_str1, _str2) => {
   const initialTable = () => {
     const initialItem = { length: 0, previous: null }
 
-    table[0] = new Array(columnSize).fill(initialItem)
+    table[0] = new Array(colSize).fill(initialItem)
 
     for (let i = 1; i < rowSize; i++) {
-      const newArr = new Array(columnSize)
+      const newArr = new Array(colSize)
       newArr[0] = initialItem
       table[i] = newArr
     }
@@ -48,7 +48,7 @@ const lcs = (_str1, _str2) => {
   }
 
   const buildResult = () => {
-    let ptr = table[rowSize - 1][columnSize - 1]
+    let ptr = table[rowSize - 1][colSize - 1]
     const length = ptr.length
     let result = ''
 
@@ -64,7 +64,7 @@ const lcs = (_str1, _str2) => {
   initialTable()
 
   while (ptrR < rowSize) {
-    while (ptrC < columnSize) {
+    while (ptrC < colSize) {
       fillTable()
       ptrC++
     }
