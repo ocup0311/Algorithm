@@ -126,6 +126,7 @@ output:
 
     # code practice:
         ＊ Longest Common Subsequence (LCS) 
+        ; 參考圖 image/3_Skills/Dynamic Programming/LCS.jpg
         "ex. 比較兩條 ssDNA 的相似度"
 
             # 名詞: 
