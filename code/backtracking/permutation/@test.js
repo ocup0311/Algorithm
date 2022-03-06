@@ -44,6 +44,6 @@ export const runTest = (input, fn) => {
   const result = fn(input)
 
   console.log(`======= ${input} =======`)
-  console.log(`SWAP ${result.step} times`)
+  console.log(`steps: ${result.step} `)
   console.log(result.output)
 }

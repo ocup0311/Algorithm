@@ -11,5 +11,7 @@ export const toDownCounter = (counter, item) => {
   counter[item] = counter[item] === undefined ? -1 : counter[item] - 1
 }
 
-// log
+// other
 export const openLog = (v) => console.log(JSON.stringify(v, null, ' '))
+
+export const deepClone = (data) => JSON.parse(JSON.stringify(data))

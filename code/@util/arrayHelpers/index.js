@@ -53,4 +53,4 @@ export const checkSameArrItem = (...arrs) => {
 }
 
 export const initial2DTable = (rowSize, colSize = rowSize) =>
-  new Array(rowSize).fill(1).map(() => new Array(colSize))
+  new Array(rowSize).fill(1).map(() => new Array(colSize).fill(null))

@@ -18,6 +18,6 @@ Backtracking (回朔法)
     "一種暴力破解法(Brute-force attack), 暴力破解時, 記錄下排除掉的候選人, 再次遇到時就直接略過他, 回朔到上一步繼續處理其他候選人。"
     
     # code practice:
-        permutation for 3 items
+        permutation_3item
         N Queens Puzzle
 
