@@ -2,9 +2,9 @@ import * as U from '$util'
 
 const nQueens = (input = 4) => {
   const Q = 'Q'
-  const output = []
   const table = U.initial2DTable(input)
-  const counter = {}
+  const colRecorder = {} // {row: col}
+  const output = []
 
   // function
   const checkCol = (row, col) => {
@@ -24,18 +24,18 @@ const nQueens = (input = 4) => {
   const check = (row, col) => checkCol(row, col) && checkDiagonal(row, col)
 
   const makeAnswer = (row) => {
-    const previos = counter[row] ?? -1
-    if (previos !== -1) table[row][previos] = null
+    const preCol = colRecorder[row] ?? -1
+    if (preCol !== -1) table[row][preCol] = null
 
-    for (let col = previos + 1; col < input; col++) {
+    for (let col = preCol + 1; col < input; col++) {
       if (check(row, col)) {
         table[row][col] = Q
-        counter[row] = col
+        colRecorder[row] = col
         return true
       }
     }
 
-    counter[row] = undefined
+    colRecorder[row] = undefined
     return false
   }
 
@@ -50,7 +50,7 @@ const nQueens = (input = 4) => {
     else row++
   }
 
-  return { output, num: output.length, step: 0 }
+  return output
 }
 
 export default nQueens
