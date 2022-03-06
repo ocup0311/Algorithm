@@ -135,9 +135,6 @@ output:
                 順序出現的字母: common subsequence  (collection of letters )
                     ; "AB", "BD", "ABDEFG"...
 
-
-
-
         ＊ 0/1 Knapsack Problem    <-- 全有全無
 
         ＊ Multistage Graph (shorted path)
