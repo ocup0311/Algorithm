@@ -1,18 +1,7 @@
 // use Branch-and-Bound
 
 import PriorityQueue from '../../tree/PriorityQueue.js'
-
-class Node {
-  constructor(cost, profit, lowerBound, upperBound, layer = 0, prev = null) {
-    this.cost = cost
-    this.profit = profit
-    this.lowerBound = lowerBound
-    this.upperBound = upperBound
-    this.layer = layer
-    this.prev = prev
-    this.addedItem = null
-  }
-}
+import Node from './Node.js'
 
 const zeroOneKP = ({ items, maxCost }) => {
   const output = []
@@ -24,8 +13,9 @@ const zeroOneKP = ({ items, maxCost }) => {
   let lowerBound_tree = 0
 
   // function
-  const toEnqueue = (node) => candidates.enqueue(node, 'upperBound', false)
-
+  const toEnqueue = (node) => {
+    candidates.enqueue(node, 'upperBound', false)
+  }
   const toDequeue = () => candidates.dequeue()
 
   const makeBound = (cost = 0, profit = 0, layer = 0) => {
@@ -78,7 +68,7 @@ const zeroOneKP = ({ items, maxCost }) => {
     const currentItem = restItems[restItems.length - 1 - prevLayer]
 
     if (prevLayer === items.length) {
-      finalcandidates.enqueue(prevNode, 'upperBound', false)
+      finalcandidates.enqueue(prevNode, 'lowerBound', false)
       continue
     }
 
@@ -141,22 +131,4 @@ const zeroOneKP = ({ items, maxCost }) => {
   return output
 }
 
-const items = [
-  { key: 'A', cost: 4, profit: 10 },
-  { key: 'B', cost: 2, profit: 10 },
-  { key: 'C', cost: 6, profit: 12 },
-  { key: 'D', cost: 9, profit: 15 },
-]
-// [
-//   { cost: 2, profit: 10 },
-//   { cost: 20, profit: 70 },
-//   { cost: 12, profit: 35 },
-//   { cost: 5, profit: 20 },
-//   { cost: 15, profit: 65 },
-//   { cost: 10, profit: 30 },
-// ]
-const maxCost = 15
-
-const aa = zeroOneKP({ items, maxCost })
-
-console.log(aa)
+export default zeroOneKP

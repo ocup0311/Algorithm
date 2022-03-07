@@ -108,27 +108,3 @@ class PriorityQueue {
 }
 
 export default PriorityQueue
-
-const pq = new PriorityQueue()
-
-console.log('------ PriorityQueue ------')
-console.log(pq)
-
-const fn = (key) => {
-  pq.enqueue({ priority: key }, 'priority', false)
-  console.log(
-    pq.queue.map((v) => {
-      // console.log(typeof v.key)
-      return v.key
-    })
-  )
-}
-
-fn(3)
-fn(4)
-fn(377)
-fn(223)
-fn(143)
-fn(3876)
-fn(13456)
-fn(35)
