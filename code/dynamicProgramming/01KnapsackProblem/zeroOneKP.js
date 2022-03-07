@@ -117,28 +117,19 @@ const zeroOneKP = ({ items, maxCost }) => {
     return output
   }
 
-  const run = () => {
-    while (candidates.queue.length > 0) {
-      const prevNode = toDequeue()
-      const prevLayer = prevNode.layer
-      const currentItem = sortedItems[sortedItems.length - 1 - prevLayer]
-
-      if (prevLayer === items.length) return makeOutput(prevNode)
-
-      if (prevNode.upperBound < lowerBound_global) break
-
-      makeCandidate({ prev: prevNode })
-
-      makeCandidate({ prev: prevNode, addedItem: currentItem })
-    }
-  }
-
   // run
   initialize()
 
-  const output = run()
+  while (candidates.queue.length > 0) {
+    const prevNode = toDequeue()
+    const prevLayer = prevNode.layer
+    const currentItem = sortedItems[sortedItems.length - 1 - prevLayer]
 
-  return output
+    if (prevLayer === items.length) return makeOutput(prevNode)
+
+    makeCandidate({ prev: prevNode }) // 0
+    makeCandidate({ prev: prevNode, addedItem: currentItem }) // 1
+  }
 }
 
 export default zeroOneKP
