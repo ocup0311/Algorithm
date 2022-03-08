@@ -51,3 +51,24 @@
         2. 若 upperBound < lowerBound_tree  --> 排除此 Branch
         3. 若 cost > maxCost               --> 排除此 Branch
         # 解析 ------------------------------------------------
+
+
+
+# Knuth-Morris-Pratt String-Search (KMP)
+"跳著尋找文字"
+    
+    # PS Array (Prefix String Array?)
+        1. 初始化兩個 pointer 1, 2 為 0, 1 用以指向一字串
+        2. "str[ptr1] !== str[ptr2]"  --> "PS[ptr2] = 0" , "ptr1 = 0" , "ptr2++"
+           "str[ptr1] === str[ptr2]"  --> "PS[ptr2] = ptr1 + 1" , "ptr1++" , "ptr2++"
+        3. PS 全部右移一位, PS[0] 補上 -1
+
+    # 步驟
+        1. 先求得 target 的 PS Array
+        2. 以兩個 pointer 1 ,2 分別來比對 target(T) & data pool(D)
+        3. "T[ptr1] !== D[ptr2]" --> "ptr2 = ptr2 - PS[ptr1]" , "ptr1 = 0"
+        4. 重複直到全部找完 或 找到全符合
+
+
+
+
