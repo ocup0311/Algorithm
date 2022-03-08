@@ -1,4 +1,4 @@
-const A_Z = [
+export const A_Z = [
   'A',
   'B',
   'C',
@@ -27,7 +27,7 @@ const A_Z = [
   'Z',
 ]
 
-const a_z = [
+export const a_z = [
   'a',
   'b',
   'c',
@@ -55,5 +55,3 @@ const a_z = [
   'y',
   'z',
 ]
-
-export default { A_Z, a_z }

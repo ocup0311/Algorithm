@@ -1,4 +1,4 @@
-import C from '$config'
+import * as C from '$config'
 import * as U from '$util'
 
 export const builtInput = (amount) => {
