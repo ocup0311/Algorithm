@@ -46,13 +46,15 @@ export const builtInput = ({ amountT, amountD }, guaranteed = false) => {
   return { target, dataPool }
 }
 
-export const runTest = (input, fn) => {
+export const runTest = (input, fn, isLog = true) => {
   const result = fn(input)
 
-  console.log(`\n------------- Data Pool -------------`)
-  console.log(input.dataPool)
-  console.log(`\n------------- Target -------------`)
-  console.log(input.target)
+  if (isLog) {
+    console.log(`\n------------- Data Pool -------------`)
+    console.log(input.dataPool)
+    console.log(`\n------------- Target -------------`)
+    console.log(input.target)
+  }
   console.log(`\n------------- Result -------------`)
   console.log(result)
 }
