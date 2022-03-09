@@ -1,4 +1,4 @@
-# 筆記方向 ===================================================================================
+# 筆記方向 =================================================================================
 1. 查演算法的各種使用時機
 2. 附圖解
 3. pseudo code
@@ -8,8 +8,54 @@
 7. （Ｑ？） still need to find the anwer
 
 
-# 重看過往 ====================================================================================
+# 重看過往 ==================================================================================
 ＊ 整理多層 object --> 淮: 用 BFS
 ＊ old case study: idsToChildren
 ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
 
+
+# P verses NP Problems =====================================================================
+; https://zh.wikipedia.org/wiki/P/NP%E9%97%AE%E9%A2%98
+; --> 未解數學 <--
+"當你可快速證明一問題的解是否正確 --> 是否此問題必有快速解法？"
+"現有的 NP 是否為 P? 若否，如何證明？"
+
+    # P Problems (polynomial)
+        polynomial complexity (多項式)
+        --> O(n^k)   (reasonable time)
+        --> class-P problems (easy problems)
+
+    # NP Problems (non-deterministic polynomial)
+        ; 目前在 Deterministic Turing Machine 無法用 polynomial complexity 解出
+        superpolynomial complexity (超越 多項式)
+        --> 已知解為 O(k^n)
+        --> class-NP problems (hard problems)
+
+        # Deterministic Turing Machine ------------------
+            ; 現今電腦都是 Deterministic Turing Machine
+            同一個條件下, 只能做一個選擇
+
+        # Non-Deterministic Turing Machine --------------
+            ; 目前無此技術
+            同一個條件下, 可以做多個選擇
+            --> "需要同時有無限個處理器一起執行所有選擇" OR "luckiest guesser 每次都猜對要選哪個"
+            
+            # 步驟:
+            1. Guessing: if 有答案 --> 給正確答案 (in polynomial complexity time)
+                         if 沒答案 --> 給隨便答案
+            2. Checking: if 答案對 --> 有解答
+                         if 答案錯 --> 沒解答
+                        
+    # NP Complete (NPC)
+        1. 本身是 NP
+        2. 可以模擬成其他相似的 NP (許多相似的 NP 群, 可以簡化成一個 NPC)
+        3. 是此類別中, 所有相似的 NP 當中, 最難的一個 NP
+        4. 若找到 NPC 解答, 可以套用在該類別中所有 NP
+
+        ; ex. -------------------
+        ; SAT problems
+        ; 0/1 Knapsack problem
+        ; Vertex Cover
+        ; Hamiltonian Cycle
+        ; Travelling Salesman (TSP)
+        ; Subset Problem

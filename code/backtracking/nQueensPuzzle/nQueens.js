@@ -5,6 +5,7 @@ const nQueens = (input = 4) => {
   const table = U.initial2DTable(input)
   const colRecorder = {} // {row: col}
   const output = []
+  let step = 0
 
   // function
   const checkCol = (row, col) => {
@@ -43,6 +44,7 @@ const nQueens = (input = 4) => {
 
   // run
   for (let row = 0; row < input; ) {
+    step++
     if (row < 0) break
 
     if (!makeAnswer(row)) row--
@@ -50,7 +52,7 @@ const nQueens = (input = 4) => {
     else row++
   }
 
-  return output
+  return { output, step }
 }
 
 export default nQueens
