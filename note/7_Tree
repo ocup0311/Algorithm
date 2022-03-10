@@ -28,7 +28,7 @@
 
     Binary Tree: "所有 node 最多兩個 children"
     
-    Complete Binary Tree: "只有最右邊最底部為空"
+    Complete Binary Tree: "只有最右邊最底部可以為空"
     
     Full Binary Tree(FBT): "所有的葉子有一樣的 depth"
     

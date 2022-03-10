@@ -26,10 +26,13 @@
         --> class-P problems (easy problems)
 
     # NP Problems (non-deterministic polynomial)
-        ; 目前在 Deterministic Turing Machine 無法用 polynomial complexity 解出
         superpolynomial complexity (超越 多項式)
         --> 已知解為 O(k^n)
         --> class-NP problems (hard problems)
+
+        # 定義:
+        「目前為止在 Deterministic Turing Machine 無法用 polynomial complexity 解出, 
+        但可用 polynomial complexity 求證」的問題。
 
         # Deterministic Turing Machine ------------------
             ; 現今電腦都是 Deterministic Turing Machine
@@ -59,3 +62,50 @@
         ; Hamiltonian Cycle
         ; Travelling Salesman (TSP)
         ; Subset Problem
+
+
+    # NP Complete Reduction
+        ; https://math.stackexchange.com/questions/1542179/can-any-np-complete-problem-can-be-reduced-to-any-other-np-complete-problem-in-p
+
+        -O-> : "can be reduced to (in polynomial complexity time)" 
+        -X-> : "can't be reduced to (in polynomial complexity time)"
+
+        # 意義:
+            若 A  -O->  B, 則只需解了 B 即可解 A (解決 NP Complete 就解決所有他的上游)
+
+        # 概念:
+            1. ALL NP  -O->  NP Complete
+            2. NP Complete  -O->  another NP Complete   (可互相轉換)
+            3. NP Complete  -X->  NP
+        -------------------------------------------------
+        --> 4. 簡單證明 A 為 NP Complete 的方法:
+                - 證明 A 為 NP
+                - 證明存在 已知 NP Complete  -O->  A
+            
+        # Cook-Levin theorem: 
+            定義 "SAT problem" 為 NP Complete    <-- 第一個 NP Complete
+            
+            ALL NP  -O->  SAT problem  -O->  other NP Complete
+
+        # General Sequence of NP Complete (普遍認知的順序)
+                          Circuit - SAT
+                                |
+                               SAT
+                                |
+                            3-CNF SAT
+                        /               \ 
+        Clique Problem                  Subset Problem 
+                |
+        Vertex Cover Problem 
+                |
+        Hamiltonian Cycle 
+                |
+        Travelling Salesman (TSP)
+
+    # NP Hardness
+        ; https://en.wikipedia.org/wiki/NP-hardness
+        1. 至少跟 最難的 NP 一樣難
+        2. 可能比 NP 還難, 例如無法驗證 in polynomial complexity time
+        3. 可能用 Non-Deterministic Turing Machine 也無法解
+
+
