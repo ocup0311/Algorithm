@@ -65,5 +65,3 @@ Array:
 String:
     slice: O(1)
 
-
-; ＊ 找時間把 O, Ω, Θ 算法再認真看一遍
