@@ -23,7 +23,8 @@ const inputSet = [input0, input1, input2, input3, input4]
 
 // warm up :)
 for (let i = 0; i < 9; i++) {
-  runTestSet({ fn: quickSort.byBase, inputSet }, false)
+  runTestSet({ fn: quickSort.byLoop, inputSet }, false)
+  runTestSet({ fn: quickSort.byRecursion, inputSet }, false)
   runTestSet({ fn: heapSort.bySameArr, inputSet }, false)
   runTestSet({ fn: heapSort.byNewArr, inputSet }, false)
   runTestSet({ fn: mergeSort.byBase, inputSet }, false)
@@ -36,7 +37,8 @@ for (let i = 0; i < 9; i++) {
 }
 
 console.log('\n---------- RUN ----------')
-const result9 = runTestSet({ fn: quickSort.byBase, inputSet })
+const result10 = runTestSet({ fn: quickSort.byLoop, inputSet })
+const result9 = runTestSet({ fn: quickSort.byRecursion, inputSet })
 const result8 = runTestSet({ fn: heapSort.bySameArr, inputSet })
 const result7 = runTestSet({ fn: heapSort.byNewArr, inputSet })
 const result6 = runTestSet({ fn: mergeSort.cleanUp, inputSet })
@@ -66,8 +68,10 @@ console.log(`\nO(nlongn)   HeapSortN   ${result7.time}`)
 console.log('steps: ', result7.steps)
 console.log(`\nO(nlongn)   HeapSortS   ${result8.time}`)
 console.log('steps: ', result8.steps)
-console.log(`\nO(nlongn)   QuickSort   ${result9.time}`)
+console.log(`\nO(nlongn)   QuickSort recursion   ${result9.time}`)
 console.log('steps: ', result9.steps)
+console.log(`\nO(nlongn)   QuickSort loop   ${result10.time}`)
+console.log('steps: ', result10.steps)
 
 console.log(`\n---------- CHECK BY [${inputSet[0]}] ----------`)
 console.log(
@@ -81,6 +85,7 @@ console.log(
     result6.arr,
     result7.arr,
     result8.arr,
-    result9.arr
+    result9.arr,
+    result10.arr
   )
 )

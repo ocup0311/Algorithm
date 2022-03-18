@@ -1,1 +1,2 @@
-export { default as byBase } from './byBase.js'
+export { default as byRecursion } from './byRecursion.js'
+export { default as byLoop } from './byLoop.js'
