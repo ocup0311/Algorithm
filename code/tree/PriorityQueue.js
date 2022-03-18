@@ -1,4 +1,6 @@
 // use Max Heap
+// [TODO] 尚未處理「部分要 priority，部分不用」的案例。
+
 import * as U from '$util'
 import { Node_arr, buildReturn, getKey } from './Node.js'
 

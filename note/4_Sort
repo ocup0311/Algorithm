@@ -136,8 +136,9 @@
         average performance: O(nlogn)
 
     ＊Quick Sort
-    ; https://kopu.chat/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-quick-sort/
-    ; ↑ ↑ ↑ 再研究解決 worst case 的方法。
+    ; https://kopu.chat/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-quick-sort/    <-- 再研究解決 worst case 的方法。
+    ; https://www.geeksforgeeks.org/iterative-quick-sort/                   <-- 補充用 loop 方法解決空間問題。
+
     
         Partition
         "The idea of partition algorithm is to divide the array into 2 parts. Either part is a sorted array, but the element in the middle is sorted(we found its correct final spot)"
@@ -154,15 +155,21 @@
         best case performance: O(nlogn)
         average performance: O(nlogn)
 
-        與 Merge Sort, Heap Sort 比較:
+        # 與 Merge Sort, Heap Sort 比較:
             優勢:
                 因為過程中省去建立許多 array, 空間複雜度相對小很多（Ｑ？）
                 省去建立 array 所花費時間, 在一般的情況下, 時間也能較快（Ｑ？）
             劣勢:
                 worst case performance: O(n^2)
-                worst case 時可能會 stack overflow
+                worst case 時可能會 stack overflow  <-- 可用 loop 寫法解決
         
-
+        # recursion (vs loop)
+            1. 比較簡潔
+            2. 容易 stack overflow
+            3. 效能 可能 略輸 loop
+                <-- 需要在記憶體片段中重複跳躍
+                <-- main & function 間反覆跳躍
+                <-- function 通常會在另一片段
 
     ; ↑ ↑ ↑ Comparison Model 中, 目前最快排列 O(nlogn) ---------------------------------------
 
