@@ -1,38 +1,40 @@
 import * as U from '$util'
 
 // function
-const checkItem = (item, keyName) => {
-  if (typeof item !== 'object' || item[keyName] === undefined)
+const checkItem = (item, keyName, isErr = true) => {
+  if (typeof item !== 'object' || item[keyName] === undefined) {
+    if (!isErr) return false
     throw new U.OwnError(`Please give an object with ${keyName} for new Node.`)
+  }
+
+  return true
 }
 
-const makeKey = (item, keyName) => {
-  checkItem(item, keyName)
+const makeKey = (item, keyName, defultKey) => {
+  if (!checkItem(item, keyName, defultKey === undefined)) return defultKey
 
   return item[keyName]
 }
 
-const makeItem = (item, keyName) => {
-  checkItem(item, keyName)
-
+const makeItem = (item) => {
   return { ...item }
 }
 
 // main
 export class Node_list {
-  constructor(item, keyName = 'key') {
+  constructor(item, keyName = 'key', defultKey) {
     // store one more key is better or not?
-    this.key = makeKey(item, keyName)
-    this.item = makeItem(item, keyName)
+    this.key = makeKey(item, keyName, defultKey)
+    this.item = makeItem(item)
     this.left = null
     this.right = null
   }
 }
 
 export class Node_arr {
-  constructor(item, keyName = 'key') {
-    this.key = makeKey(item, keyName)
-    this.item = makeItem(item, keyName)
+  constructor(item, keyName = 'key', defultKey) {
+    this.key = makeKey(item, keyName, defultKey)
+    this.item = makeItem(item)
   }
 }
 

@@ -75,10 +75,10 @@ class Digraph {
 
   Dijkstra(startNode, type = 'enqueue') {
     const shortedPaths = new Map()
-    const unVisitedNode = new PriorityQueue('min')
+    const unVisitedNode = new PriorityQueue('min', 'steps')
 
     // function
-    const toEnqueue = (path) => unVisitedNode.enqueue(path, 'steps', false)
+    const toEnqueue = (path) => unVisitedNode.enqueue(path)
     const toDequeue = () => unVisitedNode.dequeue()
     const inialize = () => {
       const path = new Path(startNode, startNode, startNode)
@@ -111,7 +111,7 @@ class Digraph {
           const newPath = new Path(startNode, edge.node2, edge.node1)
           newPath.steps = newSteps
           shortedPaths.set(edge.node2, newPath)
-          // toEnqueue(newPath)
+
           toDealNewPath(type, edge.node2, newPath)
         }
       })

@@ -6,15 +6,13 @@ import Node from './Node.js'
 const zeroOneKP = ({ items, maxCost }) => {
   // var
   let lowerBound_global = 0
-  const candidates = new PriorityQueue('max')
+  const candidates = new PriorityQueue('max', 'upperBound')
   const sortedItems = items
     .map((v) => ({ ...v, cp: v.profit / v.cost }))
     .sort((a, b) => a.cp - b.cp)
 
   // function
-  const toEnqueue = (node) => {
-    candidates.enqueue(node, 'upperBound', false)
-  }
+  const toEnqueue = (node) => candidates.enqueue(node)
 
   const toDequeue = () => candidates.dequeue()
 

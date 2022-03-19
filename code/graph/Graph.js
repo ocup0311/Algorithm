@@ -71,7 +71,7 @@ class Graph {
 
     // var
     const mst = []
-    const edgeBucket = new PriorityQueue('min')
+    const edgeBucket = new PriorityQueue('min', 'weight')
     const visitedNode = new Map()
 
     // function
@@ -83,7 +83,7 @@ class Graph {
           cycled = false
           visitedNode.set(node, true)
           node.edges.forEach((v) => {
-            if (edge !== v) edgeBucket.enqueue(v, 'weight', false)
+            if (edge !== v) edgeBucket.enqueue(v)
           })
         }
       })
@@ -103,9 +103,7 @@ class Graph {
       if (!startNode) return
 
       visitedNode.set(startNode, true)
-      startNode.edges.forEach((edge) =>
-        edgeBucket.enqueue(edge, 'weight', false)
-      )
+      startNode.edges.forEach((edge) => edgeBucket.enqueue(edge))
 
       while (visitedNode.size < this.nodes.length) {
         const minEdge = findMinWeight()
@@ -128,8 +126,8 @@ class Graph {
     // var
     const mst = []
     const visitedNode = new Map()
-    const edgeBucket = new PriorityQueue('min')
-    this.edges.forEach((v) => edgeBucket.enqueue(v, 'weight', false))
+    const edgeBucket = new PriorityQueue('min', 'weight')
+    this.edges.forEach((v) => edgeBucket.enqueue(v))
 
     // function
     const checkCycled = (edge) => {

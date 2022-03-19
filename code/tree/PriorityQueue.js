@@ -6,8 +6,8 @@ import { Node_arr, buildReturn, getKey } from './Node.js'
 
 // class
 class Node extends Node_arr {
-  constructor(item, priority) {
-    super(item, priority)
+  constructor(item, priority, defultKey) {
+    super(item, priority, defultKey)
   }
 }
 
@@ -58,20 +58,21 @@ const heapUp = (arr, index_child, type) => {
 
 // main
 class PriorityQueue {
-  constructor(type = 'max') {
-    const enumerate = ['max', 'min']
-    U.checkEnum(type, enumerate)
+  constructor(type = 'max', priority = 'priority') {
+    U.checkEnum(type, ['max', 'min'])
 
     this.queue = []
     this.type = type
+    this.priority = priority
   }
 
   isEmpty() {
     return this.queue.length === 0
   }
 
-  enqueue(item, priority = 'priority', isLog = true) {
-    const newNode = new Node(item, priority)
+  enqueue(item, { priority = this.priority, isLog = false } = {}) {
+    const defultKey = this.type === 'min' ? Infinity : -Infinity
+    const newNode = new Node(item, priority, defultKey)
     const key = getKey(newNode)
 
     // run

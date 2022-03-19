@@ -85,21 +85,7 @@ export const runTestTraversal = () => {
 }
 
 // directed
-const rawDiNode = [
-  { key: 1, value: 'A' },
-  { key: 2, value: 'B' },
-  { key: 3, value: 'C' },
-  { key: 4, value: 'D' },
-  { key: 5, value: 'E' },
-  { key: 6, value: 'F' },
-  { key: 7, value: 'G' },
-  { key: 8, value: 'H' },
-  { key: 9, value: 'I' },
-  { key: 10, value: 'J' },
-  { key: 11, value: 'K' },
-]
-
-const ssss = [
+const rawGraph = [
   [1, 2, 2],
   [1, 7, 3],
 
@@ -137,7 +123,25 @@ const ssss = [
   [11, 9, 2],
 ]
 
-const rawDiEdge = ssss.map((v) => ({ key1: v[0], key2: v[1], weight: v[2] }))
+const rawDiNode = [
+  { key: 1, value: 'A' },
+  { key: 2, value: 'B' },
+  { key: 3, value: 'C' },
+  { key: 4, value: 'D' },
+  { key: 5, value: 'E' },
+  { key: 6, value: 'F' },
+  { key: 7, value: 'G' },
+  { key: 8, value: 'H' },
+  { key: 9, value: 'I' },
+  { key: 10, value: 'J' },
+  { key: 11, value: 'K' },
+]
+
+const rawDiEdge = rawGraph.map((v) => ({
+  key1: v[0],
+  key2: v[1],
+  weight: v[2],
+}))
 
 const myDigraph = new Digraph({
   name: 'myDigraph',
