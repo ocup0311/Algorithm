@@ -1,6 +1,6 @@
 // https://adrianmejia.com/data-structures-time-complexity-for-beginners-arrays-hashmaps-linked-lists-stacks-queues-tutorial/#HashMaps
 
-class HashMap {
+class HashTable_REF {
   constructor(initialCapacity = 16, loadFactor = 0.75) {
     this.buckets = new Array(initialCapacity)
     this.loadFactor = loadFactor
@@ -96,7 +96,7 @@ class HashMap {
   }
 
   rehash(newCapacity) {
-    const newMap = new HashMap(newCapacity)
+    const newMap = new HashTable_REF(newCapacity)
 
     this.keys.forEach((key) => {
       if (key) {
@@ -115,3 +115,5 @@ class HashMap {
     return this.size / this.buckets.length
   }
 }
+
+export default HashTable_REF

@@ -1,8 +1,8 @@
 import * as U from '$util'
-import hashMethod from './hashMethod.js'
+import hashMethod from '../method/hashMethod.js'
 
-class HashTable {
-  constructor({ size, hash = 'division' }) {
+class HashTable1 {
+  constructor({ size, hash = 'multiplication' }) {
     this.size = size
     this.table = new Array(size)
     this.hash = U.getObjValue(hashMethod, hash)
@@ -37,4 +37,4 @@ class HashTable {
   }
 }
 
-export default HashTable
+export default HashTable1
