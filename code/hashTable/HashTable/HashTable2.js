@@ -1,4 +1,4 @@
-// [TODO] add load factor
+// TODO: add load factor
 
 import * as U from '$util'
 import hashMethod from '../method/hashMethod.js'

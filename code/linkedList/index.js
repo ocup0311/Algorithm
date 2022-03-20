@@ -24,11 +24,11 @@ runTestQueue()
 console.log('\n===================== runTestDeque =====================')
 runTestDeque()
 
-// TODO1
+// TODO:
 // const exception = ({ info, err }) => {
 //   if (info) console.log(info)
 //   if (err) console.error(err)
 //   return
 // }
-// TODO2
+// TODO:
 // some methods just can call inside the class

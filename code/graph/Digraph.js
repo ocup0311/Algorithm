@@ -5,7 +5,7 @@ import PriorityQueue from '../tree/PriorityQueue.js'
 
 // function
 const checkRawGraph = (rawNode, rawEdge) => {
-  // [TODO] check rawNode
+  // TODO: check rawNode
   const isNotEmptyArr = Array.isArray(rawEdge) && rawEdge.length !== 0
   const isValidEdge =
     isNotEmptyArr &&
