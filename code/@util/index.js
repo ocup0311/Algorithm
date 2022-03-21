@@ -15,7 +15,7 @@ export const toDownCounter = (counter, item) => {
 export const openLog = (v) => console.log(JSON.stringify(v, null, ' '))
 
 // export const deepClone = (data) => JSON.parse(JSON.stringify(data))
-// --> There're some limits: Symbol key, undefined value, cyclic object
+// --> There're some limits: (X) Symbol key, undefined value, cyclic reference
 export const deepClone = (value, cache = new WeakMap()) => {
   // exception
   if (value === null || typeof value !== 'object') return value
