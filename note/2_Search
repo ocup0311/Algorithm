@@ -15,7 +15,14 @@
         best case performance: O(1)
         average performance: O(logn)
 
+# Comparison Model:
 "Lower bounds of comparison searching is Ω(logn)"
-    Comparison Model --> Decision Tree
+Comparison Model --> Decision Tree
 
+    # 簡介:
+    1. 只使用 <, ≤, >, ≥ 做比較
+    2. 時間花費：做多少次比較
 
+    # Decision Tree:
+    ; 參考圖 image/2_Search/Decision Tree.png
+    所有的 leaf 為所有可能結果
