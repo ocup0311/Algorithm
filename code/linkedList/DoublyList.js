@@ -1,5 +1,15 @@
 import Node from './Node.js'
 
+// class
+class NodeD extends Node {
+  constructor(value) {
+    super(value)
+
+    this.pre = null
+  }
+}
+
+// main
 class DoublyList {
   constructor() {
     this.head = null
@@ -71,7 +81,7 @@ class DoublyList {
 
   // O(n/2)
   inserAtFromHead(index, value) {
-    const newNode = new Node(value)
+    const newNode = new NodeD(value)
 
     if (index === 0) {
       newNode.next = this.head
@@ -97,7 +107,7 @@ class DoublyList {
     }
 
     // run
-    const newNode = new Node(value)
+    const newNode = new NodeD(value)
 
     if (!this.tail) {
       this.head = newNode
@@ -227,7 +237,7 @@ class DoublyList {
 
     // exception
     if (!this.tail) {
-      const newNode = new Node(arr[0])
+      const newNode = new NodeD(arr[0])
       this.head = newNode
       this.tail = newNode
       startIndex++
@@ -235,7 +245,7 @@ class DoublyList {
 
     // run
     for (let i = startIndex; i < arr.length; i++) {
-      const newNode = new Node(arr[i])
+      const newNode = new NodeD(arr[i])
       newNode.prev = this.tail
       this.tail.next = newNode
       this.tail = newNode
