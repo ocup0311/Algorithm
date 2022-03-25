@@ -2,6 +2,9 @@
 // input: 'WriteafunctioncalleduniqueLettersString'
 // output: 'Writeafunct'
 
+// 原以為 String.prototype.slice() 是 O(n)，所以又寫了 3 pointer 的方法。
+// 後來習得 String.prototype.slice() 是 O(1)，因此可直接用 1 pointer。
+
 import { performance } from 'perf_hooks'
 import { builtInput, runTest } from './@test.js'
 import * as byPtr from './byPtr/index.js'

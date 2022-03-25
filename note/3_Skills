@@ -58,10 +58,13 @@ output:
 
     ＊ unique letters string
     "Write a function called uniqueLettersString, which accepts a string and returns the length of the longest substring with all distinct characters."
+        by 1 pointer O(n)
+        by 3 pointer O(n)
 
     ＊ largest product（乘積）
     "The four adjacent digits in the 1000-digit number that have the greatest product are 9x9x8x9=5832. Find the n adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?"
-
+        by pass whole set O(n * size)
+        by pass terminal O(n)
 
 
 # Recursion =================================================================================================
