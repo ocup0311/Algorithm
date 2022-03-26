@@ -27,8 +27,9 @@ class Queue {
         if (this.isEmpty()) return
 
         const order_to = this._.getOrder(index_to)
+        const order_stop = order_to > this.end ? this.end : order_to
 
-        for (let i = this.start; i <= order_to; i++) {
+        for (let i = this.start; i <= order_stop; i++) {
           const index = this._.getIndex(i)
           cb(this.queue[index])
         }
