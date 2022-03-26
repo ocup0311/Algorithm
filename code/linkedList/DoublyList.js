@@ -5,7 +5,7 @@ class NodeD extends Node {
   constructor(value) {
     super(value)
 
-    this.pre = null
+    this.prev = null
   }
 }
 
@@ -15,6 +15,11 @@ class DoublyList {
     this.head = null
     this.tail = null
     this.length = 0
+  }
+
+  isEmpty() {
+    if (!this.head) return true
+    return false
   }
 
   // O(n/2)
@@ -48,7 +53,7 @@ class DoublyList {
 
   // O(n/2)
   traverseFromHead(indexTo, cb) {
-    if (!this.head) {
+    if (this.isEmpty()) {
       console.log('This is an empty list.')
       return
     }
@@ -80,26 +85,7 @@ class DoublyList {
   }
 
   // O(n/2)
-  inserAtFromHead(index, value) {
-    const newNode = new NodeD(value)
-
-    if (index === 0) {
-      newNode.next = this.head
-      this.head = newNode
-    } else {
-      const preNode = this.findNode(index - 1)
-      preNode.next.prev = newNode
-      newNode.prev = preNode
-      newNode.next = preNode.next
-      preNode.next = newNode
-    }
-    this.length++
-
-    return this.length
-  }
-
-  // O(n/2)
-  inserAtFromTail(index, value) {
+  inserAt(index, value) {
     // exception
     if (index > this.length) {
       console.log("Can't skip the empty index.")
@@ -109,19 +95,22 @@ class DoublyList {
     // run
     const newNode = new NodeD(value)
 
-    if (!this.tail) {
+    if (index === 0) {
+      if (this.head) this.head.prev = null
+      newNode.next = this.head
       this.head = newNode
-      this.tail = newNode
-    } else if (index === this.length) {
-      this.tail.next = newNode
-      newNode.prev = this.tail
-      this.tail = newNode
     } else {
       const preNode = this.findNode(index - 1)
-      preNode.next.prev = newNode
+      if (preNode.next) preNode.next.prev = newNode
       newNode.prev = preNode
       newNode.next = preNode.next
       preNode.next = newNode
+    }
+
+    if (index === this.length) {
+      if (this.tail) this.tail.next = newNode
+      newNode.prev = this.tail
+      this.tail = newNode
     }
 
     this.length++
@@ -130,69 +119,38 @@ class DoublyList {
   }
 
   // O(n/2)
-  inserAt(index, value) {
-    if (index < this.length / 2) return this.inserAtFromHead(index, value)
-    else return this.inserAtFromTail(index, value)
-  }
-
-  // O(n/2)
-  removeAtFromHead(index) {
-    let removedNode = null
-
-    if (index === 0) {
-      removedNode = this.head
-      this.head = this.head.next
-      this.head.prev = null
-    } else {
-      const preNode = this.findNode(index - 1)
-      removedNode = preNode.next
-      preNode.next = removedNode.next
-    }
-
-    removedNode.next = null
-    this.length--
-
-    return removedNode.value
-  }
-
-  // O(n/2)
-  removeAtFromTail(index) {
+  removeAt(index) {
     // exception
-    if (!this.head) {
+    if (this.isEmpty()) {
       console.log('This is an empty list.')
       return null
     }
-    if (index > this.length) {
+    if (index > this.length - 1) {
       console.log("Can't remove the empty index.")
       return null
     }
 
     // run
-    let removedNode = null
-    if (this.length === 1) {
-      this.head = null
-      this.tail = null
-    } else if (index === this.length - 1) {
-      this.tail.next = null
-      removedNode = this.tail
-      this.tail = this.tail.prev
-    } else {
-      const preNode = this.findNode(index - 1)
-      removedNode = preNode.next
-      preNode.next = removedNode.next
+    const removedNode = this.findNode(index)
+
+    if (removedNode.next) removedNode.next.prev = removedNode.prev
+    if (removedNode.prev) removedNode.prev.next = removedNode.next
+
+    if (removedNode === this.head) {
+      this.head = removedNode.next
+      if (this.head) this.head.prev = null
+    }
+    if (removedNode === this.tail) {
+      this.tail = removedNode.prev
+      if (this.tail) this.tail.next = null
     }
 
     removedNode.next = null
     removedNode.prev = null
+
     this.length--
 
     return removedNode.value
-  }
-
-  // O(n/2)
-  removeAt(index) {
-    if (index < this.length / 2) return this.removeAtFromHead(index)
-    else return this.removeAtFromTail(index)
   }
 
   // O(n)
@@ -217,7 +175,7 @@ class DoublyList {
 
   // O(1)
   pushList(list) {
-    if (!this.head) {
+    if (this.isEmpty()) {
       this.head = list.head
     } else {
       list.head.prev = this.tail
@@ -258,7 +216,7 @@ class DoublyList {
 
   // O(n)
   getValue(index) {
-    return this.findNode(index).value
+    return this.findNode(index)?.value
   }
 
   // O(n)
