@@ -46,14 +46,14 @@ class Queue {
       },
 
       // O(n)
-      traverse: (indexOfEnd, cb) => {
+      traverse: (indexTo, cb) => {
         if (!this.head) {
           console.log('This is an empty list.')
           return
         }
 
         let currentNode = this.head
-        for (let i = 0; i <= indexOfEnd; i++) {
+        for (let i = 0; i <= indexTo; i++) {
           cb(currentNode)
           currentNode = currentNode.next
         }

@@ -6,8 +6,8 @@ class Queue {
 
     this._ = {
       // O(n)
-      traverse: (indexOfEnd, cb) => {
-        for (let i = 0; i <= indexOfEnd; i++) {
+      traverse: (indexTo, cb) => {
+        for (let i = 0; i <= indexTo; i++) {
           cb(this.queue[i])
         }
       },

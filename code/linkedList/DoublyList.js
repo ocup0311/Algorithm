@@ -47,28 +47,28 @@ class DoublyList {
   }
 
   // O(n/2)
-  traverseFromHead(indexOfEnd, cb) {
+  traverseFromHead(indexTo, cb) {
     if (!this.head) {
       console.log('This is an empty list.')
       return
     }
 
     let currentNode = this.head
-    for (let i = 0; i <= indexOfEnd; i++) {
+    for (let i = 0; i <= indexTo; i++) {
       cb(currentNode)
       currentNode = currentNode.next
     }
   }
 
   // O(n/2)
-  traverseFromTail(indexOfEnd, cb) {
+  traverseFromTail(indexTo, cb) {
     if (!this.tail) {
       console.log('This is an empty list.')
       return
     }
 
     let currentNode = this.tail
-    for (let i = this.length - 1; i >= indexOfEnd; i++) {
+    for (let i = this.length - 1; i >= indexTo; i++) {
       cb(currentNode)
       currentNode = currentNode.prev
     }
