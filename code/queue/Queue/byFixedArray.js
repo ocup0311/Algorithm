@@ -7,11 +7,27 @@ class Queue {
     this.queue = new Array(size)
 
     this._ = {
+      getIndex: (indexORorder) => indexORorder % this.queue.length,
+
+      getOrder: (indexORorder) => {
+        const index_start = this._.getIndex(this.start)
+        const index = this._.getIndex(indexORorder)
+
+        const diff =
+          index > index_start
+            ? index - index_start
+            : index - index_start + this.queue.length
+
+        return this.start + diff
+      },
+
       // O(n)
-      traverse: (indexOfEnd, cb) => {
-        for (let i = this.start; i <= indexOfEnd; i++) {
-          const realIndex = i % this.queue.length
-          cb(this.queue[realIndex])
+      traverse: (index_to, cb) => {
+        const order_to = this._.getOrder(index_to)
+
+        for (let i = this.start; i <= order_to; i++) {
+          const index = this._.getIndex(i)
+          cb(this.queue[index])
         }
       },
 
@@ -32,8 +48,8 @@ class Queue {
 
     //  run
     this.end++
-    const endIndex = this.end % this.queue.length
-    this.queue[endIndex] = value
+    const index_end = this._.getIndex(this.end)
+    this.queue[index_end] = value
 
     return this.end - this.start + 1
   }
@@ -47,8 +63,8 @@ class Queue {
     }
 
     // run
-    const startIndex = this.start % this.queue.length
-    const removedValue = this.queue[startIndex]
+    const index_start = this._.getIndex(this.start)
+    const removedValue = this.queue[index_start]
 
     this.start++
 
