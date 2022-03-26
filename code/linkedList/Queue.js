@@ -1,34 +1,54 @@
 import Node from './Node.js'
 
+// class
+class NodeD extends Node {
+  constructor(value) {
+    super(value)
+
+    this.pre = null
+  }
+}
+
 class Queue {
   constructor() {
     this.head = null
+    this.tail = null
     this.length = 0
 
     // internal use
     this._ = {
-      // O(n)
-      findNode: (index) => {
+      // O(n/2)
+      findNodeFromHead: (index) => {
         let currentNode = this.head
-
         for (let i = 0; i < index; i++) {
           currentNode = currentNode.next
         }
-
         return currentNode
       },
 
-      // O(n)
+      // O(n/2)
+      findNodeFromTail: (index) => {
+        let currentNode = this.tail
+        for (let i = this.length - 1; i > index; i--) {
+          currentNode = currentNode.prev
+        }
+        return currentNode
+      },
+
+      // O(n/2)
+      findNode: (index) => {
+        if (index < this.length / 2) return this._.findNodeFromHead(index)
+        else return this._.findNodeFromTail(index)
+      },
+
+      // O(1)
       findLastNode: () => {
-        return this._.findNode(this.length - 1)
+        return this.tail
       },
 
       // O(n)
       traverse: (indexTo, cb) => {
-        if (!this.head) {
-          console.log('This is an empty list.')
-          return
-        }
+        if (this.isEmpty()) return
 
         let currentNode = this.head
         for (let i = 0; i <= indexTo; i++) {
@@ -44,14 +64,27 @@ class Queue {
     }
   }
 
-  // O(n)
-  enqueue(value) {
-    const newNode = new Node(value)
+  isEmpty() {
+    if (!this.head) {
+      console.log("It's EMPTY!")
+      return true
+    }
 
-    if (!this.head) this.head = newNode
-    else {
+    return false
+  }
+
+  // O(1)
+  enqueue(value) {
+    const newNode = new NodeD(value)
+
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
       const lastNode = this._.findLastNode()
       lastNode.next = newNode
+      this.tail = newNode
+      this.tail.pre = lastNode
     }
 
     this.length++
@@ -59,19 +92,17 @@ class Queue {
     return this.length
   }
 
-  // O(n)
+  // O(1)
   dequeue() {
     // exception
-    if (!this.head) {
-      console.log('This is an empty list.')
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
     const removedNode = this.head
     this.head = this.head.next
     removedNode.next = null
     this.length--
+    if (!this.isEmpty()) this.head.pre = null
 
     return removedNode.value
   }

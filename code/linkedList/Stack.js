@@ -1,34 +1,54 @@
 import Node from './Node.js'
 
+// class
+class NodeD extends Node {
+  constructor(value) {
+    super(value)
+
+    this.pre = null
+  }
+}
+
 class Stack {
   constructor() {
     this.head = null
+    this.tail = null
     this.length = 0
 
     // internal use
     this._ = {
-      // O(n)
-      findNode: (index) => {
+      // O(n/2)
+      findNodeFromHead: (index) => {
         let currentNode = this.head
-
         for (let i = 0; i < index; i++) {
           currentNode = currentNode.next
         }
-
         return currentNode
       },
 
-      // O(n)
+      // O(n/2)
+      findNodeFromTail: (index) => {
+        let currentNode = this.tail
+        for (let i = this.length - 1; i > index; i--) {
+          currentNode = currentNode.prev
+        }
+        return currentNode
+      },
+
+      // O(n/2)
+      findNode: (index) => {
+        if (index < this.length / 2) return this._.findNodeFromHead(index)
+        else return this._.findNodeFromTail(index)
+      },
+
+      // O(1)
       findLastNode: () => {
-        return this._.findNode(this.length - 1)
+        return this.tail
       },
 
       // O(n)
       traverse: (indexTo, cb) => {
-        if (!this.head) {
-          console.log('This is an empty list.')
-          return
-        }
+        if (this.isEmpty()) return
 
         let currentNode = this.head
         for (let i = 0; i <= indexTo; i++) {
@@ -44,14 +64,27 @@ class Stack {
     }
   }
 
-  // O(n)
-  push(value) {
-    const newNode = new Node(value)
+  isEmpty() {
+    if (!this.head) {
+      console.log("It's EMPTY!")
+      return true
+    }
 
-    if (!this.head) this.head = newNode
-    else {
+    return false
+  }
+
+  // O(1)
+  push(value) {
+    const newNode = new NodeD(value)
+
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
       const lastNode = this._.findLastNode()
       lastNode.next = newNode
+      this.tail = newNode
+      this.tail.pre = lastNode
     }
 
     this.length++
@@ -59,19 +92,19 @@ class Stack {
     return this.length
   }
 
-  // O(n)
+  // O(1)
   pop() {
     // exception
-    if (!this.head) {
-      console.log('This is an empty list.')
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
-    const last2Node = this._.findNode(this.length - 2)
-    const popNode = last2Node.next
-    last2Node.next = null
+    const popNode = this._.findLastNode()
+    this.tail = popNode.pre
+    popNode.pre = null
     this.length--
+
+    if (this.length === 0) this.head = null
+    else this.tail.next = null
 
     return popNode.value
   }

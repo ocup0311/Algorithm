@@ -6,6 +6,11 @@ class SinglyList {
     this.length = 0
   }
 
+  isEmpty() {
+    if (!this.head) return true
+    return false
+  }
+
   // O(n)
   findNode(index) {
     let currentNode = this.head
@@ -24,7 +29,7 @@ class SinglyList {
 
   // O(n)
   traverse(indexTo, cb) {
-    if (!this.head) {
+    if (this.isEmpty()) {
       console.log('This is an empty list.')
       return
     }
@@ -52,7 +57,7 @@ class SinglyList {
     // run
     const newNode = new Node(value)
 
-    if (!this.head) {
+    if (this.isEmpty()) {
       this.head = newNode
     } else if (index === 0) {
       newNode.next = this.head
@@ -74,22 +79,18 @@ class SinglyList {
   // O(n)
   removeAt(index) {
     // exception
-    if (!this.head) {
+    if (this.isEmpty()) {
       console.log('This is an empty list.')
       return null
     }
-    if (index > this.length) {
+    if (index > this.length - 1) {
       console.log("Can't remove the empty index.")
       return null
     }
 
     // run
     let removedNode = null
-    if (index === this.length - 1) {
-      const last2Node = this.findNode(this.length - 2)
-      removedNode = last2Node.next
-      last2Node.next = null
-    } else if (index === 0) {
+    if (index === 0) {
       removedNode = this.head
       this.head = this.head.next
     } else {
@@ -126,7 +127,7 @@ class SinglyList {
 
   // O(n)
   pushList(list) {
-    if (!this.head) {
+    if (this.isEmpty()) {
       this.head = list.head
     } else {
       const lastNode = this.findLastNode()
@@ -166,7 +167,7 @@ class SinglyList {
 
   // O(n)
   getValue(index) {
-    return this.findNode(index).value
+    return this.findNode(index)?.value
   }
 
   // O(n)
