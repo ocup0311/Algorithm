@@ -5,7 +5,7 @@ class NodeD extends Node {
   constructor(value) {
     super(value)
 
-    this.pre = null
+    this.prev = null
   }
 }
 
@@ -84,7 +84,7 @@ class Queue {
       const lastNode = this._.findLastNode()
       lastNode.next = newNode
       this.tail = newNode
-      this.tail.pre = lastNode
+      this.tail.prev = lastNode
     }
 
     this.length++
@@ -102,7 +102,7 @@ class Queue {
     this.head = this.head.next
     removedNode.next = null
     this.length--
-    if (!this.isEmpty()) this.head.pre = null
+    if (!this.isEmpty()) this.head.prev = null
 
     return removedNode.value
   }

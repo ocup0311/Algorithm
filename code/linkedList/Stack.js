@@ -5,7 +5,7 @@ class NodeD extends Node {
   constructor(value) {
     super(value)
 
-    this.pre = null
+    this.prev = null
   }
 }
 
@@ -84,7 +84,7 @@ class Stack {
       const lastNode = this._.findLastNode()
       lastNode.next = newNode
       this.tail = newNode
-      this.tail.pre = lastNode
+      this.tail.prev = lastNode
     }
 
     this.length++
@@ -99,8 +99,8 @@ class Stack {
 
     // run
     const popNode = this._.findLastNode()
-    this.tail = popNode.pre
-    popNode.pre = null
+    this.tail = popNode.prev
+    popNode.prev = null
     this.length--
 
     if (this.length === 0) this.head = null
