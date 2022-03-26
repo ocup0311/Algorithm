@@ -5,6 +5,7 @@ class Deque {
     this.head = null
     this.length = 0
 
+    // internal use
     this._ = {
       // O(n)
       findNode: (index) => {
