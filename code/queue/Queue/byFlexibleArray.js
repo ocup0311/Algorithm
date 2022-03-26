@@ -29,7 +29,7 @@ class Queue {
   // O(n)
   dequeue() {
     // exception
-    if (this.start > this.end) {
+    if (this.queue.length === 0) {
       console.log("It's EMPTY!")
       return null
     }
