@@ -5,6 +5,7 @@ class Queue {
     this.head = null
     this.length = 0
 
+    // internal use
     this._ = {
       // O(n)
       findNode: (index) => {
@@ -24,10 +25,7 @@ class Queue {
 
       // O(n)
       traverse: (indexTo, cb) => {
-        if (!this.head) {
-          console.log('This is an empty list.')
-          return
-        }
+        if (this.isEmpty()) return
 
         let currentNode = this.head
         for (let i = 0; i <= indexTo; i++) {
@@ -41,6 +39,15 @@ class Queue {
         this._.traverse(this.length - 1, cb)
       },
     }
+  }
+
+  isEmpty() {
+    if (!this.head) {
+      console.log("It's EMPTY!")
+      return true
+    }
+
+    return false
   }
 
   // O(n)
@@ -61,10 +68,7 @@ class Queue {
   // O(1)
   dequeue() {
     // exception
-    if (!this.head) {
-      console.log('This is an empty list.')
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
     const removedNode = this.head

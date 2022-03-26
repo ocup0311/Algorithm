@@ -4,9 +4,12 @@ class Queue {
   constructor() {
     this.queue = []
 
+    // internal use
     this._ = {
       // O(n)
       traverse: (indexTo, cb) => {
+        if (this.isEmpty()) return
+
         for (let i = 0; i <= indexTo; i++) {
           cb(this.queue[i])
         }
@@ -19,6 +22,15 @@ class Queue {
     }
   }
 
+  isEmpty() {
+    if (this.queue.length === 0) {
+      console.log("It's EMPTY!")
+      return true
+    }
+
+    return false
+  }
+
   // O(1)
   enqueue(value) {
     this.queue.push(value)
@@ -29,10 +41,7 @@ class Queue {
   // O(n)
   dequeue() {
     // exception
-    if (this.queue.length === 0) {
-      console.log("It's EMPTY!")
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
     const removedValue = this.queue.shift()

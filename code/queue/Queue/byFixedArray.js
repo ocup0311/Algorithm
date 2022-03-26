@@ -6,6 +6,7 @@ class Queue {
     this.end = -1
     this.queue = new Array(size)
 
+    // internal use
     this._ = {
       getIndex: (indexORorder) => indexORorder % this.queue.length,
 
@@ -23,6 +24,8 @@ class Queue {
 
       // O(n)
       traverse: (index_to, cb) => {
+        if (this.isEmpty()) return
+
         const order_to = this._.getOrder(index_to)
 
         for (let i = this.start; i <= order_to; i++) {
@@ -38,13 +41,28 @@ class Queue {
     }
   }
 
+  isFull() {
+    if (this.end - this.start + 1 === this.queue.length) {
+      console.log("It's FULL!")
+      return true
+    }
+
+    return false
+  }
+
+  isEmpty() {
+    if (this.start > this.end) {
+      console.log("It's EMPTY!")
+      return true
+    }
+
+    return false
+  }
+
   // O(1)
   enqueue(value) {
     // exception
-    if (this.end - this.start + 1 === this.queue.length) {
-      console.log("It's FULL!")
-      return this.end - this.start + 1
-    }
+    if (this.isFull()) return this.end - this.start + 1
 
     //  run
     this.end++
@@ -57,10 +75,7 @@ class Queue {
   // O(1)
   dequeue() {
     // exception
-    if (this.start > this.end) {
-      console.log("It's EMPTY!")
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
     const index_start = this._.getIndex(this.start)
