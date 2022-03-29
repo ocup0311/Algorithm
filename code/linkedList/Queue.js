@@ -1,3 +1,5 @@
+// TODO: 回頭試試看用這個改 this._  (https://www.w3schools.com/js/js_object_es5.asp)
+
 import Node from './Node.js'
 
 // class

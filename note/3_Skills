@@ -93,7 +93,7 @@ output:
         ＊ Fibonacci Sequence
         "Write a function that takes an integer N as an input and returns the Nth number in Fibonacci Sequence."
             withoutStore O(2^n)
-            withStore O(n)
+            withStore O(n) (此為 Dynamic Programming 概念)
 
         ＊ Array of Arrays
         "Write a function that collects all value in an array of arrays and return an array of values collected."
