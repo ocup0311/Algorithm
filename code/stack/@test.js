@@ -1,5 +1,3 @@
-import Stack from './Stack/bySingleList.js'
-
 export const runTest = (Stack, initial) => {
   const stack = new Stack(initial)
 

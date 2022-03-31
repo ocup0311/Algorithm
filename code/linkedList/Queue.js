@@ -1,69 +1,28 @@
-// TODO: 回頭試試看用這個改 this._  (https://www.w3schools.com/js/js_object_es5.asp)
+import { Node_D as Node } from './Node.js'
 
-import Node from './Node.js'
+// function
+// O(n)
+const traverse = function (indexTo, cb) {
+  if (this.isEmpty()) return
 
-// class
-class NodeD extends Node {
-  constructor(value) {
-    super(value)
-
-    this.prev = null
+  let currentNode = this.head
+  for (let i = 0; i <= indexTo; i++) {
+    cb(currentNode)
+    currentNode = currentNode.next
   }
 }
 
+// O(n)
+const traverseAll = function (cb) {
+  traverse.bind(this)(this.length - 1, cb)
+}
+
+// main
 class Queue {
   constructor() {
     this.head = null
     this.tail = null
     this.length = 0
-
-    // internal use
-    this._ = {
-      // O(n/2)
-      findNodeFromHead: (index) => {
-        let currentNode = this.head
-        for (let i = 0; i < index; i++) {
-          currentNode = currentNode.next
-        }
-        return currentNode
-      },
-
-      // O(n/2)
-      findNodeFromTail: (index) => {
-        let currentNode = this.tail
-        for (let i = this.length - 1; i > index; i--) {
-          currentNode = currentNode.prev
-        }
-        return currentNode
-      },
-
-      // O(n/2)
-      findNode: (index) => {
-        if (index < this.length / 2) return this._.findNodeFromHead(index)
-        else return this._.findNodeFromTail(index)
-      },
-
-      // O(1)
-      findLastNode: () => {
-        return this.tail
-      },
-
-      // O(n)
-      traverse: (indexTo, cb) => {
-        if (this.isEmpty()) return
-
-        let currentNode = this.head
-        for (let i = 0; i <= indexTo; i++) {
-          cb(currentNode)
-          currentNode = currentNode.next
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.length - 1, cb)
-      },
-    }
   }
 
   isEmpty() {
@@ -77,13 +36,13 @@ class Queue {
 
   // O(1)
   enqueue(value) {
-    const newNode = new NodeD(value)
+    const newNode = new Node(value)
 
     if (!this.head) {
       this.head = newNode
       this.tail = newNode
     } else {
-      const lastNode = this._.findLastNode()
+      const lastNode = this.tail
       lastNode.next = newNode
       this.tail = newNode
       this.tail.prev = lastNode
@@ -115,7 +74,7 @@ class Queue {
 
     const cb = (currentNode) => list.push(currentNode)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
 
     return list
   }
@@ -126,7 +85,7 @@ class Queue {
 
     const cb = (currentNode) => arr.push(currentNode.value)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
 
     return arr
   }
@@ -135,7 +94,7 @@ class Queue {
   printAll() {
     const cb = (currentNode) => console.log(currentNode.value)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
   }
 }
 

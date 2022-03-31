@@ -1,4 +1,4 @@
-import Node from '../Node.js'
+import { Node_S as Node } from '../Node.js'
 
 class Stack {
   constructor() {

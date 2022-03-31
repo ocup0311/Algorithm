@@ -1,8 +1,14 @@
-class Node {
+export class Node_S {
   constructor(value) {
     this.value = value
     this.next = null
   }
 }
 
-export default Node
+export class Node_D {
+  constructor(value) {
+    this.value = value
+    this.next = null
+    this.prev = null
+  }
+}

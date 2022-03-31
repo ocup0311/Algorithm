@@ -1,13 +1,4 @@
-import Node from './Node.js'
-
-// class
-class NodeD extends Node {
-  constructor(value) {
-    super(value)
-
-    this.prev = null
-  }
-}
+import { Node_D as Node } from './Node.js'
 
 // main
 class DoublyList {
@@ -93,7 +84,7 @@ class DoublyList {
     }
 
     // run
-    const newNode = new NodeD(value)
+    const newNode = new Node(value)
 
     if (index === 0) {
       if (this.head) this.head.prev = null
@@ -195,7 +186,7 @@ class DoublyList {
 
     // exception
     if (!this.tail) {
-      const newNode = new NodeD(arr[0])
+      const newNode = new Node(arr[0])
       this.head = newNode
       this.tail = newNode
       startIndex++
@@ -203,7 +194,7 @@ class DoublyList {
 
     // run
     for (let i = startIndex; i < arr.length; i++) {
-      const newNode = new NodeD(arr[i])
+      const newNode = new Node(arr[i])
       newNode.prev = this.tail
       this.tail.next = newNode
       this.tail = newNode

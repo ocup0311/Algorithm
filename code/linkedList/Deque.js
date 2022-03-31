@@ -1,57 +1,51 @@
-import Node from './Node.js'
+import { Node_D as Node } from './Node.js'
 
+// function
+// O(n)
+const traverse = function (indexTo, cb) {
+  if (this.isEmpty()) return
+
+  let currentNode = this.head
+  for (let i = 0; i <= indexTo; i++) {
+    cb(currentNode)
+    currentNode = currentNode.next
+  }
+}
+
+// O(n)
+const traverseAll = function (cb) {
+  traverse.bind(this)(this.length - 1, cb)
+}
+
+// main
 class Deque {
   constructor() {
     this.head = null
+    this.tail = null
     this.length = 0
-
-    // internal use
-    this._ = {
-      // O(n)
-      findNode: (index) => {
-        let currentNode = this.head
-
-        for (let i = 0; i < index; i++) {
-          currentNode = currentNode.next
-        }
-
-        return currentNode
-      },
-
-      // O(n)
-      findLastNode: () => {
-        return this._.findNode(this.length - 1)
-      },
-
-      // O(n)
-      traverse: (indexTo, cb) => {
-        if (!this.head) {
-          console.log('This is an empty list.')
-          return
-        }
-
-        let currentNode = this.head
-        for (let i = 0; i <= indexTo; i++) {
-          cb(currentNode)
-          currentNode = currentNode.next
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.length - 1, cb)
-      },
-    }
   }
 
-  // O(n)
+  isEmpty() {
+    if (!this.head) {
+      console.log("It's EMPTY!")
+      return true
+    }
+
+    return false
+  }
+
+  // O(1)
   push(value) {
     const newNode = new Node(value)
 
-    if (!this.head) this.head = newNode
-    else {
-      const lastNode = this._.findLastNode()
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      const lastNode = this.tail
       lastNode.next = newNode
+      this.tail = newNode
+      this.tail.prev = lastNode
     }
 
     this.length++
@@ -59,19 +53,19 @@ class Deque {
     return this.length
   }
 
-  // O(n)
+  // O(1)
   pop() {
     // exception
-    if (!this.head) {
-      console.log('This is an empty list.')
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
-    const last2Node = this._.findNode(this.length - 2)
-    const popNode = last2Node.next
-    last2Node.next = null
+    const popNode = this.tail
+    this.tail = popNode.prev
+    popNode.prev = null
     this.length--
+
+    if (this.length === 0) this.head = null
+    else this.tail.next = null
 
     return popNode.value
   }
@@ -95,16 +89,14 @@ class Deque {
   // O(1)
   eject() {
     // exception
-    if (!this.head) {
-      console.log('This is an empty list.')
-      return null
-    }
+    if (this.isEmpty()) return null
 
     // run
     const removedNode = this.head
     this.head = this.head.next
     removedNode.next = null
     this.length--
+    if (!this.isEmpty()) this.head.prev = null
 
     return removedNode.value
   }
@@ -115,7 +107,7 @@ class Deque {
 
     const cb = (currentNode) => list.push(currentNode)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
 
     return list
   }
@@ -126,7 +118,7 @@ class Deque {
 
     const cb = (currentNode) => arr.push(currentNode.value)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
 
     return arr
   }
@@ -135,7 +127,7 @@ class Deque {
   printAll() {
     const cb = (currentNode) => console.log(currentNode.value)
 
-    this._.traverseAll(cb)
+    traverseAll.bind(this)(cb)
   }
 }
 

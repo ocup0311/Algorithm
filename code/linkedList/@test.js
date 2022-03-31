@@ -1,7 +1,4 @@
 import * as U from '$util'
-import Stack from './Stack.js'
-import Queue from './Queue.js'
-import Deque from './Deque.js'
 
 const builtArr = (amount, sorted = false) => {
   let output = []
@@ -133,8 +130,8 @@ export const runTestList = ({ Factory }, bigData = false) => {
   return oneData
 }
 
-export const runTestStack = () => {
-  const stack = new Stack()
+export const runTestStack = ({ Factory }) => {
+  const stack = new Factory()
   console.log('------ push(1) ------')
   stack.push(1)
   console.log(stack.getArr())
@@ -151,8 +148,8 @@ export const runTestStack = () => {
   stack.printAll()
 }
 
-export const runTestQueue = () => {
-  const queue = new Queue()
+export const runTestQueue = ({ Factory }) => {
+  const queue = new Factory()
   console.log('------ enqueue(1) ------')
   queue.enqueue(1)
   console.log(queue.getArr())
@@ -169,8 +166,8 @@ export const runTestQueue = () => {
   queue.printAll()
 }
 
-export const runTestDeque = () => {
-  const deque = new Deque()
+export const runTestDeque = ({ Factory }) => {
+  const deque = new Factory()
   console.log('------ push(1) ------')
   deque.push(1)
   console.log(deque.getArr())
