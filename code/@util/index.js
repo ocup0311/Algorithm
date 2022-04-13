@@ -16,6 +16,8 @@ export const openLog = (v) => console.log(JSON.stringify(v, null, ' '))
 
 // export const deepClone = (data) => JSON.parse(JSON.stringify(data))
 // --> There're some limits: (X) Symbol key, undefined value, cyclic reference
+// 參考新的 Web API "structuredClone()"
+// https://developer.mozilla.org/en-US/docs/Web/API/structuredClone
 export const deepClone = (value, cache = new WeakMap()) => {
   // exception
   if (value === null || typeof value !== 'object') return value
