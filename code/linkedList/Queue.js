@@ -1,28 +1,26 @@
 import { Node_D as Node } from './Node.js'
 
-// function
-// O(n)
-const traverse = function (indexTo, cb) {
-  if (this.isEmpty()) return
-
-  let currentNode = this.head
-  for (let i = 0; i <= indexTo; i++) {
-    cb(currentNode)
-    currentNode = currentNode.next
-  }
-}
-
-// O(n)
-const traverseAll = function (cb) {
-  traverse.bind(this)(this.length - 1, cb)
-}
-
-// main
 class Queue {
   constructor() {
     this.head = null
     this.tail = null
     this.length = 0
+  }
+
+  // O(n)
+  #traverse(indexTo, cb) {
+    if (this.isEmpty()) return
+
+    let currentNode = this.head
+    for (let i = 0; i <= indexTo; i++) {
+      cb(currentNode)
+      currentNode = currentNode.next
+    }
+  }
+
+  // O(n)
+  #traverseAll(cb) {
+    this.#traverse(this.length - 1, cb)
   }
 
   isEmpty() {
@@ -74,7 +72,7 @@ class Queue {
 
     const cb = (currentNode) => list.push(currentNode)
 
-    traverseAll.bind(this)(cb)
+    this.#traverseAll(cb)
 
     return list
   }
@@ -85,7 +83,7 @@ class Queue {
 
     const cb = (currentNode) => arr.push(currentNode.value)
 
-    traverseAll.bind(this)(cb)
+    this.#traverseAll(cb)
 
     return arr
   }
@@ -94,7 +92,7 @@ class Queue {
   printAll() {
     const cb = (currentNode) => console.log(currentNode.value)
 
-    traverseAll.bind(this)(cb)
+    this.#traverseAll(cb)
   }
 }
 

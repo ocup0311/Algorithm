@@ -1,6 +1,5 @@
 import { Node_D as Node } from './Node.js'
 
-// main
 class DoublyList {
   constructor() {
     this.head = null

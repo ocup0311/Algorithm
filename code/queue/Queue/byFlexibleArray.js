@@ -3,23 +3,20 @@
 class Queue {
   constructor() {
     this.queue = []
+  }
 
-    // internal use
-    this._ = {
-      // O(n)
-      traverse: (indexTo, cb) => {
-        if (this.isEmpty()) return
+  // O(n)
+  #traverse(indexTo, cb) {
+    if (this.isEmpty()) return
 
-        for (let i = 0; i <= indexTo; i++) {
-          cb(this.queue[i])
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.queue.length - 1, cb)
-      },
+    for (let i = 0; i <= indexTo; i++) {
+      cb(this.queue[i])
     }
+  }
+
+  // O(n)
+  #traverseAll(cb) {
+    this.#traverse(this.queue.length - 1, cb)
   }
 
   isEmpty() {
@@ -55,7 +52,7 @@ class Queue {
 
     const cb = (currentValue) => arr.push(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
 
     return arr
   }
@@ -64,7 +61,7 @@ class Queue {
   printAll() {
     const cb = (currentValue) => console.log(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
   }
 }
 

@@ -5,41 +5,40 @@ class Queue {
     this.start = 0
     this.end = -1
     this.queue = new Array(size)
+  }
 
-    // internal use
-    this._ = {
-      getIndex: (indexORorder) => indexORorder % this.queue.length,
+  #getIndex(indexORorder) {
+    return indexORorder % this.queue.length
+  }
 
-      getOrder: (indexORorder) => {
-        const index_start = this._.getIndex(this.start)
-        const index = this._.getIndex(indexORorder)
+  #getOrder(indexORorder) {
+    const index_start = this.#getIndex(this.start)
+    const index = this.#getIndex(indexORorder)
 
-        const diff =
-          index > index_start
-            ? index - index_start
-            : index - index_start + this.queue.length
+    const diff =
+      index > index_start
+        ? index - index_start
+        : index - index_start + this.queue.length
 
-        return this.start + diff
-      },
+    return this.start + diff
+  }
 
-      // O(n)
-      traverse: (index_to, cb) => {
-        if (this.isEmpty()) return
+  // O(n)
+  #traverse(index_to, cb) {
+    if (this.isEmpty()) return
 
-        const order_to = this._.getOrder(index_to)
-        const order_stop = order_to > this.end ? this.end : order_to
+    const order_to = this.#getOrder(index_to)
+    const order_stop = order_to > this.end ? this.end : order_to
 
-        for (let i = this.start; i <= order_stop; i++) {
-          const index = this._.getIndex(i)
-          cb(this.queue[index])
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.end, cb)
-      },
+    for (let i = this.start; i <= order_stop; i++) {
+      const index = this.#getIndex(i)
+      cb(this.queue[index])
     }
+  }
+
+  // O(n)
+  #traverseAll(cb) {
+    this.#traverse(this.end, cb)
   }
 
   isFull() {
@@ -67,7 +66,7 @@ class Queue {
 
     //  run
     this.end++
-    const index_end = this._.getIndex(this.end)
+    const index_end = this.#getIndex(this.end)
     this.queue[index_end] = value
 
     return this.end - this.start + 1
@@ -79,7 +78,7 @@ class Queue {
     if (this.isEmpty()) return null
 
     // run
-    const index_start = this._.getIndex(this.start)
+    const index_start = this.#getIndex(this.start)
     const removedValue = this.queue[index_start]
 
     this.start++
@@ -93,7 +92,7 @@ class Queue {
 
     const cb = (currentValue) => arr.push(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
 
     return arr
   }
@@ -102,7 +101,7 @@ class Queue {
   printAll() {
     const cb = (currentValue) => console.log(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
   }
 }
 

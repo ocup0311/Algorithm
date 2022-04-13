@@ -4,41 +4,38 @@ class Queue {
   constructor() {
     this.head = null
     this.length = 0
+  }
 
-    // internal use
-    this._ = {
-      // O(n)
-      findNode: (index) => {
-        let currentNode = this.head
+  // O(n)
+  #findNode(index) {
+    let currentNode = this.head
 
-        for (let i = 0; i < index; i++) {
-          currentNode = currentNode.next
-        }
-
-        return currentNode
-      },
-
-      // O(n)
-      findLastNode: () => {
-        return this._.findNode(this.length - 1)
-      },
-
-      // O(n)
-      traverse: (indexTo, cb) => {
-        if (this.isEmpty()) return
-
-        let currentNode = this.head
-        for (let i = 0; i <= indexTo; i++) {
-          cb(currentNode)
-          currentNode = currentNode.next
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.length - 1, cb)
-      },
+    for (let i = 0; i < index; i++) {
+      currentNode = currentNode.next
     }
+
+    return currentNode
+  }
+
+  // O(n)
+  #findLastNode() {
+    return this.#findNode(this.length - 1)
+  }
+
+  // O(n)
+  #traverse(indexTo, cb) {
+    if (this.isEmpty()) return
+
+    let currentNode = this.head
+    for (let i = 0; i <= indexTo; i++) {
+      cb(currentNode)
+      currentNode = currentNode.next
+    }
+  }
+
+  // O(n)
+  #traverseAll(cb) {
+    this.#traverse(this.length - 1, cb)
   }
 
   isEmpty() {
@@ -56,7 +53,7 @@ class Queue {
 
     if (!this.head) this.head = newNode
     else {
-      const lastNode = this._.findLastNode()
+      const lastNode = this.#findLastNode()
       lastNode.next = newNode
     }
 
@@ -85,7 +82,7 @@ class Queue {
 
     const cb = (currentNode) => list.push(currentNode)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
 
     return list
   }
@@ -96,7 +93,7 @@ class Queue {
 
     const cb = (currentNode) => arr.push(currentNode.value)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
 
     return arr
   }
@@ -105,7 +102,7 @@ class Queue {
   printAll() {
     const cb = (currentNode) => console.log(currentNode.value)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
   }
 }
 

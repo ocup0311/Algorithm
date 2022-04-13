@@ -4,27 +4,26 @@ class Stack {
   constructor(size = 10) {
     this.end = -1
     this.stack = new Array(size)
+  }
 
-    // internal use
-    this._ = {
-      getLength: () => this.end + 1,
+  #getLength() {
+    return this.end + 1
+  }
 
-      // O(n)
-      traverse: (index_to, cb) => {
-        if (this.isEmpty()) return
+  // O(n)
+  #traverse(index_to, cb) {
+    if (this.isEmpty()) return
 
-        index_to = index_to > this.end ? this.end : index_to
+    index_to = index_to > this.end ? this.end : index_to
 
-        for (let i = 0; i <= index_to; i++) {
-          cb(this.stack[i])
-        }
-      },
-
-      // O(n)
-      traverseAll: (cb) => {
-        this._.traverse(this.end, cb)
-      },
+    for (let i = 0; i <= index_to; i++) {
+      cb(this.stack[i])
     }
+  }
+
+  // O(n)
+  #traverseAll(cb) {
+    this.#traverse(this.end, cb)
   }
 
   isFull() {
@@ -48,13 +47,13 @@ class Stack {
   // O(1)
   push(value) {
     // exception
-    if (this.isFull()) return this._.getLength()
+    if (this.isFull()) return this.#getLength()
 
     //  run
     this.end++
     this.stack[this.end] = value
 
-    return this._.getLength()
+    return this.#getLength()
   }
 
   // O(1)
@@ -75,7 +74,7 @@ class Stack {
 
     const cb = (currentValue) => arr.push(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
 
     return arr
   }
@@ -84,7 +83,7 @@ class Stack {
   printAll() {
     const cb = (currentValue) => console.log(currentValue)
 
-    this._.traverseAll(cb)
+    this.#traverseAll(cb)
   }
 }
 
