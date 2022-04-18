@@ -27,6 +27,12 @@
 
 // Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
 // Notice --------------------------------------------------------
 // 1. 有唯一解
 // 2. 沒有排序

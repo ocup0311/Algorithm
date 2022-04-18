@@ -21,6 +21,12 @@
 // What if elements of nums2 are stored on disk, and the memory is limited such that
 // you cannot load all elements into the memory at once?
 
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+
 // Notice --------------------------------------------------------
 // 1. 並未排序
 // 2. 可能有重複的
