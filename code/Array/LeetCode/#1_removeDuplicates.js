@@ -24,6 +24,11 @@
 // Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
 // It does not matter what you leave beyond the returned k (hence they are underscores).
 
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
 // Notice --------------------------------------------------------
 // 1. 不能建立新 array
 // 2. 已排列
