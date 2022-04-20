@@ -12,16 +12,14 @@
 // is consistent to C's strstr() and Java's indexOf().
 
 // Example 1:
-
 // Input: haystack = "hello", needle = "ll"
 // Output: 2
-// Example 2:
 
+// Example 2:
 // Input: haystack = "aaaaa", needle = "bba"
 // Output: -1
 
 // Constraints:
-
 // 1 <= haystack.length, needle.length <= 104
 // haystack and needle consist of only lowercase English characters.
 
