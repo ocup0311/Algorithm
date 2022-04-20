@@ -57,3 +57,25 @@ const longestCommonPrefix2 = (strs) => {
 
   return first.slice(0, ptr)
 }
+
+// 3. ------------------------------------------------------------
+// Runtime: 86.82% / 66 ms
+// Memory: 64.74% / 42.6 MB
+const longestCommonPrefix3 = (strs) => {
+  const [first, ...others] = strs
+  let [idxStart, idxEnd] = [0, first.length]
+
+  // function
+  const isAllSame = (s, e) =>
+    others.every((v) => v.slice(s, e) === first.slice(s, e))
+
+  // run
+  while (idxStart < idxEnd) {
+    const idxMiddle = Math.ceil((idxStart + idxEnd) / 2)
+
+    if (isAllSame(idxStart, idxMiddle)) idxStart = idxMiddle
+    else idxEnd = idxMiddle - 1
+  }
+
+  return first.slice(0, idxEnd)
+}
