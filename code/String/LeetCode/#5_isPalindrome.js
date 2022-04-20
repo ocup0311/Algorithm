@@ -24,6 +24,11 @@
 // 1 <= s.length <= 2 * 105
 // s consists only of printable ASCII characters.
 
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+
 // Notice --------------------------------------------------------
 // 1. 只看英文字母 ＆ 數字
 // 2. 不分大小寫

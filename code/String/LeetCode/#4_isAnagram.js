@@ -18,9 +18,15 @@
 // Follow up: What if the inputs contain Unicode characters? How would you adapt your
 // solution to such a case?
 
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+
 // Notice --------------------------------------------------------
 // 1. 只有小寫
-// 2. 只會用原有的來組合，且不能少？
+// 2. 只會用原有的來組合，且不能少
 
 // 1. ------------------------------------------------------------
 // Runtime: 86.01% /  81 ms
