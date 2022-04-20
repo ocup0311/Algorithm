@@ -93,7 +93,7 @@ const myAtoi1 = (s) => {
 // 2. ------------------------------------------------------------
 // Runtime: 97.62% / 66 ms
 // Memory: 50.00% / 44.9 MB
-const myAtoi = (s) => {
+const myAtoi2 = (s) => {
   // exception
   if (s.length === 0) return 0
 
@@ -109,7 +109,7 @@ const myAtoi = (s) => {
   const DIGIT = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
   // var
-  const macLen = INT_MAX.toString().length
+  const maxLen = INT_MAX.toString().length
   let limit = 0
   let str = ''
   let sign = false
@@ -140,15 +140,15 @@ const myAtoi = (s) => {
 
     if (!DIGIT.includes(s[i])) break
 
-    if (str.length >= macLen) return limit
+    if (s[i] === ZERO && str === '') continue
+
+    if (str.length >= maxLen) return limit
 
     if (
-      (str.length === macLen - 1 && str > Math.abs(limit / 10)) ||
+      (str.length === maxLen - 1 && str > Math.abs(limit / 10)) ||
       (str == Math.trunc(Math.abs(limit / 10)) && s[i] >= Math.abs(limit % 10))
     )
       return limit
-
-    if (s[i] === ZERO && str === '') continue
 
     str = str + s[i]
   }
@@ -157,4 +157,76 @@ const myAtoi = (s) => {
   if (str === '') return 0
 
   return Number(sign + str)
+}
+
+// 3. ------------------------------------------------------------
+const myAtoi3 = (s) => {
+  // exception
+  if (s.length === 0) return 0
+
+  // CONST
+  const [INT_MAX, INT_MIN] = [2 ** 30 - 1 + 2 ** 30, -(2 ** 30) - 2 ** 30]
+  const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  const SIGN = { P: '+', N: '-' }
+  const IGNORE = { S: ' ', Z: '0' }
+  const STAGE = { PREV: 'prev', POST: 'post' }
+
+  // var
+  const maxLen = INT_MAX.toString().length
+  let stage = STAGE.PREV
+  let limit = 0
+  let sign = ''
+  let strDigit = ''
+
+  // function
+  const isPrevStage = () => stage === STAGE.PREV
+  const isIgnoreSpace = (char) => char === IGNORE.S
+  const isNegative = (char) => char === SIGN.N
+  const isPositive = (char) => char === SIGN.P
+  const isIgnoreZero = (str, char) => char === IGNORE.Z && str === ''
+
+  const isNonDigit = (char) => !DIGITS.includes(char)
+  const isTooLong = (str) => str.length >= maxLen
+  const isOverLimit = (str, char) =>
+    (str.length === maxLen - 1 && str > Math.abs(limit / 10)) ||
+    (str == Math.trunc(Math.abs(limit / 10)) && char >= Math.abs(limit % 10))
+
+  // run
+  for (let i = 0; i < s.length; i++) {
+    const charI = s[i]
+
+    // prev
+    if (isPrevStage()) {
+      if (!sign) {
+        if (isIgnoreSpace(charI)) continue
+
+        if (isNegative(charI)) {
+          sign = SIGN.N
+          limit = INT_MIN
+          continue
+        }
+
+        sign = SIGN.P
+        limit = INT_MAX
+
+        if (isPositive(charI)) continue
+      }
+
+      if (isIgnoreZero(strDigit, charI)) continue
+
+      stage = STAGE.POST
+    }
+
+    // post
+    if (isNonDigit(charI)) break
+    if (isTooLong(strDigit)) return limit
+    if (isOverLimit(strDigit, charI)) return limit
+
+    strDigit = strDigit + charI
+  }
+
+  // exception
+  if (strDigit === '') return 0
+
+  return Number(sign + strDigit)
 }
