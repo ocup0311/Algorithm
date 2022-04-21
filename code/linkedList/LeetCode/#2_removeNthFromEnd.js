@@ -102,12 +102,12 @@ const removeNthFromEnd2 = (head, n) => {
 // --> return 上家需要的資訊：[上家的 next 歸屬, idxN]
 // --> 上家獲取資訊後，將自身的 next 改成確認後的資訊
 const removeNthFromEnd3 = (head, n) => {
-  const getFromNext = (node) => {
+  const checkFromNext = (node) => {
     // exception
     if (node === null) return [node, 1]
 
     // run
-    const [nextNode, idxN] = getFromNext(node.next)
+    const [nextNode, idxN] = checkFromNext(node.next)
 
     if (idxN === n) {
       node.next = null
@@ -118,5 +118,5 @@ const removeNthFromEnd3 = (head, n) => {
     }
   }
 
-  return getFromNext(head)[0]
+  return checkFromNext(head)[0]
 }
