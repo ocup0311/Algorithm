@@ -41,7 +41,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 67.87% / 79 ms
 // Memory: 56.70% / 44.3 MB
-const mergeTwoLists = (list1, list2) => {
+const mergeTwoLists1 = (list1, list2) => {
   if (list1 === null) return list2
   if (list2 === null) return list1
 
@@ -72,6 +72,26 @@ const mergeTwoLists = (list1, list2) => {
 
   if (list1 !== null) currNode.next = list1
   if (list2 !== null) currNode.next = list2
+
+  return newHead
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 67.87% / 79 ms
+// Memory: 14.87% / 44.7 MB
+const mergeTwoLists = (list1, list2) => {
+  if (list1 === null) return list2
+  if (list2 === null) return list1
+
+  let newHead = null
+
+  if (list1.val < list2.val) {
+    newHead = list1
+    newHead.next = mergeTwoLists(list1.next, list2)
+  } else {
+    newHead = list2
+    newHead.next = mergeTwoLists(list1, list2.next)
+  }
 
   return newHead
 }
