@@ -18,24 +18,78 @@
 
 // Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
 
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+
 // Notice --------------------------------------------------------
 
 // 1. ------------------------------------------------------------
 // Runtime: 76.39% / 70 ms
 // Memory: 96.49% / 43.7 MB
 const reverseList1 = (head) => {
-  let curNode = head
-  let preNode = null
+  if (head === null || head.next === null) return head
 
-  while (curNode !== null) {
-    const tmpNode = curNode.next
+  let currNode = head
+  let prevNode = null
 
-    curNode.next = preNode
-    preNode = curNode
-    curNode = tmpNode
+  while (currNode !== null) {
+    const tempNode = currNode.next
+
+    currNode.next = prevNode
+    prevNode = currNode
+    currNode = tempNode
   }
 
-  return preNode
+  return prevNode
 }
 
 // 2. ------------------------------------------------------------
+// Runtime: 97.44% / 58 ms
+// Memory: 34.06% / 44.5 MB
+const reverseList2 = (head) => {
+  if (head === null || head.next === null) return head
+
+  let newHead = null
+
+  // function
+  const modify = (currNode) => {
+    if (currNode.next === null) {
+      newHead = currNode
+      return currNode
+    }
+
+    const nextNode = modify(currNode.next)
+
+    nextNode.next = currNode
+
+    return currNode
+  }
+
+  // run
+  modify(head).next = null
+
+  return newHead
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 85.89% / 66 ms
+// Memory: 100% / 44.8 MB
+const reverseList = (head) => {
+  if (head === null || head.next === null) return head
+
+  const newHead = reverseList(head.next)
+
+  newHead.next = head
+  head.next = null
+
+  return newHead
+}
