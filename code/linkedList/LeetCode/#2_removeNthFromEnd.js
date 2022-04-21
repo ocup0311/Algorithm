@@ -89,3 +89,34 @@ const removeNthFromEnd2 = (head, n) => {
 
   return preHead.next
 }
+
+// 3. ------------------------------------------------------------
+// node: [A, B, C, D, E]
+// idxN: [5, 4, 3, 2, 1]
+// 思路：
+// removeNth "From End"
+// --> 需要從 next 獲取資訊
+// --> 需要得到誰才是 nextNode 跟自身的 idxN (ref "n")
+// --> nextNode 需重新檢視本身 idxN 是否沒問題
+// --> 沒問題：留 | 有問題：去
+// --> return 上家需要的資訊：[上家的 next 歸屬, idxN]
+// --> 上家獲取資訊後，將自身的 next 改成確認後的資訊
+const removeNthFromEnd3 = (head, n) => {
+  const getFromNext = (node) => {
+    // exception
+    if (node === null) return [node, 1]
+
+    // run
+    const [nextNode, idxN] = getFromNext(node.next)
+
+    if (idxN === n) {
+      node.next = null
+      return [nextNode, idxN + 1]
+    } else {
+      node.next = nextNode
+      return [node, idxN + 1]
+    }
+  }
+
+  return getFromNext(head)[0]
+}
