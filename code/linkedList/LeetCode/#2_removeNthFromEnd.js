@@ -35,11 +35,12 @@
 
 // Notice --------------------------------------------------------
 // 1. 刪除從後面數來第幾個
+// 2. 原來可以使用已經定義好的 class
 
 // 1. ------------------------------------------------------------
 // Runtime: 81.15% / 67 ms
 // Memory: 79.32% / 42.6 MB
-const removeNthFromEnd = (head, n) => {
+const removeNthFromEnd1 = (head, n) => {
   // var
   let curNode = head
   let preNode = head
@@ -65,4 +66,26 @@ const removeNthFromEnd = (head, n) => {
   preNode.next = curNode.next
 
   return head
+}
+
+// 2. ------------------------------------------------------------
+const removeNthFromEnd2 = (head, n) => {
+  // var
+  const preHead = { next: head }
+  let preNode = preHead
+  let curNode = preHead
+  let length = 0
+
+  // run
+  while (curNode.next !== null) {
+    if (length >= n) preNode = preNode.next
+
+    curNode = curNode.next
+
+    length++
+  }
+
+  preNode.next = preNode.next.next
+
+  return preHead.next
 }
