@@ -39,14 +39,30 @@
 // 1. ------------------------------------------------------------
 // Runtime: 78.39% / 79 ms
 // Memory: 91.29% / 44.2 MB
-const sortedArrayToBST = (nums, idxS = 0, idxE = nums.length - 1) => {
+const sortedArrayToBST1 = (nums, idxS = 0, idxE = nums.length - 1) => {
   if (idxS > idxE) return null
 
   const idxM = Math.ceil((idxS + idxE) / 2)
   const root = new TreeNode(nums[idxM])
 
-  const left = sortedArrayToBST(nums, idxS, idxM - 1)
-  const right = sortedArrayToBST(nums, idxM + 1, idxE)
+  const left = sortedArrayToBST1(nums, idxS, idxM - 1)
+  const right = sortedArrayToBST1(nums, idxM + 1, idxE)
+
+  root.left = left
+  root.right = right
+
+  return root
+}
+
+// 2. ------------------------------------------------------------
+const sortedArrayToBST2 = (nums, idxS = 0, idxE = nums.length - 1) => {
+  if (idxS > idxE) return null
+
+  const idxM = Math.floor((idxS + idxE) / 2)
+  const root = new TreeNode(nums[idxM])
+
+  const left = sortedArrayToBST2(nums, idxS, idxM - 1)
+  const right = sortedArrayToBST2(nums, idxM + 1, idxE)
 
   root.left = left
   root.right = right
