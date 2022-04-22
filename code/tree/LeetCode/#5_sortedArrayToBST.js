@@ -69,3 +69,39 @@ const sortedArrayToBST2 = (nums, idxS = 0, idxE = nums.length - 1) => {
 
   return root
 }
+
+// 3. ------------------------------------------------------------
+// Runtime: 79.16% / 78 ms
+// Memory: 39.94% / 44.7 MB
+const sortedArrayToBST3 = (nums) => {
+  const idxS = 0
+  const idxE = nums.length - 1
+  const idxM = Math.floor((idxS + idxE) / 2)
+  const root = new TreeNode(nums[idxM])
+  const queue = [[root, idxS, idxM, idxE]]
+
+  // function
+  const makeNode = (idxS, idxE) => {
+    if (idxS > idxE) return null
+
+    const idxM = Math.floor((idxS + idxE) / 2)
+    const node = new TreeNode(nums[idxM])
+
+    queue.push([node, idxS, idxM, idxE])
+
+    return node
+  }
+
+  // run
+  while (queue.length > 0) {
+    const [node, idxS, idxM, idxE] = queue.pop()
+
+    const left = makeNode(idxS, idxM - 1)
+    const right = makeNode(idxM + 1, idxE)
+
+    node.left = left
+    node.right = right
+  }
+
+  return root
+}
