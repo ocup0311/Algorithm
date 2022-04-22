@@ -25,28 +25,40 @@ const bft = (node, cb) => {
 }
 
 // Depth First Tree Traversal
+// A. Another way to think about DFS
+const dft = (node, { preOrder, inOrder, postOrder }) => {
+  if (node === null) return
+
+  preOrder()
+  dft(node.left, { preOrder, inOrder, postOrder })
+  inOrder()
+  dft(node.right, { preOrder, inOrder, postOrder })
+  postOrder()
+}
+
+// B.
 const preOrder = (node, cb) => {
-  if (node !== null) {
-    cb(node)
-    preOrder(node.left, cb)
-    preOrder(node.right, cb)
-  }
+  if (node === null) return
+
+  cb(node)
+  preOrder(node.left, cb)
+  preOrder(node.right, cb)
 }
 
 const inOrder = (node, cb) => {
-  if (node !== null) {
-    inOrder(node.left, cb)
-    cb(node)
-    inOrder(node.right, cb)
-  }
+  if (node === null) return
+
+  inOrder(node.left, cb)
+  cb(node)
+  inOrder(node.right, cb)
 }
 
 const postOrder = (node, cb) => {
-  if (node !== null) {
-    postOrder(node.left, cb)
-    postOrder(node.right, cb)
-    cb(node)
-  }
+  if (node === null) return
+
+  postOrder(node.left, cb)
+  postOrder(node.right, cb)
+  cb(node)
 }
 
 export default { bft, preOrder, inOrder, postOrder }
