@@ -57,7 +57,7 @@ const maxSubArray1 = (nums) => {
 // 2. ------------------------------------------------------------
 // Runtime: 3567 ms
 // Memory: 57.5 MB
-const maxSubArray = (nums) => {
+const maxSubArray2 = (nums) => {
   let max = -Infinity
   let [idxL, maxL] = [0, -Infinity]
 
@@ -79,6 +79,25 @@ const maxSubArray = (nums) => {
     }
 
     maxL = maxL === nums[idxS] ? -Infinity : maxL - nums[idxS]
+  }
+
+  return max
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 81.91% / 85 ms
+// Memory: 83.05% / 50.2 MB
+// 拆分成「沿用」、「不沿用」 --> 二選一保留，有最好的就更新 max
+const maxSubArray = (nums) => {
+  let max = nums[0]
+  let maxE = nums[0]
+
+  for (let i = 1; i < nums.length; i++) {
+    const temp = maxE + nums[i]
+
+    maxE = temp > nums[i] ? temp : nums[i]
+
+    if (maxE > max) max = maxE
   }
 
   return max
