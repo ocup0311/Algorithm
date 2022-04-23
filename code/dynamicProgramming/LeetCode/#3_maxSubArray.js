@@ -88,7 +88,8 @@ const maxSubArray2 = (nums) => {
 // Runtime: 81.91% / 85 ms
 // Memory: 83.05% / 50.2 MB
 // 拆分成「沿用」、「不沿用」 --> 二選一保留，有最好的就更新 max
-const maxSubArray = (nums) => {
+// 看解答後發現此方法類似：Kadane's Algorithm，可在解化成方法 4
+const maxSubArray3 = (nums) => {
   let max = nums[0]
   let maxE = nums[0]
 
@@ -98,6 +99,21 @@ const maxSubArray = (nums) => {
     maxE = temp > nums[i] ? temp : nums[i]
 
     if (maxE > max) max = maxE
+  }
+
+  return max
+}
+
+// 4. ------------------------------------------------------------
+const maxSubArray = (nums) => {
+  let max = nums[0]
+  let sum = 0
+
+  for (let i = 0; i < nums.length; i++) {
+    sum = sum + nums[i]
+
+    if (max < sum) max = sum
+    if (sum < 0) sum = 0
   }
 
   return max
