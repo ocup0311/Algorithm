@@ -81,12 +81,28 @@ const hammingWeight2 = (() => {
 // 3. ------------------------------------------------------------
 // Runtime: 97.34% / 60 ms
 // Memory: 61.92% / 42.6 MB
-const hammingWeight = (n) => {
+const hammingWeight3 = (n) => {
   let num = n.toString(2)
   let count = 0
 
   for (let i = 0; i < num.length; i++) {
     if (num[i] === '1') count++
+  }
+
+  return count
+}
+
+// 4. ------------------------------------------------------------
+const hammingWeight4 = (n) => n.toString(2).split('0').join('').length
+
+// 5. ------------------------------------------------------------
+const hammingWeight5 = (n) => {
+  let num = n
+  let count = 0
+
+  while (num) {
+    count = count + (num & 1)
+    num >>>= 1
   }
 
   return count
