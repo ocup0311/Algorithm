@@ -162,8 +162,8 @@ const reverseBits = (() => {
 
   return (n) => {
     let restN = n
-    let result = ''
     let restDigit = 32
+    let result = ''
 
     while (restN) {
       if (cache[restN]) {
