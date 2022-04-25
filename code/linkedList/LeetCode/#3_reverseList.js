@@ -82,7 +82,7 @@ const reverseList2 = (head) => {
 
 // 3. ------------------------------------------------------------
 // Runtime: 85.89% / 66 ms
-// Memory: 100% / 44.8 MB
+// Memory: 0% / 44.8 MB
 const reverseList = (head) => {
   if (head === null || head.next === null) return head
 
