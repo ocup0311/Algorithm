@@ -38,36 +38,45 @@ const threeSum1 = (() => {
   let used = {}
 
   // function
-  const twoSum = (nums, num) => {
-    const cache = {}
+  const twoSum = (nums, x) => {
+    const pair = {}
 
     for (let i = 0; i < nums.length; i++) {
-      const n = nums[i]
+      const y = nums[i]
+      const z = pair[y]
 
-      if (cache[n] === 'used') continue
-      if (used[n]) continue
-
-      if (cache[n] !== undefined) {
-        result.push([num, n, cache[n]])
-        cache[cache[n]] = 'used'
-        cache[n] = 'used'
-      } else {
-        cache[-num - n] = n
+      if (z === 'used') continue
+      if (used[y]) continue
+      if (z === undefined) {
+        pair[-x - y] = y
+        continue
       }
+
+      result.push([x, y, z])
+
+      pair[y] = 'used'
+      pair[z] = 'used'
     }
   }
 
   // main
   return (nums) => {
+    // reset
     result = []
     used = {}
-    const len = nums.length
 
-    for (let i = 0; i < len; i++) {
-      const num = nums.pop()
+    // var
+    const numArr = [...nums]
+    const times = numArr.length - 2
 
-      if (!used[num]) twoSum(nums, num)
-      used[num] = true
+    // run
+    for (let i = 0; i < times; i++) {
+      const x = numArr.pop()
+
+      if (!used[x]) {
+        twoSum(numArr, x)
+        used[x] = true
+      }
     }
 
     return result
