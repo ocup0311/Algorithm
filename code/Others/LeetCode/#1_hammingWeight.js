@@ -55,7 +55,7 @@ const hammingWeight1 = (n) => {
 // 2. ------------------------------------------------------------
 // Runtime: 71.48% / 75 ms
 // Memory: 50.96% / 42.6 MB
-const hammingWeight2 = (() => {
+export const hammingWeight2 = (() => {
   const cache = {}
 
   return (n) => {
@@ -102,7 +102,7 @@ const hammingWeight5 = (n) => {
 
   while (num) {
     count = count + (num & 1)
-    num >>>= 1
+    num = num >>> 1
   }
 
   return count
