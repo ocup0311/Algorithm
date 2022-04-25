@@ -33,12 +33,8 @@
 // Runtime: 9.52% / 2854 ms
 // Memory: 6.51% / 74.9 MB
 const threeSum1 = (() => {
-  // cache
-  let result = []
-  let used = {}
-
   // function
-  const twoSum = (nums, x) => {
+  const twoSum = (nums, x, result, used) => {
     const pair = {}
 
     for (let i = 0; i < nums.length; i++) {
@@ -61,21 +57,63 @@ const threeSum1 = (() => {
 
   // main
   return (nums) => {
-    // reset
-    result = []
-    used = {}
-
-    // var
-    const numArr = [...nums]
-    const times = numArr.length - 2
+    const cloneNums = [...nums]
+    const times = cloneNums.length - 2
+    const result = []
+    const used = {}
 
     // run
     for (let i = 0; i < times; i++) {
-      const x = numArr.pop()
+      const x = cloneNums.pop()
 
       if (!used[x]) {
-        twoSum(numArr, x)
+        twoSum(cloneNums, x, result, used)
         used[x] = true
+      }
+    }
+
+    return result
+  }
+})()
+
+// 2. ------------------------------------------------------------
+// Runtime: 86.45% / 140 ms
+// Memory: 41.61% / 53.1 MB
+const threeSum = (() => {
+  // function
+  const twoSum = (i, nums, result) => {
+    let ptrL = i + 1
+    let ptrR = nums.length - 1
+
+    while (ptrL < ptrR) {
+      const sum = nums[i] + nums[ptrL] + nums[ptrR]
+
+      if (sum === 0) {
+        result.push([nums[i], nums[ptrL], nums[ptrR]])
+
+        while (nums[ptrL] === nums[ptrL + 1]) ptrL++
+        while (nums[ptrR] === nums[ptrR - 1]) ptrR--
+
+        ptrL++
+        ptrR--
+      } else if (sum < 0) {
+        ptrL++
+      } else {
+        ptrR--
+      }
+    }
+  }
+
+  // main
+  return (nums) => {
+    const cloneNums = [...nums]
+    const sortedNums = cloneNums.sort((a, b) => a - b)
+    const times = cloneNums.length - 2
+    const result = []
+
+    for (let i = 0; i < times; i++) {
+      if (sortedNums[i - 1] !== sortedNums[i]) {
+        twoSum(i, sortedNums, result)
       }
     }
 
