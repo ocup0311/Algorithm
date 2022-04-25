@@ -79,7 +79,7 @@ const threeSum1 = (() => {
 // 2. ------------------------------------------------------------
 // Runtime: 86.45% / 140 ms
 // Memory: 41.61% / 53.1 MB
-const threeSum = (() => {
+const threeSum2 = (() => {
   // function
   const twoSum = (i, nums, result) => {
     let ptrL = i + 1
@@ -114,6 +114,54 @@ const threeSum = (() => {
     for (let i = 0; i < times; i++) {
       if (sortedNums[i - 1] !== sortedNums[i]) {
         twoSum(i, sortedNums, result)
+      }
+    }
+
+    return result
+  }
+})()
+
+// 3. ------------------------------------------------------------
+// Runtime: 20.53% / 559 ms
+// Memory: 28.53% / 53.8 MB
+// just modify hashMap: Object 3000ms --> new Map 500ms
+const threeSum = (() => {
+  // function
+  const twoSum = (nums, x, result, used) => {
+    const pair = new Map()
+
+    for (let i = 0; i < nums.length; i++) {
+      const y = nums[i]
+      const z = pair.get(y)
+
+      if (z === 'used') continue
+      if (used.get(y)) continue
+      if (z === undefined) {
+        pair.set(-x - y, y)
+        continue
+      }
+
+      result.push([x, y, z])
+
+      pair.set(y, 'used')
+      pair.set(z, 'used')
+    }
+  }
+
+  // main
+  return (nums) => {
+    const cloneNums = [...nums]
+    const times = cloneNums.length - 2
+    const result = []
+    const used = new Map()
+
+    // run
+    for (let i = 0; i < times; i++) {
+      const x = cloneNums.pop()
+
+      if (!used.get(x)) {
+        twoSum(cloneNums, x, result, used)
+        used.set(x, true)
       }
     }
 
