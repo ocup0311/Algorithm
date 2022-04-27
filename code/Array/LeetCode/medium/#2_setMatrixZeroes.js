@@ -39,6 +39,7 @@ const setZeroes1 = (matrix) => {
   const hasZeroCol = new Array(matrix[0].length).fill(false)
   const ZEROROW = new Array(hasZeroCol.length).fill(0)
 
+  // 1. check
   for (let r = 0; r < hasZeroRow.length; r++) {
     for (let c = 0; c < hasZeroCol.length; c++) {
       if (matrix[r][c] === 0) {
@@ -48,6 +49,7 @@ const setZeroes1 = (matrix) => {
     }
   }
 
+  // 2. change
   for (let r = 0; r < hasZeroRow.length; r++) {
     if (hasZeroRow[r]) matrix[r] = ZEROROW
   }
@@ -67,16 +69,18 @@ const setZeroes1 = (matrix) => {
 // Runtime: 66.99% / 97 ms
 // Memory: 67.23% / 44.9 MB
 // O(1) space
-const setZeroes = (matrix) => {
+const setZeroes2 = (matrix) => {
   const lenRow = matrix.length
   const lenCol = matrix[0].length
   const lastRow = lenRow - 1
   let hasZeroLastRow = false
 
+  // 1. check last row
   for (let c = 0; c < lenCol; c++) {
     if (matrix[lastRow][c] === 0) hasZeroLastRow = true
   }
 
+  // 2. check other row
   for (let r = 0; r < lenRow - 1; r++) {
     let hasZero = false
 
@@ -87,6 +91,7 @@ const setZeroes = (matrix) => {
       }
     }
 
+    // 3. change row
     if (hasZero) {
       for (let c = 0; c < lenCol; c++) {
         matrix[r][c] = 0
@@ -94,6 +99,7 @@ const setZeroes = (matrix) => {
     }
   }
 
+  // 4. change col
   for (let c = 0; c < lenCol; c++) {
     if (matrix[lastRow][c] === 0) {
       for (let r = 0; r < lenRow; r++) {
@@ -102,9 +108,70 @@ const setZeroes = (matrix) => {
     }
   }
 
+  // 5. change last row
   if (hasZeroLastRow) {
     for (let c = 0; c < lenCol; c++) {
       matrix[lastRow][c] = 0
+    }
+  }
+
+  return
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 86.06% / 84 ms
+// Memory: 57.48% / 44.9 MB
+// O(1) space
+const setZeroes = (matrix) => {
+  const lenRow = matrix.length
+  const lenCol = matrix[0].length
+  let isFirstRowZero = false
+  let isFirstColZero = false
+
+  // 1. check
+  for (let r = 0; r < lenRow; r++) {
+    if (matrix[r][0] === 0) isFirstColZero = true
+  }
+
+  for (let c = 0; c < lenCol; c++) {
+    if (matrix[0][c] === 0) isFirstRowZero = true
+  }
+
+  for (let r = 1; r < lenRow; r++) {
+    for (let c = 1; c < lenCol; c++) {
+      if (matrix[r][c] === 0) {
+        matrix[0][c] = 0
+        matrix[r][0] = 0
+      }
+    }
+  }
+
+  // 2. change
+  for (let c = 1; c < lenCol; c++) {
+    if (matrix[0][c] === 0) {
+      for (let r = 1; r < lenRow; r++) {
+        matrix[r][c] = 0
+      }
+    }
+  }
+
+  for (let r = 1; r < lenRow; r++) {
+    if (matrix[r][0] === 0) {
+      for (let c = 1; c < lenCol; c++) {
+        matrix[r][c] = 0
+      }
+    }
+  }
+
+  if (isFirstRowZero) {
+    for (let c = 0; c < lenCol; c++) {
+      matrix[0][c] = 0
+    }
+  }
+
+  if (isFirstColZero) {
+    for (let r = 0; r < lenRow; r++) {
+      matrix[r][0] = 0
     }
   }
 
