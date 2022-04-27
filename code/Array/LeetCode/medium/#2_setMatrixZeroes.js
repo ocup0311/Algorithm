@@ -29,6 +29,7 @@
 // Notice --------------------------------------------------------
 // 1. 使整排整列都成為 0
 // 2. 是否可用更少 "空間": O(rc) --> O(r+c) --> O(1)
+// 3. 個人偏好「方法1」、若需 O(1) 則偏好「方法3」
 
 // 1. ------------------------------------------------------------
 // Runtime: 7.18% / 173 ms
@@ -122,7 +123,7 @@ const setZeroes2 = (matrix) => {
 // Runtime: 86.06% / 84 ms
 // Memory: 57.48% / 44.9 MB
 // O(1) space
-const setZeroes = (matrix) => {
+const setZeroes3 = (matrix) => {
   const lenRow = matrix.length
   const lenCol = matrix[0].length
   let isFirstRowZero = false
@@ -172,6 +173,53 @@ const setZeroes = (matrix) => {
   if (isFirstColZero) {
     for (let r = 0; r < lenRow; r++) {
       matrix[r][0] = 0
+    }
+  }
+
+  return
+}
+
+// 4. ------------------------------------------------------------
+// O(1) space
+const setZeroes4 = (matrix) => {
+  const lenRow = matrix.length
+  const lenCol = matrix[0].length
+  let isFirstRowZero = false
+
+  // 1. check
+  for (let c = 0; c < lenCol; c++) {
+    if (matrix[0][c] === 0) isFirstRowZero = true
+  }
+
+  for (let r = 1; r < lenRow; r++) {
+    for (let c = 0; c < lenCol; c++) {
+      if (matrix[r][c] === 0) {
+        matrix[0][c] = 0
+        matrix[r][0] = 0
+      }
+    }
+  }
+
+  // 2. change
+  for (let r = 1; r < lenRow; r++) {
+    if (matrix[r][0] === 0) {
+      for (let c = 1; c < lenCol; c++) {
+        matrix[r][c] = 0
+      }
+    }
+  }
+
+  for (let c = 0; c < lenCol; c++) {
+    if (matrix[0][c] === 0) {
+      for (let r = 1; r < lenRow; r++) {
+        matrix[r][c] = 0
+      }
+    }
+  }
+
+  if (isFirstRowZero) {
+    for (let c = 0; c < lenCol; c++) {
+      matrix[0][c] = 0
     }
   }
 
