@@ -120,3 +120,46 @@ const longestPalindrome3 = (s) => {
 
   return s.slice(ptrS, ptrE + 1)
 }
+
+// 4. ------------------------------------------------------------
+// Runtime: 115 ms
+// Memory Usage: 46.8 MB
+const longestPalindrome = (s) => {
+  // function
+  const getShortestPalindromes = (str) => {
+    return (candidateSet, char, ptrS) => {
+      if (char === str[ptrS + 1]) candidateSet.push([ptrS, ptrS + 1])
+      if (char === str[ptrS + 2]) candidateSet.push([ptrS, ptrS + 2])
+
+      return candidateSet
+    }
+  }
+  const getLongestPalindrome = (str) => {
+    return ([ptrSL, ptrEL], [ptrS, ptrE]) => {
+      // exception
+      const lenLon = ptrEL - ptrSL + 1
+      const lenCur = ptrE - ptrS + 1
+      const lenExt = Math.max(ptrS, str.length - 1 - ptrE) * 2
+      if (lenCur + lenExt <= lenLon) return [ptrSL, ptrEL]
+
+      // run
+      while (ptrS > 0 && ptrE < str.length - 1) {
+        if (str[ptrS - 1] !== str[ptrE + 1]) break
+
+        ptrS--
+        ptrE++
+      }
+      if (ptrEL - ptrSL < ptrE - ptrS) return [ptrS, ptrE]
+
+      return [ptrSL, ptrEL]
+    }
+  }
+
+  // run
+  const [ptrS, ptrE] = s
+    .split('')
+    .reduce(getShortestPalindromes(s), [])
+    .reduce(getLongestPalindrome(s), [0, 0])
+
+  return s.slice(ptrS, ptrE + 1)
+}
