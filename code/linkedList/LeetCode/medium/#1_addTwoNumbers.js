@@ -44,7 +44,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 93.67% / 97 ms
 // Memory Usage: 74.13% / 47.2 MB
-const addTwoNumbers = (l1, l2) => {
+const addTwoNumbers1 = (l1, l2) => {
   const head = new ListNode(null)
   let ptr = null
   let ptr1 = l1
@@ -101,4 +101,28 @@ const addTwoNumbers = (l1, l2) => {
   }
 
   return head
+}
+
+// 1. ------------------------------------------------------------
+// clean up
+// Runtime: 104 ms
+// Memory Usage: 47.7 MB
+const addTwoNumbers = (l1, l2) => {
+  const preHead = new ListNode('preHead')
+  let [ptr, ptr1, ptr2] = [preHead, l1, l2]
+  let carry = 0
+
+  while (ptr1 || ptr2) {
+    const sum = (ptr1?.val || 0) + (ptr2?.val || 0) + carry
+    carry = Math.floor(sum / 10)
+    ptr.next = new ListNode(sum % 10)
+
+    ptr = ptr.next
+    if (ptr1) ptr1 = ptr1.next
+    if (ptr2) ptr2 = ptr2.next
+  }
+
+  if (carry !== 0) ptr.next = new ListNode(carry)
+
+  return preHead.next
 }
