@@ -34,7 +34,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 81.95% / 77 ms
 // Memory Usage: 35.84% / 54.3 MB
-const increasingTriplet = (nums) => {
+const increasingTriplet1 = (nums) => {
   // exception
   if (nums.length < 3) return false
 
@@ -58,6 +58,33 @@ const increasingTriplet = (nums) => {
 
     if (num1 < n) num2 = n
     else if (tmp1 < n) {
+      num1 = tmp1
+      num2 = n
+    } else {
+      tmp1 = n
+    }
+  }
+
+  return false
+}
+
+// 2. ------------------------------------------------------------
+// 將不必要的精簡
+// 一開始也先排進 tmp1，tmp1 < n 時，才會有 num1, num2
+// Runtime: 80 ms
+// Memory Usage: 54.6 MB
+const increasingTriplet = (nums) => {
+  // exception
+  if (nums.length < 3) return false
+
+  // var
+  let num1, num2, tmp1
+
+  // run
+  for (let n of nums) {
+    if (num2 < n) return true
+
+    if (tmp1 < n) {
       num1 = tmp1
       num2 = n
     } else {
