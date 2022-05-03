@@ -97,7 +97,7 @@ const countAndSay2 = (() => {
 // use loop
 // Runtime: 82 ms
 // Memory Usage: 46.3 MB
-const countAndSay = (() => {
+const countAndSay3 = (() => {
   // function
   const toCountNum = (counter, char) => {
     const lastNum = counter[counter.length - 1]
@@ -120,5 +120,34 @@ const countAndSay = (() => {
     }
 
     return result
+  }
+})()
+
+// 4. ------------------------------------------------------------
+// try to use loop with FP
+// Runtime: 68 ms
+// Memory Usage: 46 MB
+const countAndSay = (() => {
+  // function
+  const toCountNum = (counter, char) => {
+    const lastNum = counter[counter.length - 1]
+
+    if (char === lastNum?.[1]) lastNum[0]++
+    else counter.push([1, char])
+
+    return counter
+  }
+  const makeStr = (str, [count, char]) => str + count + char
+
+  // main
+  return (n) => {
+    if (n < 1) return null
+
+    const helpArr = new Array(n - 1).fill('')
+
+    const helpFn = (str) =>
+      str.split('').reduce(toCountNum, []).reduce(makeStr, '')
+
+    return helpArr.reduce(helpFn, '1')
   }
 })()
