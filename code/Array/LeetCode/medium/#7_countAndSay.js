@@ -41,7 +41,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 61.17% / 82 ms
 // Memory Usage: 5.96% / 46.3 MB
-const countAndSay = (n) => {
+const countAndSay1 = (n) => {
   // exception
   if (n < 1) return null
   if (n === 1) return '1'
@@ -64,3 +64,31 @@ const countAndSay = (n) => {
   // run
   return preStr.split('').reduce(toCountNum, []).reduce(makeStr, '')
 }
+
+// 2. ------------------------------------------------------------
+// clean up
+// Runtime: 73 ms
+// Memory Usage: 45.7 MB
+const countAndSay = (() => {
+  // function
+  const toCountNum = (counter, char) => {
+    const lastNum = counter[counter.length - 1]
+
+    if (char === lastNum?.[1]) lastNum[0]++
+    else counter.push([1, char])
+
+    return counter
+  }
+  const makeStr = (str, [count, char]) => str + count + char
+
+  // main
+  return (n) => {
+    if (n < 1) return null
+    if (n === 1) return '1'
+
+    return countAndSay(n - 1)
+      .split('')
+      .reduce(toCountNum, [])
+      .reduce(makeStr, '')
+  }
+})()
