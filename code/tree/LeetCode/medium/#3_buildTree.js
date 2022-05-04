@@ -131,7 +131,7 @@ const buildTree3 = (preorder, inorder) => {
 // 加入 hashMap 記住 inorder
 // Runtime: 92 ms
 // Memory Usage: 46.7 MB
-const buildTree = (preorder, inorder) => {
+const buildTree4 = (preorder, inorder) => {
   // var
   const hashMapI = new Map(inorder.map((v, i) => [v, i]))
 
@@ -158,4 +158,31 @@ const buildTree = (preorder, inorder) => {
 
   // run
   return byPointer([0, preorder.length], [0, inorder.length])
+}
+
+// 4. ------------------------------------------------------------
+// Runtime: 95 ms
+// Memory Usage: 44.8 MB
+const buildTree = (preorder, inorder) => {
+  // var
+  const hashMapI = new Map(inorder.map((v, i) => [v, i]))
+  let ptrP = 0
+
+  // function
+  const preorderDFS = (left, right) => {
+    if (left > right) return null
+
+    const val = preorder[ptrP]
+    const node = new TreeNode(val)
+    const idxM = hashMapI.get(val)
+    ptrP++
+
+    node.left = preorderDFS(left, idxM - 1)
+    node.right = preorderDFS(idxM + 1, right)
+
+    return node
+  }
+
+  // run
+  return preorderDFS(0, preorder.length - 1)
 }
