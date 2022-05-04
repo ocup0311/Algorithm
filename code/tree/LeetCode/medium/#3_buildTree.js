@@ -33,11 +33,12 @@
  */
 
 // Notice --------------------------------------------------------
+// 1. val 不重複
 
 // 1. ------------------------------------------------------------
 // Runtime: 16.16% / 225 ms
 // Memory Usage: 20.31% / 136.1 MB
-const buildTree = (preorder, inorder) => {
+const buildTree1 = (preorder, inorder) => {
   if (preorder.length === 0) return null
 
   const val = preorder[0]
@@ -52,4 +53,76 @@ const buildTree = (preorder, inorder) => {
   node.right = buildTree(preorderR, inorderR)
 
   return node
+}
+
+// 2. ------------------------------------------------------------
+// 使用 pointer，避免多餘 array 的生產
+// Runtime: 90.57% / 84 ms
+// Memory Usage: 51.32% / 46.2 MB
+const buildTree2 = (preorder, inorder) => {
+  // function
+  const findMiddle = (val, idxS, idxE) => {
+    for (let i = idxS; i <= idxE; i++) {
+      if (inorder[i] === val) return i
+    }
+  }
+
+  const byPointer = ([idxPS, idxPE], [idxIS, idxIE]) => {
+    if (idxPE < idxPS) return null
+
+    const val = preorder[idxPS]
+    const node = new TreeNode(val)
+
+    if (idxPE === idxPS) return node
+
+    const idxM = findMiddle(val, idxIS, idxIE)
+    const idxIL = [idxIS, idxM - 1]
+    const idxIR = [idxM + 1, idxIE]
+    const idxPL = [idxPS + 1, idxPS + (idxM - idxIS)]
+    const idxPR = [idxPS + (idxM - idxIS) + 1, idxPE]
+
+    node.left = byPointer(idxPL, idxIL)
+    node.right = byPointer(idxPR, idxIR)
+
+    return node
+  }
+
+  // run
+  return byPointer([0, preorder.length - 1], [0, inorder.length - 1])
+}
+
+// 3. ------------------------------------------------------------
+// 調整 idxE
+// Runtime: 92 ms
+// Memory Usage: 46 MB
+const buildTree = (preorder, inorder) => {
+  // function
+  const findMiddle = (val, idxS, idxE) => {
+    for (let i = idxS; i < idxE; i++) {
+      if (inorder[i] === val) return i
+    }
+  }
+
+  const byPointer = ([idxPS, idxPE], [idxIS, idxIE]) => {
+    if (idxPE === idxPS) return null
+
+    const val = preorder[idxPS]
+    const node = new TreeNode(val)
+
+    if (idxPE === idxPS + 1) return node
+
+    const idxM = findMiddle(val, idxIS, idxIE)
+    const idxIL = [idxIS, idxM]
+    const idxIR = [idxM + 1, idxIE]
+    const idxPL = [idxPS + 1, idxPS + (idxM - idxIS) + 1]
+    const idxPR = [idxPS + (idxM - idxIS) + 1, idxPE]
+
+    node.left = byPointer(idxPL, idxIL)
+    node.right = byPointer(idxPR, idxIR)
+
+    return node
+  }
+
+  // run
+  return byPointer([0, preorder.length], [0, inorder.length])
 }
