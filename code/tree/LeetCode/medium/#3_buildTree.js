@@ -92,10 +92,10 @@ const buildTree2 = (preorder, inorder) => {
 }
 
 // 3. ------------------------------------------------------------
-// 調整 idxE
+// 調整 idxE 為不包含
 // Runtime: 92 ms
 // Memory Usage: 46 MB
-const buildTree = (preorder, inorder) => {
+const buildTree3 = (preorder, inorder) => {
   // function
   const findMiddle = (val, idxS, idxE) => {
     for (let i = idxS; i < idxE; i++) {
@@ -112,6 +112,39 @@ const buildTree = (preorder, inorder) => {
     if (idxPE === idxPS + 1) return node
 
     const idxM = findMiddle(val, idxIS, idxIE)
+    const idxIL = [idxIS, idxM]
+    const idxIR = [idxM + 1, idxIE]
+    const idxPL = [idxPS + 1, idxPS + (idxM - idxIS) + 1]
+    const idxPR = [idxPS + (idxM - idxIS) + 1, idxPE]
+
+    node.left = byPointer(idxPL, idxIL)
+    node.right = byPointer(idxPR, idxIR)
+
+    return node
+  }
+
+  // run
+  return byPointer([0, preorder.length], [0, inorder.length])
+}
+
+// 4. ------------------------------------------------------------
+// 加入 hashMap 記住 inorder
+// Runtime: 92 ms
+// Memory Usage: 46.7 MB
+const buildTree = (preorder, inorder) => {
+  // var
+  const hashMapI = new Map(inorder.map((v, i) => [v, i]))
+
+  // function
+  const byPointer = ([idxPS, idxPE], [idxIS, idxIE]) => {
+    if (idxPE === idxPS) return null
+
+    const val = preorder[idxPS]
+    const node = new TreeNode(val)
+
+    if (idxPE === idxPS + 1) return node
+
+    const idxM = hashMapI.get(val)
     const idxIL = [idxIS, idxM]
     const idxIR = [idxM + 1, idxIE]
     const idxPL = [idxPS + 1, idxPS + (idxM - idxIS) + 1]
