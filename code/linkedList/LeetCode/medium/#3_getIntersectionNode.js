@@ -77,7 +77,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 82.89% / 95 ms
 // Memory Usage: 96.05% / 49.4 MB
-const getIntersectionNode = (headA, headB) => {
+const getIntersectionNode1 = (headA, headB) => {
   let diffLength = 0
   let ptrA = headA
   let ptrB = headB
@@ -122,4 +122,23 @@ const getIntersectionNode = (headA, headB) => {
   }
 
   return null
+}
+
+// 2. ------------------------------------------------------------
+// max time: O(nA+nB)
+// headA_headB : headB_headA 相比。若ＡＢ長度相同，前半段出結果。若長度不同，後半段出結果。
+// Runtime: 95 ms
+// Memory Usage: 49.3 MB
+const getIntersectionNode = (headA, headB) => {
+  if (!headA || !headB) return null
+
+  let ptr1 = headA
+  let ptr2 = headB
+
+  while (ptr1 !== ptr2) {
+    ptr1 = ptr1 ? ptr1.next : headB
+    ptr2 = ptr2 ? ptr2.next : headA
+  }
+
+  return ptr1
 }
