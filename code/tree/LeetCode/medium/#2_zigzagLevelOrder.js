@@ -34,9 +34,9 @@
 // 1. 第一層 left --> right ，第二層 right --> left  -->  想到類似 BFS
 
 // 1. ------------------------------------------------------------
-// Runtime: 65 ms
-// Memory Usage: 44.4 MB
-const zigzagLevelOrder = (root) => {
+// Runtime: 85.35% / 65 ms
+// Memory Usage: 13.68% 44.4 MB
+const zigzagLevelOrder1 = (root) => {
   // exception
   if (root === null) return []
 
@@ -59,6 +59,37 @@ const zigzagLevelOrder = (root) => {
     if (newLevel.length > 0) queue.push(newLevel)
 
     reverse = !reverse
+  }
+
+  return result
+}
+
+// 2. ------------------------------------------------------------
+// clean up
+// Runtime: 75 ms
+// Memory Usage: 44.2 MB
+const zigzagLevelOrder = (root) => {
+  // exception
+  if (root === null) return []
+
+  // var
+  const result = []
+  const queue = [{ level: [root], reverse: false }]
+
+  // run
+  while (queue.length > 0) {
+    // function
+    const makeLevel = (lv, n) => lv.concat([n.left, n.right]).filter((n) => n)
+
+    // run
+    const { level: currLevel, reverse } = queue.shift()
+    const nextLevel = currLevel.reduce(makeLevel, [])
+    const newResult = currLevel.map((n) => n.val)
+
+    if (nextLevel[0]) queue.push({ level: nextLevel, reverse: !reverse })
+
+    if (reverse) newResult.reverse()
+    result.push(newResult)
   }
 
   return result
