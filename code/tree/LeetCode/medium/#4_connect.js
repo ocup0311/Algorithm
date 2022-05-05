@@ -48,12 +48,13 @@
  */
 
 // Notice --------------------------------------------------------
+// 1. 是 perfect binary tree，所以可以再試試更 tricky 的做法。
 
 // 1. ------------------------------------------------------------
 // Runtime: 10.02% / 144 ms
 // Memory Usage: 0% / 50.2 MB
 const connect1 = (root) => {
-  if (!root) return root
+  if (!root?.left) return root
 
   const connectLevel = (level) => {
     level.reduceRight((nextNode, currNode) => {
@@ -79,7 +80,7 @@ const connect1 = (root) => {
 // Runtime: 96 ms
 // Memory Usage: 48.4 MB
 const connect2 = (root) => {
-  if (!root) return root
+  if (!root?.left) return root
 
   const connectLevel = (level) => {
     level.reduceRight((nextNode, currNode) => {
@@ -107,7 +108,7 @@ const connect2 = (root) => {
 // Runtime: 94 ms
 // Memory Usage: 49.6 MB
 const connect3 = (root) => {
-  if (!root) return root
+  if (!root?.left) return root
 
   const queue = [[root, 1]]
   const hashMap = new Map()
@@ -130,7 +131,7 @@ const connect3 = (root) => {
 // change: hashMap --> one node
 // Runtime: 80 ms
 // Memory Usage: 49.5 MB
-const connect = (root) => {
+const connect4 = (root) => {
   if (!root?.left && !root?.right) return root
 
   const queue = [{ node: root, level: 1 }]
@@ -147,6 +148,95 @@ const connect = (root) => {
     if (node.right) queue.push({ node: node.right, level: level + 1 })
 
     ptr++
+  }
+
+  return root
+}
+
+// 5. ------------------------------------------------------------
+// perfect binary tree --> just need to check root?.left
+const connect5 = (root) => {
+  if (!root?.left) return root
+
+  const queue = [{ node: root, level: 1 }]
+  let lastNode = { node: null, level: 0 }
+  let ptr = 0
+
+  while (queue.length > ptr) {
+    const { node, level } = queue[ptr]
+
+    if (lastNode.level === level) lastNode.node.next = node
+    lastNode = { node, level }
+
+    if (node.left) queue.push({ node: node.left, level: level + 1 })
+    if (node.right) queue.push({ node: node.right, level: level + 1 })
+
+    ptr++
+  }
+
+  return root
+}
+
+// 6. ------------------------------------------------------------
+// Runtime: 84 ms
+// Memory Usage: 48.5 MB
+const connect6 = (root) => {
+  if (!root?.left) return root
+
+  const queue = [root]
+
+  while (queue.length > 0) {
+    const lenLevel = queue.length
+
+    for (let i = 0; i < lenLevel; i++) {
+      const node = queue.shift()
+
+      if (i < lenLevel - 1) node.next = queue[0]
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+  }
+
+  return root
+}
+
+// 7. ------------------------------------------------------------
+// DFS 只能用 preorder，才能提早 set root.next
+// Runtime: 87 ms
+// Memory Usage: 47.5 MB
+const connect7 = (root) => {
+  if (!root?.left) return root
+
+  const left = root.left
+  const right = root.right
+
+  left.next = right
+  right.next = root.next?.left || null
+
+  connect7(root.left)
+  connect7(root.right)
+
+  return root
+}
+
+// 8. ------------------------------------------------------------
+// Runtime: 88 ms
+// Memory Usage: 48 MB
+const connect = (root) => {
+  if (!root?.left) return root
+
+  let levelHead = root
+
+  while (levelHead.left) {
+    let ptr = levelHead
+    levelHead = levelHead.left
+
+    while (ptr) {
+      ptr.left.next = ptr.right
+      ptr.right.next = ptr.next?.left || null
+
+      ptr = ptr.next
+    }
   }
 
   return root
