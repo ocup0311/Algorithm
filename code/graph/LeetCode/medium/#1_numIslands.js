@@ -39,9 +39,11 @@
 // 1. ------------------------------------------------------------
 // Runtime: 60.60% / 107 ms
 // Memory Usage: 73.19% / 45 MB
-const numIslands = (grid) => {
+const numIslands1 = (grid) => {
+  // var
   let result = 0
 
+  // function
   const check = (row, col) => {
     if (grid[row][col] === '1') {
       grid[row][col] = null
@@ -52,10 +54,48 @@ const numIslands = (grid) => {
     }
   }
 
+  // run
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col] === '1') {
         check(row, col)
+        result++
+      }
+    }
+  }
+
+  return result
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 114 ms
+// Memory Usage: 50.6 MB
+const numIslands = (grid) => {
+  // var
+  let result = 0
+
+  // function
+  const check = (cell) => {
+    const queue = [cell]
+
+    while (queue.length > 0) {
+      const [row, col] = queue.pop()
+
+      if (grid[row][col] === '1') {
+        grid[row][col] = null
+        if (row > 0) queue.push([row - 1, col])
+        if (col > 0) queue.push([row, col - 1])
+        if (row < grid.length - 1) queue.push([row + 1, col])
+        if (col < grid[0].length - 1) queue.push([row, col + 1])
+      }
+    }
+  }
+
+  // run
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      if (grid[row][col] === '1') {
+        check([row, col])
         result++
       }
     }
