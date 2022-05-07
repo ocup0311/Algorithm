@@ -28,26 +28,46 @@
 // 1. ------------------------------------------------------------
 // Runtime: 82.32% / 79 ms
 // Memory Usage: 66.46% / 45 MB
-const permute = (nums) => {
+const permute1 = (nums) => {
   // var
-  let output = [nums.slice(0, 1)]
-  let ptr = 1
+  let result = [nums.slice(0, 1)]
 
   // function
-  const addOneNum = (nums, ptr) => (set, preArr) => {
+  const insertOneNum = (insert) => (output, preArr) => {
     for (let i = 0; i <= preArr.length; i++) {
-      const newArr = preArr.slice(0, i).concat(nums[ptr], preArr.slice(i))
-      set.push(newArr)
+      const newArr = preArr.slice(0, i).concat([insert], preArr.slice(i))
+      output.push(newArr)
     }
-    return set
+    return output
   }
 
   // run
-  while (ptr < nums.length) {
-    output = output.reduce(addOneNum(nums, ptr), [])
-
-    ptr++
+  for (let i = 1; i < nums.length; i++) {
+    result = result.reduce(insertOneNum(nums[i]), [])
   }
 
-  return output
+  return result
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 84 ms
+// Memory Usage: 44.6 MB
+const permute2 = (nums) => {
+  if (nums.length === 1) return [[...nums]]
+
+  // function
+  const insertOneNum = (insert) => (output, preArr) => {
+    for (let i = 0; i <= preArr.length; i++) {
+      const newArr = preArr.slice(0, i).concat([insert], preArr.slice(i))
+      output.push(newArr)
+    }
+    return output
+  }
+
+  // run
+  const [firstNum, ...restNums] = nums
+  const preResult = permute(restNums)
+  const result = preResult.reduce(insertOneNum(firstNum), [])
+
+  return result
 }
