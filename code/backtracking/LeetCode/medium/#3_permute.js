@@ -33,17 +33,17 @@ const permute1 = (nums) => {
   let result = [nums.slice(0, 1)]
 
   // function
-  const insertOneNum = (insert) => (output, preArr) => {
-    for (let i = 0; i <= preArr.length; i++) {
-      const newArr = preArr.slice(0, i).concat([insert], preArr.slice(i))
-      output.push(newArr)
+  const insertN = (n) => (t, path) => {
+    for (let i = 0; i <= path.length; i++) {
+      const newPath = path.slice(0, i).concat([n], path.slice(i))
+      t.push(newPath)
     }
-    return output
+    return t
   }
 
   // run
   for (let i = 1; i < nums.length; i++) {
-    result = result.reduce(insertOneNum(nums[i]), [])
+    result = result.reduce(insertN(nums[i]), [])
   }
 
   return result
@@ -56,18 +56,43 @@ const permute2 = (nums) => {
   if (nums.length === 1) return [[...nums]]
 
   // function
-  const insertOneNum = (insert) => (output, preArr) => {
-    for (let i = 0; i <= preArr.length; i++) {
-      const newArr = preArr.slice(0, i).concat([insert], preArr.slice(i))
-      output.push(newArr)
+  const insertN = (n) => (t, path) => {
+    for (let i = 0; i <= path.length; i++) {
+      const newPath = path.slice(0, i).concat([n], path.slice(i))
+      t.push(newPath)
     }
-    return output
+    return t
   }
 
   // run
   const [firstNum, ...restNums] = nums
   const preResult = permute(restNums)
-  const result = preResult.reduce(insertOneNum(firstNum), [])
+  const result = preResult.reduce(insertN(firstNum), [])
+
+  return result
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 92 ms
+// Memory Usage: 46.7 MB
+const permute = (nums) => {
+  // function
+  const makeResult = (restNums, path = []) => {
+    if (path.length === nums.length) return [path]
+
+    const insertN = (t, n, i, self) => {
+      const newRest = self.slice(0, i).concat(self.slice(i + 1))
+      const newPath = path.concat(n)
+      const newResult = makeResult(newRest, newPath)
+
+      return t.concat(newResult)
+    }
+
+    return restNums.reduce(insertN, [])
+  }
+
+  // run
+  const result = makeResult(nums)
 
   return result
 }
