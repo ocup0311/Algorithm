@@ -79,7 +79,7 @@ const topKFrequent2 = (nums, k) => {
 // 3. ------------------------------------------------------------
 // Runtime: 76 ms
 // Memory Usage: 45.3 MB
-const topKFrequent = (nums, k) => {
+const topKFrequent3 = (nums, k) => {
   const bucket = new Array(nums.length + 1)
   const count = nums.reduce((count, v) => {
     if (count[v]) count[v]++
@@ -104,3 +104,30 @@ const topKFrequent = (nums, k) => {
 
   return result
 }
+
+// TEST1 --------------------------------------------
+// 快 3 > 1 >> 2 慢 (約 2.5s : 3s : 6s)
+const a1 = 99
+const b1 = 50000
+const arr1 = []
+for (let i = 0; i < a1; i++) {
+  for (let j = 0; j < b1; j++) {
+    arr1.push(Math.round(Math.random() * j * a1))
+  }
+}
+topKFrequent1(arr1, a1)
+
+// TEST2 --------------------------------------------
+// 快 2 > 3 >> 1 慢 (約 1.3s : 3s : 11s)
+const a2 = 99
+const b2 = 10000000
+const input2 = []
+const xx = new Array(a2).fill(3).concat(new Array(b2 - a2).fill(1))
+
+for (let i = 0; i < b2; i++) {
+  for (let j = 0; j < xx[i]; j++) {
+    input2.push(i)
+  }
+}
+
+topKFrequent1(input2, a2)
