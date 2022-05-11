@@ -64,7 +64,7 @@ const searchRange1 = (nums, target) => {
 // 2. ------------------------------------------------------------
 // Runtime: 79.78% / 66 ms
 // Memory Usage: 86.84% / 42.3 MB
-const searchRange = (nums, target) => {
+const searchRange2 = (nums, target) => {
   if (nums.length === 0) return [-1, -1]
 
   const findS = (ptrS, ptrE) => {
@@ -86,6 +86,66 @@ const searchRange = (nums, target) => {
     }
 
     return ptrS
+  }
+
+  // run
+  const idxS = findS(0, nums.length - 1)
+  const idxE = findE(0, nums.length - 1)
+
+  return nums[idxS] === target ? [idxS, idxE] : [-1, -1]
+}
+
+// 3 & 4 改良自 1 & 2 <-- 或許可統一 binary search 作法，省去每次重新思考上下限：
+// (1) [0, nums.length - 1]  (2) while (ptrS <= ptrE) (3) ptrM - 1 & ptrM + 1
+// 3. ------------------------------------------------------------
+const searchRange3 = (nums, target) => {
+  if (nums.length === 0) return [-1, -1]
+
+  const result = [Infinity, -1]
+
+  const find = (ptrS, ptrE) => {
+    while (ptrS <= ptrE) {
+      const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+      if (target === nums[ptrM]) {
+        result[0] = Math.min(result[0], ptrM)
+        result[1] = Math.max(result[1], ptrM)
+        find(ptrS, ptrM - 1)
+      }
+
+      if (target < nums[ptrM]) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
+    }
+  }
+
+  find(0, nums.length - 1)
+
+  return result[0] > result[1] ? [-1, -1] : result
+}
+
+// 4. ------------------------------------------------------------
+const searchRange4 = (nums, target) => {
+  if (nums.length === 0) return [-1, -1]
+
+  const findS = (ptrS, ptrE) => {
+    while (ptrS <= ptrE) {
+      const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+      if (target > nums[ptrM]) ptrS = ptrM + 1
+      else ptrE = ptrM - 1
+    }
+
+    return ptrS
+  }
+  const findE = (ptrS, ptrE) => {
+    while (ptrS <= ptrE) {
+      const ptrM = Math.ceil((ptrS + ptrE) / 2)
+
+      if (target < nums[ptrM]) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
+    }
+
+    return ptrE
   }
 
   // run
