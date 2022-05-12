@@ -113,7 +113,8 @@ const search2 = (nums, target) => {
 }
 
 // 3. ------------------------------------------------------------
-const search = (nums, target) => {
+// fix 1
+const search3 = (nums, target) => {
   let [ptrS, ptrE] = [0, nums.length - 1]
 
   while (ptrS <= ptrE) {
@@ -137,6 +138,69 @@ const search = (nums, target) => {
     } else {
       if (nums[ptrM] > target) ptrE = ptrM - 1
       else ptrS = ptrM + 1
+    }
+  }
+
+  return -1
+}
+
+// 4. ------------------------------------------------------------
+// clean up from 3
+const search4 = (nums, target) => {
+  let [ptrS, ptrE] = [0, nums.length - 1]
+
+  while (ptrS <= ptrE) {
+    const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+    if (nums[ptrM] === target) return ptrM
+
+    if (nums[ptrS] > nums[ptrE]) {
+      if (nums[ptrM] < nums[ptrS]) {
+        if (target > nums[ptrE] || target < nums[ptrM]) ptrE = ptrM - 1
+        else ptrS = ptrM + 1
+      } else {
+        if (target < nums[ptrS] || target > nums[ptrM]) ptrS = ptrM + 1
+        else ptrE = ptrM - 1
+      }
+    } else {
+      if (target < nums[ptrM]) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
+    }
+  }
+
+  return -1
+}
+
+// 5. ------------------------------------------------------------
+// clean up from 4
+const search = (nums, target) => {
+  let [ptrS, ptrE] = [0, nums.length - 1]
+
+  // function
+  const isTarget = (idx) => nums[idx] === target
+  const isTwoPart = () => nums[ptrS] > nums[ptrE]
+  const isInPart2 = (idxM) => nums[idxM] < nums[ptrS]
+  const isInRange = (idxS, idxE) => target > nums[idxS] || target < nums[idxE]
+  const goLeftOf = (idx) => (ptrE = idx - 1)
+  const goRightOf = (idx) => (ptrS = idx + 1)
+
+  // run
+  while (ptrS <= ptrE) {
+    const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+    if (isTarget(ptrM)) return ptrM
+
+    if (isTwoPart()) {
+      if (isInPart2(ptrM)) {
+        if (isInRange(ptrE, ptrM)) goLeftOf(ptrM)
+        else goRightOf(ptrM)
+      } else {
+        if (isInRange(ptrM, ptrS)) goRightOf(ptrM)
+        else goLeftOf(ptrM)
+      }
+    } else {
+      if (target < nums[ptrM]) goLeftOf(ptrM)
+      else goRightOf(ptrM)
     }
   }
 
