@@ -111,3 +111,34 @@ const search2 = (nums, target) => {
 
   return Math.max(resultS, resultE)
 }
+
+// 3. ------------------------------------------------------------
+const search = (nums, target) => {
+  let [ptrS, ptrE] = [0, nums.length - 1]
+
+  while (ptrS <= ptrE) {
+    const ptrM = Math.ceil((ptrS + ptrE) / 2)
+    console.log(ptrS, ptrM, ptrE)
+
+    if (nums[ptrM] === target) return ptrM
+
+    if (nums[ptrS] > nums[ptrE]) {
+      if (nums[ptrM] < nums[ptrS]) {
+        if (nums[ptrS] < target) ptrE = ptrM - 1
+        else if (nums[ptrE] < target) ptrE = ptrM - 1
+        else if (nums[ptrM] < target) ptrS = ptrM + 1
+        else ptrE = ptrM - 1
+      } else {
+        if (nums[ptrS] > target) ptrS = ptrM + 1
+        else if (nums[ptrE] > target) ptrS = ptrM + 1
+        else if (nums[ptrM] < target) ptrS = ptrM + 1
+        else ptrE = ptrM - 1
+      }
+    } else {
+      if (nums[ptrM] > target) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
+    }
+  }
+
+  return -1
+}
