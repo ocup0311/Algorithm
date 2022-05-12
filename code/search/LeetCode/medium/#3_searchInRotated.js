@@ -173,7 +173,7 @@ const search4 = (nums, target) => {
 
 // 5. ------------------------------------------------------------
 // clean up from 4
-const search = (nums, target) => {
+const search5 = (nums, target) => {
   let [ptrS, ptrE] = [0, nums.length - 1]
 
   // function
@@ -201,6 +201,66 @@ const search = (nums, target) => {
     } else {
       if (target < nums[ptrM]) goLeftOf(ptrM)
       else goRightOf(ptrM)
+    }
+  }
+
+  return -1
+}
+
+// 6. ------------------------------------------------------------
+// 虛擬延長雙倍:
+// --------------idxM---------------
+// ptrS--idxS--ptrE-ptrS--idxE--ptrE
+const search6 = (nums, target) => {
+  // function
+  const findSmallest = (arr, [ptrS, ptrE]) => {
+    while (ptrS < ptrE) {
+      const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+      if (arr[ptrM] > arr[ptrE]) ptrS = ptrM + 1
+      else ptrE = ptrM
+    }
+
+    return ptrS
+  }
+
+  const findTarget = (arr, [ptrS, ptrE, idxS]) => {
+    while (ptrS <= ptrE) {
+      const ptrM = Math.floor((ptrS + ptrE) / 2)
+      const idxM = (ptrM + idxS) % arr.length
+
+      if (target === arr[idxM]) return idxM
+      if (target < arr[idxM]) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
+    }
+
+    return -1
+  }
+
+  // run
+  const [idxStart, idxEnd] = [0, nums.length - 1]
+  const idxSmall = findSmallest(nums, [idxStart, idxEnd])
+  const result = findTarget(nums, [idxStart, idxEnd, idxSmall])
+
+  return result
+}
+
+// 7. ------------------------------------------------------------
+// fix from 1
+const search = (nums, target) => {
+  let [ptrS, ptrE] = [0, nums.length - 1]
+
+  while (ptrS <= ptrE) {
+    const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+    if (nums[ptrM] === target) return ptrM
+
+    if (nums[ptrM] < nums[ptrE]) {
+      if (target > nums[ptrM] && target <= nums[ptrE]) ptrS = ptrM + 1
+      else ptrE = ptrM - 1
+    } else {
+      if (target >= nums[ptrS] && target < nums[ptrM]) ptrE = ptrM - 1
+      else ptrS = ptrM + 1
     }
   }
 
