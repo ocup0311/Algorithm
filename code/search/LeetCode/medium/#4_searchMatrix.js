@@ -31,9 +31,10 @@
 // 1. 排序 小 --> 大  =>=>  左 --> 右 ＆ 上 --> 下
 
 // 1. ------------------------------------------------------------
-// Runtime: 30.18% / 2832 ms
-// Memory Usage: 50.8 MB
-const searchMatrix = (matrix, target) => {
+// 從 start 限縮 end & 從 end 限縮 start
+// Runtime: 39.46% / 1648 ms
+// Memory Usage: 36.02% / 45.4 MB
+const searchMatrix1 = (matrix, target) => {
   if (matrix.length === 0 || matrix[0].length === 0) return false
 
   let idxRS = 0
@@ -107,4 +108,77 @@ const searchMatrix = (matrix, target) => {
   }
 
   return false
+}
+
+// 2. ------------------------------------------------------------
+// 從對角線來限縮範圍
+// Runtime: 2278 ms
+// Memory Usage: 51.8 MB
+const searchMatrix2 = (matrix, target) => {
+  if (matrix.length === 0 || matrix[0].length === 0) return false
+
+  const searchDiagonal = (idxRS, idxRE, idxCS, idxCE) => {
+    // exception
+    if (idxRS > idxRE || idxCS > idxCE) return false
+    if (idxRS === idxRE) {
+      while (idxCS <= idxCE) {
+        const idxCM = Math.floor((idxCS + idxCE) / 2)
+
+        if (target === matrix[idxRS][idxCM]) return true
+        if (target > matrix[idxRS][idxCM]) idxCS = idxCM + 1
+        else idxCE = idxCM - 1
+      }
+
+      return false
+    }
+    if (idxCS === idxCE) {
+      while (idxRS <= idxRE) {
+        const idxRM = Math.floor((idxRS + idxRE) / 2)
+
+        if (target === matrix[idxRM][idxCS]) return true
+        if (target > matrix[idxRM][idxCS]) idxRS = idxRM + 1
+        else idxRE = idxRM - 1
+      }
+
+      return false
+    }
+
+    // var
+    let ptrRS = idxRS
+    let ptrRE = idxRE
+    let ptrCS = idxCS
+    let ptrCE = idxCE
+
+    // run
+    while (ptrRS < ptrRE && ptrCS < ptrCE) {
+      const ptrRM = Math.floor((ptrRS + ptrRE) / 2)
+      const ptrCM = Math.floor((ptrCS + ptrCE) / 2)
+
+      if (target === matrix[ptrRM][ptrCM]) return true
+
+      if (target > matrix[ptrRM][ptrCM]) {
+        ptrRS = ptrRM + 1
+        ptrCS = ptrCM + 1
+      } else {
+        ptrRE = ptrRM
+        ptrCE = ptrCM
+      }
+    }
+
+    if (target === matrix[ptrRS][ptrCS]) return true
+
+    if (target < matrix[ptrRS][ptrCS]) {
+      return (
+        searchDiagonal(idxRS, ptrRE - 1, ptrCS, idxCE) ||
+        searchDiagonal(ptrRS, idxRE, idxCS, ptrCE - 1)
+      )
+    } else {
+      return (
+        searchDiagonal(idxRS, ptrRE, ptrCS + 1, idxCE) ||
+        searchDiagonal(ptrRS + 1, idxRE, idxCS, ptrCE)
+      )
+    }
+  }
+
+  return searchDiagonal(0, matrix.length - 1, 0, matrix[0].length - 1)
 }
