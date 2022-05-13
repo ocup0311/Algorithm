@@ -182,3 +182,24 @@ const searchMatrix2 = (matrix, target) => {
 
   return searchDiagonal(0, matrix.length - 1, 0, matrix[0].length - 1)
 }
+
+// 3. ------------------------------------------------------------
+// 從 matrix[ptrRS][ptrCE] 開始查詢：
+// < target --> ptrRS + 1 之前的，都太小
+// > target --> ptrCE - 1 之後的，都太大
+// Runtime: 80.73% / 473 ms
+// Memory Usage: 86.18% / 44.8 MB
+const searchMatrix = (matrix, target) => {
+  let ptrRS = 0
+  let ptrCE = matrix[0].length - 1
+
+  while (ptrRS < matrix.length && ptrCE >= 0) {
+    const element = matrix[ptrRS][ptrCE]
+
+    if (element === target) return true
+    if (element < target) ptrRS++
+    else ptrCE--
+  }
+
+  return false
+}
