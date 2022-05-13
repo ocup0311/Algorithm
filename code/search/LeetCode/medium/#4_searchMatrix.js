@@ -31,3 +31,80 @@
 // 1. 排序 小 --> 大  =>=>  左 --> 右 ＆ 上 --> 下
 
 // 1. ------------------------------------------------------------
+// Runtime: 30.18% / 2832 ms
+// Memory Usage: 50.8 MB
+const searchMatrix = (matrix, target) => {
+  if (matrix.length === 0 || matrix[0].length === 0) return false
+
+  let idxRS = 0
+  let idxRE = matrix.length - 1
+  let idxCS = 0
+  let idxCE = matrix[0].length - 1
+
+  // run
+  while (idxRS <= idxRE && idxCS <= idxCE) {
+    let ptrRS = idxRS
+    let ptrRE = idxRE
+    let ptrCS = idxCS
+    let ptrCE = idxCE
+
+    while (ptrRS <= ptrRE) {
+      const ptrRM = Math.floor((ptrRS + ptrRE) / 2)
+
+      if (target === matrix[ptrRM][idxCS]) return true
+
+      if (target < matrix[ptrRM][idxCS]) {
+        idxRE = ptrRM - 1
+        ptrRE = ptrRM - 1
+      } else {
+        ptrRS = ptrRM + 1
+      }
+    }
+
+    while (ptrCS <= ptrCE) {
+      const ptrCM = Math.floor((ptrCS + ptrCE) / 2)
+
+      if (target === matrix[idxRS][ptrCM]) return true
+
+      if (target < matrix[idxRS][ptrCM]) {
+        idxCE = ptrCM - 1
+        ptrCE = ptrCM - 1
+      } else {
+        ptrCS = ptrCM + 1
+      }
+    }
+
+    ptrRS = idxRS
+    ptrRE = idxRE
+    ptrCS = idxCS
+    ptrCE = idxCE
+
+    while (ptrRS <= ptrRE) {
+      const ptrRM = Math.floor((ptrRS + ptrRE) / 2)
+
+      if (target === matrix[ptrRM][idxCE]) return true
+
+      if (target > matrix[ptrRM][idxCE]) {
+        idxRS = ptrRM + 1
+        ptrRS = ptrRM + 1
+      } else {
+        ptrRE = ptrRM - 1
+      }
+    }
+
+    while (ptrCS <= ptrCE) {
+      const ptrCM = Math.floor((ptrCS + ptrCE) / 2)
+
+      if (target === matrix[idxRE][ptrCM]) return true
+
+      if (target > matrix[idxRE][ptrCM]) {
+        idxCS = ptrCM + 1
+        ptrCS = ptrCM + 1
+      } else {
+        ptrCE = ptrCM - 1
+      }
+    }
+  }
+
+  return false
+}
