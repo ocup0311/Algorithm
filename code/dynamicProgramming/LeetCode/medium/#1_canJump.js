@@ -47,8 +47,8 @@ const canJump1 = (nums) => {
 }
 
 // 2. ------------------------------------------------------------
-// Runtime: 17.02% / 2037 ms
-// Memory Usage: 0% / 54.5 MB
+// Runtime: 17.69% / 1838 ms
+// Memory Usage: 0% / 55 MB
 const canJump2 = (nums) => {
   // exception
   if (nums[0] >= nums.length - 1) return true
@@ -78,3 +78,45 @@ const canJump2 = (nums) => {
 }
 
 // 3. ------------------------------------------------------------
+// update from 1: (1) add break point (2) Object --> Map
+// Runtime: 4651 ms
+// Memory Usage: 51.1 MB
+const canJump3 = (nums) => {
+  // exception
+  if (nums[0] >= nums.length - 1) return true
+
+  // var
+  const cache = new Map()
+  cache.set(nums.length - 1, true)
+
+  // run
+  for (let i = nums.length - 2; i >= 0; i--) {
+    for (let j = nums[i]; j > 0; j--) {
+      if (cache.has(i + j)) {
+        cache.set(i, true)
+        break
+      }
+    }
+  }
+
+  return cache.get(0) ?? false
+}
+
+// 4. ------------------------------------------------------------
+// update from 1:
+// Runtime: 92.37% / 74 ms
+// Memory Usage: 99.26% / 45.7 MB
+const canJump = (nums) => {
+  // exception
+  if (nums[0] >= nums.length - 1) return true
+
+  // var
+  let lastStep = nums.length - 1
+
+  // run
+  for (let i = nums.length - 2; i >= 0; i--) {
+    if (nums[i] + i >= lastStep) lastStep = i
+  }
+
+  return lastStep === 0
+}
