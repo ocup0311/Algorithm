@@ -53,33 +53,39 @@ const lengthOfLIS1 = (nums) => {
 }
 
 // 2. ------------------------------------------------------------
-const binarySearch = (arr, val) => {
-  let ptrS = 0
-  let ptrE = arr.length - 1
+// 最終的 DP array 不一定是符合的答案。但 DP 長度會是本題所需。
+// Runtime: 94.70% / 73 ms
+// Memory Usage: 95.07% / 42.6 MB
+const lengthOfLIS2 = (nums) => {
+  // var
+  const DP = [nums[0]]
 
-  while (ptrS < ptrE) {
-    const ptrM = Math.floor((ptrS + ptrE) / 2)
+  // function
+  const binarySearch = (arr, val) => {
+    let ptrS = 0
+    let ptrE = arr.length - 1
 
-    if (arr[ptrM] == val) return ptrM
+    while (ptrS <= ptrE) {
+      const ptrM = Math.floor((ptrS + ptrE) / 2)
 
-    if (arr[ptrM] < val) ptrS = ptrM + 1
-    else ptrE = ptrM
+      if (arr[ptrM] == val) return ptrM
+
+      if (arr[ptrM] < val) ptrS = ptrM + 1
+      else ptrE = ptrM - 1
+    }
+
+    return ptrS
   }
 
-  return ptrS
-}
-
-const lengthOfLIS2 = (nums) => {
-  const subseq = [nums[0]]
-
+  // run
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] > subseq[subseq.length - 1]) {
-      subseq.push(nums[i])
+    if (nums[i] > DP[DP.length - 1]) {
+      DP.push(nums[i])
     } else {
-      const j = binarySearch(subseq, nums[i])
-      subseq[j] = nums[i]
+      const j = binarySearch(DP, nums[i])
+      DP[j] = nums[i]
     }
   }
 
-  return subseq.length
+  return DP.length
 }
