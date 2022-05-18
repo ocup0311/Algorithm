@@ -66,10 +66,11 @@ const isHappy2 = (n) => {
 }
 
 // 3. ------------------------------------------------------------
+// Floyd's Cycle-Finding Algorithm
 // 判斷快的追上慢的後，是否為 1
 // Runtime: 106 ms
 // Memory Usage: 44.2 MB
-const isHappy = (n) => {
+const isHappy3 = (n) => {
   // var
   let quick = n
   let slow = n
@@ -88,5 +89,32 @@ const isHappy = (n) => {
     quick = makeSquare(makeSquare(quick))
 
     if (slow === quick) return slow === 1
+  }
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 63 ms
+// Memory Usage: 44.1 MB
+const isHappy = (n) => {
+  // var
+  const hashMap = new Map()
+  let result = n
+
+  // function
+  const makeSquare = (num) => {
+    return num
+      .toString()
+      .split('')
+      .reduce((t, v) => t + v ** 2, 0)
+  }
+
+  // run
+  while (true) {
+    result = makeSquare(result)
+
+    if (result === 1) return true
+    if (hashMap.has(result)) return false
+
+    hashMap.set(result, true)
   }
 }
