@@ -67,12 +67,13 @@ const isHappy2 = (n) => {
 
 // 3. ------------------------------------------------------------
 // Floyd's Cycle-Finding Algorithm
-// 判斷快的追上慢的後，是否為 1
-// Runtime: 106 ms
+// 判斷快的追上慢的後，是否為 1 <-- 因為可以轉為 1 ，則不會形成 cycle
+// T: O(logn) S: O(1)
+// Runtime: 85 ms
 // Memory Usage: 44.2 MB
 const isHappy3 = (n) => {
   // var
-  let quick = n
+  let fast = n
   let slow = n
 
   // function
@@ -84,18 +85,21 @@ const isHappy3 = (n) => {
   }
 
   // run
-  while (true) {
+  while (fast !== 1) {
     slow = makeSquare(slow)
-    quick = makeSquare(makeSquare(quick))
+    fast = makeSquare(makeSquare(fast))
 
-    if (slow === quick) return slow === 1
+    if (slow === fast) return fast === 1
   }
+
+  return true
 }
 
-// 3. ------------------------------------------------------------
+// 4. ------------------------------------------------------------
+// T: O(logn) S: O(logn)
 // Runtime: 63 ms
 // Memory Usage: 44.1 MB
-const isHappy = (n) => {
+const isHappy4 = (n) => {
   // var
   const hashMap = new Map()
   let result = n
@@ -117,4 +121,38 @@ const isHappy = (n) => {
 
     hashMap.set(result, true)
   }
+}
+
+// 5. ------------------------------------------------------------
+// Math: 只有兩種可能 (1) happy (2) cycle: 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4
+const isHappy = (n) => {
+  // var
+  const hashMap = new Map([
+    [4, true],
+    [16, true],
+    [37, true],
+    [58, true],
+    [89, true],
+    [145, true],
+    [42, true],
+    [20, true],
+  ])
+  let result = n
+
+  // function
+  const makeSquare = (num) => {
+    return num
+      .toString()
+      .split('')
+      .reduce((t, v) => t + v ** 2, 0)
+  }
+
+  // run
+  while (result !== 1) {
+    result = makeSquare(result)
+
+    if (hashMap.has(result)) return false
+  }
+
+  return true
 }
