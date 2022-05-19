@@ -27,5 +27,29 @@
  */
 
 // Notice --------------------------------------------------------
+// 1. 尾巴有多少 0
 
 // 1. ------------------------------------------------------------
+// Runtime: 74.02% / 71 ms
+// Memory Usage: 44.48% / 42.5 MB
+const trailingZeroes1 = (n) => {
+  let restN = n
+  let result = 0
+
+  while (restN) {
+    restN = Math.floor(restN / 5)
+    result = result + restN
+  }
+
+  return result
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 70 ms
+// Memory Usage: 41.9 MB
+const trailingZeroes = (n) => {
+  const restN = Math.floor(n / 5)
+  const result = restN ? restN + trailingZeroes(restN) : 0
+
+  return result
+}
