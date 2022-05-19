@@ -84,7 +84,7 @@ const divide2 = (dividend, divisor) => {
 // 3. ------------------------------------------------------------
 // Runtime: 74.30% / 85 ms
 // Memory Usage: 5.88% / 45.1 MB
-const divide = (dividend, divisor) => {
+const divide3 = (dividend, divisor) => {
   // CONST
   const [INT_MIN, INT_MAX] = [-(2 ** 30) - 2 ** 30, 2 ** 30 - 1 + 2 ** 30]
 
@@ -123,6 +123,48 @@ const divide = (dividend, divisor) => {
 
     dvd = dvd - Number(dvsLast)
     result = result + Number(times)
+  }
+
+  return Number(sign + result)
+}
+
+// 4. ------------------------------------------------------------
+const divide = (dividend, divisor) => {
+  // CONST
+  const [INT_MIN, INT_MAX] = [-(2 ** 30) - 2 ** 30, 2 ** 30 - 1 + 2 ** 30]
+
+  // exception
+  if (divisor === 1) return dividend
+  if (dividend === divisor) return 1
+  if (dividend === INT_MIN && divisor === -1) return INT_MAX
+
+  // var
+  const sign = dividend > 0 === divisor > 0 ? '+' : '-'
+  const dvs = Math.abs(divisor)
+  let dvd = dividend === INT_MIN ? Math.abs(dividend + 1) : Math.abs(dividend)
+  let TAG_MIN = 0
+  let result = 0
+
+  // run
+  while (dvd >= dvs) {
+    if (dividend === INT_MIN) {
+      if (TAG_MIN === 1) dvd++
+      TAG_MIN++
+    }
+
+    let dvsLast = dvs
+    let dvsTemp = dvsLast + dvsLast
+    let times = 1
+
+    while (dvd >= dvsTemp) {
+      times = times + times
+      dvsLast = dvsTemp
+
+      dvsTemp = dvsTemp + dvsTemp
+    }
+
+    dvd = dvd - dvsLast
+    result = result + times
   }
 
   return Number(sign + result)
