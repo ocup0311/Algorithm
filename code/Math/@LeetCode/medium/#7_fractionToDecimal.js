@@ -34,7 +34,9 @@
 // 2. 如果有多個答案，則全部列出 <-- 有可能有多個答案嗎？
 
 // 1. ------------------------------------------------------------
-const fractionToDecimal = (numerator, denominator) => {
+// Runtime: 37.25% / 82 ms
+// Memory Usage: 94.77% / 42.1 MB
+const fractionToDecimal1 = (numerator, denominator) => {
   // exception
   if (denominator === 1) return numerator.toString()
   if (numerator === denominator) return '1'
@@ -48,6 +50,7 @@ const fractionToDecimal = (numerator, denominator) => {
 
   if (n3 === 0) return left === '0' ? left : sign + left
 
+  // run
   const cache = new Map()
   let right = ''
 
@@ -56,7 +59,7 @@ const fractionToDecimal = (numerator, denominator) => {
     let n5 = (n3 * 10) % den
 
     if (cache.has(n3)) {
-      let zero = 0
+      let numof0 = 0
 
       n3 = n5
 
@@ -66,10 +69,10 @@ const fractionToDecimal = (numerator, denominator) => {
 
         n3 = n5
 
-        zero++
+        numof0++
       }
 
-      const idx = right.indexOf(n4) - zero
+      const idx = right.indexOf(n4) - numof0
 
       return `${sign}${left}.${right.slice(0, idx)}(${right.slice(idx)})`
     }
@@ -80,4 +83,55 @@ const fractionToDecimal = (numerator, denominator) => {
 
     if (n5 === 0) return sign + left + '.' + right
   }
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 85.51% / 63 ms
+// Memory Usage: 38.41% / 42.6 MB
+const fractionToDecimal2 = (numerator, denominator) => {
+  // exception
+  if (denominator === 1) return numerator.toString()
+  if (numerator === denominator) return '1'
+
+  // 1.整數
+  const sign = numerator > 0 === denominator > 0 ? '' : '-'
+  const num = Math.abs(numerator)
+  const den = Math.abs(denominator)
+  const left = Math.floor(num / den).toString()
+  let remainder = num % den
+
+  if (remainder === 0) return left === '0' ? left : sign + left
+
+  // 2.有限小數
+  const cache = new Map()
+  const dot = '.'
+  let right = ''
+  let lastN = Math.floor((remainder * 10) / den)
+
+  while (!cache.has(remainder)) {
+    cache.set(remainder, true)
+
+    right = right + lastN
+
+    remainder = (remainder * 10) % den
+    lastN = Math.floor((remainder * 10) / den)
+
+    if (remainder === 0) return sign + left + dot + right
+  }
+
+  // 3.循環小數
+  let numof0 = 0
+
+  while (lastN === 0) {
+    remainder = (remainder * 10) % den
+    lastN = Math.floor((remainder * 10) / den)
+
+    numof0++
+  }
+
+  const idx = right.indexOf(lastN) - numof0
+  const unRepeat = right.slice(0, idx)
+  const repeat = `(${right.slice(idx)})`
+
+  return sign + left + dot + unRepeat + repeat
 }
