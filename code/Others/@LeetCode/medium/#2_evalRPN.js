@@ -131,6 +131,8 @@ const evalRPN2 = (tokens) => {
 }
 
 // 3. ------------------------------------------------------------
+// Runtime: 70 ms
+// Memory Usage: 44.7 MB
 const evalRPN = (tokens) => {
   const stack = []
 
