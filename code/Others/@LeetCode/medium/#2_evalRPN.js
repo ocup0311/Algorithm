@@ -38,5 +38,59 @@
  */
 
 // Notice --------------------------------------------------------
+// 1. 除法：無條件捨去
+// 2. 只有 "+", "-", "*", or "/"
 
 // 1. ------------------------------------------------------------
+// Runtime: 86.11% / 76 ms
+// Memory Usage: 80.31% / 44.6 MB
+const evalRPN = (tokens) => {
+  const operators = { '+': true, '-': true, '*': true, '/': true }
+  const items = [...tokens]
+  const stack = []
+  let result = null
+
+  // function
+  const cal = (left, operator, right) => {
+    if (operator === '+') return left + right
+    if (operator === '-') return left - right
+    if (operator === '*') return left * right
+    if (operator === '/') return ~~(left / right)
+  }
+  const isNum = (token) => typeof token === 'number'
+  const isOpe = (token) => operators[token]
+
+  // run
+  while (items.length > 0) {
+    const token = items.pop()
+    const num = Number(token)
+
+    if (isOpe(token)) {
+      if (isNum(result)) {
+        stack.push(result)
+        result = null
+      }
+      stack.push(token)
+
+      continue
+    }
+
+    if (isNum(result)) {
+      const operator = stack.pop()
+      result = cal(num, operator, result)
+
+      while (isNum(stack[stack.length - 1])) {
+        const right = Number(stack.pop())
+        const operator = stack.pop()
+
+        result = cal(result, operator, right)
+      }
+
+      continue
+    }
+
+    result = num
+  }
+
+  return result
+}
