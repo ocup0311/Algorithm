@@ -27,6 +27,7 @@
 // 1. 過半數的數字
 // 2. 假設必有答案
 // 3. O(1) space
+// 4. O(n) time
 
 // 1. ------------------------------------------------------------
 // T(n): O(nlogn)
@@ -44,7 +45,7 @@ const majorityElement1 = (nums) => {
 // S(n): O(n)
 // Runtime: 92.81% / 67 ms
 // Memory Usage: 41.70% / 44.2 MB
-const majorityElement = (nums) => {
+const majorityElement2 = (nums) => {
   const hashMap = {}
 
   for (const n of nums) {
@@ -55,3 +56,21 @@ const majorityElement = (nums) => {
 }
 
 // 3. ------------------------------------------------------------
+// Boyer-Moore Voting Algorithm
+// T(n): O(n)
+// S(n): O(1)
+// Runtime: 71.50% / 79 ms
+// Memory Usage: 67.63% / 43.7 MB
+const majorityElement = (nums) => {
+  let count = 0
+  let candidate = null
+
+  for (const num of nums) {
+    if (count === 0) candidate = num
+
+    if (num === candidate) count++
+    else count--
+  }
+
+  return candidate
+}
