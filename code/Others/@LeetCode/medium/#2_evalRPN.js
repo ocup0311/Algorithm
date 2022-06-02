@@ -44,7 +44,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 86.11% / 76 ms
 // Memory Usage: 80.31% / 44.6 MB
-const evalRPN = (tokens) => {
+const evalRPN1 = (tokens) => {
   const operators = { '+': true, '-': true, '*': true, '/': true }
   const items = [...tokens]
   const stack = []
@@ -93,4 +93,42 @@ const evalRPN = (tokens) => {
   }
 
   return result
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 84 ms
+// Memory Usage: 43.5 MB
+const evalRPN = (tokens) => {
+  const operators = new Map([['+'], ['-'], ['*'], ['/']])
+  let idx = tokens.length - 1
+
+  // function
+  const cal = (left, operator, right) => {
+    const n1 = parseInt(left)
+    const n2 = parseInt(right)
+
+    if (operator === '+') return n1 + n2
+    if (operator === '-') return n1 - n2
+    if (operator === '*') return n1 * n2
+    if (operator === '/') return ~~(n1 / n2)
+  }
+  const isOpe = (token) => operators.has(token)
+  const EvaluateRPN = () => {
+    let left, operator, right
+
+    const token = tokens[idx--]
+    if (isOpe(token)) operator = token
+    else return token
+
+    if (isOpe(tokens[idx])) right = EvaluateRPN()
+    else right = tokens[idx--]
+
+    if (isOpe(tokens[idx])) left = EvaluateRPN()
+    else left = tokens[idx--]
+
+    return cal(left, operator, right)
+  }
+
+  // run
+  return parseInt(EvaluateRPN())
 }
