@@ -45,27 +45,27 @@
 // Runtime: 86.11% / 76 ms
 // Memory Usage: 80.31% / 44.6 MB
 const evalRPN1 = (tokens) => {
-  const operators = { '+': true, '-': true, '*': true, '/': true }
+  const operators = new Map([['+'], ['-'], ['*'], ['/']])
   const items = [...tokens]
   const stack = []
   let result = null
 
   // function
-  const cal = (left, operator, right) => {
-    if (operator === '+') return left + right
-    if (operator === '-') return left - right
-    if (operator === '*') return left * right
-    if (operator === '/') return ~~(left / right)
+  const cal = (operandL, operator, operandR) => {
+    if (operator === '+') return operandL + operandR
+    if (operator === '-') return operandL - operandR
+    if (operator === '*') return operandL * operandR
+    if (operator === '/') return Math.trunc(operandL / operandR)
   }
   const isNum = (token) => typeof token === 'number'
-  const isOpe = (token) => operators[token]
+  const isOpt = (token) => operators.has(token)
 
   // run
   while (items.length > 0) {
     const token = items.pop()
-    const num = Number(token)
+    const opdL = Number(token)
 
-    if (isOpe(token)) {
+    if (isOpt(token)) {
       if (isNum(result)) {
         stack.push(result)
         result = null
@@ -76,20 +76,20 @@ const evalRPN1 = (tokens) => {
     }
 
     if (isNum(result)) {
-      const operator = stack.pop()
-      result = cal(num, operator, result)
+      const opt = stack.pop()
+      result = cal(opdL, opt, result)
 
       while (isNum(stack[stack.length - 1])) {
-        const right = Number(stack.pop())
-        const operator = stack.pop()
+        const opdR = Number(stack.pop())
+        const opt = stack.pop()
 
-        result = cal(result, operator, right)
+        result = cal(result, opt, opdR)
       }
 
       continue
     }
 
-    result = num
+    result = opdL
   }
 
   return result
@@ -98,37 +98,67 @@ const evalRPN1 = (tokens) => {
 // 2. ------------------------------------------------------------
 // Runtime: 84 ms
 // Memory Usage: 43.5 MB
-const evalRPN = (tokens) => {
+const evalRPN2 = (tokens) => {
   const operators = new Map([['+'], ['-'], ['*'], ['/']])
   let idx = tokens.length - 1
 
   // function
-  const cal = (left, operator, right) => {
-    const n1 = parseInt(left)
-    const n2 = parseInt(right)
-
-    if (operator === '+') return n1 + n2
-    if (operator === '-') return n1 - n2
-    if (operator === '*') return n1 * n2
-    if (operator === '/') return ~~(n1 / n2)
+  const cal = (operandL, operator, operandR) => {
+    if (operator === '+') return operandL + operandR
+    if (operator === '-') return operandL - operandR
+    if (operator === '*') return operandL * operandR
+    if (operator === '/') return Math.trunc(operandL / operandR)
   }
   const isOpe = (token) => operators.has(token)
   const EvaluateRPN = () => {
-    let left, operator, right
+    let opdL, opt, opdR
 
     const token = tokens[idx--]
-    if (isOpe(token)) operator = token
+    if (isOpe(token)) opt = token
     else return token
 
-    if (isOpe(tokens[idx])) right = EvaluateRPN()
-    else right = tokens[idx--]
+    if (isOpe(tokens[idx])) opdR = EvaluateRPN()
+    else opdR = tokens[idx--]
 
-    if (isOpe(tokens[idx])) left = EvaluateRPN()
-    else left = tokens[idx--]
+    if (isOpe(tokens[idx])) opdL = EvaluateRPN()
+    else opdL = tokens[idx--]
 
-    return cal(left, operator, right)
+    return cal(Number(opdL), opt, Number(opdR))
   }
 
   // run
-  return parseInt(EvaluateRPN())
+  return Number(EvaluateRPN())
+}
+
+// 3. ------------------------------------------------------------
+const evalRPN = (tokens) => {
+  const stack = []
+
+  for (const token of tokens) {
+    const num = Number(token)
+    if (!Number.isNaN(num)) {
+      stack.push(num)
+      continue
+    }
+
+    const operandR = stack.pop()
+    const operandL = stack.pop()
+
+    switch (token) {
+      case '+':
+        stack.push(operandL + operandR)
+        break
+      case '-':
+        stack.push(operandL - operandR)
+        break
+      case '*':
+        stack.push(operandL * operandR)
+        break
+      case '/':
+        stack.push(Math.trunc(operandL / operandR))
+        break
+    }
+  }
+
+  return stack.pop()
 }
