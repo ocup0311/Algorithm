@@ -1,3 +1,4 @@
+// REF: https://leetcode.com/explore/interview/card/top-interview-questions-medium/113/math/820/discuss/13407/C++-bit-manipulations
 // Given two integers dividend and divisor, divide two integers without using multiplication,
 // division, and mod operator.
 
