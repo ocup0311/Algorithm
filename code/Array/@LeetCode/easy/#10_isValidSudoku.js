@@ -49,50 +49,46 @@
 
 // Notice --------------------------------------------------------
 // 1. 不需要確定他是有解答的數獨
+// 2. 上一次搞錯題意：是「3x3 九宮格內不重複」，非「對角線不重複」
 
 // 1. ------------------------------------------------------------
-// 473 / 507 test cases passed.
-// fail at failTest --> run isValidSudoku(failTest) = true, but Expected Answer is false.
-// Maybe the there's a wrong test?
+// Runtime: 77.97% / 88 ms
+// Memory Usage: 44.56% / 45.9 MB
 const isValidSudoku = (board) => {
   // var
   const validValue = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
   const counter = {
     row: [{}, {}, {}, {}, {}, {}, {}, {}, {}],
     col: [{}, {}, {}, {}, {}, {}, {}, {}, {}],
+    grid: [
+      [{}, {}, {}],
+      [{}, {}, {}],
+      [{}, {}, {}],
+    ],
   }
 
   // function
   const isFilled = (x) => x !== '.'
   const isValidValue = (x) => validValue.some((v) => v === x)
-  const isDuplicate = (x, i, j) => counter.row[i][x] || counter.col[j][x]
+  const isDuplicate = (v, i, j, x, y) =>
+    counter.row[i][v] || counter.col[j][v] || counter.grid[x][y][v]
 
   // run
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       const value = board[i][j]
+      const x = Math.floor(i / 3)
+      const y = Math.floor(j / 3)
 
-      if (isFilled(value)) {
-        if (!isValidValue(value)) return false
-        if (isDuplicate(value, i, j)) return false
+      if (!isFilled(value)) continue
+      if (!isValidValue(value)) return false
+      if (isDuplicate(value, i, j, x, y)) return false
 
-        counter.row[i][value] = true
-        counter.col[j][value] = true
-      }
+      counter.row[i][value] = true
+      counter.col[j][value] = true
+      counter.grid[x][y][value] = true
     }
   }
 
   return true
 }
-
-const failTest = [
-  ['.', '.', '.', '.', '5', '.', '.', '1', '.'],
-  ['.', '4', '.', '3', '.', '.', '.', '.', '.'],
-  ['.', '.', '.', '.', '.', '3', '.', '.', '1'],
-  ['8', '.', '.', '.', '.', '.', '.', '2', '.'],
-  ['.', '.', '2', '.', '7', '.', '.', '.', '.'],
-  ['.', '1', '5', '.', '.', '.', '.', '.', '.'],
-  ['.', '.', '.', '.', '.', '2', '.', '.', '.'],
-  ['.', '2', '.', '9', '.', '.', '.', '.', '.'],
-  ['.', '.', '4', '.', '.', '.', '.', '.', '.'],
-]
