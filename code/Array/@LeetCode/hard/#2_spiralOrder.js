@@ -164,7 +164,7 @@ const spiralOrder2 = (matrix) => {
 // clean up
 // Runtime: 66 ms
 // Memory Usage: 42.1 MB
-const spiralOrder = (matrix) => {
+const spiralOrder3 = (matrix) => {
   const [numR, numC] = [matrix.length, matrix[0].length]
   const output = new Array(numR * numC)
 
@@ -227,6 +227,48 @@ const spiralOrder = (matrix) => {
   // run
   while (ptrO < output.length) {
     goto[direction]()
+  }
+
+  return output
+}
+
+// 4. ------------------------------------------------------------
+// another style
+// Runtime: 71 ms
+// Memory Usage: 41.9 MB
+const spiralOrder = (matrix) => {
+  if (matrix.length === 0) return []
+
+  const [numR, numC] = [matrix.length, matrix[0].length]
+  const output = new Array(numR * numC)
+
+  let [top, bottom, left, right] = [0, numR - 1, 0, numC - 1]
+  let ptrO = 0
+
+  while (top <= bottom && left <= right) {
+    for (let ptrC = left; ptrC <= right; ptrC++) {
+      output[ptrO] = matrix[top][ptrC]
+      ptrO++
+    }
+
+    for (let ptrR = top + 1; ptrR <= bottom; ptrR++) {
+      output[ptrO] = matrix[ptrR][right]
+      ptrO++
+    }
+
+    if (top === bottom || left === right) break
+
+    for (let ptrC = right - 1; ptrC >= left; ptrC--) {
+      output[ptrO] = matrix[bottom][ptrC]
+      ptrO++
+    }
+
+    for (let ptrR = bottom - 1; ptrR > top; ptrR--) {
+      output[ptrO] = matrix[ptrR][left]
+      ptrO++
+    }
+
+    top++, left++, bottom--, right--
   }
 
   return output
