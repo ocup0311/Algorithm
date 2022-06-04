@@ -32,7 +32,11 @@
 // 3. 除了 output，只用 O(1) space
 
 // 1. ------------------------------------------------------------
-const productExceptSelf = (nums) => {
+// T(n): O(n)
+// S(n): O(n) || 「O(1) (除了 output)」
+// Runtime: 87.41% / 109 ms
+// Memory Usage: 39.17% / 55.3 MB
+const productExceptSelf1 = (nums) => {
   const n = nums.length
   const output = new Array(n).fill(nums[0])
   let productFromRight = 1
@@ -47,6 +51,34 @@ const productExceptSelf = (nums) => {
   }
 
   output[0] = productFromRight
+
+  return output
+}
+
+// 2. ------------------------------------------------------------
+// 在複雜度不變下，多花點時間空間，但覺得較為清楚
+// T(n): O(n)
+// S(n): O(n)
+// Runtime: 150 ms
+// Memory Usage: 58.8 MB
+const productExceptSelf = (nums) => {
+  const n = nums.length
+  const left = [...nums]
+  const right = [...nums]
+  const output = new Array(n)
+
+  for (let l = 1; l < n; l++) {
+    const r = n - 1 - l
+
+    left[l] = left[l - 1] * left[l]
+    right[r] = right[r + 1] * right[r]
+  }
+
+  for (let i = 1; i < n - 1; i++) {
+    output[i] = left[i - 1] * right[i + 1]
+  }
+  output[0] = right[1]
+  output[n - 1] = left[n - 2]
 
   return output
 }
