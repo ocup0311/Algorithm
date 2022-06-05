@@ -98,7 +98,7 @@ const fourSumCount2 = (nums1, nums2, nums3, nums4) => {
 // clean from 2
 // Runtime: 825 ms
 // Memory Usage: 39 MB
-const fourSumCount = (nums1, nums2, nums3, nums4) => {
+const fourSumCount3 = (nums1, nums2, nums3, nums4) => {
   // function
   const getSums = (preSums, nums) => {
     const sums = new Map()
@@ -124,4 +124,42 @@ const fourSumCount = (nums1, nums2, nums3, nums4) => {
   const sums4 = getSums(sums3, nums4)
 
   return sums4.get(0) ?? 0
+}
+
+// 4. ------------------------------------------------------------
+// Runtime: 91.20% / 213 ms
+// Memory Usage: 30.40% / 48 MB
+const fourSumCount = (nums1, nums2, nums3, nums4) => {
+  // function
+  const getSums = (preSums, nums) => {
+    const sums = new Map()
+
+    preSums.forEach((preCount, n1) => {
+      for (const n2 of nums) {
+        const sum = n1 + n2
+        const count = sums.get(sum)
+
+        if (sums.has(sum)) sums.set(sum, preCount + count)
+        else sums.set(sum, preCount)
+      }
+    })
+
+    return sums
+  }
+
+  // run
+  let result = 0
+
+  const sums0 = new Map([[0, 1]])
+  const sums12 = getSums(getSums(sums0, nums1), nums2)
+  const sums34 = getSums(getSums(sums0, nums3), nums4)
+
+  sums34.forEach((count34, n1) => {
+    const n2 = -n1
+    const count12 = sums12.get(n2)
+
+    if (sums12.has(n2)) result = result + count12 * count34
+  })
+
+  return result
 }
