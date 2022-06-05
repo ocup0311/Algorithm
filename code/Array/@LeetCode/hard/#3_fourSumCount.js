@@ -35,3 +35,93 @@
 // Notice --------------------------------------------------------
 
 // 1. ------------------------------------------------------------
+// 19 / 132 test cases passed.
+const fourSumCount1 = (nums1, nums2, nums3, nums4) => {
+  // function
+  const merge = (arr1, arr2) => {
+    return arr1.reduce((res, n1) => {
+      arr2.forEach((n2) => res.push(n1 + n2))
+      return res
+    }, [])
+  }
+
+  // run
+  const mergeNums1 = merge(nums1, nums2)
+  const mergeNums2 = merge(nums3, nums4)
+
+  return merge(mergeNums1, mergeNums2).filter((v) => v === 0).length
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 12.00% / 812 ms
+// Memory Usage: 28.80% / 48.3 MB
+const fourSumCount2 = (nums1, nums2, nums3, nums4) => {
+  // function
+  const getCounter = (nums) => {
+    const counter = new Map()
+
+    for (const n of nums) {
+      const count = counter.get(n)
+
+      if (counter.has(n)) counter.set(n, count + 1)
+      else counter.set(n, 1)
+    }
+
+    return counter
+  }
+  const getSums = (preSums, nums) => {
+    const sums = new Map()
+
+    preSums.forEach((preCount, n1) => {
+      for (const n2 of nums) {
+        const sum = n1 + n2
+        const count = sums.get(sum)
+
+        if (sums.has(sum)) sums.set(sum, preCount + count)
+        else sums.set(sum, preCount)
+      }
+    })
+
+    return sums
+  }
+
+  // run
+  const sums1 = getCounter(nums1)
+  const sums2 = getSums(sums1, nums2)
+  const sums3 = getSums(sums2, nums3)
+  const sums4 = getSums(sums3, nums4)
+
+  return sums4.get(0) ?? 0
+}
+
+// 3. ------------------------------------------------------------
+// clean from 2
+// Runtime: 825 ms
+// Memory Usage: 39 MB
+const fourSumCount = (nums1, nums2, nums3, nums4) => {
+  // function
+  const getSums = (preSums, nums) => {
+    const sums = new Map()
+
+    preSums.forEach((preCount, n1) => {
+      for (const n2 of nums) {
+        const sum = n1 + n2
+        const count = sums.get(sum)
+
+        if (sums.has(sum)) sums.set(sum, preCount + count)
+        else sums.set(sum, preCount)
+      }
+    })
+
+    return sums
+  }
+
+  // run
+  const sums0 = new Map([[0, 1]])
+  const sums1 = getSums(sums0, nums1)
+  const sums2 = getSums(sums1, nums2)
+  const sums3 = getSums(sums2, nums3)
+  const sums4 = getSums(sums3, nums4)
+
+  return sums4.get(0) ?? 0
+}
