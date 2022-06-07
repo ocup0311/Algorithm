@@ -143,13 +143,13 @@ const gameOfLife2 = (board) => {
   }
 }
 
-// 2. ------------------------------------------------------------
+// 3. ------------------------------------------------------------
 // Runtime: 55 ms
 // Memory Usage: 43.9 MB
 const gameOfLife = (board) => {
   // CONST
-  const DEAD = 123
-  const LIVE = -123
+  const DEAD = 'dead'
+  const LIVE = 'live'
   const PAIR = new Map([
     [DEAD, 0],
     [LIVE, 1],
@@ -160,18 +160,18 @@ const gameOfLife = (board) => {
   const lenC = board[0].length
 
   // function
-  const isDead = (x) => x <= 0
-  const isLive = (x) => 0 < x
-  const check = (i, j) => {
+  const isDead = (x) => x <= 0 || x === DEAD
+  const isLive = (x) => 0 < x || x === LIVE
+  const check = (r, c) => {
     const neighbors = [
-      [i - 1, j + 1],
-      [i - 1, j],
-      [i - 1, j - 1],
-      [i, j - 1],
-      [i, j + 1],
-      [i + 1, j - 1],
-      [i + 1, j],
-      [i + 1, j + 1],
+      [r - 1, c + 1],
+      [r - 1, c],
+      [r - 1, c - 1],
+      [r, c - 1],
+      [r, c + 1],
+      [r + 1, c - 1],
+      [r + 1, c],
+      [r + 1, c + 1],
     ]
     let count = 0
 
@@ -181,18 +181,21 @@ const gameOfLife = (board) => {
   }
 
   // run
-  for (let i = 0; i < lenR; i++) {
-    for (let j = 0; j < lenC; j++) {
-      const count = check(i, j)
+  for (let r = 0; r < lenR; r++) {
+    for (let c = 0; c < lenC; c++) {
+      const cell = board[r][c]
+      const count = check(r, c)
 
-      if (isLive(board[i][j]) && (count < 2 || 3 < count)) board[i][j] = DEAD
-      if (isDead(board[i][j]) && count === 3) board[i][j] = LIVE
+      if (isLive(cell) && (count < 2 || 3 < count)) board[r][c] = DEAD
+      if (isDead(cell) && count === 3) board[r][c] = LIVE
     }
   }
 
-  for (let i = 0; i < lenR; i++) {
-    for (let j = 0; j < lenC; j++) {
-      if (PAIR.has(board[i][j])) board[i][j] = PAIR.get(board[i][j])
+  for (let r = 0; r < lenR; r++) {
+    for (let c = 0; c < lenC; c++) {
+      const cell = board[r][c]
+
+      if (PAIR.has(cell)) board[r][c] = PAIR.get(cell)
     }
   }
 }
