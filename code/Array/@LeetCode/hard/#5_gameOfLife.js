@@ -92,7 +92,9 @@ const gameOfLife1 = (board) => {
 
 // 2. ------------------------------------------------------------
 // 使用 row + 1 空間
-const gameOfLife = (board) => {
+// Runtime: 97.95% / 55 ms
+// Memory Usage: 81.03% / 42 MB
+const gameOfLife2 = (board) => {
   const preRow = []
   let preCell = 0
 
@@ -138,5 +140,59 @@ const gameOfLife = (board) => {
 
     preRow[curRow.length - 1] = preCell
     preCell = 0
+  }
+}
+
+// 2. ------------------------------------------------------------
+// Runtime: 55 ms
+// Memory Usage: 43.9 MB
+const gameOfLife = (board) => {
+  // CONST
+  const DEAD = 123
+  const LIVE = -123
+  const PAIR = new Map([
+    [DEAD, 0],
+    [LIVE, 1],
+  ])
+
+  // var
+  const lenR = board.length
+  const lenC = board[0].length
+
+  // function
+  const isDead = (x) => x <= 0
+  const isLive = (x) => 0 < x
+  const check = (i, j) => {
+    const neighbors = [
+      [i - 1, j + 1],
+      [i - 1, j],
+      [i - 1, j - 1],
+      [i, j - 1],
+      [i, j + 1],
+      [i + 1, j - 1],
+      [i + 1, j],
+      [i + 1, j + 1],
+    ]
+    let count = 0
+
+    neighbors.forEach(([r, c]) => isLive(board[r]?.[c]) && count++)
+
+    return count
+  }
+
+  // run
+  for (let i = 0; i < lenR; i++) {
+    for (let j = 0; j < lenC; j++) {
+      const count = check(i, j)
+
+      if (isLive(board[i][j]) && (count < 2 || 3 < count)) board[i][j] = DEAD
+      if (isDead(board[i][j]) && count === 3) board[i][j] = LIVE
+    }
+  }
+
+  for (let i = 0; i < lenR; i++) {
+    for (let j = 0; j < lenC; j++) {
+      if (PAIR.has(board[i][j])) board[i][j] = PAIR.get(board[i][j])
+    }
   }
 }
