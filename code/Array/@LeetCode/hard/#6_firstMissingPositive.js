@@ -66,6 +66,7 @@ const firstMissingPositive1 = (nums) => {
 }
 
 // 2. ------------------------------------------------------------
+// 方法： [3, 5, 10, 30, -1, 1, 2, 7] --> [ 1,  2, 3, 30, 5, 10, 7, -1 ] --> 4
 // fix from 1：處理相同的項目
 // Runtime: 78.72% / 119 ms
 // Memory Usage: 79.41% / 59.6 MB
@@ -94,4 +95,37 @@ const firstMissingPositive2 = (nums) => {
   }
 
   return max + 1
+}
+
+// 3. ------------------------------------------------------------
+// 方法： [3, 5, 10, 30, -1, 1, 2, 7] --> [ ---, 5, 3,  1,  2, 7 ] --> [ ---, -5, -3, -1,  2, -7 ] --> 4
+const firstMissingPositive = (nums) => {
+  const max = nums.length
+  let start = 0
+
+  // function
+  const swap = (idx1, idx2) => {
+    ;[nums[idx1], nums[idx2]] = [nums[idx2], nums[idx1]]
+  }
+
+  // run
+  for (let i = 0; i < max; i++) {
+    if (nums[i] < 1 || nums[i] > max) {
+      swap(start, i)
+      start++
+    }
+  }
+
+  for (let i = start; i < max; i++) {
+    const value = Math.abs(nums[i])
+    const key = start + value - 1
+
+    if (nums[key] > 0) nums[key] = -nums[key]
+  }
+
+  for (let i = start; i < max; i++) {
+    if (nums[i] > 0) return i - start + 1
+  }
+
+  return max - start + 1
 }
