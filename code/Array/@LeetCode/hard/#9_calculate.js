@@ -239,8 +239,8 @@ const calculate = (s) => {
   if (!s) return 0
 
   // regExp
+  const isSpace = /\s/
   const isDigit = /\d/
-  const isOperator = /[^\d\s]/
 
   // var
   let n1 = 0
@@ -251,30 +251,33 @@ const calculate = (s) => {
   // run
   for (let i = 0; i < s.length; i++) {
     const char = s[i]
+    const exLast = i !== s.length - 1
 
-    if (isDigit.test(char)) n3 = n3 * 10 + Number(char)
-
-    if (isOperator.test(char) || i === s.length - 1) {
-      switch (opt) {
-        case '+':
-          n1 = n1 + n2
-          n2 = n3
-          break
-        case '-':
-          n1 = n1 + n2
-          n2 = -n3
-          break
-        case '*':
-          n2 = n2 * n3
-          break
-        case '/':
-          n2 = Math.trunc(n2 / n3)
-          break
-      }
-
-      opt = char
-      n3 = 0
+    if (isSpace.test(char) && exLast) continue
+    if (isDigit.test(char)) {
+      n3 = n3 * 10 + Number(char)
+      if (exLast) continue
     }
+
+    switch (opt) {
+      case '+':
+        n1 = n1 + n2
+        n2 = n3
+        break
+      case '-':
+        n1 = n1 + n2
+        n2 = -n3
+        break
+      case '*':
+        n2 = n2 * n3
+        break
+      case '/':
+        n2 = Math.trunc(n2 / n3)
+        break
+    }
+
+    opt = char
+    n3 = 0
   }
 
   return n1 + n2
