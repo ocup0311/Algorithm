@@ -125,12 +125,14 @@ const calculate1 = (s) => {
 
 // 2. ------------------------------------------------------------
 // 方法：因為只有四則運算，可直接運算
-// Runtime: 53.17% / 108 ms
-// Memory Usage: 28.03% / 50 MB
+// T(n): O(n), S(n):O(n)
+// Runtime: 87.77% / 84 ms
+// Memory Usage: 27.97% / 50.1 MB
 const calculate2 = (s) => {
-  let num = ''
-  let operator = '+'
+  // var
   const stack = []
+  let num = ''
+  let opt = '+'
 
   // function
   const isOperator = (x) => x === '+' || x === '-' || x === '*' || x === '/'
@@ -146,29 +148,79 @@ const calculate2 = (s) => {
     if (operator === '/') return Math.trunc(left / right)
   }
 
+  // run
   for (const char of s) {
     if (isSpace(char)) continue
 
-    if (isOperator(char)) {
-      let preNum = 0
-
-      if (isHighPrecedence(operator)) preNum = stack.pop()
-
-      stack.push(cal(num, preNum, operator))
-      num = ''
-      operator = char
-
+    if (!isOperator(char)) {
+      num = num + char
       continue
     }
 
-    num = num + char
+    const preNum = isHighPrecedence(opt) ? stack.pop() : 0
+    const newNum = cal(num, preNum, opt)
+    stack.push(newNum)
+
+    num = ''
+    opt = char
   }
 
   while (stack.length > 0) {
     const preNum = stack.pop()
-    num = cal(num, preNum, operator)
-    operator = '+'
+    num = cal(num, preNum, opt)
+    opt = '+'
   }
 
   return num
+}
+
+// 3. ------------------------------------------------------------
+// 方法：from 2，移除 stack，分別改用兩個 num, operator 做紀錄
+// T(n): O(n), S(n):O(1)
+// Runtime: 85.16% / 86 ms
+// Memory Usage: 32.16% / 49.3 MB
+const calculate = (s) => {
+  // var
+  let [n1, n2] = [0, 0]
+  let [opt1, opt2] = ['+', '+']
+  let n = ''
+
+  // function
+  const isOperator = (x) => x === '+' || x === '-' || x === '*' || x === '/'
+  const isSpace = (x) => x === ' '
+  const isHighPrecedence = (x) => x === '*' || x === '/'
+  const cal = (right, left, operator) => {
+    right = parseInt(right)
+    left = parseInt(left)
+
+    if (operator === '+') return left + right
+    if (operator === '-') return left - right
+    if (operator === '*') return left * right
+    if (operator === '/') return Math.trunc(left / right)
+  }
+
+  // run
+  for (const char of s) {
+    if (isSpace(char)) continue
+
+    if (!isOperator(char)) {
+      n = n + char
+      continue
+    }
+
+    if (isHighPrecedence(opt2)) {
+      n2 = cal(n, n2, opt2)
+    } else {
+      n1 = cal(n2, n1, opt1)
+      opt1 = opt2
+      n2 = n
+    }
+
+    n = ''
+    opt2 = char
+  }
+
+  return isHighPrecedence(opt2)
+    ? cal(cal(n, n2, opt2), n1, opt1)
+    : cal(n, cal(n2, n1, opt1), opt2)
 }
