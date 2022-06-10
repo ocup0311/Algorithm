@@ -179,11 +179,14 @@ const calculate2 = (s) => {
 // T(n): O(n), S(n):O(1)
 // Runtime: 85.16% / 86 ms
 // Memory Usage: 32.16% / 49.3 MB
-const calculate = (s) => {
+// EX. n1: "5", opt1: "+", n2: "21", opt2: "/", n3: "13"
+// n1  opt1  n2  opt2  n3
+// 5    +    21   /    13  =  6
+const calculate3 = (s) => {
   // var
   let [n1, n2] = [0, 0]
   let [opt1, opt2] = ['+', '+']
-  let n = ''
+  let n3 = ''
 
   // function
   const isOperator = (x) => x === '+' || x === '-' || x === '*' || x === '/'
@@ -204,23 +207,75 @@ const calculate = (s) => {
     if (isSpace(char)) continue
 
     if (!isOperator(char)) {
-      n = n + char
+      n3 = n3 + char
       continue
     }
 
     if (isHighPrecedence(opt2)) {
-      n2 = cal(n, n2, opt2)
+      n2 = cal(n3, n2, opt2)
     } else {
       n1 = cal(n2, n1, opt1)
       opt1 = opt2
-      n2 = n
+      n2 = n3
     }
 
-    n = ''
+    n3 = ''
     opt2 = char
   }
 
   return isHighPrecedence(opt2)
-    ? cal(cal(n, n2, opt2), n1, opt1)
-    : cal(n, cal(n2, n1, opt1), opt2)
+    ? cal(cal(n3, n2, opt2), n1, opt1)
+    : cal(n3, cal(n2, n1, opt1), opt2)
+}
+
+// 4. ------------------------------------------------------------
+// 可以再簡化，只用一個 opt 暫存變數
+// \d:	digit
+// \s:	whitespace
+// Runtime: 101 ms
+// Memory Usage: 42.6 MB
+const calculate = (s) => {
+  // exception
+  if (!s) return 0
+
+  // regExp
+  const isDigit = /\d/
+  const isOperator = /[^\d\s]/
+
+  // var
+  let n1 = 0
+  let n2 = 0
+  let n3 = 0
+  let opt = '+'
+
+  // run
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i]
+
+    if (isDigit.test(char)) n3 = n3 * 10 + Number(char)
+
+    if (isOperator.test(char) || i === s.length - 1) {
+      switch (opt) {
+        case '+':
+          n1 = n1 + n2
+          n2 = n3
+          break
+        case '-':
+          n1 = n1 + n2
+          n2 = -n3
+          break
+        case '*':
+          n2 = n2 * n3
+          break
+        case '/':
+          n2 = Math.trunc(n2 / n3)
+          break
+      }
+
+      opt = char
+      n3 = 0
+    }
+  }
+
+  return n1 + n2
 }
