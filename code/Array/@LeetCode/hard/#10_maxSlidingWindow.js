@@ -42,6 +42,8 @@
 const maxSlidingWindow1 = (nums, k) => {
   // exception
   if (k > nums.length) return []
+  if (k * nums.length === 0) return []
+  if (k === 1) return nums
 
   // var
   const candidate = []
@@ -78,6 +80,8 @@ const maxSlidingWindow1 = (nums, k) => {
 const maxSlidingWindow2 = (nums, k) => {
   // exception
   if (k > nums.length) return []
+  if (k * nums.length === 0) return []
+  if (k === 1) return nums
 
   // var
   const candidate = []
@@ -107,7 +111,7 @@ const maxSlidingWindow2 = (nums, k) => {
   return result
 }
 
-// 1. ------------------------------------------------------------
+// 3. ------------------------------------------------------------
 // 實作 Dequeue
 // Runtime: 90.17% / 387 ms
 // Memory Usage: 27.68% / 89.5 MB
@@ -181,9 +185,11 @@ class Dequeue {
   }
 }
 
-const maxSlidingWindow = (nums, k) => {
+const maxSlidingWindow3 = (nums, k) => {
   // exception
   if (k > nums.length) return []
+  if (k * nums.length === 0) return []
+  if (k === 1) return nums
 
   // var
   const candidate = new Dequeue()
@@ -208,6 +214,48 @@ const maxSlidingWindow = (nums, k) => {
 
     ptrS++
     ptrE++
+  }
+
+  return result
+}
+
+// 4. ------------------------------------------------------------
+// Dynamic Programming
+//  nums:  2   5   4 | 6   3   5 | 8   7   6 | 3   7   4 | 6   4   5
+//  left:  2   5   5 | 6   6   6 | 8   8   8 | 3   7   7 | 6   6   6
+// right:          5   5   4 | 6   5   5 | 8   7   6 | 7   7   4 | 6   5   5
+//   res:         5v5 6v5 6v4 6v6 8v5 8v5 8v8 3v7 7v6 7v7 6v7 6v4 6v6
+//   res:          5   6   6   6   8   8   8   7   7   7   7   6   6
+// Runtime: 468 ms
+// Memory Usage: 72.5 MB
+const maxSlidingWindow = (nums, k) => {
+  const len = nums.length
+
+  // exception
+  if (k > len) return []
+  if (k * len === 0) return []
+  if (k === 1) return nums
+
+  const result = new Array(len - k + 1)
+  const left = new Array(len)
+  const right = new Array(len)
+  let [ptrS, ptrE] = [1, len - 2]
+
+  left[0] = nums[0]
+  right[len - 1] = nums[len - 1]
+
+  while (ptrS < len) {
+    const [nS, nE] = [nums[ptrS], nums[ptrE]]
+
+    left[ptrS] = ptrS % k === 0 ? nS : Math.max(left[ptrS - 1], nS)
+    right[ptrE] = (ptrE + 1) % k === 0 ? nE : Math.max(right[ptrE + 1], nE) // (ptrE + 1) % k 或 ptrE % k 都可？
+
+    ptrS++
+    ptrE--
+  }
+
+  for (let i = 0; i < result.length; i++) {
+    result[i] = Math.max(left[i + k - 1], right[i])
   }
 
   return result
