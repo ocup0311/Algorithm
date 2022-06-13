@@ -44,7 +44,7 @@
 // 1. ------------------------------------------------------------
 // Runtime: 72.81% / 109 ms
 // Memory Usage: 39.55% / 46.6 MB
-const minWindow = (s, t) => {
+const minWindow1 = (s, t) => {
   // exception
   if (s.length < t.length) return ''
 
@@ -53,17 +53,18 @@ const minWindow = (s, t) => {
   const Lack = new Map()
   const Over = new Map()
   let [ptrS, ptrE] = [0, 0]
-  let [maxS, maxE, maxL] = [0, 0, Infinity]
+  let [minS, minE] = [0, 0]
+  let minLen = Infinity
 
   // function
   const isFit = () => Lack.size === 0
-  const isShorter = () => ptrE - ptrS < maxL
+  const isShorter = () => ptrE - ptrS < minLen
   const isEndS = () => ptrS > s.length - t.length
   const isEndE = () => ptrE >= s.length
   const update = () => {
-    maxS = ptrS
-    maxE = ptrE
-    maxL = maxE - maxS + 1
+    minS = ptrS
+    minE = ptrE
+    minLen = minE - minS + 1
   }
   const moveS = () => {
     const char = s[ptrS]
@@ -106,13 +107,61 @@ const minWindow = (s, t) => {
   while (true) {
     while (isFit()) {
       if (isShorter()) update()
-      if (isEndS()) return s.slice(maxS, maxE)
+      if (isEndS()) return s.slice(minS, minE)
       moveS()
     }
 
     while (!isFit()) {
-      if (isEndE()) return s.slice(maxS, maxE)
+      if (isEndE()) return s.slice(minS, minE)
       moveE()
     }
   }
+}
+
+// 2. ------------------------------------------------------------
+// 使用 remainLen 就不需要再用 Target, Lack, Over 三個，可以合一
+// Runtime: 123 ms
+// Memory Usage: 44.7 MB
+const minWindow = (s, t) => {
+  // exception
+  if (s.length < t.length) return ''
+
+  // var
+  const countor = {}
+  let remainLen = t.length
+  let [ptrS, ptrE] = [0, 0]
+  let minS = 0
+  let minLen = Infinity
+
+  // function
+  const isFit = () => remainLen === 0
+  const isShorter = () => ptrE - ptrS < minLen
+  const isTarget = (char) => typeof countor[char] === 'number'
+  const update = () => {
+    minS = ptrS
+    minLen = ptrE - ptrS
+  }
+
+  // run
+  for (const char of t) countor[char] ? countor[char]++ : (countor[char] = 1)
+
+  while (ptrE < s.length) {
+    const charE = s[ptrE]
+
+    if (countor[charE] > 0) remainLen--
+    if (isTarget(charE)) countor[charE]--
+    ptrE++
+
+    while (isFit()) {
+      const charS = s[ptrS]
+
+      if (isShorter()) update()
+      if (isTarget(charS)) countor[charS]++
+      ptrS++
+
+      if (countor[charS] > 0) remainLen++
+    }
+  }
+
+  return minLen === Infinity ? '' : s.slice(minS, minS + minLen)
 }
