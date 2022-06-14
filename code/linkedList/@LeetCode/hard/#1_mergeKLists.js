@@ -47,9 +47,10 @@
 
 // 1. ------------------------------------------------------------
 // 用 binery search 插入，可再改成用 Priority Queue 會再快一點
+// T(n): O(k * n)
 // Runtime: 71.97% / 126 ms
 // Memory Usage: 37.30% / 48 MB
-const mergeKLists = (lists) => {
+const mergeKLists1 = (lists) => {
   const sortedLists = lists.filter((v) => v).sort((a, b) => b.val - a.val)
 
   // exception
@@ -89,4 +90,110 @@ const mergeKLists = (lists) => {
   }
 
   return head
+}
+
+// 2. ------------------------------------------------------------
+// 拆成 k 次 mergeTwoLists
+// T(n): O(k * n)
+// Runtime: 473 ms
+// Memory Usage: 47.5 MB
+const mergeKLists2 = (lists) => {
+  // function
+  const mergeTwoLists = (list1, list2) => {
+    if (list1 === null) return list2
+    if (list2 === null) return list1
+
+    if (list1.val < list2.val) {
+      const nextNode = mergeTwoLists(list1.next, list2)
+      list1.next = nextNode
+      return list1
+    } else {
+      const nextNode = mergeTwoLists(list1, list2.next)
+      list2.next = nextNode
+      return list2
+    }
+  }
+
+  // run
+  return lists.reduce((result, list) => mergeTwoLists(result, list), null)
+}
+
+// 3. ------------------------------------------------------------
+// Divide And Conquer：拆成兩兩 merge
+// T(n): O(nlogk)
+// Runtime: 85.97% / 105 ms
+// Memory Usage: 30.59% / 48.4 MB
+const mergeKLists3 = (lists) => {
+  // exception
+  if (lists.length === 0) return null
+
+  // function
+  const mergeTwoLists = (list1, list2) => {
+    if (list1 === null) return list2
+    if (list2 === null) return list1
+
+    if (list1.val < list2.val) {
+      const nextNode = mergeTwoLists(list1.next, list2)
+      list1.next = nextNode
+      return list1
+    } else {
+      const nextNode = mergeTwoLists(list1, list2.next)
+      list2.next = nextNode
+      return list2
+    }
+  }
+
+  const divide = (ptrS, ptrE) => {
+    if (ptrE === ptrS) return lists[ptrS]
+    if (ptrE === ptrS + 1) return mergeTwoLists(lists[ptrS], lists[ptrE])
+
+    const ptrM = Math.floor((ptrS + ptrE) / 2)
+
+    const part1 = divide(ptrS, ptrM)
+    const part2 = divide(ptrM + 1, ptrE)
+
+    return mergeTwoLists(part1, part2)
+  }
+
+  // run
+  return divide(0, lists.length - 1)
+}
+
+// 3. ------------------------------------------------------------
+// 同 3 ，改 loop
+// T(n): O(nlogk)
+// Runtime: 133 ms
+// Memory Usage: 47.2 MB
+const mergeKLists = (lists) => {
+  // exception
+  if (lists.length === 0) return null
+
+  // function
+  const mergeTwoLists = (list1, list2) => {
+    if (!list1) return list2
+    if (!list2) return list1
+
+    if (list1.val < list2.val) {
+      const nextNode = mergeTwoLists(list1.next, list2)
+      list1.next = nextNode
+      return list1
+    } else {
+      const nextNode = mergeTwoLists(list1, list2.next)
+      list2.next = nextNode
+      return list2
+    }
+  }
+
+  // run
+  const k = lists.length
+
+  // O(logk)
+  for (let interval = 1; interval < k; interval = interval * 2) {
+    // O(n)
+    for (let i = 0; i < k; i = i + interval * 2) {
+      lists[i] = mergeTwoLists(lists[i], lists[i + interval])
+    }
+  }
+
+  return lists[0] ?? null
 }
