@@ -159,12 +159,12 @@ const mergeKLists3 = (lists) => {
   return divide(0, lists.length - 1)
 }
 
-// 3. ------------------------------------------------------------
+// 4. ------------------------------------------------------------
 // 同 3 ，改 loop
 // T(n): O(nlogk)
 // Runtime: 133 ms
 // Memory Usage: 47.2 MB
-const mergeKLists = (lists) => {
+const mergeKLists4 = (lists) => {
   // exception
   if (lists.length === 0) return null
 
@@ -197,3 +197,8 @@ const mergeKLists = (lists) => {
 
   return lists[0] ?? null
 }
+
+// 5. ------------------------------------------------------------
+// TODO: 找時間再練習一次 PQ
+// from 1 改用 Priority Queue
+// T(n): O(nlogk)
