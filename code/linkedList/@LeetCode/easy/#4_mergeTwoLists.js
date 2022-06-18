@@ -87,10 +87,10 @@ const mergeTwoLists2 = (list1, list2) => {
 
   if (list1.val < list2.val) {
     newHead = list1
-    newHead.next = mergeTwoLists(list1.next, list2)
+    newHead.next = mergeTwoLists2(list1.next, list2)
   } else {
     newHead = list2
-    newHead.next = mergeTwoLists(list1, list2.next)
+    newHead.next = mergeTwoLists2(list1, list2.next)
   }
 
   return newHead
@@ -102,11 +102,11 @@ const mergeTwoLists3 = (list1, list2) => {
   if (list2 === null) return list1
 
   if (list1.val < list2.val) {
-    const nextNode = mergeTwoLists(list1.next, list2)
+    const nextNode = mergeTwoLists3(list1.next, list2)
     list1.next = nextNode
     return list1
   } else {
-    const nextNode = mergeTwoLists(list1, list2.next)
+    const nextNode = mergeTwoLists3(list1, list2.next)
     list2.next = nextNode
     return list2
   }

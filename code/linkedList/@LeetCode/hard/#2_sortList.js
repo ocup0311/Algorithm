@@ -33,12 +33,15 @@
 // Notice --------------------------------------------------------
 // 1. T(n)= O(nlogn) & S(n)= O(1)
 
+// Other ---------------------------------------------------------
+// 1. quick sort 似乎也可以用在 linked list，但 S(n) 應該也不是 O(1)
+
 // 1. ------------------------------------------------------------
 // 轉成 array 再 sort
 // T(n)= O(nlogn) & S(n)= O(n)
 // Runtime: 74.89% / 198 ms
 // Memory Usage: 72.51% / 64.5 MB
-const sortList = (head) => {
+const sortList1 = (head) => {
   // exception
   if (!head) return null
 
@@ -63,3 +66,61 @@ const sortList = (head) => {
 
   return newHead
 }
+
+// 2. ------------------------------------------------------------
+// merge sort
+// T(n)= O(nlogn) & S(n)= O(logn)
+// Runtime: 58.26% / 237 ms
+// Memory Usage: 79.55% / 64.2 MB
+const sortList2 = (() => {
+  // function
+  const merge = (list1, list2) => {
+    if (list1 === null) return list2
+    if (list2 === null) return list1
+
+    const preHead = { next: null }
+    let currNode = preHead
+
+    while (list1 && list2) {
+      if (list1.val < list2.val) {
+        currNode.next = list1
+        currNode = currNode.next
+        list1 = list1.next
+      } else {
+        currNode.next = list2
+        currNode = currNode.next
+        list2 = list2.next
+      }
+    }
+
+    currNode.next = list1 ? list1 : list2
+
+    return preHead.next
+  }
+
+  const divide = (headL) => {
+    let [tailL, tailR] = [{ next: headL }, headL]
+
+    while (tailR?.next) {
+      tailL = tailL.next
+      tailR = tailR.next.next
+    }
+
+    const headR = tailL.next
+    tailL.next = null
+
+    return [headL, headR]
+  }
+
+  // main
+  return (head) => {
+    if (!head?.next) return head
+
+    const [headL, headR] = divide(head)
+
+    const listL = sortList2(headL)
+    const listR = sortList2(headR)
+
+    return merge(listL, listR)
+  }
+})()
