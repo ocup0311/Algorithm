@@ -124,3 +124,92 @@ const sortList2 = (() => {
     return merge(listL, listR)
   }
 })()
+
+// 3. ------------------------------------------------------------
+// merge sort + bottom up + loop
+// T(n)= O(nlogn) & S(n)= O(1)
+// Runtime: 50.00% / 251 ms
+// Memory Usage: 39.92% / 68.1 MB
+const sortList = (() => {
+  // function
+  const getLength = (head) => {
+    let count = 0
+    let ptr = head
+
+    while (ptr !== null) {
+      ptr = ptr.next
+      count++
+    }
+
+    return count
+  }
+
+  const divide = (start, size) => {
+    let [tailL, tailR] = [start, start.next]
+
+    for (let i = 1; i < size && tailL.next; i++) {
+      if (tailL.next) tailL = tailL.next
+      if (tailR.next) tailR = tailR.next?.next || tailR.next
+    }
+
+    const headR = tailL.next
+    const headN = tailR.next
+    tailL.next = null
+    tailR.next = null
+
+    return [headR, headN]
+  }
+
+  const merge = (list1, list2) => {
+    const preHead = { next: null }
+    let ptr = preHead
+
+    while (list1 && list2) {
+      if (list1.val < list2.val) {
+        ptr.next = list1
+        list1 = list1.next
+        ptr = ptr.next
+      } else {
+        ptr.next = list2
+        list2 = list2.next
+        ptr = ptr.next
+      }
+    }
+
+    ptr.next = list1 ? list1 : list2
+
+    const head = preHead.next
+    let tail = ptr
+    while (tail.next) tail = tail.next
+
+    return { head, tail }
+  }
+
+  // main
+  return (head) => {
+    if (!head?.next) return head
+
+    const preHead = { next: null }
+    const n = getLength(head)
+    let headL = head
+
+    for (let size = 1; size < n; size = size * 2) {
+      let tail = preHead
+
+      while (headL?.next) {
+        const [headR, headN] = divide(headL, size)
+        const newList = merge(headL, headR)
+
+        tail.next = newList.head
+        tail = newList.tail
+
+        headL = headN
+      }
+
+      tail.next = headL
+      headL = preHead.next
+    }
+
+    return preHead.next
+  }
+})()
