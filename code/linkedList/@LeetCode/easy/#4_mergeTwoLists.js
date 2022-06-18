@@ -97,7 +97,7 @@ const mergeTwoLists2 = (list1, list2) => {
 }
 
 // 3. ------------------------------------------------------------
-const mergeTwoLists = (list1, list2) => {
+const mergeTwoLists3 = (list1, list2) => {
   if (list1 === null) return list2
   if (list2 === null) return list1
 
@@ -110,4 +110,30 @@ const mergeTwoLists = (list1, list2) => {
     list2.next = nextNode
     return list2
   }
+}
+
+// 4. ------------------------------------------------------------
+// clean up from 1
+const mergeTwoLists = (list1, list2) => {
+  if (list1 === null) return list2
+  if (list2 === null) return list1
+
+  const preHead = { next: null }
+  let currNode = preHead
+
+  while (list1 !== null && list2 !== null) {
+    if (list1.val < list2.val) {
+      currNode.next = list1
+      currNode = currNode.next
+      list1 = list1.next
+    } else {
+      currNode.next = list2
+      currNode = currNode.next
+      list2 = list2.next
+    }
+  }
+
+  currNode.next = list1 !== null ? list1 : list2
+
+  return preHead.next
 }
