@@ -64,7 +64,7 @@ const hasCycle1 = (head) => {
 // 2. ------------------------------------------------------------
 // Runtime: 73.78% / 82 ms
 // Memory: 91.05% / 44.5 MB
-const hasCycle = (head) => {
+const hasCycle2 = (head) => {
   if (head === null) return false
 
   let ptr1 = head
@@ -78,6 +78,25 @@ const hasCycle = (head) => {
 
     ptr1 = ptr1.next
     ptr2 = temp.next
+  }
+
+  return false
+}
+
+// 3. ------------------------------------------------------------
+// Runtime: 85.93% / 84 ms
+// Memory Usage: 52.15% / 45.1 MB
+const hasCycle3 = (head) => {
+  if (head === null || head.next === null) return false
+
+  let ptr1 = head
+  let ptr2 = head.next
+
+  while (ptr1 && ptr2) {
+    if (ptr1 === ptr2) return true
+
+    ptr1 = ptr1.next
+    ptr2 = ptr2.next?.next
   }
 
   return false
