@@ -76,3 +76,22 @@ const removeDuplicates2 = (nums) => {
 
   return nums.length
 }
+
+// 3. ------------------------------------------------------------
+// 二刷，發現題目要求 in-place
+// Runtime: 66 ms (89.19 %)
+// Memory Usage: 44.5  (79.05 %)
+const removeDuplicates = (nums) => {
+  let k = 0
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[k] === nums[i]) continue
+
+    k++
+    nums[k] = nums[i]
+  }
+
+  k++
+
+  return k
+}
