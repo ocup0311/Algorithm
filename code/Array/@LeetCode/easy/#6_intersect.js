@@ -59,6 +59,7 @@ const intersect1 = (nums1, nums2) => {
 // S(n): O(Min(n1, n2))
 // 若 nums1 size 叫 nums2 的小，我會選擇以 nums1 來做 map，因為 S(n) 較小。
 // 若 nums2 size 過大，無法一次 load 進 memory，一樣用 nums1 做 map，並在第二個 for loop 分批 load nums2，並且在一批結束後，將 intersection 輸出到 file
+// 若 nums1, nums2 的 size 都過大，則可以先整理資料，依照 range 來劃分，再一一比對。(例如 1~10, 11~20 各為一組)
 const intersect1a = (nums1, nums2) => {
   if (nums1.length > nums2.length) return intersect1a(nums2, nums1)
 
