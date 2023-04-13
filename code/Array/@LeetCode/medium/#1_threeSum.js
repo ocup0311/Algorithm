@@ -124,6 +124,7 @@ const threeSum2 = (() => {
 // 3. ------------------------------------------------------------
 // Runtime: 20.53% / 559 ms
 // Memory: 28.53% / 53.8 MB
+// @tag: Object VS Map
 // just modify hashMap: Object 2500~4500ms --> new Map 500~900ms (<-- key type is from "number" not "string")
 const threeSum3 = (() => {
   // function
