@@ -27,7 +27,9 @@
 // 1. ------------------------------------------------------------
 // Runtime: 92.06% / 83 ms
 // Memory: 20.34% / 51.7 MB
-const containsDuplicate = (nums) => {
+// T(n): O(n)
+// S(n): O(n)
+const containsDuplicate1 = (nums) => {
   const counter = {}
 
   for (let i = 0; i < nums.length; i++) {
@@ -36,4 +38,31 @@ const containsDuplicate = (nums) => {
   }
 
   return false
+}
+
+// 二刷補充：
+// 1. ------------------------------------------------------------
+// 似乎使用 Map 略快，但相較 Object 略佔空間
+// TODO: 有空可以去補充閱讀 V8 的底層
+// T(n): O(n)
+// S(n): O(n)
+const containsDuplicate1a = (nums) => {
+  const map = new Map()
+
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(nums[i])) return true
+    map.set(nums[i], true)
+  }
+
+  return false
+}
+
+// 2. ------------------------------------------------------------
+// 跑出來的表現差不多，但我覺得此方法會先做出完整的 Set，無法像 Object & Map 有機會提早 return，因此較為浪費
+// T(n): O(n)
+// S(n): O(n)
+const containsDuplicate2a = (nums) => {
+  const set = new Set(nums)
+
+  return set.size === nums.length ? false : true
 }
