@@ -57,7 +57,7 @@ const rotate1 = (nums, k) => {
 // 2. ------------------------------------------------------------
 // Runtime: 88.39% / 93 ms
 // Memory: 24.40% / 53.1 MB
-const rotate2 = function (nums, k) {
+const rotate2 = (nums, k) => {
   // exception
   const modified_k = k % nums.length
   if (nums.length === 0 || modified_k === 0) return
@@ -81,4 +81,118 @@ const rotate2 = function (nums, k) {
   reverse(0, idxNewHead - 1)
   reverse(idxNewHead, idxTail)
   reverse(0, idxTail)
+}
+
+// 二刷補充 -------------------------------------
+// Runtime: 28.77 % / 106 ms
+// Memory Usage: 95.62 % / 50.7 MB
+// T(n): O(n)
+// S(n): O(n)
+const rotate1a = (nums, k) => {
+  const len = nums.length
+  const newNums = [...nums]
+
+  for (let i = 0; i < len; i++) {
+    let j = i - k
+    while (j < 0) j = j + len
+
+    nums[i] = newNums[j]
+  }
+
+  return
+}
+
+// 未完成、失敗的方法
+const rotate2a = (nums, k) => {
+  // exception
+  let step = k % nums.length
+  if (step === 0) return
+
+  // function
+  const swap = (arr, idx1, idx2) => {
+    const tmp = arr[idx1]
+    arr[idx1] = arr[idx2]
+    arr[idx2] = tmp
+  }
+
+  let ptr1 = 0
+  let ptr2 = 0
+  const n = nums.length % 2 === 0 ? nums.length - 2 : nums.length - 1
+
+  while (ptr1 < n) {
+    if (ptr2 >= step) ptr2 = ptr1 + step > nums.length ? ptr2 - 1 : 0
+    //console.log(nums)
+    //console.log("ptr1:", ptr1, "ptr2:", ptr2, (ptr1 + step)%nums.length)
+    swap(nums, ptr2, (ptr1 + step) % nums.length)
+
+    ptr1++
+    ptr2++
+  }
+
+  return
+}
+
+// 整體拆成數個 cycle，單一 cycle 內，一個項目推動另一個。A 換到新位置 B 時，將 B 往新位置 C 推進，最後一個回到 A，此 cycle 結束。
+// 而最多只會有 k 個 cycle，即可將所有項目移動完成 (count === n 時)，因此不會有重複移動的項目。
+// start: 每個 cycle 的起點
+// T(n): O(n)
+// S(n): O(1)
+const rotate3a = (nums, k) => {
+  const n = nums.length
+  if (n === 0 || k <= 0 || k % n === 0) return
+
+  let count = 0
+  let start = 0
+  let curNum = nums[0]
+
+  while (count < n) {
+    let ptr = start
+
+    do {
+      ptr = (ptr + k) % n
+
+      const tmpNum = nums[ptr]
+      nums[ptr] = curNum
+      curNum = tmpNum
+
+      count++
+    } while (ptr !== start)
+
+    start++
+    curNum = nums[start]
+  }
+}
+
+// 從 rotate2 改版：
+// 使用「圖形」方式思考，可看成是兩塊連接的方塊，最後結果是前後兩塊互換
+// --> 先整體反轉可讓前後兩塊互換位置，再將方塊方向各自轉回正面
+// T(n): O(n)
+// S(n): O(1)
+const rotate4a = (nums, k) => {
+  // var
+  const idxNewHead = k % nums.length
+  const idxArrEnd = nums.length - 1
+
+  // exception
+  if (idxArrEnd === 0 || idxNewHead <= 0) return
+
+  // function
+  const reverse = ([start, end]) => {
+    while (start < end) {
+      const temp = nums[start]
+      nums[start] = nums[end]
+      nums[end] = temp
+      start++
+      end--
+    }
+  }
+
+  // run
+  const wholeArr = [0, idxArrEnd]
+  const frontArr = [0, idxNewHead - 1]
+  const backArr = [idxNewHead, idxArrEnd]
+
+  reverse(wholeArr)
+  reverse(frontArr)
+  reverse(backArr)
 }

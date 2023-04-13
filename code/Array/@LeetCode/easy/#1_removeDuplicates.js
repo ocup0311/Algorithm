@@ -81,7 +81,7 @@ const removeDuplicates2 = (nums) => {
 // 二刷，發現題目要求 in-place
 // Runtime: 66 ms (89.19 %)
 // Memory Usage: 44.5  (79.05 %)
-const removeDuplicates = (nums) => {
+const removeDuplicates1a = (nums) => {
   let k = 0
 
   for (let i = 0; i < nums.length; i++) {
