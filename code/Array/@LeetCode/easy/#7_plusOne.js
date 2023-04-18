@@ -41,82 +41,128 @@
 // 1. ------------------------------------------------------------
 // Runtime: 71.325 / 68 ms
 // Memory: 50.17% / 42.2 MB
-const plusOne1 = (digits) => {
-  const output = [...digits]
-  let carry = 1
-  let ptr = digits.length - 1
+// T(n): O(n)
+// S(n): O(n)
+const solution1 = () => {
+  const plusOne = (digits) => {
+    const output = [...digits]
+    let carry = 1
+    let ptr = digits.length - 1
 
-  while (carry === 1) {
-    const num = output[ptr] + 1
+    while (carry === 1) {
+      const digit = output[ptr] + 1
 
-    if (num < 10) {
-      output[ptr] = num
-      carry = 0
-    } else if (ptr > 0) {
-      output[ptr] = 0
-      ptr--
-    } else {
-      output[ptr] = 0
-      output.unshift(1)
-      carry = 0
+      if (digit < 10) {
+        output[ptr] = digit
+        carry = 0
+      } else if (ptr > 0) {
+        output[ptr] = 0
+        ptr--
+      } else {
+        output[ptr] = 0
+        output.unshift(1)
+        carry = 0
+      }
     }
-  }
 
-  return output
+    return output
+  }
 }
 
 // 2. ------------------------------------------------------------
 // Runtime: 92.84% / 57 ms
 // Memory: 38.78% / 42.3 MB
-const plus = (digits, plusNum) => {
-  const output = [...digits]
-  let carry = plusNum
-  let ptr = digits.length - 1
+// T(n): O(n)
+// S(n): O(n)
+const solution2 = () => {
+  const plusDigitToDigits = (digits, summand) => {
+    if (!(summand < 10)) throw 'summand should be a digit'
 
-  while (carry > 0) {
-    const num = output[ptr] + carry
+    const output = [...digits]
+    let carry = summand
+    let ptr = digits.length - 1
 
-    output[ptr] = num % 10
-    carry = Math.floor(num / 10)
+    while (carry > 0 && ptr >= 0) {
+      const digit = digits[ptr] + carry
 
-    if (ptr === 0 && carry > 0) {
-      output.unshift(carry)
-      break
+      output[ptr] = digit % 10
+      carry = Math.floor(digit / 10)
+
+      ptr--
     }
 
-    ptr--
+    if (carry > 0) output.unshift(carry)
+
+    return output
   }
 
-  return output
+  const plusOne = (digits) => plusDigitToDigits(digits, 1)
 }
-
-const plusOne2 = (digits) => plus(digits, 1)
 
 // 3. ------------------------------------------------------------
 // Runtime: 91.98% / 59 ms
 // Memory: 61.01% / 42 MB
-const plusOne = (digits) => {
-  const output = [...digits]
-  let carry = 1
-  let ptr = digits.length - 1
+// T(n): O(n)
+// S(n): O(n)
+const solution3 = () => {
+  const plusOne = (digits) => {
+    const output = [...digits]
+    let carry = 1
+    let ptr = digits.length - 1
 
-  while (true) {
-    const num = output[ptr] + carry
+    while (true) {
+      const digit = output[ptr] + carry
 
-    if (num < 10) {
-      output[ptr] = num
-      break
+      if (digit < 10) {
+        output[ptr] = digit
+        break
+      }
+
+      output[ptr] = 0
+
+      if (ptr === 0) {
+        output.unshift(carry)
+        break
+      }
+
+      ptr--
     }
 
-    output[ptr] = 0
+    return output
+  }
+}
 
-    if (ptr === 0) {
-      output.unshift(carry)
-      break
+// 二刷補充 ===============================================================
+// 1. ------------------------------------------------------------
+// 從 solution2 改來，使用 new Array() 可以略少點時間，但變得更不簡潔，各有好壞
+// T(n): O(n)
+// S(n): O(n)
+const solution1a = () => {
+  const plusDigitToDigits = (digits, summand) => {
+    if (!(summand < 10)) throw 'summand should be a digit'
+
+    const output = new Array(digits)
+    let carry = summand
+    let ptr = digits.length - 1
+
+    while (carry > 0 && ptr >= 0) {
+      const digit = digits[ptr] + carry
+
+      output[ptr] = digit % 10
+      carry = Math.floor(digit / 10)
+
+      ptr--
     }
 
-    ptr--
+    while (ptr >= 0) {
+      output[ptr] = digits[ptr]
+      ptr--
+    }
+
+    if (carry > 0) output.unshift(carry)
+
+    return output
   }
 
-  return output
+  const plusOne = (digits) => plusDigitToDigits(digits, 1)
 }
