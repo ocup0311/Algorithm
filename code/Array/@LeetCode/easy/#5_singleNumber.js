@@ -32,52 +32,58 @@
 // 1. ------------------------------------------------------------
 // Runtime: 85.86% / 74 ms
 // Memory: 14.56% / 48.2 MB
-const singleNumber1 = (nums) => {
-  const single = {}
-  const twice = {}
+const solution1 = () => {
+  const singleNumber = (nums) => {
+    const single = {}
+    const twice = {}
 
-  for (let i = 0; i < nums.length; i++) {
-    if (single[nums[i]]) {
-      twice[nums[i]] = true
-      delete single[nums[i]]
-    } else single[nums[i]] = true
+    for (let i = 0; i < nums.length; i++) {
+      if (single[nums[i]]) {
+        twice[nums[i]] = true
+        delete single[nums[i]]
+      } else single[nums[i]] = true
+    }
+
+    return Object.keys(single)[0]
   }
-
-  return Object.keys(single)[0]
 }
 
 // 二刷補充：
 // 1. ------------------------------------------------------------
 // T(n): O(n)
 // S(n): O(n)
-const singleNumber1a = (nums) => {
-  if (nums.length === 1) return nums[0]
+const solution1a = () => {
+  const singleNumber = (nums) => {
+    if (nums.length === 1) return nums[0]
 
-  const map1 = new Map()
-  const map2 = new Map()
+    const map1 = new Map()
+    const map2 = new Map()
 
-  for (let i = 0; i < nums.length; i++) {
-    if (map1.has(nums[i])) {
-      map1.delete(nums[i])
-      map2.set(nums[i], true)
-    } else {
-      map1.set(nums[i], true)
+    for (let i = 0; i < nums.length; i++) {
+      if (map1.has(nums[i])) {
+        map1.delete(nums[i])
+        map2.set(nums[i], true)
+      } else {
+        map1.set(nums[i], true)
+      }
     }
-  }
 
-  return map1.keys().next().value
+    return map1.keys().next().value
+  }
 }
 
 // 2. ------------------------------------------------------------
 // T(n): O(nlogn)
 // S(n): O(1)
-const singleNumber2a = (nums) => {
-  if (nums.length === 1) return nums[0]
+const solution2a = () => {
+  const singleNumber = (nums) => {
+    if (nums.length === 1) return nums[0]
 
-  nums.sort((a, b) => a - b)
+    nums.sort((a, b) => a - b)
 
-  for (let i = 0; i < nums.length; i = i + 2) {
-    if (nums[i] !== nums[i + 1]) return nums[i]
+    for (let i = 0; i < nums.length; i = i + 2) {
+      if (nums[i] !== nums[i + 1]) return nums[i]
+    }
   }
 }
 
@@ -85,8 +91,10 @@ const singleNumber2a = (nums) => {
 // T(n): O(n)
 // S(n): O(1)
 // 使用 XOR 運算邏輯 (single 1 --> 1)
-const singleNumber3a = (nums) => {
-  if (nums.length === 1) return nums[0]
+const solution3a = () => {
+  const singleNumber = (nums) => {
+    if (nums.length === 1) return nums[0]
 
-  return nums.reduce((acc, cur) => acc ^ cur, 0)
+    return nums.reduce((acc, cur) => acc ^ cur, 0)
+  }
 }

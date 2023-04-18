@@ -38,87 +38,101 @@
 // 1. ------------------------------------------------------------
 // Runtime: 82.66% / 67 ms
 // Memory: 90.63% / 42.1 MB
-const maxProfit1 = (prices) => {
-  let earnedMoney = 0
-  let own = false
+const solution1 = () => {
+  const maxProfit = (prices) => {
+    let earnedMoney = 0
+    let own = false
 
-  for (let i = 0; i < prices.length; i++) {
-    if (own !== false) {
-      if (prices[i] > prices[i + 1] || i === prices.length - 1) {
-        const earned = prices[i] - own
-        earnedMoney = earnedMoney + earned
-        own = false
-      }
-    } else {
-      if (prices[i] < prices[i + 1]) {
-        own = prices[i]
+    for (let i = 0; i < prices.length; i++) {
+      if (own !== false) {
+        if (prices[i] > prices[i + 1] || i === prices.length - 1) {
+          const earned = prices[i] - own
+          earnedMoney = earnedMoney + earned
+          own = false
+        }
+      } else {
+        if (prices[i] < prices[i + 1]) {
+          own = prices[i]
+        }
       }
     }
-  }
 
-  return earnedMoney
+    return earnedMoney
+  }
 }
 
 // 2. ------------------------------------------------------------
 // Runtime: 83.79% / 66 ms
 // Memory: 18.20% / 42.8 MB
-const maxProfit2 = (prices) => {
-  // var
-  let earnedMoney = 0
-  let own = false
+const solution2 = () => {
+  const maxProfit = (prices) => {
+    // var
+    let earnedMoney = 0
+    let own = false
 
-  // function
-  const sell = (price) => {
-    earnedMoney = earnedMoney + price - own
-    own = false
-  }
-  const buy = (price) => {
-    own = price
-  }
-
-  // run
-  prices.forEach((v, i) => {
-    if (own === false) {
-      if (prices[i] < prices[i + 1]) buy(prices[i])
-    } else {
-      if (prices[i] > prices[i + 1] || i === prices.length - 1) sell(prices[i])
+    // function
+    const sell = (price) => {
+      earnedMoney = earnedMoney + price - own
+      own = false
     }
-  })
+    const buy = (price) => {
+      own = price
+    }
 
-  return earnedMoney
+    // run
+    prices.forEach((v, i) => {
+      if (own === false) {
+        if (prices[i] < prices[i + 1]) buy(prices[i])
+      } else {
+        if (prices[i] > prices[i + 1] || i === prices.length - 1)
+          sell(prices[i])
+      }
+    })
+
+    return earnedMoney
+  }
 }
 
 // 3. ------------------------------------------------------------
 // Runtime: 99.46% / 51 ms
 // Memory: 75.58% / 42.2 MB
-const maxProfit3 = (prices) => {
-  let earnedMoney = 0
+const solution3 = () => {
+  const maxProfit = (prices) => {
+    let earnedMoney = 0
 
-  for (let i = 0; i < prices.length; i++) {
-    if (prices[i] < prices[i + 1])
-      earnedMoney = earnedMoney + prices[i + 1] - prices[i]
+    for (let i = 0; i < prices.length; i++) {
+      if (prices[i] < prices[i + 1])
+        earnedMoney = earnedMoney + prices[i + 1] - prices[i]
+    }
+
+    return earnedMoney
   }
-
-  return earnedMoney
 }
 
 // 4. ------------------------------------------------------------
 // Runtime: 98.83% / 54 ms
 // Memory: 75.58% / 42.2 MB
-const maxProfit4 = (prices) =>
-  prices.reduce((t, v, i, arr) => (arr[i + 1] > v ? t + arr[i + 1] - v : t), 0)
+const solution4 = () => {
+  const maxProfit = (prices) =>
+    prices.reduce(
+      (t, v, i, arr) => (arr[i + 1] > v ? t + arr[i + 1] - v : t),
+      0
+    )
+}
 
 // 5. ------------------------------------------------------------
 // Runtime: 91.21% / 62 ms
 // Memory: 28.11% / 42.6 MB
-const maxProfit5 = (prices) => {
-  let earnedMoney = 0
+const solution5 = () => {
+  const maxProfit = (prices) => {
+    let earnedMoney = 0
 
-  for (let i = 1; i < prices.length; i++) {
-    const earned = prices[i] - prices[i - 1]
+    for (let i = 1; i < prices.length; i++) {
+      const earned = prices[i] - prices[i - 1]
 
-    if (earned > 0) earnedMoney = earnedMoney + earned
+      if (earned > 0) earnedMoney = earnedMoney + earned
+    }
+
+    return earnedMoney
   }
-
-  return earnedMoney
 }

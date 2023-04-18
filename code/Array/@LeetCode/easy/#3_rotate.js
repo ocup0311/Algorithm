@@ -35,21 +35,23 @@
 
 // 1. ------------------------------------------------------------
 // Time Limit Exceeded
-const rotate1 = (nums, k) => {
-  // var
-  const lastIndex = nums.length - 1
+const solution1 = () => {
+  const rotate = (nums, k) => {
+    // var
+    const lastIndex = nums.length - 1
 
-  // function
-  const swap = (arr, index1, index2) => {
-    const temp = arr[index1]
-    arr[index1] = arr[index2]
-    arr[index2] = temp
-  }
+    // function
+    const swap = (arr, index1, index2) => {
+      const temp = arr[index1]
+      arr[index1] = arr[index2]
+      arr[index2] = temp
+    }
 
-  // run
-  for (let i = 0; i < k; i++) {
-    for (let j = lastIndex; j > 0; j--) {
-      swap(nums, j, j - 1)
+    // run
+    for (let i = 0; i < k; i++) {
+      for (let j = lastIndex; j > 0; j--) {
+        swap(nums, j, j - 1)
+      }
     }
   }
 }
@@ -57,30 +59,32 @@ const rotate1 = (nums, k) => {
 // 2. ------------------------------------------------------------
 // Runtime: 88.39% / 93 ms
 // Memory: 24.40% / 53.1 MB
-const rotate2 = (nums, k) => {
-  // exception
-  const modified_k = k % nums.length
-  if (nums.length === 0 || modified_k === 0) return
+const solution2 = () => {
+  const rotate = (nums, k) => {
+    // exception
+    const modified_k = k % nums.length
+    if (nums.length === 0 || modified_k === 0) return
 
-  // var
-  const idxNewHead = nums.length - modified_k
-  const idxTail = nums.length - 1
+    // var
+    const idxNewHead = nums.length - modified_k
+    const idxTail = nums.length - 1
 
-  // function
-  const reverse = (start, end) => {
-    while (start < end) {
-      const temp = nums[start]
-      nums[start] = nums[end]
-      nums[end] = temp
-      start++
-      end--
+    // function
+    const reverse = (start, end) => {
+      while (start < end) {
+        const temp = nums[start]
+        nums[start] = nums[end]
+        nums[end] = temp
+        start++
+        end--
+      }
     }
-  }
 
-  // run
-  reverse(0, idxNewHead - 1)
-  reverse(idxNewHead, idxTail)
-  reverse(0, idxTail)
+    // run
+    reverse(0, idxNewHead - 1)
+    reverse(idxNewHead, idxTail)
+    reverse(0, idxTail)
+  }
 }
 
 // 二刷補充 -------------------------------------
@@ -88,48 +92,52 @@ const rotate2 = (nums, k) => {
 // Memory Usage: 95.62 % / 50.7 MB
 // T(n): O(n)
 // S(n): O(n)
-const rotate1a = (nums, k) => {
-  const len = nums.length
-  const newNums = [...nums]
+const solution1a = () => {
+  const rotate = (nums, k) => {
+    const len = nums.length
+    const newNums = [...nums]
 
-  for (let i = 0; i < len; i++) {
-    let j = i - k
-    while (j < 0) j = j + len
+    for (let i = 0; i < len; i++) {
+      let j = i - k
+      while (j < 0) j = j + len
 
-    nums[i] = newNums[j]
+      nums[i] = newNums[j]
+    }
+
+    return
   }
-
-  return
 }
 
 // 未完成、失敗的方法
-const rotate2a = (nums, k) => {
-  // exception
-  let step = k % nums.length
-  if (step === 0) return
+const solution2a = () => {
+  const rotate = (nums, k) => {
+    // exception
+    let step = k % nums.length
+    if (step === 0) return
 
-  // function
-  const swap = (arr, idx1, idx2) => {
-    const tmp = arr[idx1]
-    arr[idx1] = arr[idx2]
-    arr[idx2] = tmp
+    // function
+    const swap = (arr, idx1, idx2) => {
+      const tmp = arr[idx1]
+      arr[idx1] = arr[idx2]
+      arr[idx2] = tmp
+    }
+
+    let ptr1 = 0
+    let ptr2 = 0
+    const n = nums.length % 2 === 0 ? nums.length - 2 : nums.length - 1
+
+    while (ptr1 < n) {
+      if (ptr2 >= step) ptr2 = ptr1 + step > nums.length ? ptr2 - 1 : 0
+      //console.log(nums)
+      //console.log("ptr1:", ptr1, "ptr2:", ptr2, (ptr1 + step)%nums.length)
+      swap(nums, ptr2, (ptr1 + step) % nums.length)
+
+      ptr1++
+      ptr2++
+    }
+
+    return
   }
-
-  let ptr1 = 0
-  let ptr2 = 0
-  const n = nums.length % 2 === 0 ? nums.length - 2 : nums.length - 1
-
-  while (ptr1 < n) {
-    if (ptr2 >= step) ptr2 = ptr1 + step > nums.length ? ptr2 - 1 : 0
-    //console.log(nums)
-    //console.log("ptr1:", ptr1, "ptr2:", ptr2, (ptr1 + step)%nums.length)
-    swap(nums, ptr2, (ptr1 + step) % nums.length)
-
-    ptr1++
-    ptr2++
-  }
-
-  return
 }
 
 // 整體拆成數個 cycle，單一 cycle 內，一個項目推動另一個。A 換到新位置 B 時，將 B 往新位置 C 推進，最後一個回到 A，此 cycle 結束。
@@ -137,29 +145,31 @@ const rotate2a = (nums, k) => {
 // start: 每個 cycle 的起點
 // T(n): O(n)
 // S(n): O(1)
-const rotate3a = (nums, k) => {
-  const n = nums.length
-  if (n === 0 || k <= 0 || k % n === 0) return
+const solution3a = () => {
+  const rotate = (nums, k) => {
+    const n = nums.length
+    if (n === 0 || k <= 0 || k % n === 0) return
 
-  let count = 0
-  let start = 0
-  let curNum = nums[0]
+    let count = 0
+    let start = 0
+    let curNum = nums[0]
 
-  while (count < n) {
-    let ptr = start
+    while (count < n) {
+      let ptr = start
 
-    do {
-      ptr = (ptr + k) % n
+      do {
+        ptr = (ptr + k) % n
 
-      const tmpNum = nums[ptr]
-      nums[ptr] = curNum
-      curNum = tmpNum
+        const tmpNum = nums[ptr]
+        nums[ptr] = curNum
+        curNum = tmpNum
 
-      count++
-    } while (ptr !== start)
+        count++
+      } while (ptr !== start)
 
-    start++
-    curNum = nums[start]
+      start++
+      curNum = nums[start]
+    }
   }
 }
 
@@ -168,31 +178,33 @@ const rotate3a = (nums, k) => {
 // --> 先整體反轉可讓前後兩塊互換位置，再將方塊方向各自轉回正面
 // T(n): O(n)
 // S(n): O(1)
-const rotate4a = (nums, k) => {
-  // var
-  const idxNewHead = k % nums.length
-  const idxArrEnd = nums.length - 1
+const solution4a = () => {
+  const rotate = (nums, k) => {
+    // var
+    const idxNewHead = k % nums.length
+    const idxArrEnd = nums.length - 1
 
-  // exception
-  if (idxArrEnd === 0 || idxNewHead <= 0) return
+    // exception
+    if (idxArrEnd === 0 || idxNewHead <= 0) return
 
-  // function
-  const reverse = ([start, end]) => {
-    while (start < end) {
-      const temp = nums[start]
-      nums[start] = nums[end]
-      nums[end] = temp
-      start++
-      end--
+    // function
+    const reverse = ([start, end]) => {
+      while (start < end) {
+        const temp = nums[start]
+        nums[start] = nums[end]
+        nums[end] = temp
+        start++
+        end--
+      }
     }
+
+    // run
+    const wholeArr = [0, idxArrEnd]
+    const frontArr = [0, idxNewHead - 1]
+    const backArr = [idxNewHead, idxArrEnd]
+
+    reverse(wholeArr)
+    reverse(frontArr)
+    reverse(backArr)
   }
-
-  // run
-  const wholeArr = [0, idxArrEnd]
-  const frontArr = [0, idxNewHead - 1]
-  const backArr = [idxNewHead, idxArrEnd]
-
-  reverse(wholeArr)
-  reverse(frontArr)
-  reverse(backArr)
 }

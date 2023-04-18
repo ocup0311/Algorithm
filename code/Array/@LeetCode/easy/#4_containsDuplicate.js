@@ -29,15 +29,17 @@
 // Memory: 20.34% / 51.7 MB
 // T(n): O(n)
 // S(n): O(n)
-const containsDuplicate1 = (nums) => {
-  const counter = {}
+const solution1 = () => {
+  const containsDuplicate = (nums) => {
+    const counter = {}
 
-  for (let i = 0; i < nums.length; i++) {
-    if (counter[nums[i]]) return true
-    counter[nums[i]] = true
+    for (let i = 0; i < nums.length; i++) {
+      if (counter[nums[i]]) return true
+      counter[nums[i]] = true
+    }
+
+    return false
   }
-
-  return false
 }
 
 // 二刷補充：
@@ -46,23 +48,27 @@ const containsDuplicate1 = (nums) => {
 // TODO: 有空可以去補充閱讀 V8 的底層
 // T(n): O(n)
 // S(n): O(n)
-const containsDuplicate1a = (nums) => {
-  const map = new Map()
+const solution1a = () => {
+  const containsDuplicate = (nums) => {
+    const map = new Map()
 
-  for (let i = 0; i < nums.length; i++) {
-    if (map.has(nums[i])) return true
-    map.set(nums[i], true)
+    for (let i = 0; i < nums.length; i++) {
+      if (map.has(nums[i])) return true
+      map.set(nums[i], true)
+    }
+
+    return false
   }
-
-  return false
 }
 
 // 2. ------------------------------------------------------------
 // 跑出來的表現差不多，但我覺得此方法會先做出完整的 Set，無法像 Object & Map 有機會提早 return，因此較為浪費
 // T(n): O(n)
 // S(n): O(n)
-const containsDuplicate2a = (nums) => {
-  const set = new Set(nums)
+const solution2a = () => {
+  const containsDuplicate = (nums) => {
+    const set = new Set(nums)
 
-  return set.size === nums.length ? false : true
+    return set.size === nums.length ? false : true
+  }
 }

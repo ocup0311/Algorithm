@@ -41,57 +41,63 @@
 // 1. ------------------------------------------------------------
 // Runtime: 80.36% / 81 ms
 // Memory: 48.29% / 44.8 MB
-const removeDuplicates1 = (nums) => {
-  const length = nums.length
-  let ptr = 0
+const solution1 = () => {
+  const removeDuplicates = (nums) => {
+    const length = nums.length
+    let ptr = 0
 
-  for (let i = 1; i < length; i++) {
-    if (nums[i] !== nums[ptr]) {
-      ptr++
-      nums[ptr] = nums[i]
+    for (let i = 1; i < length; i++) {
+      if (nums[i] !== nums[ptr]) {
+        ptr++
+        nums[ptr] = nums[i]
+      }
     }
-  }
 
-  for (let i = ptr + 1; i < length; i++) {
-    nums.pop()
-  }
+    for (let i = ptr + 1; i < length; i++) {
+      nums.pop()
+    }
 
-  return nums.length
+    return nums.length
+  }
 }
 
 // 2. ------------------------------------------------------------
 // Runtime: 92.86% / 71 ms
 // Memory: 18.48% / 45.2 MB
-const removeDuplicates2 = (nums) => {
-  let ptr = 0
+const solution2 = () => {
+  const removeDuplicates = (nums) => {
+    let ptr = 0
 
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[ptr]) {
-      ptr++
-      nums[ptr] = nums[i]
+    for (let i = 1; i < nums.length; i++) {
+      if (nums[i] !== nums[ptr]) {
+        ptr++
+        nums[ptr] = nums[i]
+      }
     }
+
+    nums.splice(ptr + 1, nums.length)
+
+    return nums.length
   }
-
-  nums.splice(ptr + 1, nums.length)
-
-  return nums.length
 }
 
 // 3. ------------------------------------------------------------
 // 二刷，發現題目要求 in-place
 // Runtime: 66 ms (89.19 %)
 // Memory Usage: 44.5  (79.05 %)
-const removeDuplicates1a = (nums) => {
-  let k = 0
+const solution1a = () => {
+  const removeDuplicates = (nums) => {
+    let k = 0
 
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[k] === nums[i]) continue
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[k] === nums[i]) continue
+
+      k++
+      nums[k] = nums[i]
+    }
 
     k++
-    nums[k] = nums[i]
+
+    return k
   }
-
-  k++
-
-  return k
 }
