@@ -40,12 +40,34 @@
 // 1. ------------------------------------------------------------
 // Runtime: 96.27% / 64 ms
 // Memory: 47.07% / 42.7 MB
-const twoSum = (nums, target) => {
-  const cache = {}
+// T(n): O(n)
+// S(n): O(n)
+const solution1 = () => {
+  const twoSum = (nums, target) => {
+    const hashmap = {}
 
-  for (let i = 0; i < nums.length; i++) {
-    if (cache[nums[i]] !== undefined) return [i, cache[nums[i]]]
+    for (let i = 0; i < nums.length; i++) {
+      if (hashmap[nums[i]] !== undefined) return [i, hashmap[nums[i]]]
 
-    cache[target - nums[i]] = i
+      hashmap[target - nums[i]] = i
+    }
+  }
+}
+
+// 1. ------------------------------------------------------------
+// T(n): O(n)
+// S(n): O(n)
+// 之前測試：可能因為 Object 的 key 都需轉為 string，所以當 number 的 key 時，使用 Map 會略快一些
+const solution1a = () => {
+  const twoSum = (nums, target) => {
+    const hashmap = new Map()
+
+    for (let i = 0; i < nums.length; i++) {
+      if (hashmap.has(nums[i])) return [hashmap.get(nums[i]), i]
+
+      hashmap.set(target - nums[i], i)
+    }
+
+    throw 'Invaid input of twoSum!'
   }
 }
