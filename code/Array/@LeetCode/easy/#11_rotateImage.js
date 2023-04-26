@@ -29,23 +29,134 @@
 // --> 可先畫出 5x5 圖幫助思考 --> 先定下 for range 比較容易 --> 再來思考 k, l 細節
 
 // 1. ------------------------------------------------------------
+// 此方法是將 matrix 切成 1/4，將其視為整塊轉一圈
 // Runtime: 85.00% / 62 ms
 // Memory: 75.54% / 42.1 MB
-const rotateImage = (matrix) => {
-  const lastIndex = matrix.length - 1
-  const halfLength = Math.floor(matrix.length / 2)
-  const restLength = matrix.length % 2
+// T(m): O(m)
+// S(m): O(1)
+const solution1 = () => {
+  const rotateImage = (matrix) => {
+    const lastIndex = matrix.length - 1
+    const halfLength = Math.floor(matrix.length / 2)
+    const restLength = matrix.length % 2
 
-  for (let i = 0; i < halfLength + restLength; i++) {
-    for (let j = 0; j < halfLength; j++) {
-      const k = lastIndex - i
-      const l = lastIndex - j
-      const temp = matrix[i][j]
+    for (let i = 0; i < halfLength + restLength; i++) {
+      for (let j = 0; j < halfLength; j++) {
+        const k = lastIndex - i
+        const l = lastIndex - j
+        const temp = matrix[i][j]
 
-      matrix[i][j] = matrix[l][i]
-      matrix[l][i] = matrix[k][l]
-      matrix[k][l] = matrix[j][k]
-      matrix[j][k] = temp
+        matrix[i][j] = matrix[l][i]
+        matrix[l][i] = matrix[k][l]
+        matrix[k][l] = matrix[j][k]
+        matrix[j][k] = temp
+      }
     }
+  }
+}
+
+// 二刷：
+// 1. ------------------------------------------------------------
+// 此方法是從最外圈開始轉一圈，再依次往內縮
+// T(m): O(m)
+// S(m): O(1)
+const solution1a = () => {
+  const rotate = (matrix) => {
+    let i = 0
+    let j = matrix.length - 1
+
+    while (i < j) {
+      let a = i
+      let b = j
+
+      while (a < j) {
+        rotatePoint(matrix, a, b, i, j)
+        a++
+        b--
+      }
+
+      i++
+      j--
+    }
+  }
+
+  // function
+  function swap(matrix, point1, point2) {
+    const tmp = matrix[point1[0]][point1[1]]
+    matrix[point1[0]][point1[1]] = matrix[point2[0]][point2[1]]
+    matrix[point2[0]][point2[1]] = tmp
+  }
+  function rotatePoint(matrix, a, b, i, j) {
+    const head = [i, a]
+    swap(matrix, head, [a, j])
+    swap(matrix, head, [j, b])
+    swap(matrix, head, [b, i])
+  }
+}
+
+// 2. ------------------------------------------------------------
+// 從 solution1a 整理而來
+// T(m): O(m)
+// S(m): O(1)
+const solution2a = () => {
+  const rotate = (matrix) => {
+    let borderS = 0
+    let borderE = matrix.length - 1
+
+    while (borderS < borderE) {
+      for (let ptr = 0; borderS + ptr < borderE; ptr++) {
+        rotatePoint(matrix, borderS, borderE, ptr)
+      }
+
+      borderS++
+      borderE--
+    }
+  }
+
+  // function
+  function swap(matrix, point1, point2) {
+    const tmp = matrix[point1[0]][point1[1]]
+    matrix[point1[0]][point1[1]] = matrix[point2[0]][point2[1]]
+    matrix[point2[0]][point2[1]] = tmp
+  }
+  function rotatePoint(matrix, idxS, idxE, ptr) {
+    const head = [idxS, idxS + ptr]
+    swap(matrix, head, [idxS + ptr, idxE])
+    swap(matrix, head, [idxE, idxE - ptr])
+    swap(matrix, head, [idxE - ptr, idxS])
+  }
+}
+
+// 3. ------------------------------------------------------------
+// 先進行 transpose (m x n --> n x m) 再進行 reflect (左右鏡像)
+// T(m): O(m)
+// S(m): O(1)
+const solution3a = () => {
+  const rotate = (matrix) => {
+    transpose(matrix)
+    reflect(matrix)
+  }
+
+  // function
+  function transpose(matrix) {
+    const len = matrix.length
+    for (let i = 0; i < len; i++) {
+      for (let j = i + 1; j < len; j++) {
+        swap(matrix, [j, i], [i, j])
+      }
+    }
+  }
+  function reflect(matrix) {
+    const len = matrix.length
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < len / 2; j++) {
+        swap(matrix, [i, j], [i, len - j - 1])
+      }
+    }
+  }
+  function swap(matrix, point1, point2) {
+    const tmp = matrix[point1[0]][point1[1]]
+    matrix[point1[0]][point1[1]] = matrix[point2[0]][point2[1]]
+    matrix[point2[0]][point2[1]] = tmp
   }
 }
