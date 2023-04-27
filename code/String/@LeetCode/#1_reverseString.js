@@ -25,22 +25,26 @@
 // 1. ------------------------------------------------------------
 // Runtime: 83.40% / 93 ms
 // Memory: 62.05% / 49.3 MB
-const reverseString = (s) => {
-  // var
-  let ptr1 = 0
-  let ptr2 = s.length - 1
+// T(n): O(n)
+// S(n): O(1)
+const solution1 = () => {
+  const reverseString = (s) => {
+    // var
+    let ptr1 = 0
+    let ptr2 = s.length - 1
 
-  // function
-  const swap = (arr, index1, index2) => {
-    const temp = arr[index1]
-    arr[index1] = arr[index2]
-    arr[index2] = temp
-  }
+    // function
+    const swap = (arr, index1, index2) => {
+      const temp = arr[index1]
+      arr[index1] = arr[index2]
+      arr[index2] = temp
+    }
 
-  // run
-  while (ptr1 < ptr2) {
-    swap(s, ptr1, ptr2)
-    ptr1++
-    ptr2--
+    // run
+    while (ptr1 < ptr2) {
+      swap(s, ptr1, ptr2)
+      ptr1++
+      ptr2--
+    }
   }
 }
