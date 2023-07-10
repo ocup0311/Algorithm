@@ -164,26 +164,26 @@ output:
         ＊ 0/1 Knapsack Problem
             # 解析 ------------------------------------------------
             item of input:{
-            cost: "物品所需花費 (重量)"
-            profit: "物品利潤 (performance)"
-            cp: "profit / cost"
+                cost: "物品所需花費 (重量)"
+                profit: "物品利潤 (performance)"
+                cp: "profit / cost"
             }
 
             global:{
-            maxCost: "背包最大承重, 最大可承受花費 (limit)"
-            lowerBound_tree: "目前整棵樹的 lowerBound"
+                maxCost: "背包最大承重, 最大可承受花費 (limit)"
+                lowerBound_tree: "目前整棵樹的 lowerBound"
             }
 
             node of tree:{
-            cost: "此 Branch 已確定 cost"
-            profit: "此 Branch 已確定 profit"
-            lowerBound: "以 cp 排序選取, 取得 < maxCost 的 profit"
-            upperBound: "以 Fractional Knapsack Problem 計算"
+                cost: "此 Branch 已確定 cost"
+                profit: "此 Branch 已確定 profit"
+                lowerBound: "以 cp 排序選取, 取得 < maxCost 的 profit"
+                upperBound: "以 Fractional Knapsack Problem 計算"
             }
 
             1. 優先尋找最高 maxProfit node 的 Branch 
             2. 若 upperBound < lowerBound_tree  --> 排除此 Branch
-            3. 若 cost > maxCost               --> 排除此 Branch
+            3. 若 cost > maxCost                --> 排除此 Branch
             # 解析 ------------------------------------------------
 
 
